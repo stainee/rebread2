@@ -8,9 +8,8 @@ a{
 	text-decoration: none;
 	color: black;
 }
-a:hover{
+.content_container a:hover{
 	color: pink;
-	
 }
 .member-point{
 	padding-top: 35px;
@@ -41,7 +40,6 @@ a:hover{
 	border-bottom: 2px solid rgba(0, 0, 0, 0.1);
 	cursor: pointer;
 }
-
 .content-img img{
 	width: 70px;
 	height: 70px;
