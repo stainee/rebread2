@@ -20,10 +20,12 @@ public class ReviewController {
 	@RequestMapping(value = "/reviewList.do")
 	public String reviewList(Model model) {
 		ArrayList<Review> list = service.reviewList();
+		System.out.println(list);
 		model.addAttribute("list",list);
 		return "review/reviewList";
 	}
 	*/
+	
 	@RequestMapping(value = "/reviewList.do")
 	public String reviewList(int reqPage, Model model) {
 		HashMap<String, Object> pageMap = service.selectReviewList(reqPage);
@@ -33,5 +35,6 @@ public class ReviewController {
 		model.addAttribute("numPerPage", (Integer)pageMap.get("numPerPage"));
 		return "review/reviewList";
 	}
+	
 	
 }

@@ -26,9 +26,11 @@
 			review_date as reviewDate,
 			rating,
 			review_img as reviewImg
-	from review order by 1 desc)b)
+	from review order by 1 desc)r)
 	where rnum between #{start} and #{end}
 	</select>
+	
+	
 	
 	<select id="totalCount" resultType="int">
 		select count(*) from review
