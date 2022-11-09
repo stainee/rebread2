@@ -53,16 +53,18 @@
 	
 	<select id="selectMainList" resultType="p">
 		select 
-			product_name as productName,
-			product_price as productPrice,
-			product_img as productImg,
-			product_count as productCount
+			productName,
+			storeNo,
+			productPrice,
+			productImg,
+			productCount
 		from 
 		(select 
 			product_name as productName,
+			store_no as storeNo,
 			product_price as productPrice,
 			product_img as productImg,
 			product_count as productCount
-		from product order by product_count desc) where rownum &lt; 4 
+		from product order by product_count desc) where rownum &lt; 5 
 	</select>
 </mapper>

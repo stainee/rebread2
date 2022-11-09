@@ -20,5 +20,6 @@
 	<typeAlias type="kr.or.account.model.vo.Account" alias="a"></typeAlias>
 	<typeAlias type="kr.or.product.model.vo.Product" alias="p"></typeAlias>
 	<typeAlias type="kr.or.order.model.vo.Order" alias="o"></typeAlias>
+	<typeAlias type="kr.or.review.model.vo.Review" alias="r"></typeAlias>
 </typeAliases>
 </configuration>

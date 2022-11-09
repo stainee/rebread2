@@ -96,12 +96,11 @@ public class ProductController {
 	*/
 	
 	//메인에서 불러오는 product리스트
-	@ResponseBody
-	@RequestMapping(value="/productList.do", produces = "application/json;charset=utf-8;")
-	public String mainProductList(Model model) {
+	@RequestMapping(value = "/DoMain.do")
+	public String mainDo(Model model) {
 		ArrayList<Product> list = service.mainProductList();
-		model.addAttribute("list",list);
-		return "";
+		model.addAttribute("list", list);
+		return "common/main";
 	}
 	
 	
