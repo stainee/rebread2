@@ -17,6 +17,7 @@
             <p>빠르게 배송 노력합니당</p>
             <button class="order-detail" onclick="goToHome()">홈으로 가기</button>
             <button class="order-mypage" onclick="goToMyPage(${sessionScope.m.memberNo})">마이페이지</button>
+            <p>${accountNumber }</p>
         </div>
     </div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>

@@ -24,11 +24,11 @@
                         <tr>
                             <td rowspan="2"><img src="/resources/img/common/blog.png" style="margin: 10px;"></td>
                             <td style="width: 80%;">빵이름길고길고길어</td>
-                            <td style="width: 15%;">1개</td>
+                            <td class="product-quan" style="width: 15%;">1개</td>
                         </tr>
                         <tr>
                             <td style="color: #cbcbcb; font-size: 0.9em;">설명설명설명설명설명설명</td>
-                            <td class="product-price" style="color: #cbcbcb; font-size: 0.9em;">20000원</td>
+                            <td class="product-price" style="color: #cbcbcb; font-size: 0.9em;">20000000</td>
                         </tr>
 		                <!-- for문 종료 -->
                     </table>
@@ -49,7 +49,7 @@
                     </div>
                     <div class="four">
                         <span>결제금액</span>
-                        <span class="product-final-price">20000원</span>
+                        <span class="product-final-price"></span>
                     </div>
                 </div>
 
@@ -72,9 +72,6 @@
                         <div class="addr-box">
                         	<input type="text" id="orderPhone" value="${sessionScope.m.memberPhone}" readonly="readonly">
                         </div>
-                        <div class="addr-box">
-                        	<input type="text" id="orderEmail" value="${sessionScope.m.memberMail}" readonly="readonly">
-                        </div>
                     </div>
                 </div>
                 <div class="pay-method" style="width: 40%;">
@@ -85,9 +82,12 @@
                     		<div class="pay-card-comment">신용/체크카드</div>
                     	</div>
                     </div>
-                    <button id="pay-card">
-                    	<div class="pay-card-comment">결제하기</div>
-                    </button>
+                    <div id="pay-account">
+                    	<div class="pay-card-wrap">
+                    		<img src="/resources/img/order/accountPay.svg">
+                    		<div class="pay-card-comment">무통장입금</div>
+                    	</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -95,7 +95,14 @@
     <input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
     <input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
 	<script>
-	
+		// 총 상품들 가격 합
+		function price(){
+			const productPrice = $(".product-price").text(); // 20000000
+			console.log(Number(productPrice).toLocaleString()); // 20,000,000
+			$(".product-price").text(Number(productPrice).toLocaleString());
+		}
+		price();
+		
 		// 배송지정보
 		const update = $(".deliver-addr-update");
 		const complete = $(".deliver-addr-complete");
@@ -114,7 +121,7 @@
 				inputText.css("text-decoration","none");
 			});
 		});
-	
+
 
 	
 		// 가격
@@ -139,46 +146,90 @@
     	var todayString = year+month+day+hours+minutes+seconds;
     	
     	const payCard = $("#pay-card");
+    	const payAccount = $("#pay-account");
     	const memberNo = $("[name=memberNo]").val();
     	const memberId = $("[name=memberId]").val();
-    	
+    	const storeNo = $("[name=storeNo]").val();
+
+    	// 카드결제
     	payCard.on("click", function(){
-    		// 배송지 정보
-    		const orderName = $("#orderName").val();
-    		const orderAddr = $("#orderAddr").val();
-    		const orderPhone = $("#orderPhone").val();
-    		const orderEmail = $("#orderEmail").val();
-    		
-	    	console.log(orderName);
-	    	console.log(orderAddr);
-	    	console.log(orderPhone);
-    		$.ajax({
-    			  type: "POST",
-    			  url: "/insertOrder.do",
-    			  data: 
-    			  	{
-    				  	memberNo:memberNo,
-    					orderName:orderName,
-    					orderAddr:orderAddr,
-    					orderPhone:orderPhone,
-    					orderMileage:20000
-    					
-    			  	},
-    			  success: function(){
-				    	tossPayments.requestPayment('카드', { // 결제 수단 파라미터
-				    		  // 결제 정보 파라미터
-				    		  amount: 222,
-				    		  orderId: memberId+'-'+todayString,
-				    		  orderName: '토스 티셔츠 외 2건',
-				    		  customerName: '박토스',
-				    		  successUrl: 'http://localhost:8888/success.do',
-				    		  failUrl: 'http://localhost:8888/fail.do'
-				    	});
-    			  }  
-    		});  
+    		if(inputText.prop('readonly') == true){
+	    		// 배송지 정보
+	    		const orderName = $("#orderName").val();
+	    		const orderAddr = $("#orderAddr").val();
+	    		const orderPhone = $("#orderPhone").val();
+	
+	    		$.ajax({
+	    			  type: "POST",
+	    			  url: "/insertOrder.do",
+	    			  data: 
+	    			  	{
+	    				  	memberNo:memberNo,
+	    					orderName:orderName,
+	    					orderAddr:orderAddr,
+	    					orderPhone:orderPhone,
+	    					orderMileage:20000
+	    					
+	    			  	},
+	    			  success: function(){
+					    	tossPayments.requestPayment('카드', { // 결제 수단 파라미터
+					    		  // 결제 정보 파라미터
+					    		  amount: 222,
+					    		  orderId: memberId+'-'+todayString,
+					    		  orderName: '토스 티셔츠 외 2건',
+					    		  customerName: orderName,
+					    		  successUrl: 'http://localhost:8888/orderCard.do',
+					    		  failUrl: 'http://localhost:8888/fail.do'
+					    	});
+	    			  }  
+	    		});  
+    			
+    		}else{
+    			alert("배송지 정보 수정을 완료해주세요.");
+    		}
 
     	});
     	
+		
+    		
+    	
+    	// 무통장결제
+    	payAccount.on("click", function(){
+    		if(inputText.prop('readonly') == true){    		
+	    		// 배송지 정보
+	    		const orderName = $("#orderName").val();
+	    		const orderAddr = $("#orderAddr").val();
+	    		const orderPhone = $("#orderPhone").val();
+	    		
+	    		$.ajax({
+	    			  type: "POST",
+	    			  url: "/insertOrder.do",
+	    			  data: 
+	    			  	{
+	    				  	memberNo:memberNo,
+	    					orderName:orderName,
+	    					orderAddr:orderAddr,
+	    					orderPhone:orderPhone,
+	    					orderMileage:20000
+	    					
+	    			  	},
+	    			  success: function(){
+					    	tossPayments.requestPayment('가상계좌', { // 결제 수단 파라미터
+					    		  // 결제 정보 파라미터
+					    		  amount: 222,
+					    		  orderId: memberId+'-'+todayString,
+					    		  orderName: '첫번째상품이름'+' 외 '+'2'+'건',
+					    		  customerName: orderName,
+					    		  successUrl: 'http://localhost:8888/orderAccount.do',
+					    		  failUrl: 'http://localhost:8888/fail.do'
+					    	});
+	    			  }  
+	    		});
+    		}else{
+    			alert("배송지 정보 수정을 완료해주세요.");
+    		}
+
+    	});
     	
     	
     	

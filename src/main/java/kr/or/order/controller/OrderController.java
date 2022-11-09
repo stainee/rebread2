@@ -140,7 +140,7 @@ public class OrderController {
 	
 	// 주문 취소 api
 	@RequestMapping("/orderCancel.do")
-	public String orderCancel(int orderNo, Model model, HttpSession session) throws Exception {
+	public String orderCancel(int orderNo, int reqPage, Model model, HttpSession session) throws Exception {
 		String paymentKey = service.selectPaymentKey(orderNo);
 		String cancelReason = "고객변심";
 		
@@ -179,6 +179,7 @@ public class OrderController {
 			
 			Order o = service.selectOneOrder(orderNo);
 			model.addAttribute("o",o);
+			model.addAttribute("reqPage",reqPage);
 			
 			// memberMileage 구하기
 			int memberMileage = service.selectMemberMileage(o.getMemberNo());
@@ -187,6 +188,50 @@ public class OrderController {
 		}
 		else {
 			return "redirect:/";
+		}
+	}
+	
+	// 무통장입금 api
+	@RequestMapping("/orderAccount.do")
+	public String confirmAccountOrder(@RequestParam String paymentKey, @RequestParam String orderId, @RequestParam int amount, Model model) throws Exception {
+		HttpHeaders headers = new HttpHeaders();
+		
+		headers.set("Authorization","Basic "+Base64.getEncoder().encodeToString((SECRET_KEY+":").getBytes()));
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		
+		Map<String, String> payloadMap = new HashMap<>();
+		payloadMap.put("orderId", orderId);
+		payloadMap.put("amount", String.valueOf(amount));
+		
+		HttpEntity<String> request = new HttpEntity<>(objectMapper.writeValueAsString(payloadMap), headers);
+		
+		ResponseEntity<JsonNode> responseEntity = restTemplate.postForEntity("https://api.tosspayments.com/v1/payments/"+paymentKey, request, JsonNode.class);
+		
+		if(responseEntity.getStatusCode() == HttpStatus.OK) {
+			JsonNode successNode = responseEntity.getBody();
+			model.addAttribute("orderId",successNode.get("orderId").asText());
+			
+			// 가상계좌번호
+			model.addAttribute("accountNumber",successNode.get("virtualAccount").get("accountNumber").asText());
+
+			System.out.println("accountNumber : "+successNode.get("virtualAccount").get("accountNumber").asText());
+			
+			// 결제 후 paymentKey를 DB에 저장
+			int orderNo = service.searchOrderNo();
+			Order o = new Order();
+			o.setOrderNo(orderNo);
+			o.setPaymentKey(paymentKey);
+			int result = service.updatePaymentKey(o);
+			
+			model.addAttribute("orderNo",o.getOrderNo());
+			
+			return "order/orderSuccess";
+		}else {
+			JsonNode failNode = responseEntity.getBody();
+			model.addAttribute("message",failNode.get("message").asText());
+			model.addAttribute("code",failNode.get("code").asText());
+			
+			return "order/orderFail"; 
 		}
 	}
 	
