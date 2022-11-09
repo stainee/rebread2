@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="payment">
+	<select id="selectSalesByStore" resultType="map">
+		select 
+			store_no as storeNo, 
+			sum(price) as sales 
+		from payment
+		where payment_date between add_months(sysdate,-1) and sysdate group by store_no
+	</select>
+</mapper>

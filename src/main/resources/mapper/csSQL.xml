@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cs">
+	<select id="selectAllCS" resultType="csl">
+		select
+			cs.cs_no as csNo,
+			cs.member_no as memberNo,
+			m.member_id as memberId,
+			m.member_name as memberName,
+			cs.cs_category as csCategory,
+			cs.cs_content as csContent,
+			cs.cs_check as csCheck
+		from cs cs join member m on cs.member_no = m.member_no 
+	</select>
+	<update id="updateCheck" parameterType="map">
+		update cs
+			set cs_check = #{csCheck}
+		where cs_no = #{csNo}
+	</update>
+	<select id="selectOneCheck" parameterType="Integer" resultType="Integer">
+		select 
+			cs_check as csCheck 
+		from cs
+		where cs_no = #{csNo}
+	</select>
+	<insert id="insertCS" parameterType="cs">
+		insert into CS values(cs_seq.nextval, #{memberNo}, #{csCategory}, #{csContent}, 0)
+	</insert>
+	<select id="searchCS" parameterType="csl" resultType="csl">
+		select
+			cs.cs_no as csNo,
+			cs.member_no as memberNo,
+			m.member_id as memberId,
+			m.member_name as memberName,
+			cs.cs_category as csCategory,
+			cs.cs_content as csContent,
+			cs.cs_check as csCheck
+		from cs cs join member m on cs.member_no = m.member_no
+		<if test="memberId != null">
+			where m.member_id LIKE '%'||#{memberId}||'%'
+		</if>
+		<if test="memberName != null">	
+			where m.member_name LIKE '%'||#{memberName}||'%' 
+		</if>
+	</select>
+	
+	<select id="selectOneCS" parameterType="Integer" resultType="csd">
+		select
+			cs.cs_no as csNo,
+			m.member_id as memberId,
+			m.member_name as memberName,
+			m.member_phone as memberPhone,
+			m.member_mail as memberMail,
+			m.member_addr as memberAddr,
+			m.member_grade as memberGrade,
+			m.member_mileage as memberMileage,
+			cs.cs_category as csCategory,
+			cs.cs_content as csContent
+		from cs cs join member m on cs.member_no = m.member_no
+		where cs.cs_no = #{_parameter}
+	</select>
+</mapper>

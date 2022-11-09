@@ -1,0 +1,115 @@
+*{
+	font-family: nsr-r;
+}
+/* .donate_wrap{
+    width: 1200px;
+} */
+.donate_title{
+    text-align: center;
+    border-bottom: 2px solid rgb(159, 159, 159);
+}
+.donate_content_wrap{
+    width: 1200px;
+    margin: 60px auto;
+}
+.donate_content_box{
+    width: 267px;
+    height: 363px;
+    border: 1px solid lightgray; 
+    display: inline-block;
+    margin-left: 24px;
+    margin-bottom: 24px;
+}
+/*
+.donate_content_box:nth-child(4n+1){
+    margin: 0;
+}
+*/
+.donate_content{
+    padding: 20px;
+}
+.donate_img{
+    width: 265px;
+    height: 200px;
+}
+.donate_content_title{
+    font-weight: 700;
+    font-size: 15px;
+}
+.donate_content_organ{
+    margin-top: 10px;
+    font-size: 14px;
+    color: gray;
+}
+.donate_content_bar{
+    height: 5px;
+    margin-top: 15px;
+    background-color: lightgray;
+}
+.donate_content_footer{
+    margin-top: 10px;
+}
+.donate_percent_num,.donate_percent_per{
+    font-size: 18px;
+    float: left;
+}
+.donate_amount_num,.donate_amount_won{
+    font-size: 18px;
+    float: right;
+}
+.more_btn{
+    width: 1200px;
+    height: 40px;
+}
+.donate_content_box>a{
+    text-decoration: none;
+    color: black;
+}
+#ex1{
+	max-width: 380px;
+	padding: 15px 40px;
+}
+#ex1>.donate_content_box{
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+	margin-bottom: 30px;
+}
+.donate_div{
+	display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid lightgray;
+}
+.modal_close{
+	display: flex;
+	align-items: center;
+	padding: 10px 0px;
+	
+}
+.modal_close>a{
+	color: black;
+}
+
+.donate_btn_box{
+	padding: 0px 25px;
+	height : 40px;
+	border-left: 1px solid lightgray;
+	border-right: 1px solid lightgray;
+	display: flex;
+	align-items:center;
+	background-color: #fefaee;
+}
+.donate_btn{
+	border: none;
+	background-color: #fefaee;
+}
+.donate_input_area{
+	display: flex;
+	justify-content: space-between;
+	align-items:center;
+	width: 300px;
+	border-bottom: 1px solid lightgray;
+	padding-left: 30px;
+}

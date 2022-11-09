@@ -1,0 +1,44 @@
+@charset "UTF-8";
+
+.contetn-wrap{
+    margin: 0 auto;
+
+}
+.content{
+    text-align: center;
+    margin: 200px 0px;
+}
+.content>p:first-child{
+    font-size: 2.3em;
+    font-weight: 900;
+}
+.content>p:last-of-type{
+    font-size: 1.5em;
+    margin-bottom: 200px;
+}
+.order-detail, .order-mypage{
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 150px;
+    height: 45px;
+    cursor: pointer;
+}
+.order-detail{
+    background-color: #fff;
+}
+.order-mypage{
+    color: #fff;
+    background-color: #1c1c1c;
+}
+.order-detail:hover{
+    color: #fff;
+    background-color: #1c1c1c;
+    transition-duration: 0.5s;
+    
+}
+.order-mypage:hover{
+    color: #1c1c1c;
+    background-color: #fff;
+    transition-duration: 0.5s;
+    
+}

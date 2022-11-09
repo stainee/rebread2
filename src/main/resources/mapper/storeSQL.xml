@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="store">
+    <select id="selectAllStore" resultType="s">
+   		select
+   			store_no as storeNo,
+   			member_no as memberNo,
+   			store_name as storeName,
+   			store_content as storeContent,
+   			store_addr as storeAddr,
+   			store_regist_num as storeRegistNum,
+   			store_account as storeAccount,
+   			open_time as openTime,
+   			close_time as closeTime,
+   			store_phone as storePhone,
+   			store_img as storeImg
+   		from store
+   </select>
+   <select id="selectOneStore" resultType="sd" parameterType="Integer">
+   		select
+   			s.store_no as storeNo,
+   			s.member_no as memberNo,
+   			m.member_name as memberName,
+   			s.store_name as storeName,
+   			s.store_addr as storeAddr,
+   			s.store_regist_num as storeRegistNum,
+   			s.store_account as storeAccount,
+   			s.open_time as openTime,
+   			s.close_time as closeTime,
+   			s.store_phone as storePhone,
+   			s.store_img as storeImg
+   		from store s join member m on s.member_no=m.member_no
+   		where s.store_no = #{_parameter}
+   </select>
+   
+   <select id="selectOneStore1" resultType="s" parameterType="s">
+   		select
+   			s.store_no as storeNo,
+   			s.member_no as memberNo,
+   			m.member_name as memberName,
+   			s.store_name as storeName,
+   			s.store_addr as storeAddr,
+   			s.store_content as storeContent,
+   			s.store_regist_num as storeRegistNum,
+   			s.store_account as storeAccount,
+   			s.open_time as openTime,
+   			s.close_time as closeTime,
+   			s.store_phone as storePhone,
+   			s.store_img as storeImg
+   		from store s join member m on s.member_no=m.member_no
+   		where s.store_no = #{storeNo}
+   </select>
+   <update id="updateStore" parameterType="s">
+   		update store
+   			set 
+   			store_name = #{storeName},
+   			store_addr = #{storeAddr},
+   			store_content = #{storeContent},
+   			store_regist_num = #{storeRegistNum},
+   			store_account = #{storeAccount},
+   			open_time = #{openTime},
+   			close_time = #{closeTime},
+   			store_phone = #{storePhone},
+   			store_img = #{storeImg}
+   		where store_no = #{storeNo}
+   </update>
+
+    <select id="selectOneStoreDetail" resultType="sld" parameterType="Integer">
+   		select
+   			s.store_no as storeNo,
+   			s.member_no as memberNo,
+   			m.member_name as memberName,
+   			s.store_name as storeName,
+   			s.store_addr as storeAddr,
+   			s.store_regist_num as storeRegistNum,
+   			s.store_account as storeAccount,
+   			s.open_time as openTime,
+   			s.close_time as closeTime,
+   			s.store_phone as storePhone,
+   			s.store_img as storeImg
+   		from store s join member m on s.member_no=m.member_no
+   		where s.store_no = #{_parameter}
+   </select>
+
+   <update id="updateStoreDetail" parameterType="s">
+   		update store
+   			set 
+   			store_name = #{storeName},
+   			store_addr = #{storeAddr},
+   			store_regist_num = #{storeRegistNum},
+   			open_time = #{openTime},
+   			close_time = #{closeTime}
+   		where store_no = #{storeNo}
+   </update>
+   <select id="selectAllStoreNo" resultType="Integer">
+   		select store_no as storeNo
+   			from store
+   </select>
+   <select id="selectOneStoreAccount" resultType="string" parameterType="Integer">
+   		select
+   			store_account as storeAccount
+   		from store
+   		where store_no = #{_parameter}
+   </select>
+   
+
+   <select id="selectStoreList" parameterType="map" resultType="spd">
+		select * from
+		(select rownum as rnum, s.* from 
+		(select
+		    store_no as storeNo,
+   			member_no as memberNo,
+   			store_name as storeName,
+   			store_addr as storeAddr,
+   			store_regist_num as storeRegistNum,
+   			store_account as storeAccount,
+   			open_time as openTime,
+   			close_time as closeTime,
+   			store_phone as storePhone,
+   			store_img as storeImg
+		from store order by 1 desc)s)
+		where rnum between #{start} and #{end}
+	</select>
+
+	<select id="selectMemberStore" resultType="s" parameterType="Integer">
+   		select
+   			store_no as storeNo,
+   			member_no as memberNo,
+   			store_name as storeName,
+   			store_content as storeContent,
+   			store_addr as storeAddr,
+   			store_regist_num as storeRegistNum,
+   			store_account as storeAccount,
+   			open_time as openTime,
+   			close_time as closeTime,
+   			store_phone as storePhone,
+   			store_img as storeImg
+   		from store
+   		where member_no = #{memberNo}
+   </select>
+	<insert id="insertStore" parameterType="s">
+		insert into store values(store_seq.nextval,#{memberNo},#{storeName},#{storeContent},#{storeAddr},#{storeRegistNum},#{storeAccount},#{openTime},#{closeTime},#{storePhone},#{storeImg})
+	</insert>
+
+   <select id="allStoreList" parameterType="map" resultType="s">
+	select * from
+	(select rownum as rnum, s.*from
+	(select
+	s.store_no as storeNo,
+	s.member_no as memberNo,
+	s.store_name as storeName,
+	s.store_content as storeContent,
+	s.store_addr as storeAddr,
+	s.store_regist_num as storeRegistNum,
+	s.store_account as storeAccount,
+	s.open_time as openTime,
+	s.close_time as closeTime,
+	s.store_phone as storePhone,
+	s.store_img as storeImg,
+	nvl(
+	(select avg(rating) from test_review r where r.store_no = s.store_no),0)as
+	rating
+	from store s order by 1 desc)s)
+	where rnum between #{start} and #{end}
+   </select>
+   
+   <select id="totalCount" resultType="_int">
+   		select count(*) from store
+   </select>
+   
+   <!-- 별점 포함해서 매장 상세정보 불러오기 -->
+   <select id="selectOneStore2" parameterType="_int" resultType="s">
+	select
+	s.store_no as storeNo,
+	s.member_no as memberNo,
+	s.store_name as
+	storeName,
+	s.store_content as storeContent,
+	s.store_addr as storeAddr,
+	s.store_regist_num as storeRegistNum,
+	s.store_account as storeAccount,
+	s.open_time as openTime,
+	s.close_time as closeTime,
+	s.store_phone as
+	storePhone,
+	s.store_img as storeImg,
+	nvl((select avg(rating) from test_review r where r.store_no = s.store_no),0)as rating
+	from store s
+	where store_no = #{_parameter}
+   </select>
+   <select id="searchStore" resultType="s" parameterType="string">
+   		select
+   			store_no as storeNo,
+   			store_name as storeName,
+   			store_addr as storeAddr,
+   			store_regist_num as storeRegistNum,
+   			store_account as storeAccount
+   		from store
+   		where store_name LIKE '%'||#{storeName}||'%'
+   </select>
+</mapper>

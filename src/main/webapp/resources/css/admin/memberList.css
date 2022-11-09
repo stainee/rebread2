@@ -1,0 +1,36 @@
+@charset "UTF-8";
+.membertbl th{
+	background-color:lightgrey;
+	width:200px;
+}
+
+.membertbl th:nth-child(1){
+	width:120px;
+}
+
+.membertbl tr button{
+	border:none;
+	padding:5px 10px 5px 10px;
+	color: white;
+	font-weight:800;
+	border-radius:5px;
+	cursor:pointer;
+}
+
+.membertbl tr td:nth-child(5){
+	margin : 0 auto;
+	text-align:center;
+}
+
+.membertbl .info{
+	background-color:orange;
+}
+
+.membertbl .remove{
+	background-color:red;
+}
+
+.membertbl tr td{
+	text-align:center;
+}
+

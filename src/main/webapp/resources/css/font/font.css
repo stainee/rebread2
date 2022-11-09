@@ -1,0 +1,16 @@
+@font-face {
+	font-family: 'nsr-l';
+    src: url(NanumSquareRoundOTFL.otf);
+}
+@font-face {
+	font-family: 'nsr-r';
+    src: url(NanumSquareRoundOTFR.otf);
+}
+@font-face {
+	font-family: 'nsr-b';
+	src: url(NanumSquareRoundOTFB.otf);
+}
+@font-face {
+	font-family: 'nsr-eb';
+	src: url(NanumSquareRoundOTFEB.otf);
+}

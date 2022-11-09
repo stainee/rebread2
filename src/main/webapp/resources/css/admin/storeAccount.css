@@ -1,0 +1,62 @@
+@charset "UTF-8";
+* {
+	margin:0;
+	background-color:#f8f8f8;
+	font-family: 'nsr-r';
+
+}
+
+
+.title_wrapper{
+	margin : 0 auto;
+	text-align : center; 
+	font-size:24px;
+	font-weight:800;
+	padding-top:40px;
+	padding-bottom:40px;
+}
+
+.title_wrapper p{
+	margin : 0 auto;
+}
+
+/* 테이블*/
+
+.content_container p{
+	text-align:center;
+}
+.membertbl {
+	margin : 0 auto;
+}
+.membertbl th{
+	background-color:lightgrey;
+	width:200px;
+}
+
+.membertbl th:nth-child(n+2){
+	width:250px;
+}
+
+.membertbl tr td{
+	background-color:white;
+}
+.membertbl tr td p{
+	background-color:white;
+}
+
+.btn_wrap{
+	display:flex;
+	justify-content:center;
+	margin-top:40px;
+}
+.complete{
+	border:none;
+	padding:10px 20px 10px 20px;
+	color: white;
+	font-weight:800;
+	border-radius:5px;
+	background-color: skyblue;
+	font-size:18px;
+	cursor:pointer;
+}
+

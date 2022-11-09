@@ -1,0 +1,53 @@
+@charset "UTF-8";
+.cstbl th{
+	background-color:lightgrey;
+	width:200px;
+}
+
+.cstbl tr td{
+	text-align:center;
+}
+
+.cstbl tr td:nth-child(3){
+	text-align:left;
+}
+
+.cstbl th:nth-child(1){
+	width:120px;
+}
+
+.cstbl th:nth-child(4){
+	width:240px;
+}
+.cstbl th:nth-child(n+5){
+	width:120px;
+}
+.cstbl tr button{
+	border:none;
+	padding:5px 10px 5px 10px;
+	color: white;
+	font-weight:800;
+	border-radius:5px;
+	cursor:pointer;
+}
+
+.cstbl tr td:nth-child(n+3){
+	margin : 0 auto;
+	text-align:center;
+}
+
+.cstbl .detail{
+	background-color:orange;
+}
+
+.cstbl .complete{
+	background-color:skyblue;
+}
+
+.cstbl .cancel{
+	background-color:red;
+}
+
+.cstbl .cs{
+	background-color:green;
+}

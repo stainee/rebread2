@@ -1,0 +1,120 @@
+@charset "UTF-8";
+*{
+	margin: 0;
+	padding: 0;
+	text-decoration: none;
+}
+.page-content{
+    width: 500px;
+    margin: 0 auto;
+    margin-top: 200px;
+    padding: 55px 45px;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
+    border-radius: 20px;
+    padding-bottom: 20px;
+}
+input:focus{
+	outline: 1px solid darkgray;
+}
+.textArea{
+	min-height: 30px;
+    padding: 0 0 34px;
+    text-align: center;
+}
+.textArea p{
+	font-size: 15px;
+    line-height: 1.5;
+    letter-spacing: -0.03em;
+    color: #999;
+}
+.textArea h1{
+	font-family: 'Noto Sans KR', sans-serif;
+    margin-top: 20px;
+    font-size: 30px;
+    color: #785c37;
+    text-align: center;
+    font-weight: 600;
+}
+.textArea h2{
+	font-family: 'Noto Sans KR', sans-serif;
+    font-size: 32px;
+    font-weight: 600;
+    color: #555555;
+    text-align: center;
+    margin-top: -5px;
+    margin-bottom: 20px;
+}
+
+input, select{
+	outline: none;
+    font-size: 100%;
+    font-family: 'Montserrat','Noto Sans KR',Verdana,Dotum,sans-serif;
+    color: #111111;
+    vertical-align: middle;
+}
+.content{
+    padding: 30px 50px;
+    border-bottom: 1px solid #e1e1e1;
+    border-top: 1px solid #e1e1e1;
+    font-size: 16px;
+}
+.content>p{
+	margin: 7px 0 0;
+}
+.content>p>strong{
+	width: 140px;
+	display: inline-block;
+    margin: 0 0 5px;
+    color: #555555;
+}
+.check{
+	margin-left: 150px !important;
+	margin-bottom: 50px;
+	color: #353535;
+}
+.check>label{
+	font-size: 15px;
+}
+.phone>input{
+	height: 28px;
+    line-height: 24px;
+    padding: 2px 4px;
+    border: 1px solid #d5d5d5;
+    color: #111111;
+    font-size: 12px;
+    width: 60px;
+    height: 30px;
+    text-indent: 10px;
+}
+.member>select, .name>input, .email>input{
+	width: 243px;
+	border: 1px solid #d5d5d5;
+	color: #111111;
+	height: 30px;
+	font-size:12px;
+	text-indent: 10px;
+}
+#btnarea{
+	text-align: center;
+	margin-top: 40px;
+}
+
+#searchId{
+	font-size: 16px;
+    font-weight: 400;
+    width: 180px;
+    display: inline-block;
+    line-height: 44px;
+    line-height: 42px;
+    color: #fff;
+    background: #785c37;
+    cursor: pointer;
+    border: none;
+    border-radius: 3px;
+ 	font-family: 'Noto Sans KR', sans-serif;
+    
+}
+#searchId:hover{
+	background-color: #6d5331;
+    transition: 0.5s;
+}

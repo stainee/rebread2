@@ -1,0 +1,64 @@
+*{
+	font-family: nsr-r;
+}
+.left_container{
+    width:200px;
+    height: 360px;
+    box-shadow: 2px 2px 2px 2px lightgray;
+    border-radius: 5px;
+    margin-right:20px;
+}
+/* 위의 배송 상태 선택칸*/
+.sales_info{
+    width: 150px;
+    height: 35px;
+    outline: none;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+.memberInfo>p{
+	display: inline-block;
+}
+
+/* 각 상품 별 배송 상태 선택칸 */
+.store_sales_info{
+    width: 110px;
+    height: 30px;
+    outline: none;
+}
+.store_info_status{
+    display: inline-block;
+    padding-right: 15px;
+}
+.store_info_date{
+    padding-left: 20px;
+    font-size: 20px;
+    color: gray;
+}
+.store_info_wrap_box{
+    display: flex;
+    align-items: center;
+}
+.product_info_form{
+    display: flex;
+    align-items: center;
+    padding-bottom: 20px;
+}
+.product_info_right{
+    display: inline-block;
+    padding-left: 50px;
+}
+.product_info_content{
+    font-weight: 600;
+    font-size: 17px;
+}
+.store_info_status_btn_box{
+    display: inline-block;
+    padding-right: 30px;
+    border-right: 2px solid lightgray;
+}
+.store_info_status_btn{
+    display: flex;
+    align-items: center;
+    height: 30px;
+}

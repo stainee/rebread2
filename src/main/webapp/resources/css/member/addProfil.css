@@ -1,0 +1,150 @@
+@charset "UTF-8";
+@charset "UTF-8";
+form{
+	margin-bottom: 200px;
+}
+.page-content{
+    width: 1030px;
+    margin: 0 auto;
+    margin-top: 80px;
+    height: 2300px;
+    font-family: 'Noto Sans KR', sans-serif;
+    padding-bottom: 50px;
+}
+.content-title{
+    text-align: center;
+    padding: 0 0 40px;
+    font-size: 27px;
+    font-weight: 900;
+    color: #785c37;
+}
+th{
+    font-size: 18px;
+    border: 0;
+    width: 140px;
+    border-right: 0;
+    text-align: left;
+    background: #fff;
+}
+#phone::placeholder{
+	color: lightgray;
+	font-size: 13px;
+}
+#joinFrm {
+    width: 1000px;
+}
+#joinFrm tr:last-child{
+    border-bottom: 1px solid black;
+}
+
+#joinFrm th{
+    padding: 30px 0 27px 0;
+    width: 20%;
+}
+#joinFrm th img{
+    margin-left: 7px;
+}
+#joinFrm td{
+    padding: 24px 0 27px 28px;
+    width: 80%;
+}
+#joinFrm td>input{
+    margin: 0 10px 0 0;
+    padding: 0 0 0 10px;
+    font-size: 18px;
+    font-weight: 700;
+    width: 300px;
+    height: 40px;
+    border: 1px solid #d5d5d5;
+    color: #111111;
+}
+#joinFrm td>input:focus{
+    outline: none;
+    border: solid 2px darkgray;
+    border-radius: 3px;
+}
+#allAgree{
+    font-size: 25px;
+    font-weight: 400;
+    padding: 100px 0 10px;
+}
+.astyle{
+    padding: 20px;
+    order: 1px solid #e8e8e8;
+    color: #404040;
+    border: 1px solid lightgray;
+    margin: 20px 0;
+}
+.astyle>h3{
+    font-size: 18px;
+    font-weight: 400;
+    margin: 0 0 20px;
+}
+.astyle textarea{
+    width: 980px;
+    height: 130px;
+    padding: 20px;
+    resize: none;
+    border: 1px solid lightgray;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+.astyle textarea:focus{
+    outline: none;
+}
+.aCheck{
+    font-size: 15px;
+    color: #000;
+    font-weight: 300;
+    padding: 20px 0 5px 0;
+}
+.aCheck>span{
+    margin-right: 10px;
+}
+#joinUs{
+    text-align: center;
+    margin-top: 70px;
+    margin-bottom: 200px;
+}
+#joinUs>input{
+    width: 240px;
+    height: 40px;
+    cursor: pointer;
+    background-color: #fff;
+    border: 1px solid  darkgray;
+    border-radius: 5px;
+    color: darkgray;
+}
+#joinUs>input:hover{
+    background-color: #fff1c8db;
+    transition: 0.3s;
+}
+#address{
+	height: 40px;
+    width: 70px;
+    border: 1px solid lightgrey;
+    border-radius: 3px;
+    font-family: 'Noto Sans KR', sans-serif;
+    cursor: pointer;
+}
+
+#address:hover{
+	background-color: #e4e4e4;
+    border-radius: 5px;
+}
+.select{
+    width: 200px;
+    height: 40px;
+    border: 1px solid lightgray;
+    padding-left: 10px;
+    color: #404040;
+}
+.select:focus{
+    outline: none;
+}
+.sOpt:hover{
+    background-color: #785c37;
+    height: 20px;
+}
+.adr{
+	margin-top: 10px;
+}

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="account">
+	<insert id="insertOneAccount" parameterType="a">
+		insert into account values
+		(account_seq.nextval, #{storeNo}, #{profit}, #{accountPayment}, to_char(sysdate,'YYYY-MM-DD'), #{storeAccount})
+	</insert>
+	
+	<select id="selectAccountList" resultType="a" parameterType="Integer">
+		select
+			account_no as accountNo,
+			store_no as storeNo,
+			profit,
+			account_payment as accountPayment,
+			account_date as accountDate,
+			store_account as storeAccount
+		from account
+		where store_no=#{_parameter}
+	</select>
+</mapper>

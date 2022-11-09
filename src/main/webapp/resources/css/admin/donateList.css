@@ -1,0 +1,36 @@
+*{
+	font-family: nsr-r;
+}
+.membertbl th:nth-child(3){
+	width:370px;
+}
+.membertbl tr td:nth-child(3) {
+	padding-left:25px;
+	padding-right:25px;
+	width: 370px;
+	overflow: hidden;
+  	text-overflow: ellipsis;
+ 	white-space: nowrap;
+ 	display: inline-block;
+}
+.membertbl .edit_btn{
+	background-color: orange;
+}
+.membertbl .delete_btn{
+	background-color: red;	
+}
+.donate_edit_btn_box{
+	display: flex;
+	justify-content: flex-end;
+	padding-right: 3px;
+}
+.donate_edit_btn{
+	border:none;
+	padding:5px 10px 5px 10px;
+	margin-bottom:3px;
+	color: white;
+	font-weight:800;
+	border-radius:5px;
+	cursor:pointer;
+	background-color: gray;
+}

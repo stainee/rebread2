@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="product">
+	<insert id="insertProduct" parameterType="p">
+		insert into product
+		values(
+			product_seq.nextval,
+			#{storeNo},
+			#{productName},
+			#{productContent},
+			#{productPrice},
+			#{productStock},
+			#{productDate},
+			#{productImg},
+			#{productSale},
+			#{productType},
+			0
+		)
+	</insert>
+	
+	<select id="selectLossList" parameterType="_int" resultType="p">
+		select 
+			product_no as productNo,
+			store_no as storeNo,
+			product_name as productName,
+			product_content as productContent,
+			product_price as productPrice,
+			product_stock as productStock,
+			product_date as productDate,
+			product_img as productImg,
+			product_sale as productSale,
+			product_type as productType,
+			product_count as productCount
+		from product
+		where store_no= #{_parameter} and product_type = 0
+	</select>
+	<select id="selectNomalList" parameterType="_int" resultType="p">
+		select 
+			product_no as productNo,
+			store_no as storeNo,
+			product_name as productName,
+			product_content as productContent,
+			product_price as productPrice,
+			product_stock as productStock,
+			product_date as productDate,
+			product_img as productImg,
+			product_sale as productSale,
+			product_type as productType,
+			product_count as productCount
+		from product
+		where store_no= #{_parameter} and product_type = 1
+	</select>
+	
+	<select id="selectMainList" resultType="p">
+		select 
+			product_name as productName,
+			product_price as productPrice,
+			product_img as productImg,
+			product_count as productCount
+		from 
+		(select 
+			product_name as productName,
+			product_price as productPrice,
+			product_img as productImg,
+			product_count as productCount
+		from product order by product_count desc) where rownum &lt; 4 
+	</select>
+</mapper>

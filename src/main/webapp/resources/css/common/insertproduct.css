@@ -1,0 +1,70 @@
+@charset "UTF-8";
+
+*{
+    list-style: none;
+    margin : 0;
+}
+body{
+	align-items: center;
+}
+.top{
+	display: flex;
+	width:100%;
+	min-width: 1200px;
+    justify-content: space-around;
+    align-items: center;
+}
+.total_wrapper{
+    margin-top :40px;
+    margin-left:60px;
+    display:flex;
+}
+
+.left_container{
+    width:200px;
+    box-shadow: 2px 2px 2px 2px lightgray;
+    border-radius: 5px;
+    margin-right:20px;
+    height:160px;
+}
+
+.memberInfo{
+    width:200px;
+    height:160px;
+    margin-top:14px;
+    margin-left:20px;
+}
+
+.memberInfo p{
+    font-size:24px;
+    margin-bottom: 10px;
+    font-weight:1000;
+    
+}
+
+.right_container{
+    width:960px;
+    box-shadow: 2px 2px 2px 2px lightgray;
+    border-radius:5px;
+}
+
+.right_container .content_container{
+    margin-top:10px;
+    margin-left:10px;
+}
+.content-top {
+	width: 90%;
+	margin : 0 auto;
+	border-bottom: 2px solid #ccc;
+	padding: 20px;
+
+}
+
+.content-top h2{
+	font-size:30px;
+	font-weight: 1000;
+}
+#product-viewer{
+	min-height: 50px;
+    border : 1px solid #EBEBEC;
+}

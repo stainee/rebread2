@@ -1,0 +1,93 @@
+@charset "UTF-8";
+
+*{
+	font-family: 'nsr-r';
+}
+.member-point{
+	padding-top: 35px;
+}
+.selectList ul li{
+    display:block;
+    text-decoration: none;
+    color : black;
+    width:200px;
+    line-height: 60px;
+    text-align: center;
+    color : gray;
+    cursor: pointer;
+}
+.content_container{
+	
+	padding: 40px;
+}
+.content_container .member-withdraw{
+	text-align: center;
+}
+.content_container .member-withdraw a{
+	color: gray;
+}
+.content-update{
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 35px;
+}
+.right_container{
+	width: 700px;
+}
+.content-title{
+	font-size: 1.5em;
+	padding-bottom : 40px;
+	margin-bottom: 40px;
+	border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+}
+.content-update div:first-child{
+	font-size: 1.2em;
+}
+.content-info-wrap{
+	padding-bottom: 25px;
+	margin-bottom: 40px;
+	border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+}
+.content-info{
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	position: relative;
+	margin-left: 10px;
+	margin-bottom: 24px;
+}
+.content-info div:first-child {
+	width: 120px;
+}
+
+
+
+/* 최근 주문 내역 */
+.content-box{
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+	cursor: pointer;
+}
+.content-img img{
+	width: 70px;
+	height: 70px;
+	margin: 25px;
+}
+.content-status-date{
+	display: flex;
+	justify-content: flex-start;
+}
+.content-status-date span{
+	align-items: center;
+}
+
+
+
+
+
+
+
+
+

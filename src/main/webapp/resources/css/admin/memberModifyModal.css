@@ -1,0 +1,100 @@
+@charset "UTF-8";@charset "UTF-8";
+* {
+	margin:0;
+	font-family: 'NanumSquareRound';
+}
+
+.modal{
+	display:none;
+	width:700px;
+	height:500px;
+	position:fixed;
+	top:50px;
+	left:250px;
+	background-color:white;
+	border:2px solid grey;
+	border-radius:10px;
+	z-index:1;
+}
+.title_wrapper{
+	margin : 0 auto;
+	text-align : center; 
+	font-size:24px;
+	font-weight:800;
+	padding-top:40px;
+	padding-bottom:40px;
+}
+
+.title_wrapper p{
+	margin : 0 auto;
+}
+
+#memberGrade{
+	height:30px;
+	background-color:white;
+}
+/* 테이블*/
+
+.membertbl {
+	margin : 0 auto;
+}
+.membertbl th{
+	background-color:lightgrey;
+	width:200px;
+}
+
+.membertbl #memberNo{
+	background-color:#e2e2e2;
+}
+.membertbl #memberNo:focus{
+	outline:none;
+}
+.membertbl tr button{
+	border:none;
+	padding:5px 10px 5px 10px;
+	color: white;
+	font-weight:800;
+	border-radius:5px;
+	background-color:skyblue;
+}
+
+.membertbl td:nth-child(2){
+	width:400px;
+}
+
+.membertbl td input{
+	width:300px;
+	height:30px;
+	border: 1px solid lightgrey;
+	box-sizing:border;
+	background-color:white;
+}
+
+.modaltbl tr th{
+	width:200px;
+}
+
+.btn_wrap{
+	display:flex;
+	justify-content:center;
+	margin-top:40px;
+}
+
+.btn_wrap button{
+	border:none;
+	padding:10px 20px 10px 20px;
+	color: white;
+	font-weight:800;
+	border-radius:5px;
+	font-size:18px;
+	margin-left:10px;
+	cursor:pointer;
+}
+
+.complete{
+	background-color:darkgray;
+}
+.modify{
+	background-color: orange;
+}
+

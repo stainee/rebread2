@@ -1,0 +1,126 @@
+@charset "UTF-8";
+*{
+	margin: 0;
+	padding: 0;
+	text-decoration: none;
+}
+.page-content{
+    width: 500px;
+    margin: 0 auto;
+    margin-top: 200px;
+    padding: 55px 45px;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
+    border-radius: 20px;
+    padding-bottom: 20px;
+}
+input:focus{
+	outline: 1px solid darkgray;
+}
+.textArea{
+	min-height: 30px;
+    padding: 0 0 34px;
+    text-align: center;
+}
+.textArea p{
+	font-size: 15px;
+    line-height: 1.5;
+    letter-spacing: -0.03em;
+    color: #999;
+}
+.textArea h1{
+	font-family: 'Noto Sans KR', sans-serif;
+    margin-top: 20px;
+    font-size: 30px;
+    color: #785c37;
+    text-align: center;
+    font-weight: 600;
+}
+.textArea h2{
+	font-family: 'Noto Sans KR', sans-serif;
+    font-size: 32px;
+    font-weight: 600;
+    color: #555555;
+    text-align: center;
+    margin-top: -5px;
+    margin-bottom: 20px;
+}
+
+input, select{
+	outline: none;
+    font-size: 100%;
+    font-family: 'Montserrat','Noto Sans KR',Verdana,Dotum,sans-serif;
+    color: #111111;
+    vertical-align: middle;
+}
+.content{
+    padding: 20px 75px;
+    border-top: 1px solid #e1e1e1;
+    font-size: 16px;
+}
+.password, .passwordRe{
+	margin-top:20px; 
+	margin-bottom: 7px;
+	padding-left: 25px;
+}
+#pw, #pwRe{
+	width: 300px;
+	height: 35px;
+	text-indent: 10px;
+	border: 1px solid darkgray;  
+}
+strong{
+	color: #555555;
+	font-family: 'Noto Sans KR', sans-serif;
+}
+#sub{
+	text-align: center;
+	margin-top: 30px;
+}
+#sub>input {
+	font-size: 16px;
+    font-weight: 400;
+    width: 180px;
+    display: inline-block;
+    line-height: 44px;
+    line-height: 42px;
+    color: #fff;
+    background: #785c37;
+    cursor: pointer;
+    border: none;
+    border-radius: 3px;
+ 	font-family: 'Noto Sans KR', sans-serif;
+}
+#sub>input:hover{
+	background-color: #6d5331;
+    transition: 0.5s;
+}
+#jek{
+	padding-left: 22px;
+	margin-top: 3px;
+	margin-bottom:30px;
+	font-size: 14.5px;
+	color: #555555;
+}
+#pwCheck, #pwReCheck{
+	margin-left: 10px;
+	font-size: 12px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
