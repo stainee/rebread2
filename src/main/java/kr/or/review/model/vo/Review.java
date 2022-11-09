@@ -14,6 +14,6 @@ public class Review {
 	private String reviewWriter;
 	private String reviewContent;
 	private String reviewDate;
-	private int Ratting;
+	private int Rating;
 	private String reviewImg;
 }
