@@ -21,9 +21,18 @@
             <div class="mid-wrap">
                 <div class="search">
                     <div>
-                        <form action="/#">
-                            <input type="text" name="storeName" placeholder="매장검색">
-                            <button type="submit" class="btn bc2">검색</button>
+                        <form action="/allStoreList.do">
+                        	<input type="hidden" name="reqPage" value="1">
+                 			<c:choose>
+	               				<c:when test="${not empty storeName }">
+	               					<input type="text" name="storeName" value="${storeName }">
+	               					<button type="submit" class="btn bc2">검색</button>
+	               				</c:when>
+	               				<c:otherwise>
+		                            <input type="text" name="storeName" placeholder="매장검색">
+		                            <button type="submit" class="btn bc2">검색</button>
+	                            </c:otherwise>
+                            </c:choose>
                         </form>
                     </div>
                     <div class="lineUp">
@@ -43,14 +52,14 @@
 								<a href="/detailStore.do?storeNo=${s.storeNo}">
 								<div class="store-name">${s.storeName}</div>
 								<div class="store-star">
-									<span id="star">★ ${s.rating}</span> <span>리뷰 3,800</span>
+									<span id="star">★ ${s.rating}</span> <span>리뷰  ${s.reviewCount}</span>
 								</div>
 								<div class="store-time">
 									<span>운영시간 ${s.openTime} ~ ${s.closeTime }</span>
 								</div>
 								</a>
 							</div>
-							<div class="store-discount">70%</div>
+							<div class="store-discount">${s.maxDiscount }%</div>
 						</div>
 					</div>
 				</c:forEach>
@@ -60,5 +69,14 @@
             </div>
         </div>  
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/> 
+	
+	<script>
+		$("[type=submit]").on("click",function(){
+			const search = $("[name=storeName]").val();
+			console.log(search);
+			$("[name=storeName]").attr("value",search);
+		});
+		
+	</script>
 </body>
 </html>

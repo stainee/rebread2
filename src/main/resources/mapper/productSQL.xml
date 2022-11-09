@@ -63,6 +63,24 @@
 			product_price as productPrice,
 			product_img as productImg,
 			product_count as productCount
-		from product order by product_count desc) where rownum &lt; 4 
+		from product order by product_count desc) where rownum &lt; 4
 	</select>
+	
+	<select id="selectOneProduct" parameterType="_int" resultType="p">
+		select 
+			product_no as productNo,
+			store_no as storeNo,
+			product_name as productName,
+			product_content as productContent,
+			product_price as productPrice,
+			product_stock as productStock,
+			product_date as productDate,
+			product_img as productImg,
+			product_sale as productSale,
+			product_type as productType,
+			product_count as productCount
+		from product
+		where product_no = #{_parameter}
+	</select>
+	
 </mapper>

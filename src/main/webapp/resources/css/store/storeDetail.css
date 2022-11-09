@@ -236,6 +236,8 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
+    width : 90%;
+    text-align: center;
 }
 .detail-name{
     font-size: 20px;
@@ -326,4 +328,91 @@ body{
     line-height: 50px;
     font-size: 20px;
     color: #eee;
+}
+
+.cart-wrap{
+    margin-left: 25px;
+}
+
+#cart-img img{
+    text-align: center;
+    border-radius: 10px;    
+}
+.cart-box{
+    margin: 0 auto;
+    width: 90%;
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 2px solid #6b3e04;
+    height: 70px;
+}
+
+.cart-name{
+    display: flex;
+    width: 50%;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 1000;
+}
+
+.cart-amount table th{
+    border: 2px solid #785c37;
+    border-radius: 3px;
+    color: #6b3e04;
+}
+.cart-amount input{
+    border: none;
+    background-color: transparent;
+    width: 20px;
+    height: 20px;
+    font-weight: 800;
+    text-align: center;
+}
+.cart-amount [type=button]:hover{
+    cursor: pointer;
+}
+.cart-amount{
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.price-zone{
+    margin: 0 auto;
+    width: 90%;
+    border-bottom: 2px solid #6b3e04;
+}
+.cart-wrap input{
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+#cart-img{
+    display: flex;
+    align-self: center;
+}
+.price-zone div{
+    display: flex;
+    justify-content: space-between;
+}
+.subBtn{
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+}
+.subBtn .btn{
+    height: 50px;
+    padding: 0;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #785c37;
+}
+
+.cart-box input{
+    font-size: 20px;
+}
+.cart-box-wrap{
+    width: 100%;
+    margin: 0 auto;
 }

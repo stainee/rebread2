@@ -74,8 +74,7 @@ public class ProductController {
 		}
 		int result = service.insertProduct(p);
 		if(result>0) {
-			return "redirect:/allStoreList.do?reqPage=1";
-			//return "redirect:/detailStore.do?storeNo= "+p.getStoreNo();
+			return "redirect:/detailStore.do?storeNo="+p.getStoreNo();
 			//기존의 상세페이지로 이동시키고 싶은데 안됨..ㅠㅠ 이거는 다시 체크
 		}else {
 			return "redirect:/";
@@ -83,17 +82,75 @@ public class ProductController {
 		
 		
 	}
-	/*
 	@RequestMapping(value="/updateProductFrm.do")
-	public String updateProductFrm(Model model,String storeName,String storeAddr,int storeNo, ) {
-		Product p = service.selectOneProduct(Product);
+	public String updateProductFrm(Model model,String storeName,String storeAddr,int storeNo,int productNo ) {
+		//Product p = service.selectOneProduct(Product);
+//		System.out.println("스토어이름?"+storeName);
+//		System.out.println("스토어주소?"+storeAddr);
+//		System.out.println("스토어번호?"+storeNo);
+//		System.out.println("제품번호?"+productNo);
+		Product p = service.selectOneProduct(productNo);
 		
+		System.out.println(p);
 		model.addAttribute("storeNo",storeNo);
 		model.addAttribute("storeName",storeName);
 		model.addAttribute("storeAddr",storeAddr);
+		model.addAttribute("p",p);
 		return "store/updateProductFrm";
 	}
-	*/
+	
+	@RequestMapping(value="/updateProduct.do")
+	public String updateProduct(Product p,MultipartFile upFile, HttpServletRequest request, String status,String oldImg) {
+		
+		System.out.println("업데이트할 상품 번호 : "+p.getProductNo());
+		//저장 경로
+		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/product/");
+		
+		if(upFile != null) {
+					
+			String filename= upFile.getOriginalFilename();
+			String filepath = fileRename.fileRename(savePath, filename);
+					
+			try {
+				FileOutputStream fos = new FileOutputStream(new File(savePath+filepath));
+				BufferedOutputStream bos = new BufferedOutputStream(fos);
+						
+				byte[] bytes = upFile.getBytes();
+				bos.write(bytes);
+				bos.close();
+						
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			p.setProductImg(filepath);
+			
+		}else if(oldImg != null && status.equals("stay")) {
+			p.setProductImg(oldImg);
+		}
+		int result = service.updateProduct(p);
+		
+		if(result>0) {
+			return "redirect:/detailStore.do?storeNo="+p.getStoreNo();
+		}else {
+			return "redirect:/allStoreList.do?reqPage=1";
+		}
+
+		
+	}
+	
+	@RequestMapping(value="/deleteProduct.do")
+	public String deleteProduct(int productNo,int storeNo) {
+		int result = service.deleteProduct(productNo);
+		if(result >0) {
+			return "redirect:/detailStore.do?storeNo="+storeNo;
+		}else {
+			return "redirect:/allStoreList.do?reqPage=1";
+		}
+	}
 	
 	//메인에서 불러오는 product리스트
 	@ResponseBody

@@ -20,4 +20,6 @@ public class Store {
 	private String storePhone;
 	private String storeImg;
 	private int rating;
+	private int reviewCount;
+	private int maxDiscount;
 }
