@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.or.member.model.vo.Member;
+import kr.or.order.model.vo.Order;
 import kr.or.store.model.vo.Store;
 import kr.or.store.model.vo.StoreDetail;
 import kr.or.store.model.vo.StoreListDetail;
@@ -88,6 +89,15 @@ public class StoreDao {
 		return (ArrayList<Store>)list;
 	}
 
+	public ArrayList<Order> selectAllOrder() {
+		List list = sqlSession.selectList("order.selectAllOrder");
+		return (ArrayList<Order>) list; 
+	}
+
+	public int salesInfoUpdate(Order o) {
+		int result = sqlSession.update("store.salesInfoUpdate", o);
+		return result;
+	}
 
 
 }

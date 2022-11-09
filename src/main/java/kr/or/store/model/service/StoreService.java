@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import kr.or.member.model.vo.Member;
-
+import kr.or.order.model.vo.Order;
 import kr.or.product.model.dao.ProductDao;
 import kr.or.product.model.vo.Product;
 
@@ -134,6 +134,16 @@ public class StoreService {
 		}else {
 			return null;
 		}
+	}
+
+	public ArrayList<Order> selectAllOrder() {
+		ArrayList<Order> list = dao.selectAllOrder();
+		return list;
+	}
+
+	public int salesInfoUpdate(Order o) {
+		int result = dao.salesInfoUpdate(o);
+		return result;
 	}
 
 	

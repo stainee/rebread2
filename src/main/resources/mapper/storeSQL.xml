@@ -198,4 +198,10 @@
    		from store
    		where store_name LIKE '%'||#{storeName}||'%'
    </select>
+   
+   <update id="salesInfoUpdate" parameterType="o">
+   		update orders set
+   			order_state = #{orderState}
+   		where order_no = #{orderNo}
+   </update>
 </mapper>

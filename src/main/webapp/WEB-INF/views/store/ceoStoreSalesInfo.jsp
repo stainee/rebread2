@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>마이페이지-가게 정보</title>
 </head>
-<link rel="stylesheet" href="resources/css/font/font.css">
+<link rel="stylesheet" href="/resources/css/font/font.css">
 <link rel="stylesheet" href="/resources/css/common/managetemplate.css">
 <link rel="stylesheet" href="/resources/css/store/ceoStoreInfo.css">
 <link rel="stylesheet" href="/resources/css/store/ceoStoreSalesInfo.css">
@@ -32,119 +33,64 @@
         <div class="right_container">
             <div class="content_container">
                 <div class="navi_box">상품 판매 정보
-                    <select class="sales_info">
-                        <option value="delivery_processed">배송 준비</option>
-                        <option value="delivery">배송 중</option>
-                        <option value="delivery_complete">배송 완료</option>
-                        <option value="pickup_processed">픽업 준비</option>
-                        <option value="pickup_complete">픽업 완료</option>
+                    <select class="store_sales_info_select_box">
+                    	<option value="" disabled selected hidden>선택해주세요</option>
+                        <option value="결제완료">결제완료</option>
+                        <option value="배송준비">배송준비</option>
+				        <option value="배송중">배송중</option>
+				        <option value="배송완료">배송완료</option>
+				        <option value="픽업준비">픽업준비</option>
+				        <option value="픽업완료">픽업완료</option>
                     </select>
                 </div>
                 <div class="store_info_wrapper">
+                    <c:forEach items="${list}" var="o">
                     <div class="store_info_wrap_box">
                         <div class="store_info_left">
                             <div class="store_img">
                                 <img src="resources/img/member/testImg.jfif">
                             </div>
-                            <div class="store_name">주문자 명 : 최선우</div>
+                  			<form action="/salesInfoUpdate.do" method="post">
+                            <div class="store_name">주문번호 : ${o.orderNo }</div>
                         </div>
                         <div class="product_info_right">
                             <div class="product_info_form">
                                 <div class="store_info_status">
-                                    <select class="store_sales_info">
-                                        <option value="delivery_processed">배송 준비</option>
-				                        <option value="delivery">배송 중</option>
-				                        <option value="delivery_complete">배송 완료</option>
-				                        <option value="pickup_processed">픽업 준비</option>
-				                        <option value="pickup_complete">픽업 완료</option>
+                                    <select class="store_sales_info" name="orderState">
+                                        <option value="" selected hidden>${o.orderState }</option>
+				                        <option value="결제완료">결제완료</option>
+                                        <option value="배송준비">배송준비</option>
+				                        <option value="배송중">배송중</option>
+				                        <option value="배송완료">배송완료</option>
+				                        <option value="픽업준비">픽업준비</option>
+				                        <option value="픽업완료">픽업완료</option>
                                     </select>
                                 </div>
                                 <div class="store_info_status_btn_box">
-                                    <button class="store_info_status_btn">변경</button>
+		                            <input type="hidden" name="orderNo" value="${o.orderNo }">
+                                    <button type="submit" class="store_info_status_btn">변경</button>
                                 </div>
-                                <div class="store_info_date">구매 일자 : 2022-10-25</div>
+                 				</form>
+                                <div class="store_info_date">구매 일자 : ${o.orderDate }</div>
                             </div>
                             <div class="product_info_form">
-                                <div class="product_info_content">상품 이름 : 맛있는 빵</div>
+                                <div class="product_info_content">주문자 : ${o.orderName }</div>
                             </div>
                             <div class="product_info_form">
-                                <div class="product_info_content">배송지 : 당산 KH정보교육원 A Class</div>
+                                <div class="product_info_content">주문자 번호 : ${o.orderPhone }</div>
                             </div>
                             <div class="product_info_form">
-                                <div class="product_info_content">주문자 번호 : 010-8318-1206</div>
+                                <div class="product_info_content">배송지 : ${o.orderAddr }</div>
+                            </div>
+                            <div class="product_info_form">
+                                <div class="product_info_content">판매 가게 : ${o.storeName }</div>
                             </div>
                         </div>
-                    </div>
-                    <div class="store_info_wrap_box">
-                        <div class="store_info_left">
-                            <div class="store_img">
-								<img src="resources/img/member/testImg.jfif">
-                            </div>
-                            <div class="store_name">주문자 명 : 최선우</div>
                         </div>
-                        <div class="product_info_right">
-                            <div class="product_info_form">
-                                <div class="store_info_status">
-                                    <select class="store_sales_info">
-                                        <option value="">배송 준비</option>
-                                        <option value="">배송 중</option>
-                                        <option value="">배송 완료</option>
-                                        <option value="">픽업 준비</option>
-                                        <option value="">픽업 완료</option>
-                                    </select>
-                                </div>
-                                <div class="store_info_status_btn_box">
-                                    <button class="store_info_status_btn">변경</button>
-                                </div>
-                                <div class="store_info_date">구매 일자 : 2022-10-25</div>
-                            </div>
-                            <div class="product_info_form">
-                                <div class="product_info_content">상품 이름 : 맛있는 빵</div>
-                            </div>
-                            <div class="product_info_form">
-                                <div class="product_info_content">배송지 : 당산 KH정보교육원 A Class</div>
-                            </div>
-                            <div class="product_info_form">
-                                <div class="product_info_content">주문자 번호 : 010-8318-1206</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="store_info_wrap_box">
-                        <div class="store_info_left">
-                            <div class="store_img">
-                                <img src="resources/img/member/testImg.jfif">
-                            </div>
-                            <div class="store_name">주문자 명 : 최선우</div>
-                        </div>
-                        <div class="product_info_right">
-                            <div class="product_info_form">
-                                <div class="store_info_status">
-                                    <select class="store_sales_info">
-                                        <option value="">배송 준비</option>
-                                        <option value="">배송 중</option>
-                                        <option value="">배송 완료</option>
-                                        <option value="">픽업 준비</option>
-                                        <option value="">픽업 완료</option>
-                                    </select>
-                                </div>
-                                <div class="store_info_status_btn_box">
-                                    <button class="store_info_status_btn">변경</button>
-                                </div>
-                                <div class="store_info_date">구매 일자 : 2022-10-25</div>
-                            </div>
-                            <div class="product_info_form">
-                                <div class="product_info_content">상품 이름 : 맛있는 빵</div>
-                            </div>
-                            <div class="product_info_form">
-                                <div class="product_info_content">배송지 : 당산 KH정보교육원 A Class</div>
-                            </div>
-                            <div class="product_info_form">
-                                <div class="product_info_content">주문자 번호 : 010-8318-1206</div>
-                            </div>
-                        </div>
+                        </c:forEach>
                     </div>
                 </div>
-
+                
                 <div class="navi_box_footer">
                     <ul class="pagination">
                         <li class="page-item">
@@ -180,5 +126,16 @@
 		e.stopPropagation();
 	});
 	$(this).eq(2).click();
+	
+	$(".store_info_status_btn").on("click",function(){
+		const orderNo = $(this).prev().prev().val();
+	});
+	
+	$(".store_sales_info_select_box").on("change", function(){
+		$(".store_sales_info").val();
+		console.log($(".store_sales_info_select_box option:eq(1)").text());
+	});
+	
+	
 </script>
 </html>
