@@ -58,15 +58,17 @@ public class StoreService {
 		System.out.println(nomalList);
 		return sd;
 	}
-	//매장 전체페이지 리스트와 페이지 네비
-	public StorePageData selectStoreList(int reqPage) {
-		int numPerPage = 10;
+
+	// 매장 전체페이지 리스트와 페이지 네비
+	public StorePageData selectStoreList(int reqPage, String storeName) {
+		int numPerPage = 20;
 		int end = reqPage * numPerPage;
 		int start = end - numPerPage + 1;
 
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("start", start);
 		map.put("end", end);
+		map.put("storeName", storeName);
 		ArrayList<Store> list = dao.selectStoreList(map);
 
 		int totalCount = dao.selectStoreCount();

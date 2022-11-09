@@ -103,7 +103,7 @@
    		where store_no = #{_parameter}
    </select>
    
-
+<!-- 
    <select id="selectStoreList" parameterType="map" resultType="spd">
 		select * from
 		(select rownum as rnum, s.* from 
@@ -121,7 +121,7 @@
 		from store order by 1 desc)s)
 		where rnum between #{start} and #{end}
 	</select>
-
+ -->
 	<select id="selectMemberStore" resultType="s" parameterType="Integer">
    		select
    			store_no as storeNo,
@@ -142,6 +142,7 @@
 		insert into store values(store_seq.nextval,#{memberNo},#{storeName},#{storeContent},#{storeAddr},#{storeRegistNum},#{storeAccount},#{openTime},#{closeTime},#{storePhone},#{storeImg})
 	</insert>
 
+   <!-- 전체매장리스트 -->
    <select id="allStoreList" parameterType="map" resultType="s">
 	select * from
 	(select rownum as rnum, s.*from
@@ -159,9 +160,22 @@
 	s.store_img as storeImg,
 	nvl(
 	(select avg(rating) from test_review r where r.store_no = s.store_no),0)as
-	rating
-	from store s order by 1 desc)s)
+	rating,
+	nvl(
+    (select count(review_no) from test_review r where r.store_no = s.store_no),0) as
+    reviewCount,
+    (select max(product_sale) from product p where p.store_no = s.store_no) as maxDiscount
+	from store s 
+	<choose>
+	<when test="storeName != null">
+		where store_name like '%'||#{storeName}||'%' order by 1 desc)s)
+		where rnum between #{start} and #{end}
+	</when>
+	<otherwise>
+	order by 1 desc)s)
 	where rnum between #{start} and #{end}
+	</otherwise>
+	</choose>
    </select>
    
    <select id="totalCount" resultType="_int">

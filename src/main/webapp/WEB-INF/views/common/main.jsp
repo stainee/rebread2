@@ -68,8 +68,8 @@
 			<div class="item-title">
 				<p>BEST-ITEM</p>
 			</div>
-		<c:forEach items="${list }" var="p">
 			<div class="item-pic">
+		<c:forEach items="${list }" var="p">
 				<a href="#">
 					<div>
 						<img src="/resources/upload/product/${p.productImg }">
@@ -80,8 +80,8 @@
 						</div>
 					</div>
 				</a> 
-			</div>
 		</c:forEach>
+			</div>
 		</div>
 		<div class="main-search">
 			<div class="search-bar">
@@ -102,19 +102,19 @@
 		<div class="main-mid">
 			<div class="mid-pic">
 				<a href="#"><img src="/resources/img/main/mid1.jpg" data-aos="fade-up"
-					data-aos-duration="1500" data-aos-offset="500"></a>
+					data-aos-duration="1500" data-aos-offset="300"></a>
 				<p class="mid-title">비건 스타터</p>
 				<p>환경을 생각하는 비건문화</p>
 			</div>
 			<div class="mid-pic">
 				<a href="#"><img src="/resources/img/main/mdi2.jpg" data-aos="fade-down"
-					data-aos-duration="1500" data-aos-offset="500"></a>
+					data-aos-duration="1500" data-aos-offset="300"></a>
 				<p class="mid-title">비건 헬스</p>
 				<p>비건과 함께 하는 헬스문화</p>
 			</div>
 			<div class="mid-pic">
 				<a href="#"><img src="/resources/img/main/mid3.jpg" data-aos="fade-up"
-					data-aos-duration="1500" data-aos-offset="500"></a>
+					data-aos-duration="1500" data-aos-offset="300"></a>
 				<p class="mid-title">회원등급에 따른 혜택보장</p>
 				<p>회원에 따른 혜택을 확인해보세요</p>
 			</div>
@@ -148,7 +148,7 @@
 
 		<div class="review">
 			<div class="review-title">
-				<h2>BEST-REVIEW</h2>
+				<h2 style="font-family: 'Montserrat', sans-serif;">BEST-REVIEW</h2>
 			</div>
 			<p class="bar" id="bar">
 				<img src="/resources/img/main/straight-b.png">
@@ -300,14 +300,7 @@
 <script src="/resources/js/common/main.js"></script>
 <script>
 	$(document).ready(function(){
-		$("#searchIcon").on("click",function(){
-			$.ajax({
-				url : "/productList.do",
-				success: function(){
-					console.log("성공!");
-				}
-			})
-		});
+		
 	});
 </script>
 </html>
