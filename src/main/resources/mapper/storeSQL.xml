@@ -103,7 +103,7 @@
    		where store_no = #{_parameter}
    </select>
    
-
+<!-- 
    <select id="selectStoreList" parameterType="map" resultType="spd">
 		select * from
 		(select rownum as rnum, s.* from 
@@ -121,7 +121,7 @@
 		from store order by 1 desc)s)
 		where rnum between #{start} and #{end}
 	</select>
-
+ -->
 	<select id="selectMemberStore" resultType="s" parameterType="Integer">
    		select
    			store_no as storeNo,

@@ -50,7 +50,7 @@ public class StoreDao {
 	}
 
 	public ArrayList<Store> selectStoreList(HashMap<String, Object> map) {
-		List list = sqlSession.selectList("store.selectStoreList",map);
+		List list = sqlSession.selectList("store.allStoreList",map);
 		return (ArrayList<Store>) list;
 	}
 
