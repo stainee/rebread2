@@ -6,12 +6,11 @@
 
 
     <footer>
+    	<div id="chatIcon" onclick="location.href='/customerService.do'">
+    		<img src="/resources/img/common/happy.gif">
+    	</div>
         <div id="remote">
-            <img src="/resources/img/common/up-arrow.png">
-        </div>
-        <div id="social">
-            <a href="#"><img src="/resources/img/common/kakaoicon.png"></a>
-            <a href="www.instargram.com"><img src="/resources/img/common/instaricon.png"></a>
+            TOP
         </div>
         <div class="footer-top">
             <div class="foot-left">

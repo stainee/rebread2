@@ -30,9 +30,30 @@
 	where rnum between #{start} and #{end}
 	</select>
 	
-	
-	
 	<select id="totalCount" resultType="int">
 		select count(*) from review
 	</select>
+	
+	<select id="selectOneReview" parameterType="int" resultType="r">
+		select
+			review_no as reviewNo,
+			review_comment as reviewComment,
+			store_no as storeNo,
+			review_writer as reviewWriter,
+			review_content as reviewContent,
+			review_date as reviewDate,
+			rating,
+			review_img as reviewImg
+		from review where review_no = #{reviewNo} 
+	</select>
+
+	<select id="selectStoreName" parameterType="int" resultType="string">
+		select store_Name as storeName 
+		from store where store_No = #{storeNo}
+	</select>
+		
+	<delete id="deleteReview">
+		delete from review where review_no = #{reviewNo}
+	</delete>
+	
 </mapper>

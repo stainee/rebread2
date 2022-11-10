@@ -4,10 +4,10 @@
     list-style-type: none;
     text-decoration: none;
     box-sizing: border-box;
-    font-family: 'NanumSquareRound';
 }
 header {
     background-color: #fefaee;
+	font-family: 'NanumSquareRound';
 }
 header a {
     color: #785c37;
