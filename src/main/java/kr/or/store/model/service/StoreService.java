@@ -148,6 +148,11 @@ public class StoreService {
 		return result;
 	}
 
+	public ArrayList<Order> selectWhereOrder(Order o) {
+		ArrayList<Order> list = dao.selectWhereOrder(o);
+		return list;
+	}
+
 	
 	
 //	// 판매자 가게 정보 페이징 처리

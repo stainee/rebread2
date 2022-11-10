@@ -33,8 +33,9 @@
         <div class="right_container">
             <div class="content_container">
                 <div class="navi_box">상품 판매 정보
-                    <select class="store_sales_info_select_box">
+                    <select class="store_sales_info_select_box" name="orderState">
                     	<option value="" disabled selected hidden>선택해주세요</option>
+                        <option value="전체보기">전체보기</option>
                         <option value="결제완료">결제완료</option>
                         <option value="배송준비">배송준비</option>
 				        <option value="배송중">배송중</option>
@@ -132,9 +133,13 @@
 	});
 	
 	$(".store_sales_info_select_box").on("change", function(){
-		$(".store_sales_info").val();
-		console.log($(".store_sales_info_select_box option:eq(1)").text());
+		const orderState = $(this).val();
+		location.href="/salesInfoSelect.do?orderState="+orderState;
+		if(orderState == "전체보기"){
+			location.href="/ceoStoreSalesInfo.do";
+		}
 	});
+	
 	
 	
 </script>
