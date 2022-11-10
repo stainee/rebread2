@@ -30,4 +30,19 @@ public class ReviewDao {
 		int totalCount = sqlSession.selectOne("review.totalCount");
 		return totalCount;
 	}
+
+	public Review selectOneReview(int reviewNo) {
+		Review r = sqlSession.selectOne("review.selectOneReview", reviewNo);
+		return r;
+	}
+
+	public String selectStoreName(int storeNo) {
+		String storeName = sqlSession.selectOne("review.selectStoreName", storeNo);
+		return storeName;
+	}
+
+	public int deleteReview(int reviewNo) {
+		int result = sqlSession.delete("review.deleteReview", reviewNo);
+		return result;
+	}
 }

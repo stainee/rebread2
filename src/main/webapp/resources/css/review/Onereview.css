@@ -1,0 +1,75 @@
+@charset "UTF-8";
+.page-content{
+	width: 1250px;
+	margin: 90px auto;
+	font-family: 'NanumSquareRound';
+	color: #555555;
+}
+.page-title{
+	min-height: 30px;
+    padding: 0 0 10px;
+    padding: 5px 0 50px;
+    text-align: center;
+    
+}
+.page-title>h2{
+	font-size: 26px;
+    letter-spacing: 0.08em;
+   	color: #785c37;
+}
+.review{
+	padding: 30px;
+	font-family: 'NanumSquareRound';
+}
+.pic-zone{
+	text-align: center;
+	padding : 10px 0px;
+	border-top: 1px solid lightgray;
+	border-bottom: 1px solid lightgray; 
+}
+.pic-zone>img{
+	width: 150px;
+	height: 150px;
+}
+#storeName{
+	width: 100%;
+	text-align:center;
+	font-weight : 600;
+    border-top: 1px solid #ececec;
+    font-size: 20px !important;
+    padding: 50px 10px 3px !important;
+}
+#reviewWriter{
+	padding: 5px 0px 6px !Important;
+    font-size: 18px;
+    text-align: center;
+}
+#reviewDate{
+	text-align: center;
+}
+.point{
+	text-align: center;
+	height: 48px;
+	line-height: 48px;
+}
+#reviewContent{
+	width: 400px;
+	margin: 0 auto;
+	margin-top: 20px;
+	height: 100px;
+	text-align: center;
+}
+#btnArea{
+	text-align: center;
+}
+button {
+	width: 100px;
+	height: 30px;
+	border: none;
+	cursor: pointer;
+	color: #555555;
+}
+button:hover {
+	background-color: #555555;
+	color: #fff;
+}

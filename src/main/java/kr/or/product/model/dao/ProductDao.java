@@ -42,7 +42,6 @@ public class ProductDao {
 
 	public ArrayList<Product> mainProductList() {
 		List mainProductList = sqlSession.selectList("product.selectMainList");
-		System.out.println(mainProductList);
 		return (ArrayList<Product>)mainProductList;
 	}
 	
