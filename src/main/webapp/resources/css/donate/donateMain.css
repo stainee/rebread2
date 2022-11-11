@@ -1,12 +1,17 @@
 *{
 	font-family: nsr-r;
 }
+
 /* .donate_wrap{
     width: 1200px;
 } */
 .donate_title{
     text-align: center;
     border-bottom: 2px solid rgb(159, 159, 159);
+}
+.donate_title>h1{
+    margin: 40px 0px;
+    color: #785c37;    
 }
 .donate_content_wrap{
     width: 1200px;
@@ -16,7 +21,7 @@
     width: 267px;
     height: 363px;
     border: 1px solid lightgray; 
-    display: inline-block;
+    display: none;
     margin-left: 24px;
     margin-bottom: 24px;
 }
@@ -49,11 +54,11 @@
 .donate_content_footer{
     margin-top: 10px;
 }
-.donate_percent_num,.donate_percent_per{
+.donate_percent_num,.donate_percent_num_modal,.donate_percent_per{
     font-size: 18px;
     float: left;
 }
-.donate_amount_num,.donate_amount_won{
+.donate_amount_num,.donate_amount_num_modal,.donate_amount_won{
     font-size: 18px;
     float: right;
 }
