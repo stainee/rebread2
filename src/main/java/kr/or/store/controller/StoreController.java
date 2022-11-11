@@ -1,6 +1,7 @@
 package kr.or.store.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -19,7 +20,7 @@ import kr.or.store.model.service.StoreService;
 import kr.or.store.model.vo.Store;
 import kr.or.store.model.vo.StoreDetail;
 import kr.or.store.model.vo.StorePageData;
-
+import kr.or.product.model.vo.Product;
 
 @Controller
 public class StoreController {
@@ -110,7 +111,7 @@ public class StoreController {
 	}
 	
 	
-	// ceoStoreSalesInfo 이동, 판매 정보 출력
+	// ceoStoreSalesInfo 이동 (판매 정보 관리)
 	@RequestMapping(value="/ceoStoreSalesInfo.do")
 	public String ceoStoreSalesInfo(Model model) {
 		ArrayList<Order> list = sservice.selectAllOrder();
@@ -136,7 +137,6 @@ public class StoreController {
 		}
 		return "redirect:/ceoStoreSalesInfo.do";
 	}
-	
 	// 매장 리스트 출력
 	@RequestMapping(value="/allStoreList.do")
 	public String allStoreList(int reqPage,Model model,String storeName) {
@@ -167,4 +167,28 @@ public class StoreController {
 		ArrayList<Store> list = sservice.searchStore(storeName);
 		return new Gson().toJson(list);
 	}
+	//장바구니 데이터 결제페이지로 이동
+	@RequestMapping(value="/orderFrm.do")
+	public String orderFrm(int storeNo,int memberNo, String deliveryType,int[] pNo, String[] pName,String[] pContent,
+			int[] pStock, int[] pPrice, String[] pImg, Model model) {
+		
+		//System.out.println(pNo[0]);	
+		ArrayList<Product> list = new ArrayList<Product>();
+		for(int i=0;i<pName.length;i++) {
+			Product p = new Product();
+			p.setProductNo(pNo[i]);
+			p.setProductName(pName[i]);
+			p.setProductContent(pContent[i]);
+			p.setProductStock(pStock[i]);
+			p.setProductPrice(pPrice[i]);
+			p.setProductImg(pImg[i]);
+			list.add(p);
+		}
+		model.addAttribute("list",list);
+		model.addAttribute("storeNo",storeNo);
+		model.addAttribute("memberNo",memberNo);
+		model.addAttribute("type",deliveryType);
+		return "order/order";
+	}
+	
 }

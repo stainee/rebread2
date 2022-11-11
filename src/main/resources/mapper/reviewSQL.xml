@@ -10,7 +10,8 @@
 			review_content as reviewContent,
 			review_date as reviewDate,
 			rating,
-			review_img as reviewImg
+			review_img as reviewImg,
+			review_view as reviewView
 		from review
 	</select>
 	
@@ -25,13 +26,34 @@
 			review_content as reviewContent,
 			review_date as reviewDate,
 			rating,
-			review_img as reviewImg
+			review_img as reviewImg,
+			review_view as reviewView
 	from review order by 1 desc)r)
 	where rnum between #{start} and #{end}
 	</select>
 	
 	<select id="totalCount" resultType="int">
 		select count(*) from review
+	</select>
+	
+	<select id="memberTotalCount" parameterType="string" resultType="_int">
+		select count(*) from review where review_writer=#{memberId}
+	</select>	
+	
+	<select id="memberSelectReviewList" parameterType="map" resultType="r">
+	   	select * from
+		(select rownum as rnum, r.* from
+		(select
+		    review_no as reviewNo,
+		    review_comment as reviewComment,
+		    store_no as storeNo,
+		    review_writer as reviewWriter,
+		    review_content as reviewContent,
+	        review_date as reviewDate,
+	        rating,
+	        review_img as reviewImg
+		from (select * from review join member on(review_writer = member_id)) order by 1 desc)r where reviewWriter=#{memberId})
+	    where rnum between #{start} and #{end}
 	</select>
 	
 	<select id="selectOneReview" parameterType="int" resultType="r">
@@ -41,6 +63,7 @@
 			store_no as storeNo,
 			review_writer as reviewWriter,
 			review_content as reviewContent,
+			review_view as reviewView,
 			review_date as reviewDate,
 			rating,
 			review_img as reviewImg
@@ -54,6 +77,11 @@
 		
 	<delete id="deleteReview">
 		delete from review where review_no = #{reviewNo}
-	</delete>
+	</delete>		
+	
+	<update id="updateView">
+		update review set 
+		review_view = nvl(review_view,0)+1 where review_no =#{reviewNo} 
+	</update>
 	
 </mapper>

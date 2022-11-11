@@ -32,6 +32,7 @@
 					<div class="pic-zone"><img src="/resources/upload/review/${r.reviewImg }"></div>
 				</c:otherwise>
 			</c:choose>
+			
 			<div id="storeName"><span>가게명 : </span>${storeName}</div>
 			<div id="reviewWriter"><span>작성자 : </span>${r.reviewWriter }</div>
 			<div id="reviewDate"><span>작성일 : </span>${r.reviewDate }</div>
@@ -52,12 +53,15 @@
 					<p class="point"><img src="/resources/img/main/ico_point5.gif"></p>
 				</c:when>
 			</c:choose>
+			
 			<div id="reviewContent">${r.reviewContent }</div>
+			<div id="reviewView"><span>조회수 : </span>${r.reviewView }</div>
 			<div id="btnArea">
 				<c:if test="${sessionScope.m.memberId eq r.reviewWriter}">
 				<button id="deleteBtn" onclick="location.href='/deleteReview.do?reviewNo=${r.reviewNo}'">DELETE</button>
 				</c:if>
 				<button onclick="location.href='/reviewList.do?reqPage=1'">LIST</button>
+				<button onclick="location.href='/'">MAIN</button>
 			</div>
 		</div>
 		
