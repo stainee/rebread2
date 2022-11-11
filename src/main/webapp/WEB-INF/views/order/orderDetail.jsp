@@ -23,7 +23,7 @@
 	                <ul>
 						<li><a href="/memberMain.do?memberNo=${sessionScope.m.memberNo }">내정보</a></li>
 	                    <li><a href="/memberOrderList.do?memberNo=${sessionScope.m.memberNo }&reqPage=1">최근 주문 내역</a></li>
-	                    <li><a href="/memberReview.do?memberNo=${sessionScope.m.memberNo }">내 등록 리뷰</a></li>
+	                    <li><a href="/memberReviewList.do?memberNo=${sessionScope.m.memberNo }&reqPage=1">내 등록 리뷰</a></li>
 	                </ul>
 	            </div>
 	        </div>

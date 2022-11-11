@@ -2,6 +2,7 @@ package kr.or.store.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -113,6 +114,14 @@ public class StoreController {
 	@RequestMapping(value="/ceoStoreSalesInfo.do")
 	public String ceoStoreSalesInfo(Model model) {
 		ArrayList<Order> list = sservice.selectAllOrder();
+		model.addAttribute("list", list);
+		return "/store/ceoStoreSalesInfo";
+	}
+	
+	// 선택한 배송 상태에 따라 정보 출력
+	@RequestMapping(value = "/salesInfoSelect.do")
+	public String salesInfoSelect(Order o, Model model) {
+		ArrayList<Order> list = sservice.selectWhereOrder(o);
 		model.addAttribute("list", list);
 		return "/store/ceoStoreSalesInfo";
 	}

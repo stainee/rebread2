@@ -99,6 +99,11 @@ public class StoreDao {
 		return result;
 	}
 
+	public ArrayList<Order> selectWhereOrder(Order o) {
+		List list = sqlSession.selectList("store.selectWhereOrder", o); 
+		return (ArrayList<Order>) list;
+	}
+
 
 }
 

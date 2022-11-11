@@ -76,6 +76,12 @@
                 </div>
                 <div class="pay-method" style="width: 40%;">
                     <p>결제수단선택</p>
+                    <div id="pay-kakao">
+                    	<div class="pay-card-wrap">
+                    		<img src="/resources/img/order/kakaoPay.svg">
+                    		<div class="pay-card-comment">카카오페이 간편결제</div>
+                    	</div>
+                    </div>
                     <div id="pay-card">
                     	<div class="pay-card-wrap">
                     		<img src="/resources/img/order/card.svg">
@@ -145,12 +151,25 @@
     	// 현재날짜+현재시간까지
     	var todayString = year+month+day+hours+minutes+seconds;
     	
+    	const payKakao = $("#pay-kakao");
     	const payCard = $("#pay-card");
     	const payAccount = $("#pay-account");
     	const memberNo = $("[name=memberNo]").val();
     	const memberId = $("[name=memberId]").val();
     	const storeNo = $("[name=storeNo]").val();
 
+    	// 카카오페이 간편결제
+    	payKakao.on("click",function(){
+    		$.ajax({
+    			  type: "POST",
+    			  url: "/kakao.do",
+    			  dataType: 'json', 
+    			  success: function(){
+				    	
+				}
+    		}); 
+    	});
+    	
     	// 카드결제
     	payCard.on("click", function(){
     		if(inputText.prop('readonly') == true){
@@ -183,14 +202,11 @@
 					    	});
 	    			  }  
 	    		});  
-    			
     		}else{
     			alert("배송지 정보 수정을 완료해주세요.");
     		}
-
     	});
     	
-		
     		
     	
     	// 무통장결제
@@ -228,7 +244,6 @@
     		}else{
     			alert("배송지 정보 수정을 완료해주세요.");
     		}
-
     	});
     	
     	
