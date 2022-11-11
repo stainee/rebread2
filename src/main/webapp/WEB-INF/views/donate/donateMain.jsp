@@ -129,7 +129,7 @@
 	        $(".more_btn").click(function(e){ // 클릭시 more
 	            e.preventDefault();
 	            $(".donate_content_box:hidden").slice(0, 4).show(); // 클릭시 more 갯수 지정
-		        $(".donate_content_box:nth-child()").css("display","inline-block");
+		        $(".donate_content_box:nth-child(()*(-n+4))").css("display","inline-block");
 	            if($("div:hidden").length == 0){ // 컨텐츠 남아있는지 확인
 	            }
 	        });
