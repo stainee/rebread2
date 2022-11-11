@@ -243,7 +243,12 @@
 	<select id="selectMemberMileage" parameterType="_int" resultType="_int">
 		select member_mileage from member where member_no = #{memberNo}
 	</select>
-  
+
+	<!-- 세션에 memberIdMileage 저장 -->
+	<select id="selectMemberIdMileage" parameterType="string" resultType="_int">
+		select member_mileage from member where member_id = #{memberId}
+	</select>
+	
     <!-- 회원 검색 : name 또는 id -->
   <select id="memberSearch" resultType="m" parameterType="m">
   		select

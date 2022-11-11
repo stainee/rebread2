@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kr.or.product.model.dao.ProductDao;
 import kr.or.product.model.vo.Product;
+import kr.or.review.model.vo.Review;
 
 @Service
 public class ProductService {
@@ -31,5 +32,8 @@ public class ProductService {
 
 	public ArrayList<Product> mainProductList() {
 		return dao.mainProductList();
+	}
+	public ArrayList<Review> mainReviewList() {
+		return dao.mainReviewList();
 	}
 }

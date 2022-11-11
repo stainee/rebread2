@@ -23,36 +23,32 @@
                 <ul>
                 	<li><a href="/memberMain.do?memberNo=${sessionScope.m.memberNo }">내정보</a></li>
                     <li><a href="/memberOrderList.do?memberNo=${sessionScope.m.memberNo }&reqPage=1">최근 주문 내역</a></li>
-                    <li><a href="/memberReview.do?memberNo=${sessionScope.m.memberNo }">내 등록 리뷰</a></li>
+                    <li><a href="/memberReviewList.do?reviewWriter=${sessionScope.m.memberId }&reqPage=1">내 등록 리뷰</a></li>
                 </ul>
             </div>
         </div>
 
-        <div class="right_container" style="min-height: 357px;">
-            <div class="content_container" onclick="goToDetailReview()">
-				<div class="content-box">
-            		<div class="content-img"><img src="/resources/img/common/logo.png"></div>
-            		<div class="content-wrap">
-            			<div class="content-status-date">
-	            			<div class="deliver-status">파리바게뜨 당산점</div>
-	            			<span>ㅣ</span>
-	            			<div class="order-date">2022.22.22</div>
-            			</div>
-            			<div class="content-product-name">리뷰제목너무마싯어용</div>            		
-            		</div>
-            	</div>
-            	<div class="content-box">
-            		<div class="content-img"><img src="/resources/img/common/logo.png"></div>
-            		<div class="content-wrap">
-            			<div class="content-status-date">
-	            			<div class="deliver-status">배송완료</div>
-	            			<span>ㅣ</span>
-	            			<div class="order-date">2022.22.22</div>
-            			</div>
-            			<div class="content-product-name">빵이름상품이름</div>            		
-            		</div>
-            	</div>
+        <div class="right_container" style="min-height: 260px;">
+            <div class="content_container">
+            	<c:forEach items="${list }" var="r">
+           		<a href="/reviewDetail.do?reviewNo=${r.reviewNo }&reqPage=${reqPage}">
+					<div class="content-box">
+	            		<div class="content-img"><img src="/resources/img/common/logo.png"></div>
+	            		<div class="content-wrap">
+	            			<div class="content-status-date">
+		            			<div class="deliver-status">가게상호명</div>
+		            			<span>ㅣ</span>
+		            			<div class="order-date">${r.reviewDate }</div>
+	            			</div>
+	            			<div class="content-product-name">빵이름상품이름</div>            		
+	            		</div>
+	            	</div>
+            	</a>
+            	</c:forEach>
             </div>
+            <div class="order-page-wrap">
+	            <div class="order-page">${pageNavi }</div>
+			</div>
         </div>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>

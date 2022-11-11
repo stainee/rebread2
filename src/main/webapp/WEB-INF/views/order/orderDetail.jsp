@@ -23,7 +23,7 @@
 	                <ul>
 						<li><a href="/memberMain.do?memberNo=${sessionScope.m.memberNo }">내정보</a></li>
 	                    <li><a href="/memberOrderList.do?memberNo=${sessionScope.m.memberNo }&reqPage=1">최근 주문 내역</a></li>
-	                    <li><a href="/memberReview.do?memberNo=${sessionScope.m.memberNo }">내 등록 리뷰</a></li>
+	                    <li><a href="/memberReviewList.do?memberNo=${sessionScope.m.memberNo }&reqPage=1">내 등록 리뷰</a></li>
 	                </ul>
 	            </div>
 	        </div>
@@ -36,9 +36,7 @@
 	        					<div>
 	        						<a href="/memberOrderList.do?memberNo=${sessionScope.m.memberNo }&reqPage=${reqPage}"><img src="/resources/img/order/화살표.svg"></a>
 	        					</div>
-	        					<div>
-	        						${o.orderState }
-	        					</div>
+	        					<div>${o.orderState}</div>
 	        				</div>
 	        			</div>
 	        			<div class="content-title-date">${o.orderDate }</div>
@@ -98,8 +96,8 @@
 			        				</a>
 	        					</c:when>
 								<c:otherwise>
-									<a style="cursor: pointer;" onclick="orderCancel(${o.orderNo })">
-		        						<div>주문 취소</div>
+									<a style="cursor: pointer;" onclick="orderCancel(${o.orderNo },${reqPage })">
+										<div>주문 취소</div>
 			        				</a>
 								</c:otherwise>
         					</c:choose>
@@ -119,9 +117,17 @@
 			$(".selectList a").eq(index).addClass("index");
 		})	
 		
-		function orderCancel(orderNo){
+		const orderState = $(".content-title-state").children().last().text();
+		console.log(orderState);
+		console.log(orderState);
+		console.log(orderState);
+		function orderCancel(orderNo,reqPage){
 			if(confirm("주문을 취소하시겠습니까?")){
-				location.href="/orderCancel.do?orderNo="+orderNo;
+				if(orderState == "결제완료"){
+					location.href="/orderCancel.do?orderNo="+orderNo+"&reqPage="+reqPage;
+				}else{
+					alert("취소할 수 없습니다.");
+				}
 			}
 		}
 	</script>

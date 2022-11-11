@@ -212,4 +212,28 @@
    		from store
    		where store_name LIKE '%'||#{storeName}||'%'
    </select>
+   
+   <update id="salesInfoUpdate" parameterType="o">
+   		update orders set
+   			order_state = #{orderState}
+   		where order_no = #{orderNo}
+   </update>
+   <select id="selectWhereOrder" resultType="o" parameterType="o">
+		select 
+			o.order_no as orderNo,
+			o.member_no as memberNo,
+			o.store_no as storeNo,
+			o.order_state as orderState,
+			o.order_date as orderDate,
+			o.order_total_quan as orderTotalQuan,
+			o.order_price as orderPrice,
+			o.order_name as orderName,
+			o.order_addr as orderAddr,
+			o.order_phone as orderPhone,
+			o.order_mileage as orderMileage,
+			s.store_name as storeName,
+			paymentkey
+		from orders o join store s on o.store_no = s.store_no
+		where order_state = #{orderState}
+   </select>
 </mapper>

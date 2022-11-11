@@ -16,16 +16,7 @@ public class ReviewController {
 	@Autowired
 	private ReviewService service;
 	
-	/*
-	@RequestMapping(value = "/reviewList.do")
-	public String reviewList(Model model) {
-		ArrayList<Review> list = service.reviewList();
-		System.out.println(list);
-		model.addAttribute("list",list);
-		return "review/reviewList";
-	}
-	*/
-	
+	//리뷰리스트
 	@RequestMapping(value = "/reviewList.do")
 	public String reviewList(int reqPage, Model model) {
 		HashMap<String, Object> pageMap = service.selectReviewList(reqPage);
@@ -35,6 +26,28 @@ public class ReviewController {
 		model.addAttribute("numPerPage", (Integer)pageMap.get("numPerPage"));
 		return "review/reviewList";
 	}
-	
+	//리뷰조회
+	@RequestMapping(value = "/selectOneReviewFrm.do")
+	public String selectOneReviewFrm(int reviewNo, int storeNo ,Model model) {
+		//조회수 증가
+		int result = service.updateView(reviewNo);
+		//리뷰테이블 받아오기
+		Review r = service.selectOneReview(reviewNo);
+		//리뷰넘버에 따른 스토어 이름받아오기
+		String storeName = service.selectStoreName(storeNo);
+		model.addAttribute("r",r);
+		model.addAttribute("storeName", storeName);
+		return "review/selectOneReview";
+	}
+	//리뷰삭제
+	@RequestMapping(value = "/deleteReview.do")
+	public String deleteReview(int reviewNo) {
+		int result = service.deleteReview(reviewNo);
+		if(result>0) {
+			return "redirect:/reviewList.do?reqPage=1";
+		}else {
+			return "redirect:/reviewList.do?reqPage=1";
+		}
+	}
 	
 }

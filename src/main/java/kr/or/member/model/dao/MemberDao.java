@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.or.member.model.vo.Member;
 import kr.or.order.model.vo.Order;
+import kr.or.review.model.vo.Review;
 
 @Repository
 public class MemberDao {
@@ -106,6 +107,21 @@ public class MemberDao {
 	
 	public int selectMemberMileage(int memberNo) {
 		return sqlSession.selectOne("member.selectMemberMileage",memberNo);
+	}
+
+	public ArrayList<Review> selectReviewList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("review.memberSelectReviewList", map);
+		return (ArrayList<Review>)list;
+	}
+
+	public int selectReviewCount(String memberId) {
+		int totalCount = sqlSession.selectOne("review.memberTotalCount", memberId);
+		return totalCount;
+	}
+
+	public int selectMemberMileage(String memberId) {
+		System.out.println("dao : "+memberId);
+		return sqlSession.selectOne("member.selectMemberIdMileage",memberId);
 	}
 
 
