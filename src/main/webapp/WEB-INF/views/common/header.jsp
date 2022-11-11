@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-    
 <link rel="stylesheet" href="/resources/css/common/header.css">
 <link rel="stylesheet" href="/resources/css/common/font.css">
-
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    
+<link rel="Icon" href="/resources/img/favicon/favicon-16x16.png">
+
 
 <div class="wrap">
     <header>
@@ -27,7 +26,7 @@
 		                        <li><a href="/loginFrm.do">로그인</a></li>
 		                        <li><a href="/joinStep.do">회원가입</a></li>
 		                        <li><a href="/loginFrm.do">주문내역</a></li>
-		                        <li><a href="#">기부하기</a></li>
+		                        <li><a href="/donateMain.do">기부하기</a></li>
 		                    </ul>
 		                </div>
 					</c:when>
@@ -106,12 +105,12 @@
             <a href="/"><img src="/resources/img/common/logo2.png" class="header-img"></a>       
             <div class="header-navi deactive">
                 <ul>
-                    <li><a href="#">브랜드스토리</a></li>
+                    <li><a href="/brandIntro.do">브랜드스토리</a></li>
                     <li><a href="/allStoreList.do?reqPage=1">구입하기</a></li>
                     <li><a href="#">베스트세일</a></li>
                     <li><a href="#">이벤트</a></li>
                     <li><a href="/reviewList.do?reqPage=1">리 뷰</a></li>
-                    <li><a href="#">자주하는 질문</a></li>
+                    <li><a href="/customerService.do">자주하는 질문</a></li>
                 </ul>
             </div>
             <c:choose>

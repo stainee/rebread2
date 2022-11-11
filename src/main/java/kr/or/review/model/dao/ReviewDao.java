@@ -45,4 +45,9 @@ public class ReviewDao {
 		int result = sqlSession.delete("review.deleteReview", reviewNo);
 		return result;
 	}
+
+	public int updateView(int reviewNo) {
+		int result = sqlSession.update("review.updateView", reviewNo);
+		return result;
+	}
 }

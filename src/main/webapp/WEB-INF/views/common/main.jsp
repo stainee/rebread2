@@ -31,8 +31,8 @@
 		<div class="topSlide">
 			<ul id="slider1">
 				<li><a href="#"><img src="/resources/img/main/mainslide1.jpg"></a></li>
-				<li><a href="#"><img src="/resources/img/main/mainslide2.jpg"></a></li>
-				<li><a href="#"><img src="/resources/img/main/mainslide3.jpg"></a></li>
+				<li><a href="/brandIntro.do"><img src="/resources/img/main/mainslide2.jpg"></a></li>
+				<li><a href="/brandIntro.do"><img src="/resources/img/main/mainslide3.jpg"></a></li>
 			</ul>
 		</div>
 		<div class="main-section-ment">
@@ -154,138 +154,51 @@
 				<img src="/resources/img/main/straight-b.png">
 			</p>
 			<ul>
-				<li><a href="#">
+			<c:forEach items="${reviewList }" var="r">
+				<li>
+					<a href="/selectOneReviewFrm.do?reviewNo=${r.reviewNo }&storeNo=${r.storeNo}">
 						<div class="review-wrap">
-							<img src="/resources/img/main/b-bread1.jpg">
+							<c:choose>
+								<c:when test="${r.reviewImg eq null}">
+									<img src="/resources/upload/review/noimg.png">
+								</c:when>
+								<c:otherwise>
+									<img src="/resources/upload/review/${r.reviewImg }">
+								</c:otherwise>
+							</c:choose>
 							<div class="description">
-								<p class="subject">만족</p>
-								<p class="reContent">맛있습니다. 여기나오는 소금빵은 정말 제 최애 소금빵 감동입니다.. 꼭
-									시켜먹으세요</p>
-								<p class="reDate">2022-10-24</p>
-								<p class="point">
-									<img src="/resources/img/main/ico_point5.gif">
-								</p>
+							<c:choose>
+								<c:when test="${r.rating lt 3}">
+									<p class="subject">불만족</p>
+								</c:when>
+								<c:otherwise>
+									<p class="subject">만족</p>
+								</c:otherwise>
+							</c:choose>
+								<p class="reContent">${r.reviewContent }</p>
+								<p class="reDate">${r.reviewDate }</p>
+								<c:choose>
+								<c:when test="${r.rating eq 1}">
+									<p class="point"><img src="/resources/img/main/ico_point1.gif"></p>
+								</c:when>
+								<c:when test="${r.rating eq 2}">
+									<p class="point"><img src="/resources/img/main/ico_point2.gif"></p>
+								</c:when>
+								<c:when test="${r.rating eq 3}">
+									<p class="point"><img src="/resources/img/main/ico_point3.gif"></p>
+								</c:when>
+								<c:when test="${r.rating eq 4}">
+									<p class="point"><img src="/resources/img/main/ico_point4.gif"></p>
+								</c:when>
+								<c:when test="${r.rating eq 5}">
+									<p class="point"><img src="/resources/img/main/ico_point5.gif"></p>
+								</c:when>
+							</c:choose>
 							</div>
 						</div>
-				</a></li>
-				<li><a href="#">
-						<div class="review-wrap">
-							<img src="/resources/img/main/b-bread2.jpg">
-							<div class="description">
-								<p class="subject">정말 맛있습니다</p>
-								<p class="reContent">환경도 생각하고 기부도 하고 배송도 빠르고 친절합니다 정말</p>
-								<p class="reDate">2022-10-24</p>
-								<p class="point">
-									<img src="/resources/img/main/ico_point5.gif">
-								</p>
-							</div>
-						</div>
-				</a></li>
-				<li><a href="#">
-						<div class="review-wrap">
-							<img src="/resources/img/main/b-bread3.jpg">
-							<div class="description">
-								<p class="subject">리브레드 저의 최애 빵</p>
-								<p class="reContent">정말 맛있습니다 매일매일 시켜먹고 싶고 또 먹고싶어요.</p>
-								<p class="reDate">2022-10-24</p>
-								<p class="point">
-									<img src="/resources/img/main/ico_point5.gif">
-								</p>
-							</div>
-						</div>
-				</a></li>
-				<li><a href="#">
-						<div class="review-wrap">
-							<img src="/resources/img/main/b-bread4.jpg">
-							<div class="description">
-								<p class="subject">만족</p>
-								<p class="reContent">맛있습니다.</p>
-								<p class="reDate">2022-10-24</p>
-								<p class="point">
-									<img src="/resources/img/main/ico_point5.gif">
-								</p>
-							</div>
-						</div>
-				</a></li>
-				<li><a href="#">
-						<div class="review-wrap">
-							<img src="/resources/img/main/b-bread5.jpg">
-							<div class="description">
-								<p class="subject">냉동 빵은 정말 별로다..</p>
-								<p class="reContent">냉동빵은 정말 시켜먹는게 아닌거 같습니다...</p>
-								<p class="reDate">2022-10-24</p>
-								<p class="point">
-									<img src="/resources/img/main/ico_point5.gif">
-								</p>
-							</div>
-						</div>
-				</a></li>
-				<li><a href="#">
-						<div class="review-wrap">
-							<img src="/resources/img/main/b-bread6.jpg">
-							<div class="description">
-								<p class="subject">만족</p>
-								<p class="reContent">맛있습니다. 또 시켜먹을게요</p>
-								<p class="reDate">2022-10-24</p>
-								<p class="point">
-									<img src="/resources/img/main/ico_point5.gif">
-								</p>
-							</div>
-						</div>
-				</a></li>
-				<li><a href="#">
-						<div class="review-wrap">
-							<img src="/resources/img/main/b-bread7.jpg">
-							<div class="description">
-								<p class="subject">별로입니다..</p>
-								<p class="reContent">무슨 맛인지 모르겠어요 유통기한 지난빵은 버립시다..</p>
-								<p class="reDate">2022-10-24</p>
-								<p class="point">
-									<img src="/resources/img/main/ico_point1.gif">
-								</p>
-							</div>
-						</div>
-				</a></li>
-				<li><a href="#">
-						<div class="review-wrap">
-							<img src="/resources/img/main/b-bread8.jpg">
-							<div class="description">
-								<p class="subject">언제시켜먹어도 맛있습니다.</p>
-								<p class="reContent">늘시키는 빵인데 정말 맛있다?</p>
-								<p class="reDate">2022-10-24</p>
-								<p class="point">
-									<img src="/resources/img/main/ico_point5.gif">
-								</p>
-							</div>
-						</div>
-				</a></li>
-				<li><a href="#">
-						<div class="review-wrap">
-							<img src="/resources/img/main/b-bread9.jpg">
-							<div class="description">
-								<p class="subject">상태보세요</p>
-								<p class="reContent">맛있는데 상태가 좀 이상해요 다른것도 그런건 아니겠죠?</p>
-								<p class="reDate">2022-10-24</p>
-								<p class="point">
-									<img src="/resources/img/main/ico_point2.gif">
-								</p>
-							</div>
-						</div>
-				</a></li>
-				<li><a href="#">
-						<div class="review-wrap">
-							<img src="/resources/img/main/b-bread2.jpg">
-							<div class="description">
-								<p class="subject">만족</p>
-								<p class="reContent">맛있습니다.</p>
-								<p class="reDate">2022-10-24</p>
-								<p class="point">
-									<img src="/resources/img/main/ico_point5.gif">
-								</p>
-							</div>
-						</div>
-				</a></li>
-
+					</a>
+				</li>
+			</c:forEach>
 			</ul>
 		</div>
 	</div>

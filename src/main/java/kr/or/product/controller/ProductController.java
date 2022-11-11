@@ -27,6 +27,7 @@ import com.google.gson.Gson;
 import common.FileRename;
 import kr.or.product.model.service.ProductService;
 import kr.or.product.model.vo.Product;
+import kr.or.review.model.vo.Review;
 
 @Controller
 public class ProductController {
@@ -157,6 +158,8 @@ public class ProductController {
 	public String mainDo(Model model) {
 		ArrayList<Product> list = service.mainProductList();
 		model.addAttribute("list", list);
+		ArrayList<Review> reviewList = service.mainReviewList();
+		model.addAttribute("reviewList", reviewList);
 		return "common/main";
 	}
 	

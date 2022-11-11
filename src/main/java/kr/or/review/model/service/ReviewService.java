@@ -95,6 +95,9 @@ public class ReviewService {
 	public int deleteReview(int reviewNo) {
 		return dao.deleteReview(reviewNo);
 	}
+	public int updateView(int reviewNo) {
+		return dao.updateView(reviewNo);
+	}
 }
 
 

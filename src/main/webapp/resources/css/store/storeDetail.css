@@ -165,12 +165,17 @@ body{
 }
 
 /*지도 위치 */
-#MAP h2{
+#LOCATION {
+	margin:10px;
+}
+
+#LOCATION h2{
     width: 90%;
     font-size: 35px;
     font-weight: bolder;
     text-align: left;
     margin: 0 auto;
+    margin-bottom:20px;
 }
 
 /*상세페이지 모달*/
@@ -184,7 +189,7 @@ body{
 .detail-modal{
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0,0,0,0.3);
     position: fixed;
     top: 0;
     left: 0;
@@ -201,7 +206,6 @@ body{
     max-height: 850px;
     min-height: 600px;
     overflow: scroll;
-
 }
 .detail-wrap>div{
     margin: 0 auto;
@@ -252,6 +256,7 @@ body{
     font-size: 15px;
     color: #808080;
 }
+
 
 .detail-price {
     display: flex;
@@ -416,3 +421,68 @@ body{
     width: 100%;
     margin: 0 auto;
 }
+.delBtn{
+	display: flex;
+	align-items: center;
+}
+#map {
+	margin: 0 auto;
+}
+
+/*로그인알람*/
+
+.alarm-modal{
+width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.2);
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    display: none;
+}
+.alarm-wrap{
+    width: 250px;
+    height: 200px;
+    background-color: #FEFCF4;
+    box-sizing: border-box;
+    border-radius: 20px;
+}
+.alarm-wrap>div{
+    margin: 0 auto;
+}
+.login-btn button{
+	border-radius: 5px;
+    height: 50px;
+    line-height: 50px;
+    font-size: 20px;
+    color: #eee;
+}
+.btnZone{
+	width: 100%;
+	margin: 0 auto;	
+	text-align: center;
+}
+.btnZone .btn{
+	font-weight: 600;
+}
+.btnZone a{
+	background-color:#f0f0f0;
+    width:75px;
+    text-align: center;
+}
+.alarm-wrap{
+	display: flex;
+	padding: 20px;
+	flex-direction: column;
+	justify-content: space-evenly;
+}
+.alarm-wrap:first-child {
+	text-align: center;
+	font-size: 18px;
+}
+
+
