@@ -17,6 +17,7 @@ import com.google.gson.Gson;
 import kr.or.member.model.service.MemberService;
 import kr.or.member.model.vo.Member;
 import kr.or.order.model.vo.OrderPageData;
+import kr.or.review.model.vo.ReviewPageData;
 import kr.or.store.model.vo.Store;
 import kr.or.store.model.vo.StorePageData;
 import lombok.AllArgsConstructor;
@@ -83,13 +84,21 @@ public class MemberController {
 		return "member/memberOrderList";
 	}
 	
-	// memberReview 이동
-	@RequestMapping(value="/memberReview.do")
-	public String memberReview(int memberNo, HttpSession session) {
+	// memberReviewList 이동
+	@RequestMapping(value="/memberReviewList.do")
+	public String memberReviewList(int reqPage, String reviewWriter, Model model, HttpSession session) {
+		System.out.println("controller : "+reviewWriter);
+		ReviewPageData rpd = service.selectReviewList(reqPage, reviewWriter);
+		model.addAttribute("list", rpd.getList());
+		model.addAttribute("pageNavi", rpd.getPageNavi());
+		model.addAttribute("reqPage", rpd.getReqPage());
+		model.addAttribute("numPerPage", rpd.getNumPerPage());
+		model.addAttribute("memberId", rpd.getMemberId());
+		
 		// memberMileage 구하기
-		int memberMileage = service.selectMemberMileage(memberNo);
+		int memberMileage = service.selectMemberMileage(reviewWriter);
 		session.setAttribute("memberMileage", memberMileage);
-		return "member/memberReview";
+		return "member/memberReviewList";
 	}
 	
 	@RequestMapping(value="/chatting.do")

@@ -93,10 +93,11 @@ public class OrderController {
 	}
 	
 	// 주문 api
-	@RequestMapping("/success.do")
+	@RequestMapping("/orderCard.do")
 	public String confirmOrder(@RequestParam String paymentKey, @RequestParam String orderId, @RequestParam int amount, Model model) throws Exception {
-		HttpHeaders headers = new HttpHeaders();
 		
+		// 서버로 요청할 header
+		HttpHeaders headers = new HttpHeaders();
 		headers.set("Authorization","Basic "+Base64.getEncoder().encodeToString((SECRET_KEY+":").getBytes()));
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		
@@ -155,7 +156,9 @@ public class OrderController {
 		URL url = new URL("https://api.tosspayments.com/v1/payments/" + paymentKey + "/cancel");
 		
 		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+		
 		connection.setRequestProperty("Authorization", authorizations);
+		// content-type : 현재 전송하는 데이터가 어떤 타입인지에 대한 설명
 		connection.setRequestProperty("Content-Type", "application/json");
 		connection.setRequestMethod("POST");
 		connection.setDoOutput(true);
@@ -233,6 +236,21 @@ public class OrderController {
 			
 			return "order/orderFail"; 
 		}
+	}
+	
+	// 카카오페이 api
+	@RequestMapping("/kakao.do")
+	public String kakao(Order o) throws Exception{
+		// 
+		URL url = new URL("https://kapi.kakao.com/v1/payment/ready");
+		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+		connection.setRequestMethod("POST");
+		connection.setRequestProperty("Authorization", "KakaoAK 3193216ae4cabdf5c591d742459c5d6d");
+		connection.setRequestProperty("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+		connection.setDoOutput(true); // 서버에 보낼 데이터가 있을 때 true
+		
+		
+		return null;
 	}
 	
 	
