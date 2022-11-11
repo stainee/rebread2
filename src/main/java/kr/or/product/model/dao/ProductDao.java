@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.or.product.model.vo.Product;
+import kr.or.review.model.vo.Review;
 
 @Repository
 public class ProductDao {
@@ -43,6 +44,10 @@ public class ProductDao {
 	public ArrayList<Product> mainProductList() {
 		List mainProductList = sqlSession.selectList("product.selectMainList");
 		return (ArrayList<Product>)mainProductList;
+	}
+	public ArrayList<Review> mainReviewList() {
+		List mainReviewList = sqlSession.selectList("product.selectReviewList");
+		return (ArrayList<Review>)mainReviewList;
 	}
 	
 }

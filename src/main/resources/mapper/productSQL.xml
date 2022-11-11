@@ -85,4 +85,29 @@
 		where product_no = #{_parameter}
 	</select>
 	
+	<select id="selectReviewList" resultType="r">
+		select
+			reviewNo,
+			reviewComment,
+			storeNo,
+			reviewWriter,
+			reviewContent, 
+			reviewView,
+			reviewDate,
+			rating,
+			reviewImg
+		from
+		(select
+			review_no as reviewNo,
+			review_comment as reviewComment,
+			store_no as storeNo,
+			review_writer as reviewWriter,
+			review_content as reviewContent,
+			review_view as reviewView,
+			review_date as reviewDate,
+			rating,
+			review_img as reviewImg
+		from review order by review_view desc) where rownum &lt; 11 
+	</select>
+	
 </mapper>

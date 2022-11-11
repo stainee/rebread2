@@ -10,7 +10,8 @@
 			review_content as reviewContent,
 			review_date as reviewDate,
 			rating,
-			review_img as reviewImg
+			review_img as reviewImg,
+			review_view as reviewView
 		from review
 	</select>
 	
@@ -25,7 +26,8 @@
 			review_content as reviewContent,
 			review_date as reviewDate,
 			rating,
-			review_img as reviewImg
+			review_img as reviewImg,
+			review_view as reviewView
 	from review order by 1 desc)r)
 	where rnum between #{start} and #{end}
 	</select>
@@ -41,6 +43,7 @@
 			store_no as storeNo,
 			review_writer as reviewWriter,
 			review_content as reviewContent,
+			review_view as reviewView,
 			review_date as reviewDate,
 			rating,
 			review_img as reviewImg
@@ -55,5 +58,10 @@
 	<delete id="deleteReview">
 		delete from review where review_no = #{reviewNo}
 	</delete>
+	
+	<update id="updateView">
+		update review set 
+		review_view = nvl(review_view,0)+1 where review_no =#{reviewNo} 
+	</update>
 	
 </mapper>
