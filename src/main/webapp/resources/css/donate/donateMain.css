@@ -113,3 +113,6 @@
 	border-bottom: 1px solid lightgray;
 	padding-left: 30px;
 }
+.my_donate_sum p{
+	display: inline-block;
+}

@@ -2,6 +2,7 @@ package kr.or.store.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 
 import kr.or.member.model.vo.Member;
+import kr.or.order.model.vo.Order;
 import kr.or.store.model.service.StoreService;
 import kr.or.store.model.vo.Store;
 import kr.or.store.model.vo.StoreDetail;
@@ -108,11 +110,33 @@ public class StoreController {
 	}
 	
 	
-	// ceoStoreSalesInfo 이동 (판매 정보 관리)
+	// ceoStoreSalesInfo 이동, 판매 정보 출력
 	@RequestMapping(value="/ceoStoreSalesInfo.do")
-	public String ceoStoreSalesInfo() {
+	public String ceoStoreSalesInfo(Model model) {
+		ArrayList<Order> list = sservice.selectAllOrder();
+		model.addAttribute("list", list);
 		return "/store/ceoStoreSalesInfo";
 	}
+	
+	// 선택한 배송 상태에 따라 정보 출력
+	@RequestMapping(value = "/salesInfoSelect.do")
+	public String salesInfoSelect(Order o, Model model) {
+		ArrayList<Order> list = sservice.selectWhereOrder(o);
+		model.addAttribute("list", list);
+		return "/store/ceoStoreSalesInfo";
+	}
+	
+	// 상품 배송 상태 변경
+	@RequestMapping(value = "/salesInfoUpdate.do")
+	public String salesInfoUpdate(Order o) {
+		int result = sservice.salesInfoUpdate(o);
+		if(result>0) {
+			o.setOrderNo(o.getOrderNo());
+			o.setOrderState(o.getOrderState());
+		}
+		return "redirect:/ceoStoreSalesInfo.do";
+	}
+	
 	// 매장 리스트 출력
 	@RequestMapping(value="/allStoreList.do")
 	public String allStoreList(int reqPage,Model model,String storeName) {

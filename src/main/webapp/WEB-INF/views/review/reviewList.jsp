@@ -18,14 +18,14 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
-	<div class="page-content">
+	<div class="page-content" >
 		<div class="page-title" 
 		data-aos="fade-right" data-aos-duration="1000" data-aos-delay="500">
 		<h2>R E V I E W</h2></div>
 		<div class="reviewList">
 			<ul>
 				<c:forEach items="${list }" var="r">
-					<li class="review">
+					<li class="review" onclick="location.href='/selectOneReviewFrm.do?reviewNo=${r.reviewNo}&storeNo=${r.storeNo }'">
 						<c:choose>
 							<c:when test="${r.reviewImg eq null}">
 								<div class="pic-zone"><img src="/resources/upload/review/noimg.png"></div>
@@ -59,9 +59,9 @@
 					</li>
 				</c:forEach>
 			</ul>
-			<div class="listBtn">
+		</div>
+		<div class="listBtn">
 				${pageNavi }
-			</div>
 		</div>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
@@ -73,6 +73,5 @@
 <!-- //AOS 스크립트 초기화 -->
 <div aos="fade-up" data-aos-offset="200" data-aos-easing="ease-out-cubic" data-aos-duration="500"></div>
 <script>
-	
 </script>
 </html>

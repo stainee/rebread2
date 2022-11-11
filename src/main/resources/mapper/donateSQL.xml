@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="donate">
+	<select id="selectAllDonate" resultType="d">
+		select 
+    		d.donate_no as donateNo,      
+    		d.member_no as memberNo,
+    		d.donate_organ as donateOrgan,
+    		d.donate_content as donateContent,
+    		d.donate_sum as donateSum,
+    		d.donate_img as donateImg,
+    		d.donate_end as donateEnd,
+    		m.member_mileage as memberMileage
+		from donate d join member m on d.member_no = m.member_no
+	</select>
+</mapper>

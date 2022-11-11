@@ -46,8 +46,8 @@ public class ReviewService {
 	    if(pageNo != 1) {
 	    	pageNavi += "<li>";
 	         pageNavi += "<a href='/reviewList.do?reqPage="+(pageNo-1)+"'>";
-	         pageNavi += "이전";
-	         pageNavi += "</a></li";
+	         pageNavi += "<img src='/resources/img/review/prev-arrow.png'>";
+	         pageNavi += "</a></li>";
 	    }
 	    
 	    for(int i=0; i<pageNaviSize; i++) {
@@ -70,7 +70,7 @@ public class ReviewService {
 	    if(pageNo<=totalPage) {
 	         pageNavi += "<li>";
 	         pageNavi += "<a href='/reviewList.do?reqPage="+pageNo+"'>"; // 이미 ++됐음
-	         pageNavi += "다음";
+	         pageNavi += "<img src='/resources/img/review/next-arrow.png'>";
 	         pageNavi += "</a></li>";
 	     }
 	    pageNavi += "</ul>";
@@ -80,6 +80,20 @@ public class ReviewService {
 	      pageMap.put("reqPage", reqPage);
 	      pageMap.put("numPerPage", numPerPage);
 	      return pageMap;
+	}
+
+
+
+
+	public Review selectOneReview(int reviewNo) {
+		return dao.selectOneReview(reviewNo);
+	}
+	
+	public String selectStoreName(int storeNo) {
+		return dao.selectStoreName(storeNo);
+	}
+	public int deleteReview(int reviewNo) {
+		return dao.deleteReview(reviewNo);
 	}
 }
 
