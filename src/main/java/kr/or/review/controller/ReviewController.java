@@ -29,12 +29,16 @@ public class ReviewController {
 	//리뷰조회
 	@RequestMapping(value = "/selectOneReviewFrm.do")
 	public String selectOneReviewFrm(int reviewNo, int storeNo ,Model model) {
+		//조회수 증가
+		int result = service.updateView(reviewNo);
+		//리뷰테이블 받아오기
 		Review r = service.selectOneReview(reviewNo);
+		//리뷰넘버에 따른 스토어 이름받아오기
 		String storeName = service.selectStoreName(storeNo);
 		model.addAttribute("r",r);
 		model.addAttribute("storeName", storeName);
 		return "review/selectOneReview";
-	}
+	} 
 	//리뷰삭제
 	@RequestMapping(value = "/deleteReview.do")
 	public String deleteReview(int reviewNo) {

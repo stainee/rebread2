@@ -17,6 +17,7 @@ import com.google.gson.Gson;
 import kr.or.member.model.service.MemberService;
 import kr.or.member.model.vo.Member;
 import kr.or.order.model.vo.OrderPageData;
+import kr.or.review.model.vo.Review;
 import kr.or.review.model.vo.ReviewPageData;
 import kr.or.store.model.vo.Store;
 import kr.or.store.model.vo.StorePageData;
@@ -72,12 +73,14 @@ public class MemberController {
 	@RequestMapping(value="/memberOrderList.do")
 	public String memberOrderList(int reqPage, int memberNo, Model model, HttpSession session) {
 		OrderPageData opd = service.selectOrderList(reqPage, memberNo);
-		model.addAttribute("list", opd.getList());
-		model.addAttribute("pageNavi",opd.getPageNavi());
-		model.addAttribute("reqPage",opd.getReqPage());
-		model.addAttribute("numPerPage",opd.getNumPerPage());
-		model.addAttribute("memberNo",opd.getMemberNo());
-		
+		// 리스트가 존재할 때에 model에 저장
+		if(!opd.getList().isEmpty()) {
+			model.addAttribute("list", opd.getList());
+			model.addAttribute("pageNavi",opd.getPageNavi());
+			model.addAttribute("reqPage",opd.getReqPage());
+			model.addAttribute("numPerPage",opd.getNumPerPage());
+			model.addAttribute("memberNo",opd.getMemberNo());
+		}
 		// memberMileage 구하기
 		int memberMileage = service.selectMemberMileage(memberNo);
 		session.setAttribute("memberMileage", memberMileage);
@@ -87,18 +90,47 @@ public class MemberController {
 	// memberReviewList 이동
 	@RequestMapping(value="/memberReviewList.do")
 	public String memberReviewList(int reqPage, String reviewWriter, Model model, HttpSession session) {
-		System.out.println("controller : "+reviewWriter);
 		ReviewPageData rpd = service.selectReviewList(reqPage, reviewWriter);
+		// 리스트가 존재할 때에 model에 저장
+		if(!rpd.getList().isEmpty()) {
 		model.addAttribute("list", rpd.getList());
 		model.addAttribute("pageNavi", rpd.getPageNavi());
 		model.addAttribute("reqPage", rpd.getReqPage());
 		model.addAttribute("numPerPage", rpd.getNumPerPage());
 		model.addAttribute("memberId", rpd.getMemberId());
-		
+		}
 		// memberMileage 구하기
 		int memberMileage = service.selectMemberMileage(reviewWriter);
 		session.setAttribute("memberMileage", memberMileage);
 		return "member/memberReviewList";
+	}
+	
+	// memberReviewDetail 이동
+	@RequestMapping(value="/memberReviewDetail.do")
+	public String memberReviewDetail(int reviewNo, int reqPage, Model model, HttpSession session) {
+		Review r = service.selectOneReview(reviewNo);
+		String storeName = service.selectStoreName(r.getStoreNo());
+		model.addAttribute("r",r);
+		model.addAttribute("reqPage",reqPage);
+		model.addAttribute("storeName", storeName);
+		
+		// memberMileage 구하기
+		int memberMileage = service.selectMemberMileage(r.getReviewWriter());
+		session.setAttribute("memberMileage", memberMileage);
+		return "member/memberReviewDetail";
+	}
+	
+	// memberDeleteReview 멤버리뷰삭제
+	@RequestMapping(value="/memberDeleteReview.do")
+	public String memberDeleteReview(int reviewNo,String reviewWriter, int reqPage, Model model) {
+		Review r = service.selectOneReview(reviewNo);
+		model.addAttribute("r",r);
+		int result = service.memberDeleteReview(reviewNo);
+		if(result>0) {
+			return "redirect:/memberReviewList.do?reviewWriter="+reviewWriter+"&reqPage="+reqPage;
+		}else {
+			return "redirect:/";
+		}
 	}
 	
 	@RequestMapping(value="/chatting.do")

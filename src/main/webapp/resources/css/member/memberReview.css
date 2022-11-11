@@ -3,6 +3,13 @@
 *{
 	font-family: 'nsr-r';
 }
+a{
+	text-decoration: none;
+	color: black;
+}
+.content_container a:hover{
+	color: pink;
+}
 .member-point{
 	padding-top: 35px;
 }
@@ -25,6 +32,11 @@
 }
 
 /* 최근 주문 내역 */
+.content_container .review-empty{
+	font-size: 1.3em;
+	color: #cbcbcb;
+	text-align: center;
+}
 .content-box{
 	display: flex;
 	justify-content: flex-start;
@@ -43,4 +55,19 @@
 }
 .content-status-date span{
 	align-items: center;
+}
+
+.review-page-wrap{
+	display: flex;
+	padding-bottom: 40px;
+	justify-content: center;
+}
+
+/* 페이징 */
+.review-page *{
+	padding: 0px 3px;
+	font-size: 1.3em;
+}
+.review-page span{
+	color: pink;
 }

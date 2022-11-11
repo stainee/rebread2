@@ -80,4 +80,7 @@
 		from orders o join store s on o.store_no = s.store_no
 	</select>
 	
+	<select id="selectOrderPrice" parameterType="_int" resultType="_int">
+		select order_price from orders where order_no = #{orderNo}
+	</select>
 </mapper>

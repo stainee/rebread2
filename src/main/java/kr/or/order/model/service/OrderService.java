@@ -64,5 +64,14 @@ public class OrderService {
 		return memberMileage;
 	}
 
+	// payment에 넣을 price값 가져오기
+	public int selectOrderPrice(int orderNo) {
+		return dao.selectOrderPrice(orderNo);
+	}
+
+	public int insertPayment(Order o) {
+		return dao.insertPayment(o);
+	}
+
 	
 }
