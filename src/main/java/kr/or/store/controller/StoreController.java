@@ -1,6 +1,7 @@
 package kr.or.store.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 
 import kr.or.member.model.vo.Member;
+import kr.or.product.model.vo.Product;
 import kr.or.store.model.service.StoreService;
 import kr.or.store.model.vo.Store;
 import kr.or.store.model.vo.StoreDetail;
@@ -143,4 +145,28 @@ public class StoreController {
 		ArrayList<Store> list = sservice.searchStore(storeName);
 		return new Gson().toJson(list);
 	}
+	
+	@RequestMapping(value="/orderFrm.do")
+	public String orderFrm(int storeNo,int memberNo, String deliveryType,int[] pNo, String[] pName,String[] pContent,
+			int[] pStock, int[] pPrice, String[] pImg, Model model) {
+		
+		//System.out.println(pNo[0]);	
+		ArrayList<Product> list = new ArrayList<Product>();
+		for(int i=0;i<pName.length;i++) {
+			Product p = new Product();
+			p.setProductNo(pNo[i]);
+			p.setProductName(pName[i]);
+			p.setProductContent(pContent[i]);
+			p.setProductStock(pStock[i]);
+			p.setProductPrice(pPrice[i]);
+			p.setProductImg(pImg[i]);
+			list.add(p);
+		}
+		model.addAttribute("list",list);
+		model.addAttribute("storeNo",storeNo);
+		model.addAttribute("memberNo",memberNo);
+		model.addAttribute("type",deliveryType);
+		return "order/order";
+	}
+	
 }
