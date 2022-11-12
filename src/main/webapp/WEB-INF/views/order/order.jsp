@@ -16,20 +16,28 @@
     <div class="content">
         <div class="content-wrap">
             <div class="deliver-wrap" style="width: 40%;">
-                <p>배달내역</p>
-                
+            	<c:choose>
+            		<c:when test="${type eq '배달준비중' }">
+                		<p>배달내역</p>
+                	</c:when>
+                	<c:otherwise>
+                		<p>픽업내역</p>
+                	</c:otherwise>
+                </c:choose>
                 <div class="deliver-product">
                     <table>
                 		<!-- for문 시작 -->
+                		<c:forEach items="${list }" var="o">
                         <tr>
-                            <td rowspan="2"><img src="/resources/img/common/blog.png" style="margin: 10px;"></td>
-                            <td style="width: 80%;">빵이름길고길고길어</td>
-                            <td class="product-quan" style="width: 15%;">1개</td>
+                            <td rowspan="2"><img src="${o.productImg }" style="margin: 10px;"></td>
+                            <td style="width: 80%;">${o.productName }</td>
+                            <td class="product-quan" style="width: 15%;">${o.productStock }</td>
                         </tr>
                         <tr>
-                            <td style="color: #cbcbcb; font-size: 0.9em;">설명설명설명설명설명설명</td>
-                            <td class="product-price" style="color: #cbcbcb; font-size: 0.9em;">20000000</td>
+                            <td style="color: #cbcbcb; font-size: 0.9em;">${o.productContent }</td>
+                            <td class="product-price" style="color: #cbcbcb; font-size: 0.9em;">${o.productPrice }</td>
                         </tr>
+                        </c:forEach>
 		                <!-- for문 종료 -->
                     </table>
                 </div>
