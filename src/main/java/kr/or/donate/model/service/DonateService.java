@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kr.or.donate.model.dao.DonateDao;
 import kr.or.donate.model.vo.Donate;
+import kr.or.member.model.vo.Member;
 
 @Service
 public class DonateService {
@@ -17,4 +18,9 @@ public class DonateService {
 		ArrayList<Donate> list = dao.selectAllDonate(); 
 		return list;
 	}
+
+	public int donateMileage(int donateSumPlus) {
+		return dao.donateMileage(donateSumPlus);
+	}
+
 }

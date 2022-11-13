@@ -108,7 +108,7 @@
                     <li><a href="/brandIntro.do">브랜드스토리</a></li>
                     <li><a href="/allStoreList.do?reqPage=1">구입하기</a></li>
                     <li><a href="#">베스트세일</a></li>
-                    <li><a href="#">이벤트</a></li>
+                    <li><a href="/donateMain.do">기부하기</a></li>
                     <li><a href="/reviewList.do?reqPage=1">리 뷰</a></li>
                     <li><a href="/customerService.do">자주하는 질문</a></li>
                 </ul>

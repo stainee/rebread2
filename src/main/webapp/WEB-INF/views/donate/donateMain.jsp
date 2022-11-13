@@ -29,7 +29,9 @@
                 <div class="donate_content">
                     <div class="donate_content_title">${d.donateContent }</div>
                     <div class="donate_content_organ">${d.donateOrgan }</div>
-                    <div class="donate_content_bar"></div>
+                    <div class="donate_content_bar">
+                    	<progress value="${d.donateSum/10000}" max="100"></progress>
+                    </div>
                     <div class="donate_content_footer">
                         <strong class="donate_percent_num"></strong>
                         <strong class="donate_percent_per">%</strong>
@@ -47,13 +49,15 @@
             
              <!-- 모달창 시작 --> 
             <div id="ex1" class="modal">
-	            <div class="donate_content_box">
-					<a href="#ex1" rel="modal:open">
+	            <div class="donate_content_box_modal">
+					<a href="#ex1" rel="modal:open" class="modal_a">
                 		<img class="donate_img" id="modal_img">
 			            <div class="donate_content">
 			                <div class="donate_content_title" id="modal_title"></div>
 			                <div class="donate_content_organ" id="modal_organ"></div>
-			                <div class="donate_content_bar"></div>
+			                <div class="donate_content_bar" id="modal_bar">
+			                	<progress value="" max="100"></progress>
+			                </div>
 			                <div class="donate_content_footer">
 			                    <strong class="donate_percent_num" id="modal_percent_num"></strong>
 			                    <strong class="donate_percent_per">%</strong>
@@ -66,13 +70,21 @@
 	            </div>
 	            <div class="donate_div">
 	            	<div class="donate_input_area">
-	            		<div class="my_donate_sum">내 보유금액 : 
+	            		<div class="my_donate_sum">
+	            			<p class="my_donate_sum_holding">내 보유금액 : </p>
 	            			<p class="my_donate_sum_amount">${memberMileage }</p>
 	            			<p class="my_donate_sum_won">원</p>
 	            		</div>
-	            		<div class="donate_btn_box">
-	            			<button class="donate_btn">기부</button>
-	            		</div>
+	            		<div class="donate_btn_box_sum">
+	            			<div class="donate_btn_box_input">
+	            				<input type="text" value="" name="donateInput">원
+	            			</div>
+			            	<a href="#">
+			            		<div class="donate_btn_box">
+			            			<button class="donate_btn">기부</button>
+			            		</div>
+			            	</a>
+						</div>
 	            	</div>
 		            <div class="modal_close">
 	  					<a href="#" rel="modal:close">닫기</a>
@@ -84,17 +96,31 @@
             <div class="more_btn_box">
                 <button class="more_btn">더보기</button>
             </div>
+            <div class="more_end_box">마지막 페이지입니다</div>
         </div>
     </div>
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
     <script>
+    	$(".donate_btn").on("click", function(){
+    		let donateVal = $("input[name=donateInput]").val();
+    		// 기부하려고 입력한 금액
+    		location.href="/donateMileage.do?memberMileage="+memberMileage;
+    	});
+    
+    
+    
+    	/* 모달창과 기부 리스트 연결 */
     	function openModal(obj){
     		$("#modal_img").attr("src",$(obj).children().first().attr("src"));
     		$("#modal_title").text($(obj).children().eq(1).children().eq(0).text());
     		$("#modal_organ").text($(obj).children().eq(1).children().eq(1).text());
     		$("#modal_percent_num").text($(obj).children().eq(1).children().eq(3).children().eq(0).text());
     		$("#modal_amount_num").text($(obj).children().eq(1).children().eq(3).children().eq(3).text());
+    		$("#modal_bar").children().val($(obj).children().eq(1).children().eq(2).children().val());
+    		$(".header-wrap2").css("z-index","0");
+    		// $("body").css("margin-right","16px");
     	}
+    	
     	
     	/* 세자리 콤마 정규 표현식 */
 	    function addComma(value){
@@ -102,6 +128,7 @@
 	   		return value;
 	    };
 	    
+	    /* 세자리 콤마 화면에 출력 */
 	    let donateLength = $(".donate_content_box");
 	    for(let i=0;i<$(".donate_amount_num").length;i++){
 			let CommaNum = addComma($(".donate_amount_num").eq(i).text())
@@ -118,23 +145,23 @@
 		let memberMileage = addComma($("input[name=memberMileage]").val());
 		$(".my_donate_sum_amount").text(memberMileage);
 	    
-	    $(".donate_content_box").on("click",function(){
-	    	$("body").css("margin-right","16px");
-	    });
-	    
-	    
+	    /* 더보기 버튼 구현 */
 	    $(function(){
-	        $(".donate_content_box").slice(0, 4).show(); // 초기갯수
-	        $(".donate_content_box:nth-child(-n+4)").css("display","inline-block");
+	        $(".donate_content_box").slice(0, 8).show(); // 초기갯수
+	        $(".donate_content_box:nth-child(-n+8)").css("display","inline-block");
 	        $(".more_btn").click(function(e){ // 클릭시 more
 	            e.preventDefault();
-	            $(".donate_content_box:hidden").slice(0, 4).show(); // 클릭시 more 갯수 지정
-		        $(".donate_content_box:nth-child(()*(-n+4))").css("display","inline-block");
-	            if($("div:hidden").length == 0){ // 컨텐츠 남아있는지 확인
+	            $(".donate_content_box:hidden").slice(0, 4).show().css("display","inline-block"); // 클릭시 more 갯수 지정
+	            console.log($(".donate_content_box:hidden").length); // 남아있는 컨텐츠 박스 갯수 출력
+	            
+	         // 더보여줄 것이 없으면 더보기 버튼을 숨기고 "마지막페이지입니다" text 출력
+	            if($(".donate_content_box:hidden").length == 0){ 
+	            	$(".more_btn_box").css("display","none");
+	            	$(".more_end_box").css("display","block");
 	            }
 	        });
+	 
 	    });
-	    
     </script>
 </body>
 </html>
