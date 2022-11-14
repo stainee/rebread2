@@ -79,10 +79,7 @@
     font-size: 18px;
     float: right;
 }
-.more_btn{
-    width: 1200px;
-    height: 40px;
-}
+
 .donate_content_box>a{
     text-decoration: none;
     color: black;
@@ -170,6 +167,10 @@
 }
 .my_donate_sum p{
 	display: inline-block;
+}
+.more_btn{
+    width: 1200px;
+    height: 40px;
 }
 .more_end_box{
 	text-align: center;

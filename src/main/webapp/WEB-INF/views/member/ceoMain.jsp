@@ -77,18 +77,14 @@
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 <script>
-	const selectList = $(".selectList li");
-		selectList.on("click",function(e){
-			selectList.css("background-color","#f5f2f3").css("color","gray");
-			$(this).css("background-color","lightgray").css("color","black");
-			
-			const index = selectList.index(this);
-			
-			$(".content_container").hide();
-			$(".content_container").eq(index).fadeIn(0.6*1000);
-			e.stopPropagation();
-		});
-	selectList.eq(0).click();
+index=0;
+$(function(){
+	let total = $(".selectList a").length;
+	for(let i=0; i<total; i++){
+		$(".selectList a").eq(i).removeClass("index");
+	}
+	$(".selectList a").eq(index).addClass("index");
+})
 	
 </script>
 <script src="resources/js/member/ceoMain.js"></script>

@@ -33,4 +33,8 @@ public class DonateDao {
 		sqlSession.update("donate.donateMileage2", map);
 	}
 
+	public int deleteOneDonate(int donateNo) {
+		return sqlSession.delete("donate.deleteOneDonate", donateNo);
+	}
+
 }

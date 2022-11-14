@@ -37,4 +37,8 @@
 			set member_mileage = #{sumMileage}
 		where member_no = #{memberNo}
 	</update>
+	<delete id="deleteOneDonate" parameterType="_int">
+		delete from donate
+  		where donate_no = #{_parameter}
+	</delete>
 </mapper>

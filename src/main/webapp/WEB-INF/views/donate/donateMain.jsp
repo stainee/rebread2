@@ -169,7 +169,6 @@
 	            	$(".more_end_box").css("display","block");
 	            }
 	        });
-	 
 	    });
     </script>
 </body>

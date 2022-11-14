@@ -34,6 +34,10 @@ public class DonateService {
 		return dao.selectOneDonate(d);
 	}
 
+	public int deleteOneDonate(int donateNo) {
+		return dao.deleteOneDonate(donateNo);
+	}
+
 
 
 }
