@@ -141,7 +141,9 @@
     align-items: center;
 }
 .donate_btn_box_input{
-	padding-left: 30px;
+	margin-left: 30px;
+    padding-right: 5px;
+	border: 1px solid lightgray;
 }
 .donate_btn_box_input input{
 	height: 20px;
