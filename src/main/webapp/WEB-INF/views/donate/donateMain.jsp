@@ -102,9 +102,6 @@
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
     <script>
     	const donateBox = $(".donate_content_box");
-   		console.log($(this).text());
-    	$(this).on("click", function(){
-    	});
     
     	$(".donate_btn").on("click", function(){
     		let donateVal = $("input[name=donateInput]").val();
