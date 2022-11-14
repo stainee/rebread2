@@ -51,7 +51,7 @@
 	height: 38px;
     clear: both;
     line-height: 38px;
-    margin-bottom: 50px;
+    margin-bottom: 70px;
 }
 .listPickNum{
 	display: block;
@@ -171,6 +171,69 @@
 	width: 25px;
 	font-weight: 600;
 }
+.searchBar{
+	display: none;
+}
+.storeNamebar{
+  	width: 500px;
+  	height: 32px;
+  	font-size: 15px;
+  	border: 0;
+  	border-radius: 15px;
+  	outline: none;
+  	padding-left: 20px;
+  	background-color: rgb(233, 233, 233);
+}
+.searchBtn{
+	width: 100px;
+	height: 32px;
+	border-radius: 15px;
+	background-color: rgb(233, 233, 233);
+	cursor : pointer;
+	color : #555555;
+	border: 0;
+}
+.searchBtn:hover{
+	background-color: red;
+}
+.storeNamebar:focus{
+	outline: none;
+}
+.go-main{
+	height: 30px;
+	width: 150px;
+	margin: 0 auto;
+	line-height: 30px;
+	border-radius: 15px;
+	border: 1px solid lightgray; 
+	cursor: pointer;	
+}
+.go-main:hover{
+	transition : 0.4s;
+	background-color: #8dc5de;
+	border: 1px solid #8dc5de;
+	color: #fff;
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 *{
 	margin: 0;
 	padding: 0;

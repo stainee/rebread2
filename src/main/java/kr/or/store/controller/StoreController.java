@@ -167,17 +167,47 @@ public class StoreController {
 		return new Gson().toJson(list);
 	}
 	
+	
 	//스토어리스트
 	@RequestMapping(value = "/purchaseList.do")
 	public String purchaseList(int reqPage,Model model,String storeName) {
 		StorePageData spd = sservice.selectStoreList(reqPage,storeName);
+		//스토어 검색안된 count
+		int count = sservice.countList();
+		//스토어 검색됐을때 count
+		int countName = sservice.countList(storeName);
 		model.addAttribute("list",spd.getList());
 		model.addAttribute("pageNavi",spd.getPageNavi());
 		model.addAttribute("reqPage",spd.getReqPage());
 		model.addAttribute("numPerPage", spd.getNumPerPage());
 		model.addAttribute("storeName",storeName);
+		model.addAttribute("count", count);
+		model.addAttribute("countName", countName);
 		return "store/purchaseList";
 	}
+	//빵이름으로 검색시
+	@RequestMapping(value = "/searchBread.do")
+	public String searchBread(int reqPage,Model model,String breadName) {
+		if(breadName == "") {
+			return "redirect:/";
+		}
+		StorePageData spd = sservice.selectBeadList(reqPage,breadName);
+		System.out.println(spd);
+		//스토어 검색안된 count
+		int count = sservice.countList2(breadName);
+		//스토어 검색됐을때 count
+		int countName = sservice.countList(breadName);
+		model.addAttribute("list",spd.getList());
+		model.addAttribute("pageNavi",spd.getPageNavi());
+		model.addAttribute("reqPage",spd.getReqPage());
+		model.addAttribute("numPerPage", spd.getNumPerPage());
+		model.addAttribute("breadName",breadName);
+		model.addAttribute("count", count);
+		model.addAttribute("countName", countName);
+		return "store/searchList";
+	}
+	
+	
 	//장바구니 데이터 결제페이지로 이동
 	@RequestMapping(value="/orderFrm.do")
 	public String orderFrm(int storeNo,int memberNo, String deliveryType,int[] pNo, String[] pName,String[] pContent,

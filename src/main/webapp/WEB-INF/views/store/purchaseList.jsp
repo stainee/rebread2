@@ -36,15 +36,38 @@ href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200&display=sw
 			</ul>
 		</div>
 		<div class="div-pick-box">
-			<span class="listPickNum">스토어 00 개</span>&nbsp;&nbsp; 
-			<span class="search">(매장검색)</span>
+			<c:choose>
+				<c:when test="${not empty storeName }">
+					<span class="listPickNum">스토어 ${countName } 개</span>&nbsp;&nbsp; 
+				</c:when>
+				<c:otherwise>
+					<span class="listPickNum">스토어 ${count } 개</span>&nbsp;&nbsp; 
+				</c:otherwise>
+			</c:choose>
+			<span class="search" style="cursor: pointer;">(매장검색)</span>
 			<select class="chooseNum">
 				<option value="1">추천순</option>
 				<option value="2">별점순</option>
 				<option value="3">리뷰순</option>
 				<option value="4">할인순</option> 
 			</select>
+			<div class="searchBar">
+				<form action="/purchaseList.do">
+					<input type="hidden" name="reqPage" value="1">
+					<c:choose>
+						<c:when test="${not empty storeName }">
+		               		<input type="text" name="storeName" class="storeNamebar" value="${storeName }">
+		               		<button type="submit" class="searchBtn">검색</button>
+		              	</c:when>
+		            	<c:otherwise>
+			                <input type="text" name="storeName" class="storeNamebar" placeholder="매장검색">
+			                <button type="submit" class="searchBtn">검색</button>
+		                </c:otherwise>
+					</c:choose>
+				</form>
+			</div>
 		</div>
+		
 		
 		<!-- 여기서부터는 가게리스트 -->
 		<div class="item-basket-box">
@@ -83,8 +106,8 @@ href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200&display=sw
 <!-- //AOS 스크립트 초기화 -->
 <div aos="fade-up" data-aos-offset="200" data-aos-easing="ease-out-cubic" data-aos-duration="500"></div>
 <script>
-const lis = $(".list>ul>li") 
-const pic = $(".topList>ul>li>img")
+const lis = $(".list>ul>li"); 
+const pic = $(".topList>ul>li>img");
 	lis.on("click",function(){
 		const index = lis.index(this);
 		pic.hide();
@@ -96,6 +119,11 @@ const pic = $(".topList>ul>li>img")
 		lis.eq(index).css("font-weight","600").css("transition-duration","0.3s");
 		lis.eq(index).css("color", "#f4791f");
 		lis.eq(index).css("text-decoration","underline");
+	});
+const search = $(".search");
+const searchBar = $(".searchBar");
+	search.on("click",function(){
+		searchBar.toggle(400);
 	});
 </script>
 </html>
