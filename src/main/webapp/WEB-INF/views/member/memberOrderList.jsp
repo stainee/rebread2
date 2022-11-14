@@ -31,35 +31,42 @@
 	
 	        <div class="right_container" style="min-height: 260px;">
 	            <div class="content_container">
-	            	<c:forEach items="${list }" var="o">
-	           		<a href="/orderDetail.do?orderNo=${o.orderNo }&reqPage=${reqPage}">
-						<div class="content-box">
-		            		<div class="content-img"><img src="/resources/img/common/logo.png"></div>
-		            		<c:choose>
-		            			<c:when test="${o.orderState eq '취소완료' }">
-				            		<div class="content-wrap" style="text-decoration: line-through; color: #cbcbcb;">
-				            			<div class="content-status-date">
-					            			<div class="deliver-status">${o.orderState }</div>
-					            			<span>ㅣ</span>
-					            			<div class="order-date">${o.orderDate }</div>
-				            			</div>
-				            			<div class="content-product-name">빵이름상품이름</div>            		
-				            		</div>
-			            		</c:when>
-			            		<c:otherwise>
-				            		<div class="content-wrap">
-				            			<div class="content-status-date">
-					            			<div class="deliver-status">${o.orderState }</div>
-					            			<span>ㅣ</span>
-					            			<div class="order-date">${o.orderDate }</div>
-				            			</div>
-				            			<div class="content-product-name">빵이름상품이름</div>            		
-				            		</div>
-			            		</c:otherwise>
-		            		</c:choose>
-		            	</div>
-	            	</a>
-	            	</c:forEach>
+	            	<c:choose>
+	            		<c:when test="${empty list }">
+	            			<div class="order-empty" style="line-height: 200px;">주문내역이 아직 없습니다.</div>
+	            		</c:when>
+	            		<c:otherwise>
+		            		<c:forEach items="${list }" var="o">
+				           		<a href="/orderDetail.do?orderNo=${o.orderNo }&reqPage=${reqPage}">
+									<div class="content-box">
+					            		<div class="content-img"><img src="/resources/img/common/logo.png"></div>
+					            		<c:choose>
+					            			<c:when test="${o.orderState eq '취소완료' }">
+							            		<div class="content-wrap" style="text-decoration: line-through; color: #cbcbcb;">
+							            			<div class="content-status-date">
+								            			<div class="deliver-status">${o.orderState }</div>
+								            			<span>ㅣ</span>
+								            			<div class="order-date">${o.orderDate }</div>
+							            			</div>
+							            			<div class="content-product-name">빵이름상품이름</div>            		
+							            		</div>
+						            		</c:when>
+						            		<c:otherwise>
+							            		<div class="content-wrap">
+							            			<div class="content-status-date">
+								            			<div class="deliver-status">${o.orderState }</div>
+								            			<span>ㅣ</span>
+								            			<div class="order-date">${o.orderDate }</div>
+							            			</div>
+							            			<div class="content-product-name">빵이름상품이름</div>            		
+							            		</div>
+						            		</c:otherwise>
+					            		</c:choose>
+					            	</div>
+				            	</a>
+		            		</c:forEach>
+	            		</c:otherwise>
+	            	</c:choose>
 	            </div>
 	            <div class="order-page-wrap">
 		            <div class="order-page">${pageNavi }</div>

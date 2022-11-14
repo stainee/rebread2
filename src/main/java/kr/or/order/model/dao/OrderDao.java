@@ -66,6 +66,14 @@ public class OrderDao {
 		return sqlSession.selectOne("member.selectMemberMileage",memberNo);
 	}
 
+	public int selectOrderPrice(int orderNo) {
+		return sqlSession.selectOne("order.selectOrderPrice",orderNo);
+	}
+
+	public int insertPayment(Order o) {
+		return sqlSession.insert("payment.insertPayment",o);
+	}
+
 	
 
 }

@@ -18,4 +18,8 @@ public class DonateDao {
 		List list = sqlSession.selectList("donate.selectAllDonate");
 		return (ArrayList<Donate>) list;
 	}
+
+	public int donateMileage(int donateSumPlus) {
+		return sqlSession.update("donate.donateMileage", donateSumPlus);
+	}
 }

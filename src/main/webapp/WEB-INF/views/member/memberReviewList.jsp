@@ -30,24 +30,49 @@
 
         <div class="right_container" style="min-height: 260px;">
             <div class="content_container">
-            	<c:forEach items="${list }" var="r">
-           		<a href="/reviewDetail.do?reviewNo=${r.reviewNo }&reqPage=${reqPage}">
-					<div class="content-box">
-	            		<div class="content-img"><img src="/resources/img/common/logo.png"></div>
-	            		<div class="content-wrap">
-	            			<div class="content-status-date">
-		            			<div class="deliver-status">가게상호명</div>
-		            			<span>ㅣ</span>
-		            			<div class="order-date">${r.reviewDate }</div>
-	            			</div>
-	            			<div class="content-product-name">빵이름상품이름</div>            		
-	            		</div>
-	            	</div>
-            	</a>
-            	</c:forEach>
+            	<c:choose>
+            		<c:when test="${empty list }">
+            			<div class="review-empty" style="line-height: 200px;">작성한 리뷰가 아직 없습니다.</div>
+            		</c:when>
+            		<c:otherwise>
+		            	<c:forEach items="${list }" var="r">
+			           		<a href="/memberReviewDetail.do?reviewNo=${r.reviewNo }&reqPage=${reqPage}">
+								<div class="content-box">
+				            		<div class="content-img"><img src="/resources/upload/review/${r.reviewImg }"></div>
+				            		<div class="content-wrap">
+				            			<div class="content-status-date">
+					            			<div class="deliver-status">
+	            								<c:choose>
+													<c:when test="${r.rating eq 1}">
+														<p class="point"><img src="/resources/img/main/ico_point1.gif"></p>
+													</c:when>
+													<c:when test="${r.rating eq 2}">
+														<p class="point"><img src="/resources/img/main/ico_point2.gif"></p>
+													</c:when>
+													<c:when test="${r.rating eq 3}">
+														<p class="point"><img src="/resources/img/main/ico_point3.gif"></p>
+													</c:when>
+													<c:when test="${r.rating eq 4}">
+														<p class="point"><img src="/resources/img/main/ico_point4.gif"></p>
+													</c:when>
+													<c:when test="${r.rating eq 5}">
+														<p class="point"><img src="/resources/img/main/ico_point5.gif"></p>
+													</c:when>
+												</c:choose>
+					            			</div>
+					            			<span>ㅣ</span>
+					            			<div class="order-date">${r.reviewDate }</div>
+				            			</div>
+				            			<div class="content-product-name">${r.reviewContent }</div>   		
+				            		</div>
+				            	</div>
+			            	</a>
+		            	</c:forEach>
+            		</c:otherwise>
+            	</c:choose>
             </div>
-            <div class="order-page-wrap">
-	            <div class="order-page">${pageNavi }</div>
+            <div class="review-page-wrap">
+	            <div class="review-page">${pageNavi }</div>
 			</div>
         </div>
 	</div>

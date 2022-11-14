@@ -15,6 +15,8 @@
     margin: 0 auto;
 	}
 </style>
+
+
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -32,15 +34,12 @@
 					</div>
 					<div class="store-detail">
 						<span id="star">★ ${sd.s.rating }</span>
+						<input type="hidden" name="addr" value="${sd.s.storeAddr }">
 						<p>${sd.s.storeContent }</p>
 					</div>
 				</div>
 				
 				<div id="delivery-type">
-					<ul class="delivery-tabs">
-						<li class="btn bc4">배달</li>
-						<li class="btn bc4">픽업</li>
-					</ul>
 					
 					<!-- 사장님 화면-->
 					<c:if test="${sessionScope.memberNo eq sd.s.memberNo}"> 
@@ -49,15 +48,15 @@
 							<!-- <a href="/updateProductFrm.do?storeNo=${s.storeNo}&storeName=${s.storeName }&storeAddr=${s.storeAddr}" class="btn bc4">빵수정</a> -->
 						</ul>
 					</c:if>
-					<!-- <button class="btn bc4"onclick="delivery();">배달</button>
-                        <button class="btn bc4"onclick="pickup();">픽업</button> -->
+					<button class="btn bc4"onclick="delivery();">배달</button>
+                    <button class="btn bc4"onclick="pickup();">픽업</button>
 				</div>
 				
 				<div class="tab-wrap">
 					<ul class="tabs">
 						<li class="btn bc44">MENU</li>
 						<li class="btn bc44">RIVIEW<!-- <span>(${sd.s.reviewCount })</span> --></li>
-						<li class="btn bc44">MAP</li>
+						<li class="btn bc44">LOCATION</li>
 					</ul>
 					<div class="content-wrap">
 						<div class="tabcontent" id="MENU">
@@ -80,6 +79,8 @@
 											<span id= "price"style="text-decoration: line-through; color: #999999;">${sdl.productPrice }</span>
 											<span>→ <strong class="lastPrice">${sdl.productPrice-(sdl.productPrice*sdl.productSale /100)}</strong></span>
 										</div>
+										
+										<!-- 사장님에게만 수정,삭제버튼 노출 -->
 										<c:if test="${sessionScope.memberNo eq sd.s.memberNo}">
 										<div class="fix">
 											<a href="/updateProductFrm.do?productNo=${sdl.productNo }&storeNo=${sdl.storeNo}&storeName=${sd.s.storeName}&storeAddr=${sd.s.storeAddr}" class="btn bc4">수정</a>
@@ -123,8 +124,10 @@
 							</c:if>
 						</div>
 						<div class="tabcontent" id="REVIEW"></div>
-						<div class="tabcontent" id="MAP">
-							<h2>MAP</h2>
+						<div class="tabcontent" id="LOCATION">
+							<h2>${sd.s.storeAddr }</h2>
+							
+							<div id="map" style="width:600px;height:400px;"></div>
 						</div>
 					</div>
 				</div>
@@ -133,52 +136,47 @@
 			<!-- 오른쪽 장바구니 -->
                 <div class="right-content">
                     <div class="mid-title"><h2>CART</h2></div>
-                    <form action="#" method="post">
+                    <form action="/orderFrm.do" method="post">
                         <div class="cart-wrap">
-                            <input type="hidden" name="memberNo" value="">
-                            <input type="hidden" name="storeNo"value="">
+                            <input type="hidden" name="memberNo" value="${sessionScope.m.memberNo}">
+                            <input type="hidden" name="storeNo"value="${sd.s.storeNo}">
+                            <input type="hidden" name="deliveryType" value="배달준비중">
                             <div class="cart-box-wrap">
-                            <!-- 
-                            <div class="cart-box">
-                            	 
-                                <div id="cart-img"><img src="/img/거북이빵.jpg" width="60px" height="60px"></div>
-                                <div class="cart-name">
-                                    <input type="text" name="productName" value="" readonly>
-                                    <input type="hidden" name="productNo" value="">
-                                </div>
-                                <div class="cart-amount">
-                                    <span><input type="text" name="productStock" value="3" readonly>개</span>
-                                    <span><input type="hidden" name="productPrice" value="3000">3,000원</span>
-                                </div>
-                                
-                            </div>
-                            -->
+                           	<!-- 물품 내역 담길 곳 -->
+                           	
                             </div>
                             <div class="price-zone">
                                 <div>
                                     <span>상품가격</span>
-                                    <span><strong></strong> 원</span>
+                                    <span id="p1"><strong></strong> 원</span>
                                 </div>
                                 <div>
                                     <span>배송비</span>
-                                    <span><strong>3,000</strong> 원</span>
+                                    <span><strong id="dPrice">3,000</strong> 원</span>
                                 </div>
                                 <div>
                                     <span>결제예정금액</span>
-                                    <span><input type="hidden" name="orderPrice" value="">원</span>
+                                    <span id="lP"><input type="hidden" name="orderPrice" value=""> 원</span>
                                 </div>
                             </div>
-                            <div class="subBtn">
-                                <input type="submit" value="결제하기" class="btn bc5 bs4">
-                            </div>
+                            <c:choose>
+    							<c:when test="${not empty sessionScope.m.memberNo}">
+		                            <div class="subBtn">
+		                                <input type="submit" value="결제하기" class="btn bc5 bs4">
+		                            </div>
+	                            </c:when>
+	                            <c:otherwise>
+	                            	<div class="subBtn">
+		                                <button type="button"class="btn bc5 bs4" onclick="alarm();">결제하기</button>
+		                            </div>
+	                            </c:otherwise>
+                            </c:choose>
                         </div>
                         
                     </form>
                 </div>
                 <!--장바구니 화면 끝-->
-
 		</div>
-
 
 		<!-- 상품 상세페이지(수량 선택하기)-->
 		<div class="detail-modal">
@@ -218,123 +216,188 @@
 						<p></p>원
 					</div>
 				</div>
-				<div class="detail-btn">
-					<button type="button" class="btn bc5 bs4" idx="">주문표에 추가</button>
-				</div>
+				<c:choose>
+					<c:when test="${not empty sessionScope.m.memberNo}">
+						<div class="detail-btn">
+							<button type="button" class="btn bc5 bs4" idx="" >주문표에 추가</button>
+						</div>
+					</c:when>
+					<c:otherwise>
+						<div class="login-btn">
+							<button type="button" class="btn bc5 bs4" onclick="alarm();" >주문표에 추가</button>
+						</div>
+					</c:otherwise>
+				</c:choose>
 			</div>
 		</div>
 		<!--상품 상세페이지 끝-->
+		
+		<!-- 로그인 알림 -->
+		<div class="alarm-modal">
+			<div class="alarm-wrap">
+				<div>주문표에 추가 하시려면 먼저 로그인을 해주세요.</div>
+				<div class="btnZone">
+					<a href="/login.do" class="btn bc4">예</a>
+					<button type="button" class="btn bc4">아니요</button>
+				</div>
+			</div>
+		</div>
 	</div>
 	
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
-	
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7eb9ba960e94dd83c11243c2a4da622f&libraries=services"></script>
 	<script src="/resources/js/store/storeDetail.js"></script>
 	<script>
+	function delivery(){
+		//<input type="hidden" name="deliveryType" value="1">
+		$("[name=deliveryType]").attr("value","배달준비중");
+	};
+	function pickup(){
+		$("[name=deliveryType]").attr("value","픽업준비중");
+	};
 	
-	<%--
-	let price = $(".lastPrice").text();
-	price2 = Math.floor(price);
-	console.log("소수점 제거: "+price2);
-	comPrice = addComma(price2);
-	console.log(comPrice);
-	$(".lastPrice").text(comPrice);
-	--%>
+	function alarm(){
+		$(".alarm-modal").css("display","flex");
+	};
 	
-	const arr = $(".lastPrice");
-	console.log(arr.length);
-	for(let i=0;i<arr.length;i++){
-		let price = (arr.eq(i).text());
-		price = parseInt(Math.floor(price));
-		arr.eq(i).text(addComma(price));
-	}
-	
-	$(".menu-box").on("click",function(){
-		const productNo = $(this).attr("idx");
-		//console.log("idx : "+productNo);
-		const productName = $(this).find("#bread-name").text();
-		const src= $(this).find("#Img").attr("src");
-		console.log(src);
-
-		const detail = $(this).find("#bread-detail").text();
-		//console.log("설명 : "+detail);
-		
-		const showPrice = $(this).find(".lastPrice").text();
-		
-		$("#imgSrc").attr("src",src);
-		$(".detail-name").text(productName);
-		$(".detail-info").text(detail);
-		$(".detail-price p").text(showPrice);
-		$(".total-price p").text(showPrice);
-		$(".detail-btn button").attr("idx",productNo);
-		
+	//주문표에 추가 버튼 누를 시 로그인 화면으로 이동하기
+	$(".btnZone [type=button]").on("click",function(){
+		$(".alarm-modal").hide();
 	});
-	
-	//주문표에 추가 버튼 누를 시
-	$(".detail-btn button").on("click",function(){
+
+	//가격 계산을 위한 변수 선언
+		let p1 =0;
 		
-		const productNo = $(this).attr("idx");
-		//console.log("제품번호"+productNo);
-		const src= $(this).parents().find("#imgSrc").attr("src");
-		//console.log("주문표에 추가 버튼 누를 시 : "+src);
-		const name= $(this).parents().find(".detail-name").text();
-		//console.log("빵이름"+name);
-		const info =$(this).parents().find(".detail-info").text();
-		//console.log(info);
-		const showPrice = $(this).parents().find(".total-price p").text();
-		//console.log(showPrice);
-		const inputPrice = minusComma(showPrice);
-		//console.log(inputPrice);
-		const amount = $(this).parents().find("[name=amount]").val();
-		//console.log(amount);
-		
-		//버튼 누른 후 모달창 닫기, 수량 1로 바꿔주기
-		$(".detail-modal").hide();
-		$("[name=amount]").attr("value",1);
-		
-		const cartWrap = $(".cart-wrap");
-		
-		//같은 제품이 담겨있는지 먼저 체크(for문으로 검사)하고 cartwrap에 담기
-		let arr = $(".cart-name [name=productNo]");
+		const arr = $(".lastPrice");
+		console.log(arr.length);
 		for(let i=0;i<arr.length;i++){
-			const checkNo = arr.eq(i).val();
-			
-			if(productNo ==checkNo){
-				alert("이미 카트에 담겨있는 상품입니다.");
-				return;
-			}
+			let price = (arr.eq(i).text());
+			price = parseInt(Math.floor(price));
+			arr.eq(i).text(addComma(price));
 		}
-		//포문으로 카트에 담기
-		for(let i=0;i<cartWrap.length;i++){
+		
+		$(".menu-box").on("click",function(){
+			const productNo = $(this).attr("idx");
+			//console.log("idx : "+productNo);
+			const productName = $(this).find("#bread-name").text();
+			const src= $(this).find("#Img").attr("src");
+			console.log(src);
+
+			const detail = $(this).find("#bread-detail").text();
+			//console.log("설명 : "+detail);
+			
+			const showPrice = $(this).find(".lastPrice").text();
+			
+			$("#imgSrc").attr("src",src);
+			$(".detail-name").text(productName);
+			$(".detail-info").text(detail);
+			$(".detail-price p").text(showPrice);
+			$(".total-price p").text(showPrice);
+			$(".detail-btn button").attr("idx",productNo);
+			
+		});
+		
+		//주문표에 추가 버튼 누를 시
+		$(".detail-btn button").on("click",function(){
+			
+			const productNo = $(this).attr("idx");
+			//console.log("제품번호"+productNo);
+			const src= $(this).parents().find("#imgSrc").attr("src");
+			//console.log("주문표에 추가 버튼 누를 시 : "+src);
+			const name= $(this).parents().find(".detail-name").text();
+			//console.log("빵이름"+name);
+			const info =$(this).parents().find(".detail-info").text();
+			//console.log(info);
+			const showPrice = $(this).parents().find(".total-price p").text();
+			//console.log(showPrice);
+			const inputPrice = Number(minusComma(showPrice));
+			//console.log(inputPrice);
+			const amount = $(this).parents().find("[name=amount]").val();
+			//console.log(amount);
+			
+			//버튼 누른 후 모달창 닫기, 수량 1로 바꿔주기
+			$(".detail-modal").hide();
+			$("[name=amount]").attr("value",1);
+			
+			//같은 제품이 담겨있는지 먼저 체크(for문으로 검사)하고 wrap에 담기
+			let arr = $(".cart-name [name=pNo]");
+			for(let i=0;i<arr.length;i++){
+				const checkNo = arr.eq(i).val();
+				
+				if(productNo ==checkNo){
+					alert("이미 카트에 담겨있는 상품입니다.");
+					return;
+				}
+			}
 			
 			let html = '';
-			
+				
 			html += '<div class="cart-box">';
-			html += '<div id="cart-img"><img src="'+src+'"width="60px" height="60px"></div>';
-			html += '<div class="cart-name">';
-			html += '	<input type="text" name="productName" value="'+name+'" readonly>';
-			html += '	<input type="hidden" name="productNo" value="'+productNo+'">';
-			html += '	<input type="hidden" name="productContent value="'+info+'">';
-			html += '</div>';
-			html += '<div class="cart-amount">';
-			html += '	<span><input type="text" name="productStock" value="'+amount+'" readonly>개</span>';
-			html += '	<span><input type="hidden" name="productPrice" value="'+inputPrice+'">'+showPrice+'원</span>';
-			html += '</div>';
+			html += '	<div id="cart-img"><img src="'+src+'"width="60px" height="60px"></div>';
+			html += '	<div class="cart-name">';
+			html += '		<input type="text" name="pName" value="'+name+'" readonly>';
+			html += '		<input type="hidden" name="pNo" value="'+productNo+'">';
+			html += '		<input type="hidden" name="pContent" value="'+info+'">';
+			html += '		<input type="hidden" name="pImg" value="'+src+'">';
+			html += '	</div>';
+			html += '	<div class="cart-amount">';
+			html += '		<span><input type="text" name="pStock" value="'+amount+'" readonly>개</span>';
+			html += '		<span><input type="hidden" name="pPrice" value="'+inputPrice+'">'+showPrice+'원</span>';
+			html += '	</div>';
+			html += '	<div class="delBtn">';
+			html += '		<span class="material-symbols-outlined" onclick="cancel(this);">cancel</span> ';
+			html += '	</div>';
 			html += '</div>';
 			
 			const boxWrap = $(".cart-box-wrap");
 			boxWrap.append(html);
+			
+			if($(".cart-box").length == 0){
+				$("#p1 strong").text(0);
+				$(".cart-amount [name=pPrice]").attr("value",0);
+			}else{
+				p1 += Number($(".cart-amount [name=pPrice]").eq($(".cart-box").length-1).val());
+				let p2 = addComma(p1);
+				$("#p1 strong").text(p2);
+				let price2 = p1+3000;
+				$("#p1 [name=orderPrice]").attr("value",price2);
+				$("#lP").text(addComma(price2));
+			}
+		});
+		
+		
+		function cancel(obj){
+			let min =$(obj).parent().parent().find(".cart-amount [name=pPrice]").val();
+			console.log("마이너스 할 금액 : "+min);
+			//let p3 = Number(minusComma($("#p1 strong").text()));
+			console.log("더해져있던 금액 : "+p1);
+			let minP = addComma(p1-min)
+			$("#p1 strong").text(minP);
+			$(obj).parent().parent().remove();
+			
+			if($(".cart-box").length == 0){
+				//$("[name=orderPrice]").attr("value",0);
+				$("#lP").text("0 원");
+				p1 = 0;
+				$("#p1 strong").text("0");
+			}else{
+				let lP =Number(minusComma($("#p1 strong").text()))+Number(minusComma($("#dPrice").text()));
+				console.log(lP);
+				$("#lP").text(addComma(lP));	
+			}
+			
 		};
-		
-		
-	});
-	
-	
-	//콤마 추가 펑션
-	function addComma(value){
-		value = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-		return value; 
-	};
-
+				
+		//콤마 추가 펑션
+		function addComma(value){
+			value = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+			return value; 
+		};
+		//콤마 제거 펑션
+		function minusComma(value){
+		    value = value.toString().replace(/[^\d]+/g, "");
+		    return value; 
+		};
 	</script>
 </body>
 </html>

@@ -109,5 +109,5 @@
 			review_img as reviewImg
 		from review order by review_view desc) where rownum &lt; 11 
 	</select>
-	
+
 </mapper>

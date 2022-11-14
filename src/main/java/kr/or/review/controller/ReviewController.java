@@ -38,7 +38,7 @@ public class ReviewController {
 		model.addAttribute("r",r);
 		model.addAttribute("storeName", storeName);
 		return "review/selectOneReview";
-	}
+	} 
 	//리뷰삭제
 	@RequestMapping(value = "/deleteReview.do")
 	public String deleteReview(int reviewNo) {

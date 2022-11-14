@@ -33,6 +33,11 @@ a{
 }
 
 /* 최근 주문 내역 */
+.content_container .order-empty{
+	font-size: 1.3em;
+	color: #cbcbcb;
+	text-align: center;
+}
 .content-box{
 	display: flex;
 	justify-content: flex-start;
