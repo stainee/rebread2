@@ -15,7 +15,6 @@
 	href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200&display=swap"
 	rel="stylesheet">
 </head>
-</head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="page-content" >

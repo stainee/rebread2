@@ -25,11 +25,11 @@
                         	<input type="hidden" name="reqPage" value="1">
                  			<c:choose>
 	               				<c:when test="${not empty storeName }">
-	               					<input type="text" name="storeName" value="${storeName }">
+	               					<input type="text" name="storeName" class="storeName" value="${storeName }">
 	               					<button type="submit" class="btn bc2">검색</button>
 	               				</c:when>
 	               				<c:otherwise>
-		                            <input type="text" name="storeName" placeholder="매장검색">
+		                            <input type="text" name="storeName" class="storeName" placeholder="매장검색">
 		                            <button type="submit" class="btn bc2">검색</button>
 	                            </c:otherwise>
                             </c:choose>

@@ -85,17 +85,17 @@
 		</div>
 		<div class="main-search">
 			<div class="search-bar">
-				<form action="#" method="post">
-					<input id="searchText" type="text" name="searchText" placeholder="원하는 빵을 입력해보세요"> 
-					<span id="searchIcon"><img src="/resources/img/main/loupe.png"></span>
-					
+				<form action="/searchBread.do" method="post">
+					<input id="searchText" type="text" name="breadName" placeholder="원하는 빵을 입력해보세요"> 
+					<input id="searchIcon" type="submit" value="SEARCH">
+					<input type="hidden" name="reqPage" value="1">
 				</form>
 			</div>
 			<div id="frequent-word">
-				<a href="#">#케이크</a> 
-				<a href="#">#소금빵</a> 
-				<a href="#">#로스빵</a> 
-				<a href="#">#마늘바게트</a>
+				<a href="/searchBread.do?reqPage=1&breadName='케이크'">#케이크</a> 
+				<a href="/searchBread.do?reqPage=1&breadName='소금빵'">#소금빵</a> 
+				<a href="/searchBread.do?reqPage=1&breadName='로스빵'">#로스빵</a> 
+				<a href="/searchBread.do?reqPage=1&breadName='마늘바게트'">#마늘바게트</a>
 			</div>
 		</div>
 
@@ -103,7 +103,7 @@
 			<div class="mid-pic">
 				<a href="#"><img src="/resources/img/main/mid1.jpg" data-aos="fade-up"
 					data-aos-duration="1500" data-aos-offset="300"></a>
-				<p class="mid-title">비건 스타터</p>
+				<p class="mid-title" >비건 스타터</p>
 				<p>환경을 생각하는 비건문화</p>
 			</div>
 			<div class="mid-pic">
@@ -141,7 +141,7 @@
 						빵을 다시 굽는다는 뜻으로, "빵 주문·통판 플랫폼"입니다. <br> 전국의 엄선된 빵집이 만든 빵을 주문할
 						수 있으며, <br> 남는 빵을 플랫폼을 통해 순환하는 구조로 환경보호와 함께 <br> 빵 최저가를
 						보장하고 있습니다. <br> 맛과 환경보호를 함께하는 '리브레드' 지금 당장 함께 하세요!
-					</p> <a href="#" id="brand-story"> BRAND STORY → </a>
+					</p> <a href="/brandIntro.do" id="brand-story"> BRAND STORY → </a>
 				</li>
 			</ul>
 		</div>
@@ -212,8 +212,12 @@
 <div aos="fade-up" data-aos-offset="200" data-aos-easing="ease-out-cubic" data-aos-duration="500"></div>
 <script src="/resources/js/common/main.js"></script>
 <script>
-	$(document).ready(function(){
-		
-	});
+const searchText = $("#searchText").val();
+$(".searchIcon").on("click",function(){
+	if(searchText==""){
+		alert("검색어를 입력해주세요.");
+		return false;
+	}
+});
 </script>
 </html>
