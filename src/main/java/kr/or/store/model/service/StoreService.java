@@ -61,7 +61,7 @@ public class StoreService {
 
 	// 매장 전체페이지 리스트와 페이지 네비
 	public StorePageData selectStoreList(int reqPage, String storeName) {
-		int numPerPage = 20;
+		int numPerPage = 12;
 		int end = reqPage * numPerPage;
 		int start = end - numPerPage + 1;
 
@@ -112,6 +112,33 @@ public class StoreService {
 		return spd;
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public ArrayList<Store> searchStore(String storeName) {
 		return dao.searchStore(storeName);
 	}

@@ -160,11 +160,25 @@ public class StoreController {
 		model.addAttribute("sd",sd);
 		return "store/detailStore";
 	}
-	
 	@ResponseBody 
 	@RequestMapping(value="/storeSearch.do", produces = "application/json;charset=utf-8")
 	public String storeSearch(String storeName) {
 		ArrayList<Store> list = sservice.searchStore(storeName);
 		return new Gson().toJson(list);
 	}
+	
+	
+	
+	//스토어리스트
+	@RequestMapping(value = "/purchaseList.do")
+	public String purchaseList(int reqPage,Model model,String storeName) {
+		StorePageData spd = sservice.selectStoreList(reqPage,storeName);
+		model.addAttribute("list",spd.getList());
+		model.addAttribute("pageNavi",spd.getPageNavi());
+		model.addAttribute("reqPage",spd.getReqPage());
+		model.addAttribute("numPerPage", spd.getNumPerPage());
+		model.addAttribute("storeName",storeName);
+		return "store/purchaseList";
+	}
 }
+

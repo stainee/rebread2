@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <link rel="stylesheet" href="/resources/css/common/header.css">
-<link rel="stylesheet" href="/resources/css/common/font.css">
+<link rel="stylesheet" href="/resources/css/font/font.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="Icon" href="/resources/img/favicon/favicon-16x16.png">
 
@@ -108,7 +108,7 @@
                     <li><a href="/brandIntro.do">브랜드스토리</a></li>
                     <li><a href="/allStoreList.do?reqPage=1">구입하기</a></li>
                     <li><a href="#">베스트세일</a></li>
-                    <li><a href="#">이벤트</a></li>
+                    <li><a href="/purchaseList.do?reqPage=1">이벤트</a></li>
                     <li><a href="/reviewList.do?reqPage=1">리 뷰</a></li>
                     <li><a href="/customerService.do">자주하는 질문</a></li>
                 </ul>
