@@ -118,8 +118,6 @@ public class StoreDao {
 	public int selectStoreCount(String breadName) {
 		return sqlSession.selectOne("store.totalCount", breadName);
 	}
-	
-
 
 }
 
