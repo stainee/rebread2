@@ -40,16 +40,17 @@
 				</div>
 				
 				<div id="delivery-type">
-					
-					<!-- 사장님 화면-->
-					<c:if test="${sessionScope.memberNo eq sd.s.memberNo}"> 
 						<ul>
 							<a href="/insertProductFrm.do?storeNo=${sd.s.storeNo}&storeName=${sd.s.storeName }&storeAddr=${sd.s.storeAddr}" class="btn bc4">빵등록</a>
 							<!-- <a href="/updateProductFrm.do?storeNo=${s.storeNo}&storeName=${s.storeName }&storeAddr=${s.storeAddr}" class="btn bc4">빵수정</a> -->
 						</ul>
-					</c:if>
+					
+					<!-- 사장님 화면
+					<c:if test="${sessionScope.memberNo eq sd.s.memberNo}"> -->
+					<!--</c:if>
 					<button class="btn bc4"onclick="delivery();">배달</button>
                     <button class="btn bc4"onclick="pickup();">픽업</button>
+                    -->
 				</div>
 				
 				<div class="tab-wrap">
@@ -123,12 +124,31 @@
 							</div>
 							</c:if>
 						</div>
-						<div class="tabcontent" id="REVIEW"></div>
+						<div class="tabcontent" id="REVIEW">
+							<div class="input-comment-box">
+                      			<ul>
+                           			<li>
+		                               	<input type="text" name="memberId" value="${sessionScope.m.memberId }" readonly>
+		                                <input type="hidden" name="storeNo" value="${sd.s.storeNo}">
+		                                <input type="hidden" name="storeRef" value="0"><%--대댓글용 댓글번호 --%>
+		                                <textarea class="input-form" name="reviewContent"></textarea>
+		                                <button type="button" id="commentBtn"class="btn bc5">댓글달기</button>
+                           			</li>
+                           			<li>
+                                		
+                           			</li>
+                        		</ul>
+                    		</div>
+				
+						</div>
+						
+						<!-- 지도  -->
 						<div class="tabcontent" id="LOCATION">
 							<h2>${sd.s.storeAddr }</h2>
 							
 							<div id="map" style="width:600px;height:400px;"></div>
 						</div>
+						<!-- 지도 끝 -->
 					</div>
 				</div>
 			</div>
@@ -242,6 +262,7 @@
 				</div>
 			</div>
 		</div>
+		<!-- 로그인 알림 모달 끝 -->
 	</div>
 	
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>

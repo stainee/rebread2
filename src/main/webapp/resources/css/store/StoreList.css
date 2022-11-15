@@ -126,3 +126,15 @@ body{
     color: gold;
 }
 
+.input-comment-box textarea.input-form{
+    width: 80%;
+    min-height: 10px;
+}
+.input-comment-box li:first-child{
+	width: 75%;
+	margin: 0 auto;
+}
+.input-comment-box li:last-child{
+	width: 25%;
+}
+

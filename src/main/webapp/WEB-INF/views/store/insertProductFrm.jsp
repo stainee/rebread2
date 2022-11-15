@@ -5,15 +5,28 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>빵등록</title>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 </head>
 <link rel="stylesheet" href="/resources/css/common/default.css">
 <link rel="stylesheet" href="/resources/css/common/insertproduct.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
+
+	.header-right li {
+    float: left;
+    width: 60px;
+    line-height: 80px;
+    text-align: center;
+    font-size: 12px;
+	}
+	.header-right a{
+	font-size: 12px;
+	font-weight: 1000;
+	}
+</style>
 <body>
-	<div class="top">
-		<img src="/resources/img/common/logo2.png">
-	</div>
+	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="total_wrapper">
 		<div class="left_container">
 			<div class="memberInfo">
@@ -83,6 +96,10 @@
 			</div>
 		</div>
 	</div>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+	
+	
+	
 	<script>
 	function loadImg(f){
 	    console.log(f.files);

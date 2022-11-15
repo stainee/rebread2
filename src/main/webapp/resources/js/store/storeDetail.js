@@ -15,10 +15,11 @@ tabs.on("click",function(){
     //console.log(index);
     const text=$(this).text();
     //console.log(text);
-   $(".tabcontent").hide();
+    $(".tabcontent").hide();
    const showContent = $("#"+text);
    showContent.show();
-    $(".tabcontent").eq(index).show();
+   $(".tabcontent").eq(index).show();
+    
     
     if(index==2){
         var mapContainer = document.getElementById('map'), // 지도를 표시할 div 

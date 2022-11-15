@@ -486,3 +486,19 @@ width: 100vw;
 }
 
 
+.input-comment-box textarea.input-form{
+    width: 70%;
+    min-height: 10px;
+    margin: 0 auto;
+}
+/*
+.input-comment-box li:first-child{
+	width: 75%;
+	margin: 0 auto;
+}
+*/
+.input-comment-box li:last-child{
+	width: 25%;
+}
+
+
