@@ -178,8 +178,53 @@
 	</choose>
    </select>
    
-   <select id="totalCount" resultType="_int">
+   
+   
+   
+   <!-- breadList -->
+	<select id="allBreadList" parameterType="map" resultType="s">
+	select * from
+	(select rownum as rnum, s.*from
+	(select
+	s.store_no as storeNo,
+	s.member_no as memberNo,
+	s.store_name as storeName,
+	s.store_content as storeContent,
+	s.store_addr as storeAddr,
+	s.store_regist_num as storeRegistNum,
+	s.store_account as storeAccount,
+	s.open_time as openTime,
+	s.close_time as closeTime,
+	s.store_phone as storePhone,
+	s.store_img as storeImg,
+	nvl(
+	(select avg(rating) from test_review r where r.store_no = s.store_no),0)as
+	rating,
+	nvl(
+    (select count(review_no) from test_review r where r.store_no = s.store_no),0) as
+    reviewCount,
+    (select max(product_sale) from product p where p.store_no = s.store_no) as maxDiscount
+	from store s
+	where store_no in (select store_no from product where product_name like '%'||#{breadName}||'%') 
+	<choose>
+	<when test="storeName != null">
+		where store_name like '%'||#{storeName}||'%' order by 1 desc)s)
+		where rnum between #{start} and #{end}
+	</when>
+	<otherwise>
+	order by 1 desc)s)
+	where rnum between #{start} and #{end}
+	</otherwise>
+	</choose>
+	</select>
+   
+   
+   
+   <select id="totalCount" resultType="_int" parameterType="string">
    		select count(*) from store
+   		<if test="_parameter != null">
+   			where store_no in (select store_no from product where product_name like '%'||#{_parameter}||'%') 
+   		</if>
    </select>
    
    <!-- 별점 포함해서 매장 상세정보 불러오기 -->
@@ -235,5 +280,12 @@
 			paymentkey
 		from orders o join store s on o.store_no = s.store_no
 		where order_state = #{orderState}
+   </select>
+   
+   <select id="countList" resultType="int" parameterType="string">
+   		select count(*) from store
+   		<if test="_parameter != null">
+   			where store_name like '%'||#{_parameter}||'%'
+   		</if>
    </select>
 </mapper>

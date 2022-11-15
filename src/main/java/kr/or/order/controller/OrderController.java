@@ -113,12 +113,18 @@ public class OrderController {
 			JsonNode successNode = responseEntity.getBody();
 			model.addAttribute("orderId",successNode.get("orderId").asText());
 			
-			// 결제 후 paymentKey를 DB에 저장
+			// 결제 후 paymentKey를 orders 테이블에 저장
 			int orderNo = service.searchOrderNo();
 			Order o = new Order();
 			o.setOrderNo(orderNo);
 			o.setPaymentKey(paymentKey);
 			int result = service.updatePaymentKey(o);
+			
+			// 결제 후 payment 테이블에 데이터 insert
+			int orderPrice = service.selectOrderPrice(orderNo);
+			o.setOrderPrice(orderPrice);
+			int paymentResult = service.insertPayment(o);
+			
 			
 			model.addAttribute("orderNo",o.getOrderNo());
 			

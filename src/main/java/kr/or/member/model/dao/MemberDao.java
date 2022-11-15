@@ -120,8 +120,19 @@ public class MemberDao {
 	}
 
 	public int selectMemberMileage(String memberId) {
-		System.out.println("dao : "+memberId);
 		return sqlSession.selectOne("member.selectMemberIdMileage",memberId);
+	}
+
+	public Review selectOneReview(int reviewNo) {
+		return sqlSession.selectOne("review.selectOneReview",reviewNo);
+	}
+
+	public int memberDeleteReview(int reviewNo) {
+		return sqlSession.delete("review.deleteReview",reviewNo);
+	}
+
+	public String selectStoreName(int storeNo) {
+		return sqlSession.selectOne("review.selectStoreName",storeNo);
 	}
 
 

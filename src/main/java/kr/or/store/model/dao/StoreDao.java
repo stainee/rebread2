@@ -104,6 +104,22 @@ public class StoreDao {
 		return (ArrayList<Order>) list;
 	}
 
+	public int countList() {
+		return sqlSession.selectOne("store.countList");
+	}
+	public int countList(String storeName) {
+		return sqlSession.selectOne("store.countList", storeName);
+	}
+
+	public ArrayList<Store> selectBreadList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("store.allBreadList",map);
+		return (ArrayList<Store>) list;
+	}
+	public int selectStoreCount(String breadName) {
+		return sqlSession.selectOne("store.totalCount", breadName);
+	}
+	
+
 
 }
 

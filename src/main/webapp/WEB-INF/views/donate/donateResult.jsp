@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +8,7 @@
 <title>기부 결과페이지</title>
 <link rel="stylesheet" href="resources/css/font/font.css">
 <link rel="stylesheet" href="resources/css/donate/donateResult.css">
-
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -30,7 +31,10 @@
 			</div>
 			<div class="donate_info_title"><h3>기부정보 확인</h3></div>
 			<div class="donate_info_frm">
-				<div class="donate_info_comment"><strong>100</strong><span>원 기부되었습니다</span></div>
+				<div class="donate_info_comment">
+					<strong></strong><span>원 기부되었습니다</span>
+					<input type="hidden" value="${donateVal }">
+				</div>
 				<div class="donate_info_name_box">
 					<div class="donate_info_title_name_box">
 						<div class="donate_info_title_name">모금함명</div>
@@ -48,4 +52,12 @@
 		</div>
 	</div>
 </body>
+<script>
+	function addComma(value){
+			value = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+			return value;
+	};
+	
+	$(".donate_info_comment strong").append(addComma($(".donate_info_comment input").val()));
+</script>
 </html>

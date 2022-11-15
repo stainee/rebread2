@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.LinkedMultiValueMap;
@@ -37,7 +38,7 @@ public class AccountService {
 	
 	//테스트 코드
 	//@Scheduled(fixedDelay=10000)
-	//@Scheduled(cron ="0 0 0 10 * ?")
+	@Scheduled(cron ="0 0 0 10 * ?")
 	@Transactional
 	public void accountSchedule() {
 		//<상점번호, 총매출>을 담는 HashMap 가져오기
@@ -136,37 +137,6 @@ public class AccountService {
 		String rspMessage = response2.getBody().get("rsp_message").asText();
 		
 		return apiTranId+" "+apiTranDtm;
-		
-//		리팩토링 예정
-		/*
-		MultiValueMap<String,String> params2 = new LinkedMultiValueMap<>();
-		params2.add("cntr_account_type", "N");
-		params2.add("cntr_account_num", "11891000092000");
-		params2.add("wd_pass_phrase","NONE");
-		params2.add("wd_print_content","결제금액");
-		params2.add("name_check_option", "off");
-		params2.add("trans_dtime", getCurrentDateTime());
-		params2.add("req_cnt", "1");
-		//리스트 바디 파라미터
-		MultiValueMap<String, MultiValueMap<String, String>> list = new LinkedMultiValueMap<>();
-		MultiValueMap<String, String> listparam = new LinkedMultiValueMap<>();
-		listparam.add("trans_no","1");
-		listparam.add("bank_tran_id", "F123456789U4BC342397");
-		listparam.add("bank_code_std", "081");
-		listparam.add("account_num", "11811111100000");
-		listparam.add("account_holder_name", "홍길동");
-		listparam.add("print_content", "입금이체");
-		listparam.add("tran_amt", "500");
-		listparam.add("req_client_name","홍길동");
-		listparam.add("req_client_bank_code", "081");
-		listparam.add("req_client_account_cnum", "11811111100000");
-		listparam.add("req_client_num","HONGGILDONG1234");
-		listparam.add("trans_purpose", "TR");
-		params2.add("req_list", listparam);
- */
-		//바디와 헤더 묶기
-//		System.out.println(params2);
-//		HttpEntity<MultiValueMap<String, String>> request2 = new HttpEntity<>(params2, httpHeaders2);
 		
 		
 	}

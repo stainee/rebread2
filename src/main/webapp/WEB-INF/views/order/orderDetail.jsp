@@ -23,7 +23,7 @@
 	                <ul>
 						<li><a href="/memberMain.do?memberNo=${sessionScope.m.memberNo }">내정보</a></li>
 	                    <li><a href="/memberOrderList.do?memberNo=${sessionScope.m.memberNo }&reqPage=1">최근 주문 내역</a></li>
-	                    <li><a href="/memberReviewList.do?memberNo=${sessionScope.m.memberNo }&reqPage=1">내 등록 리뷰</a></li>
+	                    <li><a href="/memberReviewList.do?reviewWriter=${sessionScope.m.memberId }&reqPage=1">내 등록 리뷰</a></li>
 	                </ul>
 	            </div>
 	        </div>
@@ -118,9 +118,7 @@
 		})	
 		
 		const orderState = $(".content-title-state").children().last().text();
-		console.log(orderState);
-		console.log(orderState);
-		console.log(orderState);
+
 		function orderCancel(orderNo,reqPage){
 			if(confirm("주문을 취소하시겠습니까?")){
 				if(orderState == "결제완료"){

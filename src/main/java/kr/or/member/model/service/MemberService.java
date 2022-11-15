@@ -268,6 +268,18 @@ public class MemberService {
 		return dao.selectMemberMileage(memberId);
 	}
 
+	public Review selectOneReview(int reviewNo) {
+		return dao.selectOneReview(reviewNo);
+	}
+
+	public int memberDeleteReview(int reviewNo) {
+		return dao.memberDeleteReview(reviewNo);
+	}
+
+	public String selectStoreName(int storeNo) {
+		return dao.selectStoreName(storeNo);
+	}
+
 
 
 	

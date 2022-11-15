@@ -8,4 +8,16 @@
 		from payment
 		where payment_date between add_months(sysdate,-1) and sysdate group by store_no
 	</select>
+	
+	<insert id="insertPayment" parameterType="o">
+		insert into payment values
+		(
+			payment_seq.nextval,
+			#{orderNo},
+			30,
+			to_char(sysdate,'yyyy-mm-dd'),
+			#{orderPrice},
+			#{paymentKey}
+		)
+	</insert>
 </mapper>
