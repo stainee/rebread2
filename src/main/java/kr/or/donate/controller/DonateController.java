@@ -27,18 +27,37 @@ public class DonateController {
 		return "/donate/donateMain";
 	}
 	
-	@RequestMapping(value = "/donateMileage.do")
-	public String donateMileage(Donate d, int donateVal, int donateSumVal, Model model, @SessionAttribute(required = false) Member m) { // @SessionAttribute(required = false) -> 로그인 안하면 접근 못하도록 막음
-		int donateSumPlus = donateVal + donateSumVal;
-		d.setDonateSumPlus(donateSumPlus);
-		
-		int result = service.donateMileage(d, donateVal, m.getMemberMileage(), m.getMemberNo());
-		if(result>0) {			
-			m.setMemberMileage(m.getMemberMileage()-donateVal);
-		}
-		model.addAttribute("donateVal", donateVal);
-		return "/donate/donateResult";
+	
+	
+	@RequestMapping(value = "/donateModify.do")
+	public String donateModify(int donateNo, Model model) {
+		Donate d = service.selectOneDonate(donateNo);
+		model.addAttribute("d", d);
+		return "/admin/donateModify";
 	}
+	
+	@RequestMapping(value = "/donateInsertFrm.do")
+	public String donateInsertFrm() {
+		return "admin/donateInsertFrm";
+	}
+	
+	@RequestMapping(value = "/donateInsert.do")
+	public String donateInsert(Donate d) {
+		d.setDonateOrgan(d.getDonateOrgan());
+		d.setDonateImg(d.getDonateImg());
+		d.setDonateEnd(d.getDonateEnd());
+		d.setDonateContent(d.getDonateContent());
+		System.out.println(d);
+		int result = service.insertDonate(d);
+		return "admin/donateList";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/donateUpdate.do", produces = "application/json;charset=utf-8")
+	public void donateUpdate(Donate d) {
+		int result = service.updateOneDonate(d);
+	}
+	
 	
 	@ResponseBody
 	@RequestMapping(value = "/donateDelete.do", produces = "application/json;charset=utf-8")
@@ -46,4 +65,17 @@ public class DonateController {
 		int result = service.deleteOneDonate(donateNo);
 	}
 	
+	@RequestMapping(value = "/donateMileage.do")
+	public String donateMileage(Donate d, int donateVal, int donateSumVal, String donateContent, String donateOrgan, Model model, @SessionAttribute(required = false) Member m) { // @SessionAttribute(required = false) -> 로그인 안하면 접근 못하도록 막음
+		int donateSumPlus = donateVal + donateSumVal;
+		d.setDonateSumPlus(donateSumPlus);
+		int result = service.donateMileage(d, donateVal, m.getMemberMileage(), m.getMemberNo());
+		if(result>0) {			
+			m.setMemberMileage(m.getMemberMileage()-donateVal);
+		}
+		model.addAttribute("donateVal", donateVal);
+		model.addAttribute("donateContent", donateContent);
+		model.addAttribute("donateOrgan", donateOrgan);
+		return "/donate/donateResult";
+	}
 }
