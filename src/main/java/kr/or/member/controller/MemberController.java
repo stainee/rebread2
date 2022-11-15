@@ -41,7 +41,6 @@ public class MemberController {
 	@RequestMapping(value="/memberUpdate.do", produces = "application/json;charset=utf-8")
 	public void memberUpdate(Member m) {
 		int result = service.updateOneMember(m);
-		
 	}
 	@ResponseBody
 	@RequestMapping(value="/memberDelete.do", produces = "application/json;charset=utf-8")
@@ -310,6 +309,28 @@ public class MemberController {
 		if(member != null) {
 			session.setAttribute("m", member);
 			return "member/ceoMain";
+		}else {
+			return "redirect:/";
+		}
+	}
+	//관리자 정보 수정
+	@RequestMapping(value = "/updateAdim.do")
+	public String updateAdmin(Member m, HttpSession session) {
+		Member member = service.updateCeo(m);
+		if(member != null) {
+			session.setAttribute("m", member);
+			return "admin/adminMain";
+		}else {
+			return "redirect:/";
+		}
+	}
+	//회원마이페이지 수정
+	@RequestMapping(value = "/updateMembers.do")
+	public String updateMembers(Member m, HttpSession session) {
+		Member member = service.updateCeo(m);
+		if(member != null) {
+			session.setAttribute("m", member);
+			return "member/memberMain";
 		}else {
 			return "redirect:/";
 		}

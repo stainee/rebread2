@@ -30,7 +30,7 @@
 		<!--상단의 빵 슬라이드-->
 		<div class="topSlide">
 			<ul id="slider1">
-				<li><a href="#"><img src="/resources/img/main/mainslide1.jpg"></a></li>
+				<li><a href="/searchBread.do?reqPage=1&breadName=소금빵"><img src="/resources/img/main/mainslide1.jpg"></a></li>
 				<li><a href="/brandIntro.do"><img src="/resources/img/main/mainslide2.jpg"></a></li>
 				<li><a href="/brandIntro.do"><img src="/resources/img/main/mainslide3.jpg"></a></li>
 			</ul>
@@ -70,7 +70,7 @@
 			</div>
 			<div class="item-pic">
 		<c:forEach items="${list }" var="p">
-				<a href="#">
+				<a href="/searchBread.do?reqPage=1&breadName=${p.productName }">
 					<div>
 						<img src="/resources/upload/product/${p.productImg }">
 						<div class="price-about">
@@ -92,10 +92,10 @@
 				</form>
 			</div>
 			<div id="frequent-word">
-				<a href="/searchBread.do?reqPage=1&breadName='케이크'">#케이크</a> 
-				<a href="/searchBread.do?reqPage=1&breadName='소금빵'">#소금빵</a> 
-				<a href="/searchBread.do?reqPage=1&breadName='로스빵'">#로스빵</a> 
-				<a href="/searchBread.do?reqPage=1&breadName='마늘바게트'">#마늘바게트</a>
+				<a href="/searchBread.do?reqPage=1&breadName=케이크">#케이크</a> 
+				<a href="/searchBread.do?reqPage=1&breadName=소금빵">#소금빵</a> 
+				<a href="/searchBread.do?reqPage=1&breadName=로스빵">#로스빵</a> 
+				<a href="/searchBread.do?reqPage=1&breadName=마늘바게트">#마늘바게트</a>
 			</div>
 		</div>
 

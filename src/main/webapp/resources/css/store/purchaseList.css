@@ -82,6 +82,11 @@
 	display: inline-block;
 	position: relative;
 }
+.item-basket-box p{
+	margin-top: 9px;
+	font-size: 15px;
+}
+
 .storePic{
 	width: 274px;
 	height: 274px;
