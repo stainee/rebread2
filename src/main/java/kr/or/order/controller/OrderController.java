@@ -8,6 +8,7 @@ import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,6 +39,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import kr.or.order.model.service.OrderService;
 import kr.or.order.model.vo.Order;
+import kr.or.order.model.vo.OrderProduct;
+import kr.or.product.model.vo.Product;
 
 @Controller
 public class OrderController {
@@ -77,6 +80,18 @@ public class OrderController {
 		Order o = service.selectOneOrder(orderNo);
 		model.addAttribute("o",o);
 		model.addAttribute("reqPage",reqPage);
+
+		// 주문 목록 불러오기
+		ArrayList<OrderProduct> list = new ArrayList<OrderProduct>();
+		list = service.selectOrderProduct(orderNo);
+		ArrayList<Product> pList = new ArrayList<Product>();
+		for(int i=0;i<list.size();i++) {
+			Product p = service.selectOrderProduct2(list.get(i).getProductNo());
+			pList.add(p);
+		}
+		model.addAttribute("list",list);
+		model.addAttribute("pList",pList);
+		
 		
 		// memberMileage 구하기
 		int memberMileage = service.selectMemberMileage(o.getMemberNo());
@@ -193,7 +208,7 @@ public class OrderController {
 			// memberMileage 구하기
 			int memberMileage = service.selectMemberMileage(o.getMemberNo());
 			session.setAttribute("memberMileage", memberMileage);
-			return "order/orderDetail";
+			return "redirect:/orderDetail.do?orderNo="+orderNo+"&reqPage="+reqPage;
 		}
 		else {
 			return "redirect:/";
@@ -243,6 +258,18 @@ public class OrderController {
 			return "order/orderFail"; 
 		}
 	}
+	
+	//
+	@ResponseBody
+	@RequestMapping(value="/insertOrderProduct.do", produces = "application/json;charset=utf-8")
+	public void insertOrderProduct(OrderProduct op) {
+		System.out.println("데이터성공1");
+		int orderNo = service.searchOrderNo();
+		op.setOrderNo(orderNo);
+		int result = service.insertOrderProduct(op);
+		System.out.println("데이터성공2");
+	}
+	
 	
 	// 카카오페이 api
 	@RequestMapping("/kakao.do")

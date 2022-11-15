@@ -1,86 +1,128 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="order">
-	<insert id="insertOrder" parameterType="o">
-		insert into orders values
-		(orders_seq.nextval, #{memberNo}, 30, '결제완료', to_char(sysdate, 'yyyy-mm-dd'), 1,100, #{orderName}, #{orderAddr}, #{orderPhone}, #{orderMileage}, null)
-	</insert>
-	
-	<select id="searchOrderNo" resultType="_int">
-		select max(order_no) from orders
-	</select>
-	
-	<update id="updatePaymentKey" parameterType="o">
-		update orders set paymentKey=#{paymentKey} where order_no=#{orderNo}
-	</update>
-	
-	<select id="selectOrderList" parameterType="map" resultType="o">
-   	select * from
-	(select rownum as rnum, o.* from
-	(select
-	    order_no as orderNo,
-	    order_state as orderState,
-	    order_date as orderDate,
-	    order_name as orderName,
-        member_no as memberNo
-	from (select * from orders join member using(member_no)) order by 1 desc)o where memberNo=#{memberNo})
+   <insert id="insertOrder" parameterType="o">
+      insert into orders values
+      (
+         orders_seq.nextval,
+         #{memberNo},
+         #{storeNo},
+         #{orderState},
+         to_char(sysdate, 'yyyy-mm-dd'),
+         #{orderTotalQuan},
+         #{orderPrice},
+         #{orderName},
+         #{orderAddr},
+         #{orderPhone},
+         #{orderMileage},
+         null
+      )
+   </insert>
+   
+   <select id="searchOrderNo" resultType="_int">
+      select max(order_no) from orders
+   </select>
+   
+   <update id="updatePaymentKey" parameterType="o">
+      update orders set paymentKey=#{paymentKey} where order_no=#{orderNo}
+   </update>
+   
+   <select id="selectOrderList" parameterType="map" resultType="o">
+     select * from
+	   (select rownum as rnum, o.* from
+	   (select
+	       order_no as orderNo,
+	       order_state as orderState,
+	       order_date as orderDate,
+	       order_name as orderName,
+	        member_no as memberNo
+	   from (select * from 
+	   (select * from orders where paymentkey is not null)
+	   orders join member using(member_no)) order by 1 desc)o where memberNo=#{memberNo})
     where rnum between #{start} and #{end}
-	</select>
-	
-	<select id="totalCount" parameterType="_int" resultType="_int">
-		select count(*) from orders where member_no=#{memberNo}
-	</select>
-	
-	<select id="selectOneOrder" parameterType="_int" resultType="o">
-		select
-			order_no as orderNo,
-			member_no as memberNo,
-			order_state as orderState,
-			order_date as orderDate,
-			order_total_quan as orderTotalQuan,
-			order_price as orderPrice,
-			order_name as orderName,
-			order_addr as orderAddr,
-			order_phone as orderPhone,
-			order_mileage as orderMileage
-		from orders where order_no = #{_parameter}
-	</select>
-	
-	<select id="selectPaymentKey" parameterType="_int" resultType="string">
-		select paymentKey from orders where order_no=#{orderNo}
-	</select>
-	
-	<update id="updateOrderState" parameterType="_int">
-		update orders set order_state='취소완료' where order_no=#{orderNo}
-	</update>
-	
-	<select id="selectOrderMember" parameterType="_int" resultType="_int">
-		select member_no from orders where order_no=#{orderNo}
-	</select>
-	
-	<select id="selectOrderMileage" parameterType="_int" resultType="_int">
-		select order_mileage from orders where order_no = #{orderNo}
-	</select>
-	
-	<select id="selectAllOrder" resultType="o">
-		select 
-			o.order_no as orderNo,
-			o.member_no as memberNo,
-			o.store_no as storeNo,
-			o.order_state as orderState,
-			o.order_date as orderDate,
-			o.order_total_quan as orderTotalQuan,
-			o.order_price as orderPrice,
-			o.order_name as orderName,
-			o.order_addr as orderAddr,
-			o.order_phone as orderPhone,
-			o.order_mileage as orderMileage,
-			s.store_name as storeName,
-			paymentkey
-		from orders o join store s on o.store_no = s.store_no
-	</select>
-	
-	<select id="selectOrderPrice" parameterType="_int" resultType="_int">
-		select order_price from orders where order_no = #{orderNo}
-	</select>
+   </select>
+   
+   <select id="totalCount" parameterType="_int" resultType="_int">
+      select count(*) from orders where member_no=#{memberNo}
+   </select>
+   
+   <select id="selectOneOrder" parameterType="_int" resultType="o">
+      select
+         order_no as orderNo,
+         member_no as memberNo,
+         order_state as orderState,
+         order_date as orderDate,
+         order_total_quan as orderTotalQuan,
+         order_price as orderPrice,
+         order_name as orderName,
+         order_addr as orderAddr,
+         order_phone as orderPhone,
+         order_mileage as orderMileage
+      from orders where order_no = #{_parameter}
+   </select>
+   
+   <select id="selectPaymentKey" parameterType="_int" resultType="string">
+      select paymentKey from orders where order_no=#{orderNo}
+   </select>
+   
+   <update id="updateOrderState" parameterType="_int">
+      update orders set order_state='취소완료' where order_no=#{orderNo}
+   </update>
+   
+   <select id="selectOrderMember" parameterType="_int" resultType="_int">
+      select member_no from orders where order_no=#{orderNo}
+   </select>
+   
+   <select id="selectOrderMileage" parameterType="_int" resultType="_int">
+      select order_mileage from orders where order_no = #{orderNo}
+   </select>
+   
+   <select id="selectAllOrder" resultType="o">
+      select 
+         o.order_no as orderNo,
+         o.member_no as memberNo,
+         o.store_no as storeNo,
+         o.order_state as orderState,
+         o.order_date as orderDate,
+         o.order_total_quan as orderTotalQuan,
+         o.order_price as orderPrice,
+         o.order_name as orderName,
+         o.order_addr as orderAddr,
+         o.order_phone as orderPhone,
+         o.order_mileage as orderMileage,
+         s.store_name as storeName,
+         paymentkey
+      from orders o join store s on o.store_no = s.store_no
+   </select>
+   
+   <select id="selectOrderPrice" parameterType="_int" resultType="_int">
+      select order_price from orders where order_no = #{orderNo}
+   </select>
+   
+   <insert id="insertOrderProduct" parameterType="op">
+	  insert into order_product values
+	  (
+	  	order_product_seq.nextval,
+	  	#{orderNo},
+	  	#{productNo},
+	  	#{orderProductQuan}
+	  )
+	  
+   </insert>
+   
+   <select id="selectOrderProduct" parameterType="_int" resultType="op">
+   	  select
+   	  	order_product_no as orderProductNo,
+   	  	order_no as orderNo,
+   	  	product_no as productNo,
+   	  	order_product_quan as orderProductQuan
+   	  from order_product where order_no=#{orderNo}
+   </select>
+   
+   <select id="selectOrderProduct2" parameterType="_int" resultType="_int">
+   	  select product_no as productNo from order_product
+   	  where order_product_no = 
+   	  (select min(order_product_no) from order_product where order_no=#{_parameter})
+   </select>
+   
 </mapper>

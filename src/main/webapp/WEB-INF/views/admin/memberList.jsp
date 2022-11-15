@@ -14,6 +14,7 @@
 <link rel="stylesheet" href="/resources/css/admin/memberList.css">
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
+<div class="page-content" style="height: 800px;">
 <div class="total_wrapper">
         <div class="left_container">
             <div class="memberInfo">
@@ -65,6 +66,7 @@
 			</div>
          </div>
  
+</div>
 </div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />	
 </body>

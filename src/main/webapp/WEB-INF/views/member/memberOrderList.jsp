@@ -13,6 +13,7 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+<div class="page-content" style="height: 800px;">
 	<div class="total_wrapper" style="justify-content: center;">
 	        <div class="left_container" style="max-height: 357px;">
 	            <div class="memberInfo">
@@ -39,7 +40,7 @@
 		            		<c:forEach items="${list }" var="o">
 				           		<a href="/orderDetail.do?orderNo=${o.orderNo }&reqPage=${reqPage}">
 									<div class="content-box">
-					            		<div class="content-img"><img src="/resources/img/common/logo.png"></div>
+					            		<div class="content-img"><img src="/resources/upload/product/${productImg}"></div>
 					            		<c:choose>
 					            			<c:when test="${o.orderState eq '취소완료' }">
 							            		<div class="content-wrap" style="text-decoration: line-through; color: #cbcbcb;">
@@ -48,7 +49,7 @@
 								            			<span>ㅣ</span>
 								            			<div class="order-date">${o.orderDate }</div>
 							            			</div>
-							            			<div class="content-product-name">빵이름상품이름</div>            		
+							            			<div class="content-product-name">${productName }</div>            		
 							            		</div>
 						            		</c:when>
 						            		<c:otherwise>
@@ -58,7 +59,7 @@
 								            			<span>ㅣ</span>
 								            			<div class="order-date">${o.orderDate }</div>
 							            			</div>
-							            			<div class="content-product-name">빵이름상품이름</div>            		
+							            			<div class="content-product-name">${productName }</div>            		
 							            		</div>
 						            		</c:otherwise>
 					            		</c:choose>
@@ -72,6 +73,7 @@
 		            <div class="order-page">${pageNavi }</div>
 				</div>
 	        </div>
+	</div>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	<script>

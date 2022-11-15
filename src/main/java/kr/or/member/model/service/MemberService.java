@@ -13,6 +13,7 @@ import kr.or.member.model.vo.Member;
 import kr.or.store.model.vo.StorePageData;
 import kr.or.order.model.vo.Order;
 import kr.or.order.model.vo.OrderPageData;
+import kr.or.product.model.vo.Product;
 import kr.or.review.model.vo.Review;
 import kr.or.review.model.vo.ReviewPageData;
 import net.nurigo.java_sdk.api.Message;
@@ -162,7 +163,7 @@ public class MemberService {
 		if(pageNo<=totalPage) {
 			pageNavi += "<a href='/memberOrderList.do?memberNo="+memberNo+"&reqPage="+pageNo+"'>></a>";
 		}
-		OrderPageData opd = new OrderPageData(list, pageNavi, reqPage, numPerPage, memberNo);
+		OrderPageData opd = new OrderPageData(list, pageNavi, reqPage, numPerPage, memberNo, null, null);
 		return opd;
 	}
 
@@ -278,6 +279,14 @@ public class MemberService {
 
 	public String selectStoreName(int storeNo) {
 		return dao.selectStoreName(storeNo);
+	}
+
+	public int selectOrderProduct2(int orderNo) {
+		return dao.selectOrderProduct2(orderNo);
+	}
+
+	public Product selectOrderProduct3(int productNo) {
+		return dao.selectOrderProduct3(productNo);
 	}
 
 

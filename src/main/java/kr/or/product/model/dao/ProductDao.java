@@ -49,5 +49,9 @@ public class ProductDao {
 		List mainReviewList = sqlSession.selectList("product.selectReviewList");
 		return (ArrayList<Review>)mainReviewList;
 	}
+
+	public int expirationDate() {
+		return sqlSession.delete("product.expirationDate");
+	}
 	
 }

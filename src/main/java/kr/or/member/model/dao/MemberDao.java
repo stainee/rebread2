@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.or.member.model.vo.Member;
 import kr.or.order.model.vo.Order;
+import kr.or.product.model.vo.Product;
 import kr.or.review.model.vo.Review;
 
 @Repository
@@ -133,6 +134,15 @@ public class MemberDao {
 
 	public String selectStoreName(int storeNo) {
 		return sqlSession.selectOne("review.selectStoreName",storeNo);
+	}
+
+	public int selectOrderProduct2(int orderNo) {
+		System.out.println("dao : "+orderNo);
+		return sqlSession.selectOne("order.selectOrderProduct2",orderNo);
+	}
+
+	public Product selectOrderProduct3(int productNo) {
+		return sqlSession.selectOne("product.selectOrderProduct2",productNo);
 	}
 
 

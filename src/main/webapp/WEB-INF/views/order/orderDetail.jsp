@@ -57,33 +57,44 @@
 	        			</div>
 	        		</div>
 	        		<div class="content-box3">
-	        			<div class="content-product">
-	        				<div class="content-img-box">
-	        					<div class="content-img"><img src="/resources/img/common/logo.png"></div>
-	        					<div class="content-img-info">
-	        						<div>빵이름제목</div>
-	        						<div>1개</div>
-	        					</div>
-	        				</div>
-	        			</div>
+	        			<c:forEach items="${list }" var="op" varStatus="i">
+		        			<div class="content-product">
+		        				<div class="content-img-box">
+		        					<div class="content-img"><img src="/resources/upload/product/${pList[i.index].productImg }"></div>
+		        					<div class="content-img-info">
+		        						<div>${pList[i.index].productName }</div>
+		        						<div>${op.orderProductQuan}개</div>
+		        					</div>
+		        				</div>
+		        			</div>
+
+	        			</c:forEach>
 	        		</div>
 	        		<div class="content-box4">
 	        			<div class="content-price">
 							<div class="content-info">
 		        				<div>상품 가격</div>
-		        				<div>10,000원</div>
+		        				<div>1</div>
 		        			</div>
 							<div class="content-info">
 		        				<div>적립예정마일리지</div>
-		        				<div>100원</div>
+		        				<div>${o.orderMileage }</div>
 		        			</div>
 							<div class="content-info">
-		        				<div>배송비</div>
-		        				<div>3,000원</div>
+		        				<c:choose>
+		        					<c:when test="${o.orderState eq '픽업준비중' }">
+										<div style="color: #cbcbcb;">배송비</div>
+		        						<div style="color: #cbcbcb;">0</div>
+		        					</c:when>
+		        					<c:otherwise>
+				        				<div>배송비</div>
+				        				<div>3000</div>
+		        					</c:otherwise>
+		        				</c:choose>
 		        			</div>
 							<div class="content-info">
 		        				<div>최종 결제 금액</div>
-		        				<div>13,000원</div>
+		        				<div>${o.orderPrice }원</div>
 		        			</div>
 	        			</div>
 	        		</div>
@@ -106,6 +117,7 @@
 	        	</div>
 	        </div>
 	</div>
+	<input type="hidden" name="orderPrice" value="${o.orderPrice }">
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	<script>
 		index=1;
@@ -121,13 +133,34 @@
 
 		function orderCancel(orderNo,reqPage){
 			if(confirm("주문을 취소하시겠습니까?")){
-				if(orderState == "결제완료"){
+				if(orderState == "결제완료" , orderState == "입금대기"){
 					location.href="/orderCancel.do?orderNo="+orderNo+"&reqPage="+reqPage;
 				}else{
 					alert("취소할 수 없습니다.");
 				}
 			}
 		}
+		
+		// 상품 가격 계산
+		const orderPrice = $("[name=orderPrice]").val();
+		let price = $(".content-info").eq(3).children().next();
+		price.text(addComma(Number(orderPrice-3000))+"원");
+
+		
+		function addComma(value){
+	         value = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+	         return value; 
+	    };
+	    
+		let orderMileage = $(".content-info").eq(4).children().next();
+	    orderMileage.text(addComma(orderMileage.text())+"원");
+	    
+	    let deliveryPrice = $(".content-info").eq(5).children().next();
+	    deliveryPrice.text(addComma(deliveryPrice.text())+"원");
+	    
+	    const finalPrice = $(".content-info").eq(6).children().next();
+	    finalPrice.text(addComma(finalPrice.text()));
+		
 	</script>
 </body>
 </html>
