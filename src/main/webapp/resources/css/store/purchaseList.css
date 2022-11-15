@@ -199,7 +199,7 @@
 	border: 0;
 }
 .searchBtn:hover{
-	background-color: red;
+	background-color: darkgray;
 }
 .storeNamebar:focus{
 	outline: none;

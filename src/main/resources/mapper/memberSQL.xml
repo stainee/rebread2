@@ -12,7 +12,8 @@
 	  		member_mail as memberMail,
 	  		member_grade as memberGrade, 
 	  		member_mileage as memberMileage,
-	  		kakao
+	  		kakao,
+	  		token
 	  	from member
   </select>
   <select id="selectOneMember" resultType="m" parameterType="Integer">
@@ -25,7 +26,8 @@
 	  		member_mail as memberMail,
 	  		member_grade as memberGrade, 
 	  		member_mileage as memberMileage,
-	  		kakao
+	  		kakao,
+	  		token
 	  	from member where member_no= #{_parameter}
   </select>
   <update id="updateOneMember" parameterType="m">
@@ -57,7 +59,8 @@
 	  		member_mail as memberMail,
 	  		member_grade as memberGrade, 
 	  		member_mileage as memberMileage,
-	  		kakao
+	  		kakao,
+	  		token
 	  	from member where member_id = #{memberId} and member_pw =#{memberPw}
   </select>
   <select id="selectOneCeo" resultType="m" parameterType="_int">
@@ -71,7 +74,8 @@
 	  		member_mail as memberMail,
 	  		member_grade as memberGrade, 
 	  		member_mileage as memberMileage,
-	  		kakao
+	  		kakao,
+	  		token
 	  	from member where member_no = #{memberNo}
   </select>
   <update id="updateCeo" parameterType="m">
@@ -94,7 +98,8 @@
 	  		member_mail as memberMail,
 	  		member_grade as memberGrade, 
 	  		member_mileage as memberMileage,
-	  		kakao
+	  		kakao,
+	  		token
 	  	from member 
 	  	<if test="memberId != null">
 		  	where member_id = #{memberId}
@@ -116,6 +121,7 @@
 	  	#{memberMail},
 	  	#{memberGrade},
 	  	0,
+	  	1,
 	  	1
 	  )
  	</insert>
@@ -132,7 +138,8 @@
 	  	#{memberMail},
 	  	#{memberGrade},
 	  	0,
-	  	2
+	  	2,
+	  	1
 	  )
 	 </insert>
 	  <!-- 네이버회원가입 -->
@@ -147,7 +154,8 @@
 	  	#{memberMail},
 	  	#{memberGrade},
 	  	0,
-	  	3
+	  	3,
+	  	1
 	  )
  	</insert>
  	<!-- 아이디 검색 -->
@@ -162,7 +170,8 @@
 	  		member_mail as memberMail,
 	  		member_grade as memberGrade, 
 	  		member_mileage as memberMileage,
-	  		kakao
+	  		kakao,
+	  		token
 	  	from member where member_name = #{memberName} and member_grade = #{memberGrade}
 	  	<if test="memberMail != null">
 	  		and member_mail = #{memberMail}
@@ -184,7 +193,8 @@
 	  		member_mail as memberMail,
 	  		member_grade as memberGrade, 
 	  		member_mileage as memberMileage,
-	  		kakao
+	  		kakao,
+	  		token
 	  	from member where member_id = #{memberId} and member_grade = #{memberGrade} and member_phone =#{memberPhone}
  	</select>
  	
@@ -207,7 +217,8 @@
 	  		member_mail as memberMail,
 	  		member_grade as memberGrade, 
 	  		member_mileage as memberMileage,
-	  		kakao
+	  		kakao,
+	  		token
 	  	from member 
 		where member_id = #{memberId} and member_pw = #{memberPw}	  	
 	</select>
@@ -224,7 +235,8 @@
 	  		member_mail as memberMail,
 	  		member_grade as memberGrade, 
 	  		member_mileage as memberMileage,
-	  		kakao
+	  		kakao,
+	  		token
 	  	from member where member_id =#{memberId}
 	</select>
 	
@@ -260,7 +272,8 @@
 	  		member_mail as memberMail,
 	  		member_grade as memberGrade, 
 	  		member_mileage as memberMileage,
-	  		kakao
+	  		kakao,
+	  		token
 	  	from member
 	  	<if test="memberId != null">
 	  		where member_Id LIKE '%'||#{memberId}||'%'
@@ -269,6 +282,13 @@
 	  		where member_name LIKE '%'||#{memberName}||'%'
 	  	</if>
   </select>
+  <!-- update token -->
+  <update id="updateToken" parameterType="m">
+  		update member set 
+  		member_mileage = member_mileage + #{memberMileage},
+  		token = token - 1
+  		where member_id = #{memberId}
+  </update>
 
 </mapper>
 

@@ -337,6 +337,26 @@ public class MemberController {
 	}
 	
 	
+	
+	
+	
+	
+	//토큰수정 및 마일리지 추가
+	@ResponseBody
+	@RequestMapping(value = "/rolletEvent.do", produces = "application/json;charset=utf-8")
+	public String updateMile(int token, String memberId) {
+		Member m = new Member();
+		m.setMemberMileage(token);
+		m.setMemberId(memberId);
+		int result = service.updateToken(m);
+		if(result>0) {
+			return "token";
+		}else {
+			return null;
+		}
+	}
+	
+	
 }
 
 

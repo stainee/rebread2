@@ -135,6 +135,10 @@ public class MemberDao {
 		return sqlSession.selectOne("review.selectStoreName",storeNo);
 	}
 
+	public int updateToken(Member m) {
+		return sqlSession.update("member.updateToken",m);
+	}
+
 
 }
 
