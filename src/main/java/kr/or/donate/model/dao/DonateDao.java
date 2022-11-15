@@ -20,8 +20,8 @@ public class DonateDao {
 		return (ArrayList<Donate>) list;
 	}
 
-	public int selectOneDonate(Donate d) {
-		return sqlSession.selectOne("donate.selectOneDonate", d);
+	public Donate selectOneDonate(int donateNo) {
+		return sqlSession.selectOne("donate.selectOneDonate", donateNo);
 	}
 	
 	public int donateMileage(Donate d) {
@@ -35,6 +35,14 @@ public class DonateDao {
 
 	public int deleteOneDonate(int donateNo) {
 		return sqlSession.delete("donate.deleteOneDonate", donateNo);
+	}
+
+	public int updateOneDonate(Donate d) {
+		return sqlSession.update("donate.updateOneDonate", d);
+	}
+
+	public int insertDonate(Donate d) {
+		return sqlSession.insert("donate.insertDonate", d);
 	}
 
 }

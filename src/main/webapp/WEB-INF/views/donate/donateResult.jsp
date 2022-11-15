@@ -38,11 +38,11 @@
 				<div class="donate_info_name_box">
 					<div class="donate_info_title_name_box">
 						<div class="donate_info_title_name">모금함명</div>
-						<div class="donate_info_title_content">잔인한 추위 속 비명으로 얼룩진 우크라이나를 도와주세요</div>
+						<div class="donate_info_title_content">${donateContent }</div>
 					</div>
 					<div class="donate_info_organ_name_box">
 						<div class="donate_info_organ_name">단체명</div>
-						<div class="donate_info_organ_content">컨선월드와이드</div>
+						<div class="donate_info_organ_content">${donateOrgan }</div>
 					</div>
 				</div>
 			</div>

@@ -17,7 +17,7 @@ import kr.or.review.model.vo.Review;
 import kr.or.review.model.vo.ReviewPageData;
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
-
+import kr.or.product.model.vo.Product;
 
 @Service
 public class MemberService {
@@ -162,7 +162,7 @@ public class MemberService {
 		if(pageNo<=totalPage) {
 			pageNavi += "<a href='/memberOrderList.do?memberNo="+memberNo+"&reqPage="+pageNo+"'>></a>";
 		}
-		OrderPageData opd = new OrderPageData(list, pageNavi, reqPage, numPerPage, memberNo);
+		OrderPageData opd = new OrderPageData(list, pageNavi, reqPage, numPerPage, memberNo, null, null);
 		return opd;
 	}
 
@@ -283,6 +283,15 @@ public class MemberService {
 	public int updateToken(Member m) {
 		return dao.updateToken(m);
 	}
+	
+	public int selectOrderProduct2(int orderNo) {
+		return dao.selectOrderProduct2(orderNo);
+	}
+
+	public Product selectOrderProduct3(int productNo) {
+		return dao.selectOrderProduct3(productNo);
+	}
+
 
 	
 	

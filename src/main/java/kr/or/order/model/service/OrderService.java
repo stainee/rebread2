@@ -1,5 +1,6 @@
 package kr.or.order.model.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import kr.or.order.model.dao.OrderDao;
 import kr.or.order.model.vo.Order;
+import kr.or.order.model.vo.OrderProduct;
+import kr.or.product.model.vo.Product;
 
 @Service
 public class OrderService {
@@ -71,6 +74,18 @@ public class OrderService {
 
 	public int insertPayment(Order o) {
 		return dao.insertPayment(o);
+	}
+
+	public int insertOrderProduct(OrderProduct op) {
+		return dao.insertOrderProduct(op);
+	}
+
+	public ArrayList<OrderProduct> selectOrderProduct(int orderNo) {
+		return dao.selectOrderProduct(orderNo);
+	}
+
+	public Product selectOrderProduct2(int productNo) {
+		return dao.selectOrderProduct2(productNo);
 	}
 
 	

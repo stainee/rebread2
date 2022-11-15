@@ -30,12 +30,20 @@ public class DonateService {
 		return dao.donateMileage(d);
 	}
 
-	public int selectOneDonate(Donate d) {
-		return dao.selectOneDonate(d);
+	public Donate selectOneDonate(int donateNo) {
+		return dao.selectOneDonate(donateNo);
 	}
 
 	public int deleteOneDonate(int donateNo) {
 		return dao.deleteOneDonate(donateNo);
+	}
+
+	public int updateOneDonate(Donate d) {
+		return dao.updateOneDonate(d);
+	}
+
+	public int insertDonate(Donate d) {
+		return dao.insertDonate(d);
 	}
 
 

@@ -17,6 +17,7 @@ import com.google.gson.Gson;
 import kr.or.member.model.service.MemberService;
 import kr.or.member.model.vo.Member;
 import kr.or.order.model.vo.OrderPageData;
+import kr.or.product.model.vo.Product;
 import kr.or.review.model.vo.Review;
 import kr.or.review.model.vo.ReviewPageData;
 import kr.or.store.model.vo.Store;
@@ -74,11 +75,24 @@ public class MemberController {
 		OrderPageData opd = service.selectOrderList(reqPage, memberNo);
 		// 리스트가 존재할 때에 model에 저장
 		if(!opd.getList().isEmpty()) {
+			for(int i=0;i<opd.getList().size();i++) {
+				System.out.println(opd.getList().get(i).getOrderNo());
+				int productNo = service.selectOrderProduct2(opd.getList().get(i).getOrderNo());
+				System.out.println(productNo);
+				
+				Product p = service.selectOrderProduct3(productNo);
+				opd.setProductImg(p.getProductImg());
+				opd.setProductName(p.getProductName());
+				
+				model.addAttribute("productImg",opd.getProductImg());
+				model.addAttribute("productName",opd.getProductName());
+			}
 			model.addAttribute("list", opd.getList());
 			model.addAttribute("pageNavi",opd.getPageNavi());
 			model.addAttribute("reqPage",opd.getReqPage());
 			model.addAttribute("numPerPage",opd.getNumPerPage());
 			model.addAttribute("memberNo",opd.getMemberNo());
+			
 		}
 		// memberMileage 구하기
 		int memberMileage = service.selectMemberMileage(memberNo);
