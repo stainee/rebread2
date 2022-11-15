@@ -76,9 +76,8 @@
   </select>
   <update id="updateCeo" parameterType="m">
   	update member set
-  		member_name = #{memberName},
+  		member_Addr = #{memberAddr},
   		member_mail = #{memberMail},
-  		member_pw = #{memberPw},
   		member_phone = #{memberPhone}
   	where member_no = #{memberNo}
   </update>

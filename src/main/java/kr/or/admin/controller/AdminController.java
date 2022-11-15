@@ -12,6 +12,8 @@ import kr.or.account.model.vo.Account;
 import kr.or.cs.model.service.CSService;
 import kr.or.cs.model.vo.CSDetail;
 import kr.or.cs.model.vo.CSList;
+import kr.or.donate.model.service.DonateService;
+import kr.or.donate.model.vo.Donate;
 import kr.or.member.model.service.MemberService;
 import kr.or.member.model.vo.Member;
 import kr.or.store.model.service.StoreService;
@@ -30,6 +32,8 @@ public class AdminController {
 	private CSService csService;
 	@Autowired
 	private AccountService accountService;
+	@Autowired
+	private DonateService donateService;
 	
 	@RequestMapping(value="/adminMain.do")
 	public String adminMain(){
@@ -59,8 +63,8 @@ public class AdminController {
 	
 	@RequestMapping(value="/donateList.do")
 	public String donateList(Model model) {
-//		ArrayList<CS> list = csService.selectAllCS();
-//		model.addAttribute("list",list);
+		ArrayList<Donate> list = donateService.selectAllDonate();
+		model.addAttribute("list",list);
 		return "/admin/donateList";
 	}
 	

@@ -1,4 +1,4 @@
-const userInfoContent = $(".user_info_content input");
+const userInfoContent = $(".updateAble input");
 
 $(".edit_btn").on("click",function(){
     userInfoContent.css("border-bottom","1px solid black");

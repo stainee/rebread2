@@ -10,15 +10,16 @@
 </head>
 <link rel="stylesheet" href="resources/css/font/font.css">
 <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-round.css" rel="stylesheet">
-<link rel="stylesheet" href="/resources/css/common/managetemplate.css">
 <link rel="stylesheet" href="/resources/css/admin/memberList.css">
 <link rel="stylesheet" href="/resources/css/admin/donateList.css">
+<link rel="stylesheet" href="/resources/css/common/managetemplate.css">
 <body>
+<jsp:include page="/WEB-INF/views/common/header.jsp" />
 <div class="total_wrapper">
         <div class="left_container">
             <div class="memberInfo">
                 <p>[관리자]</p>
-                <p>박예진님</p>
+                <p>${sessionScope.m.memberName}님</p>
             </div>
             <div class="selectList">
                 <ul>
@@ -34,7 +35,7 @@
         <div class="right_container">
             <div class="content_container">
             	<div class="donate_edit_btn_box">
-            		<button class="donate_edit_btn" onclick="donateDetail()">기부 등록/수정</button>
+            		<button class="donate_edit_btn" onclick="donateInsert()">기부 등록/수정</button>
             	</div>
 				<table class="membertbl">
 					<tr>
@@ -43,20 +44,23 @@
 						<th>기부내용</th>
 						<th>관리</th>
 					</tr>				
+				<c:forEach items="${list }" var="d">
 					<tr>
-						<td>1</td>
-						<td>컨선월드와이드</td>
-						<td>잔인한 추위 속 비명으로 얼룩진 우크라이나를 도와주세요 근데 내용이 넘으면 어케 돼?</td>
+						<td>${d.donateNo }</td>
+						<td>${d.donateOrgan }</td>
+						<td>${d.donateContent }</td>
 						<td>
-							<button class="edit_btn">수정</button>
-							<button class="delete_btn">삭제</button>
+							<button class="edit_btn" onclick="donateInsert()">수정</button>
+							<button class="delete_btn" onclick="donateDelete(${d.donateNo})">삭제</button>
 						</td>
 					</tr>
+				</c:forEach>
 				</table>
 			</div>
          </div>
  
 </div>
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 <script>
 	let index=4;
@@ -72,14 +76,15 @@
 		window.open("/donateDetail.do", "기부 등록/수정", "width=800px, height=600px, top=100px, left=250px");
 	}
 	
-	function deleteMember(memberNo){
+	
+	function donateDelete(donateNo){
 		$.ajax({
-			url:"/memberDelete.do?memberNo="+memberNo+"",
+			url:"/donateDelete.do?donateNo="+donateNo+"",
 			success:function(){
 				window.location.reload();
 			}
-			
 		})
-	}
+	});
+	
 </script>
 </html>

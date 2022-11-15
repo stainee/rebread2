@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="/resources/css/admin/csList.css">
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
+<div class="page-content" style="height: 800px;">
 <div class="total_wrapper">
         <div class="left_container">
             <div class="memberInfo">
@@ -25,6 +26,7 @@
                     <li><a href="/storeList.do">가게관리</a></li>
                     <li><a href="/memberList.do">회원관리</a></li>
                     <li><a href="/csList.do">문의관리</a></li>
+                    <li><a href="/donateList.do">기부관리</a></li>
                 </ul>
             </div>
         </div>
@@ -71,6 +73,7 @@
 				</table>
 			</div>
        </div>
+</div>
 </div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />	
 </body>
