@@ -15,4 +15,6 @@ public class OrderPageData {
 	private int reqPage;
 	private int numPerPage;
 	private int memberNo;
+	private String productImg;
+	private String productName;
 }

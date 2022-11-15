@@ -109,5 +109,15 @@
 			review_img as reviewImg
 		from review order by review_view desc) where rownum &lt; 11 
 	</select>
+	
+	<select id="selectOrderProduct2" parameterType="_int" resultType="p">
+		select
+			product_name as productName,
+			product_img as productImg
+		from product where product_no=#{_parameter}
+	</select>
 
+	<delete id="expirationDate">
+		delete from product where product_date <![CDATA[<]]> sysdate and product_type = 0;
+	</delete>
 </mapper>

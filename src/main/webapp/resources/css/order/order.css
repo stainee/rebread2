@@ -2,7 +2,7 @@
 
 *{
     /* margin: 0 auto; */
-	font-family: 'nsr-r';
+   font-family: 'nsr-r';
 }
 
 .content{
@@ -30,14 +30,20 @@
     font-family: 'nsr-b';
 }
 .deliver-product img{
-    width: 60px;
-    height: 60px;
+    width: 110px;
+    height: 70px;
 }
 .deliver-product{
     border-bottom: 2px solid rgba(0, 0, 0, 0.1);
     padding-bottom: 50px;
 }
+.product-quan, .product-price{
+   text-align: right;
+}
 
+.deliver-product tr:last-of-type{
+	border-bottom: 1px solid red;
+}
 /* 배송지정보 */
 .deliver-addr-content{
     width: 50%;
@@ -53,7 +59,7 @@
     padding-bottom: 30px;    
 }
 .deliver-addr-content .deliver-addr-update, .deliver-addr-content .deliver-addr-complete{
-	border: none;
+   border: none;
     font-size: 1.2em;
     margin: 0 auto;
     text-decoration: none;
@@ -64,23 +70,23 @@
     cursor: pointer;
 }
 .deliver-addr-content .deliver-addr-update:hover, .deliver-addr-content .deliver-addr-complete:hover{
-	text-decoration: underline;	
+   text-decoration: underline;   
 }
 .deliver-addr-content .deliver-addr{
     padding-top: 15px;
 }
 .deliver-addr .addr-box input{
-	font-size: 1em;
-	border: none;
-	width: 350px;
-	outline: none;
+   font-size: 1em;
+   border: none;
+   width: 350px;
+   outline: none;
 }
 .deliver-addr-content .deliver-addr .addr-box{
     padding-left: 50px;
     padding-bottom: 20px;   
 }
 .underline{
-	text-decoration: underline;
+   text-decoration: underline;
 }
 
 
@@ -101,6 +107,8 @@
 }
 .four{
     padding-top: 20px;
+    font-size: 1.3em;
+    font-family: nsr-b;
     color: #1c1c1c;
 }
 
@@ -128,21 +136,21 @@
     line-height: 50px;
 }
 .pay-card-wrap{
-	display: flex;
-	justify-content: flex-start;
-	align-items: center;
+   display: flex;
+   justify-content: flex-start;
+   align-items: center;
 }
 .pay-card-wrap img{
-	width: 40px;
-	height: 40px;
-	margin: 0 10px;
+   width: 40px;
+   height: 40px;
+   margin: 0 10px;
 }
 .pay-card-comment{
-	justify-content: center;
-	font-size: 1.1em;
+   justify-content: center;
+   font-size: 1.1em;
 }
 #pay-card:hover, #pay-account:hover, #pay-kakao:hover{
-	border: 1px solid #2c2c2c;
+   border: 1px solid #2c2c2c;
 }
 
 

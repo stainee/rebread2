@@ -64,7 +64,7 @@
         		<div class="content-box3">
         			<div class="content-product">
         				<div class="content-img-box">
-        					<div class="content-img"><img src="/resources/img/common/logo.png"></div>
+        					<div class="content-img"><img src="/resources/upload/review/${r.reviewImg }"></div>
         				</div>
         				<div class="content-img-box">
 							<div style="font-size: 1.5em; color: #785c37;">${storeName }</div>
