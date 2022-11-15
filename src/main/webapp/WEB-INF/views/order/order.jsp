@@ -53,9 +53,9 @@
                            <c:when test="${type eq '배달준비중' }">
                               <span class="product-delivery-price">3000</span>
                            </c:when>
-                     <c:otherwise>
-                        <span class="product-delivery-price">0</span>
-                     </c:otherwise>
+	                     <c:otherwise>
+	                        <span class="product-delivery-price">0</span>
+	                     </c:otherwise>
                         </c:choose>
                     </div>
                     <div class="three">
@@ -247,42 +247,56 @@
              const orderPhone = $("#orderPhone").val();
    
              $.ajax({
-                  type: "POST",
-                  url: "/insertOrder.do",
-                  data: 
-                     {
-	                      memberNo:memberNo,
-	                      storeNo:storeNo,
-	                      orderState:orderState,
-	                      orderTotalQuan:quan,
-	                      orderPrice:finalPrice1,
-	                      orderName:orderName,
-	                      orderAddr:orderAddr,
-	                      orderPhone:orderPhone,
-	                      orderMileage:mileage1
-                      
-                     },
-                  success: function(){
-                      tossPayments.requestPayment('카드', { // 결제 수단 파라미터
-                           // 결제 정보 파라미터
-                           amount: fianlPrice,
-                           orderId: memberId+'-'+todayString,
-                           orderName: productName,
-                           customerName: orderName,
-                           successUrl: 'http://localhost:8888/orderCard.do',
-                           failUrl: 'http://localhost:8888/fail.do'
-                      });
-                  }  
-             });  
-          }else{
-             alert("배송지 정보 수정을 완료해주세요.");
-          }
-       });
+                 type: "POST",
+                 url: "/insertOrder.do",
+                 data: 
+                    {
+                       memberNo:memberNo,
+                       storeNo:storeNo,
+                       orderState:orderState,
+                       orderTotalQuan:quan,
+                       orderPrice:finalPrice1,
+                       orderName:orderName,
+                       orderAddr:orderAddr,
+                       orderPhone:orderPhone,
+                       orderMileage:mileage1
+                    },
+                 success: function(){
+                     tossPayments.requestPayment('카드', { // 결제 수단 파라미터
+                          // 결제 정보 파라미터
+                          amount: finalPrice1,
+                          orderId: memberId+'-'+todayString,
+                          orderName: productName,
+                          customerName: orderName,
+                          successUrl: 'http://localhost:8888/orderCard.do',
+                          failUrl: 'http://localhost:8888/fail.do'
+                     });
+		             for(var i=0;i<productQuan.length;i++){
+		            	 let pQuan = productQuan.eq(i).text();
+		            	 let pNo = productNo.eq(i).val();
+		            	 (function(i){
+				             $.ajax({
+				            	 type: "POST",
+				            	 url: "/insertOrderProduct.do",
+				            	 async: false,
+				            	 data:
+				            		 {
+				            		 	productNo:pNo,
+				            		 	orderProductQuan:pQuan
+				            		 }
+				             });
+		            		 
+		            	 })(i);
+		             }
+                 }  
+            });
+   	  
+     }else{
+        alert("배송지 정보 수정을 완료해주세요.");
+     }
+  });
        
-       console.log(productQuan.length);
-       for(let i=0;i<productQuan.length;i++){
-     	  console.log(productNo.eq(i).val());
-       }
+
        
        // 무통장결제
        payAccount.on("click", function(){

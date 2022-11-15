@@ -43,7 +43,7 @@
 					            		<div class="content-img"><img src="/resources/upload/product/${productImg}"></div>
 					            		<c:choose>
 					            			<c:when test="${o.orderState eq '취소완료' }">
-							            		<div class="content-wrap" style="text-decoration: line-through; color: #cbcbcb;">
+							            		<div class="content-wrap" style="color: #cbcbcb;">
 							            			<div class="content-status-date">
 								            			<div class="deliver-status">${o.orderState }</div>
 								            			<span>ㅣ</span>
