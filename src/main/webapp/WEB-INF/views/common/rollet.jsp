@@ -179,7 +179,7 @@
 	    	success : function(data){
 	    		alert(indicatedSegment.text +"마일리지 적립 성공 !" );
 	    	}
-	    })	
+	    })		
 	}
 </script>
 
