@@ -3,7 +3,9 @@ package kr.or.product.model.service;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.product.model.dao.ProductDao;
 import kr.or.product.model.vo.Product;
@@ -14,6 +16,15 @@ public class ProductService {
 	@Autowired
 	private ProductDao dao;
 
+	
+	
+	@Transactional
+	@Scheduled(cron ="0 0 0 * * ?")
+	public void expirationDate() {
+		int result = dao.expirationDate();
+		System.out.println("유통기한처리: "+result);
+	}
+	
 	public int insertProduct(Product p) {
 		return dao.insertProduct(p);
 	}
