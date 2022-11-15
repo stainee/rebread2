@@ -1,6 +1,7 @@
 package kr.or.donate.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -19,7 +20,21 @@ public class DonateDao {
 		return (ArrayList<Donate>) list;
 	}
 
-	public int donateMileage(int donateSumPlus) {
-		return sqlSession.update("donate.donateMileage", donateSumPlus);
+	public int selectOneDonate(Donate d) {
+		return sqlSession.selectOne("donate.selectOneDonate", d);
 	}
+	
+	public int donateMileage(Donate d) {
+		return sqlSession.update("donate.donateMileage", d);
+	}
+
+
+	public void donateMileage2(HashMap<String, Object> map) {
+		sqlSession.update("donate.donateMileage2", map);
+	}
+
+	public int deleteOneDonate(int donateNo) {
+		return sqlSession.delete("donate.deleteOneDonate", donateNo);
+	}
+
 }

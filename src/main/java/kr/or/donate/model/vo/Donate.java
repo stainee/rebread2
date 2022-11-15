@@ -16,4 +16,6 @@ public class Donate {
 	private String donateContent;
 	private String donateImg;
 	private int memberMileage;
+	private int donateSumPlus;
+	private int memberMileageSum;
 }

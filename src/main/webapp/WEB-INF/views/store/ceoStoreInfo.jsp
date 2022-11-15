@@ -155,26 +155,10 @@
                 	</form>
                 </div>
                 
-                <div class="navi_box_footer">
-                    <ul class="pagination">
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- 
                 <div class="more_btn_box">
-             		<button class="more_btn">더보기</button>
-             	</div>
-                -->
+                	<button class="more_btn">더보기</button>
+            	</div>
+            	<div class="more_end_box">마지막 페이지입니다</div>
               
             </div>
         </div>
@@ -182,17 +166,15 @@
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 <script>
-const selectList = $(".selectList li");
-selectList.on("click",function(e){
-	selectList.css("background-color","#f5f2f3").css("color","gray");
-	$(this).css("background-color","lightgray").css("color","black");
+index=1;
+$(function(){
+	let total = $(".selectList a").length;
+	for(let i=0; i<total; i++){
+		$(".selectList a").eq(i).removeClass("index");
+	}
+	$(".selectList a").eq(index).addClass("index");
+})
 	
-	const index = selectList.index(this);
-	
-	$(".content_container").hide();
-	$(".content_container").eq(index).fadeIn(0.6*1000);
-});
-$(this).click();
 
 $(".navi_btn").on("click",function(){
 	$(".navi_btn").css("display","none");
@@ -204,6 +186,22 @@ $(".navi_btn").on("click",function(){
 
 $(".store_edit_btn").on("click",function(){
 	location.href="/storeInfoUpdate.do?storeNo="+$(this).prev().val();
+});
+
+$(function(){
+    $(".store_info_wrapper").slice(0, 3).show(); // 초기갯수
+    $(".store_info_wrapper:nth-child(-n+3)").css("display","inline-block");
+    $(".more_btn").click(function(e){ // 클릭시 more
+        e.preventDefault();
+        $(".store_info_wrapper:hidden").slice(0, 3).show().css("display","inline-block"); // 클릭시 more 갯수 지정
+        console.log($(".store_info_wrapper:hidden").length); // 남아있는 컨텐츠 박스 갯수 출력
+        
+     // 더보여줄 것이 없으면 더보기 버튼을 숨기고 "마지막페이지입니다" text 출력
+        if($(".store_info_wrapper:hidden").length == 0){ 
+        	$(".more_btn_box").css("display","none");
+        	$(".more_end_box").css("display","block");
+        }
+    });
 });
 </script>
 </html>

@@ -14,4 +14,31 @@
 		from donate d join member m on d.member_no = m.member_no
 		order by donate_no asc
 	</select>
+	<select id="selectOneDonate" resultType="d" parameterType="d">
+		select 
+    		d.donate_no as donateNo,      
+    		d.member_no as memberNo,
+    		d.donate_organ as donateOrgan,
+    		d.donate_content as donateContent,
+    		d.donate_sum as donateSum,
+    		d.donate_img as donateImg,
+    		d.donate_end as donateEnd,
+    		m.member_mileage as memberMileage
+		from donate d join member m on d.member_no = m.member_no
+		where d.member_no = #{memberNo}
+	</select>
+	<update id="donateMileage" parameterType="d">
+		update donate 
+			set donate_sum = #{donateSumPlus}
+		where donate_no = #{donateNo}
+	</update>
+	<update id="donateMileage2" parameterType="map">
+		update member
+			set member_mileage = #{sumMileage}
+		where member_no = #{memberNo}
+	</update>
+	<delete id="deleteOneDonate" parameterType="_int">
+		delete from donate
+  		where donate_no = #{_parameter}
+	</delete>
 </mapper>

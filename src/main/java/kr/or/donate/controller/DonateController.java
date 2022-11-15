@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import kr.or.donate.model.service.DonateService;
 import kr.or.donate.model.vo.Donate;
@@ -26,19 +28,22 @@ public class DonateController {
 	}
 	
 	@RequestMapping(value = "/donateMileage.do")
-	public String donateMileage(int memberMileage, HttpSession session, int donateSum) {
-		int donateSumPlus = memberMileage + donateSum;
-		int result = service.donateMileage(donateSumPlus);
-		session.setAttribute("memberMileage", memberMileage);
-		System.out.println(donateSumPlus);
-		System.out.println(donateSum);
-		System.out.println(memberMileage);
-		return "redirect:/donateMain.do";
+	public String donateMileage(Donate d, int donateVal, int donateSumVal, Model model, @SessionAttribute(required = false) Member m) { // @SessionAttribute(required = false) -> 로그인 안하면 접근 못하도록 막음
+		int donateSumPlus = donateVal + donateSumVal;
+		d.setDonateSumPlus(donateSumPlus);
+		
+		int result = service.donateMileage(d, donateVal, m.getMemberMileage(), m.getMemberNo());
+		if(result>0) {			
+			m.setMemberMileage(m.getMemberMileage()-donateVal);
+		}
+		model.addAttribute("donateVal", donateVal);
+		return "/donate/donateResult";
 	}
 	
-	@RequestMapping(value = "/donateResult.do")
-	public String donateResult() {
-		return "/donate/donateResult";
+	@ResponseBody
+	@RequestMapping(value = "/donateDelete.do", produces = "application/json;charset=utf-8")
+	public void donateDelete(int donateNo) {
+		int result = service.deleteOneDonate(donateNo);
 	}
 	
 }

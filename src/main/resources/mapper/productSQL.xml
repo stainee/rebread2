@@ -110,4 +110,7 @@
 		from review order by review_view desc) where rownum &lt; 11 
 	</select>
 
+	<delete id="expirationDate">
+		delete from product where product_date <![CDATA[<]]> sysdate and product_type = 0;
+	</delete>
 </mapper>

@@ -1,6 +1,7 @@
 package kr.or.donate.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,8 +20,24 @@ public class DonateService {
 		return list;
 	}
 
-	public int donateMileage(int donateSumPlus) {
-		return dao.donateMileage(donateSumPlus);
+	public int donateMileage(Donate d, int donateVal, int memberMileage, int memberNo) {
+		// sumMileage = 종전 마일리지 - 기부한 금액
+		int sumMileage = memberMileage - donateVal;
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("sumMileage", sumMileage);
+		map.put("memberNo", memberNo);
+		dao.donateMileage2(map);
+		return dao.donateMileage(d);
 	}
+
+	public int selectOneDonate(Donate d) {
+		return dao.selectOneDonate(d);
+	}
+
+	public int deleteOneDonate(int donateNo) {
+		return dao.deleteOneDonate(donateNo);
+	}
+
+
 
 }

@@ -27,6 +27,7 @@
                     <li><a href="/storeList.do">가게관리</a></li>
                     <li><a href="/memberList.do">회원관리</a></li>
                     <li><a href="/csList.do">문의관리</a></li>
+                    <li><a href="/donateList.do">기부관리</a></li>
                 </ul>
             </div>
         </div>

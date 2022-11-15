@@ -1,6 +1,7 @@
 *{
 	font-family: nsr-r;
 }
+
 .left_container{
     width:200px;
     height: 360px;
@@ -36,8 +37,13 @@
     color: gray;
 }
 .store_info_wrap_box{
-    display: flex;
+    display: none;
     align-items: center;
+}
+.store_sales_info_wrapper{
+    padding-top: 10px;
+    padding-left: 50px;
+    padding-right: 50px;
 }
 .product_info_form{
     display: flex;
@@ -61,4 +67,20 @@
     display: flex;
     align-items: center;
     height: 30px;
+}
+.more_btn{
+	width: 850px;
+	height: 40px;
+	margin: 40px 0px;
+}
+.more_btn_box{
+	display: flex;
+	justify-content: center;
+}
+.more_end_box{
+	text-align: center;
+	display: none;
+	font-size: 24px;
+	font-family: nsr-b;
+	margin: 40px 0px;
 }

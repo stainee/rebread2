@@ -79,10 +79,7 @@
     font-size: 18px;
     float: right;
 }
-.more_btn{
-    width: 1200px;
-    height: 40px;
-}
+
 .donate_content_box>a{
     text-decoration: none;
     color: black;
@@ -141,7 +138,9 @@
     align-items: center;
 }
 .donate_btn_box_input{
-	padding-left: 30px;
+	margin-left: 30px;
+    padding-right: 5px;
+	border: 1px solid lightgray;
 }
 .donate_btn_box_input input{
 	height: 20px;
@@ -168,6 +167,10 @@
 }
 .my_donate_sum p{
 	display: inline-block;
+}
+.more_btn{
+    width: 1200px;
+    height: 40px;
 }
 .more_end_box{
 	text-align: center;

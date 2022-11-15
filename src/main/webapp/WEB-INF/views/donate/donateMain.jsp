@@ -40,14 +40,14 @@
                         <strong class="donate_amount_num">${d.donateSum }</strong>
                         <input type="hidden" value="${d.donateSum }" name="donateSum">
                         <input type="hidden" value="${d.donateEnd }" name="donateEnd">
+                        <input type="hidden" value="${d.donateNo }" name="donateNo">
                         <input type="hidden" value="${d.memberMileage }" name="memberMileage">
                     </div>
                 </div>
                 </a>
             </div>
 			</c:forEach>
-            
-             <!-- 모달창 시작 --> 
+            <!-- 모달창 시작 --> 
             <div id="ex1" class="modal">
 	            <div class="donate_content_box_modal">
 					<a href="#ex1" rel="modal:open" class="modal_a">
@@ -77,7 +77,7 @@
 	            		</div>
 	            		<div class="donate_btn_box_sum">
 	            			<div class="donate_btn_box_input">
-	            				<input type="text" value="" name="donateInput">원
+	            				<input type="text" value="" name="donateInput"><span>원</span>
 	            			</div>
 			            	<a href="#">
 			            		<div class="donate_btn_box">
@@ -101,10 +101,13 @@
     </div>
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
     <script>
+    	const donateBox = $(".donate_content_box");
+    
     	$(".donate_btn").on("click", function(){
     		let donateVal = $("input[name=donateInput]").val();
-    		// 기부하려고 입력한 금액
-    		location.href="/donateMileage.do?memberMileage="+memberMileage;
+    		let donateSumVal = Number(removeComma($("#modal_amount_num").text()));
+    		let donateNo = $("input[name=donateNo]").val();
+    		location.href="/donateMileage.do?donateVal="+donateVal+"&donateSumVal="+donateSumVal+"&donateNo="+donateNo;
     	});
     
     
@@ -118,6 +121,7 @@
     		$("#modal_amount_num").text($(obj).children().eq(1).children().eq(3).children().eq(3).text());
     		$("#modal_bar").children().val($(obj).children().eq(1).children().eq(2).children().val());
     		$(".header-wrap2").css("z-index","0");
+    		$("input[name=donateNo]").val($(obj).children().eq(1).children().eq(3).children().eq(6).val())
     		// $("body").css("margin-right","16px");
     	}
     	
@@ -127,6 +131,11 @@
 	   		value = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 	   		return value;
 	    };
+	    /* 세자리 콤마 제거 정규 표현식 */
+	    function removeComma(value){
+	        value = value.toString().replace(/[^\d]+/g, "");
+	        return value; 
+	    }
 	    
 	    /* 세자리 콤마 화면에 출력 */
 	    let donateLength = $(".donate_content_box");
@@ -139,7 +148,7 @@
 	    for(let i=0;i<donateLength.length;i++){
 		    let donateSum = $("input[name=donateSum]").eq(i).val();
 		    let donateEnd = $("input[name=donateEnd]").eq(i).val();
-		    let donateCountSum = $(".donate_percent_num").eq(i).text(Number((donateSum/donateEnd)*100));
+		    let donateCountSum = $(".donate_percent_num").eq(i).text(Number((donateSum/donateEnd)*100).toFixed());
 	    }
 	    
 		let memberMileage = addComma($("input[name=memberMileage]").val());
@@ -160,7 +169,6 @@
 	            	$(".more_end_box").css("display","block");
 	            }
 	        });
-	 
 	    });
     </script>
 </body>
