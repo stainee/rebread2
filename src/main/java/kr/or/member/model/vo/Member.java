@@ -18,4 +18,5 @@ public class Member {
 	private int memberGrade;
 	private int memberMileage;
 	private int kakao;
+	private int token;
 }

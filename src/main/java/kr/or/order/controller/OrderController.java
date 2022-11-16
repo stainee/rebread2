@@ -8,6 +8,7 @@ import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
@@ -30,14 +31,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.client.ResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import kr.or.member.model.vo.Member;
 import kr.or.order.model.service.OrderService;
 import kr.or.order.model.vo.Order;
+import kr.or.order.model.vo.OrderProduct;
+import kr.or.product.model.vo.Product;
 
 @Controller
 public class OrderController {
@@ -77,6 +82,18 @@ public class OrderController {
 		Order o = service.selectOneOrder(orderNo);
 		model.addAttribute("o",o);
 		model.addAttribute("reqPage",reqPage);
+
+		// 주문 목록 불러오기
+		ArrayList<OrderProduct> list = new ArrayList<OrderProduct>();
+		list = service.selectOrderProduct(orderNo);
+		ArrayList<Product> pList = new ArrayList<Product>();
+		for(int i=0;i<list.size();i++) {
+			Product p = service.selectOrderProduct2(list.get(i).getProductNo());
+			pList.add(p);
+		}
+		model.addAttribute("list",list);
+		model.addAttribute("pList",pList);
+		
 		
 		// memberMileage 구하기
 		int memberMileage = service.selectMemberMileage(o.getMemberNo());
@@ -94,7 +111,7 @@ public class OrderController {
 	
 	// 주문 api
 	@RequestMapping("/orderCard.do")
-	public String confirmOrder(@RequestParam String paymentKey, @RequestParam String orderId, @RequestParam int amount, Model model) throws Exception {
+	public String confirmOrder(@RequestParam String paymentKey, @RequestParam String orderId, @RequestParam int amount, Model model, @SessionAttribute Member m) throws Exception {
 		
 		// 서버로 요청할 header
 		HttpHeaders headers = new HttpHeaders();
@@ -125,6 +142,9 @@ public class OrderController {
 			o.setOrderPrice(orderPrice);
 			int paymentResult = service.insertPayment(o);
 			
+			//token삽입
+			int memberNo = m.getMemberNo();
+			int inToken = service.insertToken(memberNo);
 			
 			model.addAttribute("orderNo",o.getOrderNo());
 			
@@ -147,7 +167,7 @@ public class OrderController {
 	
 	// 주문 취소 api
 	@RequestMapping("/orderCancel.do")
-	public String orderCancel(int orderNo, int reqPage, Model model, HttpSession session) throws Exception {
+	public String orderCancel(int orderNo, int reqPage, Model model, HttpSession session, @SessionAttribute Member m) throws Exception {
 		String paymentKey = service.selectPaymentKey(orderNo);
 		String cancelReason = "고객변심";
 		
@@ -193,7 +213,12 @@ public class OrderController {
 			// memberMileage 구하기
 			int memberMileage = service.selectMemberMileage(o.getMemberNo());
 			session.setAttribute("memberMileage", memberMileage);
-			return "order/orderDetail";
+			
+			//주문취소시 token 삭제
+			int memberNo = m.getMemberNo();
+			int delToken = service.deleteToken(memberNo);
+			
+			return "redirect:/orderDetail.do?orderNo="+orderNo+"&reqPage="+reqPage;
 		}
 		else {
 			return "redirect:/";
@@ -243,6 +268,21 @@ public class OrderController {
 			return "order/orderFail"; 
 		}
 	}
+	
+	//
+	@ResponseBody
+	@RequestMapping(value="/insertOrderProduct.do", produces = "application/json;charset=utf-8")
+	public void insertOrderProduct(OrderProduct op) {
+		System.out.println("데이터성공1");
+		int orderNo = service.searchOrderNo();
+		op.setOrderNo(orderNo);
+		int result = service.insertOrderProduct(op);
+		
+		
+		
+		System.out.println("데이터성공2");
+	}
+	
 	
 	// 카카오페이 api
 	@RequestMapping("/kakao.do")

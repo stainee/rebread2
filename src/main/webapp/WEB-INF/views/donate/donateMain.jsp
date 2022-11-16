@@ -41,7 +41,9 @@
                         <input type="hidden" value="${d.donateSum }" name="donateSum">
                         <input type="hidden" value="${d.donateEnd }" name="donateEnd">
                         <input type="hidden" value="${d.donateNo }" name="donateNo">
-                        <input type="hidden" value="${d.memberMileage }" name="memberMileage">
+                        <input type="hidden" value="${m.memberMileage }" name="memberMileage">
+                        <input type="hidden" value="${d.donateContent }" name="donateContent">
+                        <input type="hidden" value="${d.donateOrgan }" name="donateOrgan">
                     </div>
                 </div>
                 </a>
@@ -72,18 +74,16 @@
 	            	<div class="donate_input_area">
 	            		<div class="my_donate_sum">
 	            			<p class="my_donate_sum_holding">내 보유금액 : </p>
-	            			<p class="my_donate_sum_amount">${memberMileage }</p>
+	            			<p class="my_donate_sum_amount">${sessionScope.m.memberMileage }</p>
 	            			<p class="my_donate_sum_won">원</p>
 	            		</div>
 	            		<div class="donate_btn_box_sum">
 	            			<div class="donate_btn_box_input">
 	            				<input type="text" value="" name="donateInput"><span>원</span>
 	            			</div>
-			            	<a href="#">
-			            		<div class="donate_btn_box">
-			            			<button class="donate_btn">기부</button>
-			            		</div>
-			            	</a>
+			            	<div class="donate_btn_box">
+			            		<button class="donate_btn">기부</button>
+			            	</div>
 						</div>
 	            	</div>
 		            <div class="modal_close">
@@ -102,12 +102,17 @@
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
     <script>
     	const donateBox = $(".donate_content_box");
-    
+    	
     	$(".donate_btn").on("click", function(){
     		let donateVal = $("input[name=donateInput]").val();
     		let donateSumVal = Number(removeComma($("#modal_amount_num").text()));
+    		
     		let donateNo = $("input[name=donateNo]").val();
-    		location.href="/donateMileage.do?donateVal="+donateVal+"&donateSumVal="+donateSumVal+"&donateNo="+donateNo;
+    		let donateContent = $("#modal_title").text();
+    		let donateOrgan = $("#modal_organ").text();
+    		
+    		location.href="/donateMileage.do?donateVal="+donateVal+"&donateSumVal="+donateSumVal+
+    				"&donateNo="+donateNo+"&donateContent="+donateContent+"&donateOrgan="+donateOrgan;
     	});
     
     

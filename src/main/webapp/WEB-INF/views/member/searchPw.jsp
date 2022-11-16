@@ -33,10 +33,10 @@
 				<p class="member">
 					<strong>회원유형</strong>
 					<select id="searchTpye" name="memberGrade" style="font-size: 15px; color: #555555">
-						<option selected="selected" value="0">선택</option>
+						<option selected="selected" value="3">선택</option>
 						<option value="1">개인 회원</option>
 						<option value="2">개인 사업자회원</option>
-						<option value="3">관리자 회원</option> 
+						<option value="0">관리자 회원</option> 
 					</select>
 				</p>
 				<p class="id">
@@ -66,7 +66,7 @@
 		const phone2 = $("#phone2").val();
 		const phone3 = $("#phone3").val();
 		const memberPhone = $("#phone").val(phone1+phone2+phone3);
-		if($("#searchTpye").val()=="0"|| $("#id").val()==""||$("#phone1").val()==""||$("#phone2").val()==""||$("#phone3").val()==""){
+		if($("#searchTpye").val()=="3"|| $("#id").val()==""||$("#phone1").val()==""||$("#phone2").val()==""||$("#phone3").val()==""){
 			alert("입력값을 확인해주세요");
 			return false;
 		}else{

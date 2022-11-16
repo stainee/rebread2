@@ -9,17 +9,3 @@ th{
 	outline: none;
 	resize: none;
 }
-#donateImg{
-	width: 220px;
-}
-#donateImg_btn{
-	width:76px;
-	height:34px;
-	border:1px solid lightgrey;
-	border-radius:0px;
-	color: white;
-	font-weight:800;
-	background-color:skyblue;
-	cursor:pointer;
-	display: inline-block;
-}

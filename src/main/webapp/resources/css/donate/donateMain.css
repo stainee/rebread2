@@ -48,6 +48,7 @@
 .donate_content_title{
     font-weight: 700;
     font-size: 15px;
+    min-height: 34px;
 }
 .donate_content_organ{
     margin-top: 10px;
@@ -59,6 +60,7 @@
 	height:7px;
 	border-radius:0px;
 }
+/* progress 설정들 */
 ::-webkit-progress-bar{
 	background: lightgray; 
 }
@@ -169,13 +171,18 @@
 	display: inline-block;
 }
 .more_btn{
-    width: 1200px;
-    height: 40px;
+	width: 1152px;
+	height: 40px;
+	margin: 40px 0px;
+}
+.more_btn_box{
+	display: flex;
+	justify-content: center;
 }
 .more_end_box{
 	text-align: center;
 	display: none;
 	font-size: 24px;
 	font-family: nsr-b;
-	margin-top: 35px;
+	margin: 40px 0px;
 }

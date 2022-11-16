@@ -11,9 +11,18 @@
     <header>
         <div class="header-wrap1">
             <div class="header-top">
-                <div class="header-left">
-                    <span><a href="/loginFrm.do">입점문의</a></span>
-                </div>
+            <c:choose>
+            	<c:when test="${empty sessionScope.m}">
+	                <div class="header-left">
+	                    <span><a href="/loginFrm.do">입점문의</a></span>
+	                </div>
+            	</c:when>
+            	<c:otherwise>
+            		<div class="header-left">
+	                    <span><a href="/ceoMain.do">입점문의</a></span>
+	                </div>
+            	</c:otherwise>
+            </c:choose>
                 <div class="header-mid">
                     <a href="/">
                         <img src="/resources/img/common/logo.png">
@@ -107,8 +116,7 @@
                 <ul>
                     <li><a href="/brandIntro.do">브랜드스토리</a></li>
                     <li><a href="/purchaseList.do?reqPage=1">구입하기</a></li>
-                    <li><a href="#">베스트세일</a></li>
-                    <li><a href="/allStoreList.do?reqPage=1">이벤트</a></li>
+                    <li><a href="/eventFrm.do">이벤트</a></li>
                     <li><a href="/donateMain.do">기부하기</a></li>
                     <li><a href="/reviewList.do?reqPage=1">리 뷰</a></li>
                     <li><a href="/customerService.do">자주하는 질문</a></li>

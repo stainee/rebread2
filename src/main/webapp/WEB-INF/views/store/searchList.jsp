@@ -68,7 +68,10 @@ href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200&display=sw
 		<div class="item-basket-box">
 			<c:choose>
 				<c:when test="${empty list}">
-					<img style="height: 500px;" src="/resources/img/store/404s.png">
+					<img style="width: 1200px; height: 500px;" src="/resources/img/store/404error.jpg">
+					<p style="font-size: 20px;">검색결과가 없습니다.</p>
+					<p>다른검색어로 다시 시도해주세요.</p>
+					<p style="margin-bottom: 15px;">빵을 요청하면 더 다양한 빵을 만나보실수 있습니다.</p>
 					<div class="go-main" onclick= "location.href='/DoMain.do'">메인페이지 이동</div>
 				</c:when>
 			</c:choose>

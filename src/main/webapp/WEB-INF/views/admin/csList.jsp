@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="/resources/css/admin/csList.css">
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
+<div class="page-content" style="height: 800px;">
 <div class="total_wrapper">
         <div class="left_container">
             <div class="memberInfo">
@@ -72,6 +73,7 @@
 				</table>
 			</div>
        </div>
+</div>
 </div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />	
 </body>

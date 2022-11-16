@@ -12,21 +12,28 @@
     		d.donate_end as donateEnd,
     		m.member_mileage as memberMileage
 		from donate d join member m on d.member_no = m.member_no
-		order by donate_no asc
+		order by donate_no desc
 	</select>
-	<select id="selectOneDonate" resultType="d" parameterType="d">
+	<select id="selectOneDonate" resultType="d" parameterType="_int">
 		select 
-    		d.donate_no as donateNo,      
-    		d.member_no as memberNo,
-    		d.donate_organ as donateOrgan,
-    		d.donate_content as donateContent,
-    		d.donate_sum as donateSum,
-    		d.donate_img as donateImg,
-    		d.donate_end as donateEnd,
-    		m.member_mileage as memberMileage
-		from donate d join member m on d.member_no = m.member_no
-		where d.member_no = #{memberNo}
+    		donate_no as donateNo,      
+    		member_no as memberNo,
+    		donate_organ as donateOrgan,
+    		donate_content as donateContent,
+    		donate_sum as donateSum,
+    		donate_img as donateImg,
+    		donate_end as donateEnd
+		from donate
+		where donate_no = #{donateNo}
 	</select>
+	<update id="updateOneDonate" parameterType="d">
+		update donate set 
+			donate_organ = #{donateOrgan},
+			donate_content = #{donateContent},
+			donate_img = #{donateImg},
+			donate_end = #{donateEnd}
+		where donate_no = #{donateNo}
+	</update>
 	<update id="donateMileage" parameterType="d">
 		update donate 
 			set donate_sum = #{donateSumPlus}
@@ -41,4 +48,15 @@
 		delete from donate
   		where donate_no = #{_parameter}
 	</delete>
+	<insert id="insertDonate" parameterType="d">
+		insert into donate values(
+			donate_seq.nextval,
+			56,
+			#{donateOrgan},
+			#{donateContent},
+			0,
+			#{donateImg},
+			#{donateEnd}
+		)
+	</insert>
 </mapper>

@@ -56,7 +56,7 @@
                             <div class="store_info_form">
                                 <div class="store_info_title">사업자 번호</div>
                                 <div class="store_info_content">
-                                	<input type="text" name="storeAccount" value="${s.storeRegistNum }" readonly>
+                                	<input type="text" name="storeRegistNum" value="${s.storeRegistNum }" readonly>
                                 </div>
                             </div>
                             <div class="store_info_form">
@@ -116,19 +116,19 @@
                 	<div class="store_insert_form">
                 		<div class="store_insert_title">매장 이미지</div>
                 		<div class="store_insert_input">
-                			<input type="file" name="storeImg" multiple value="">
+                			<input type="file" name="storeFile" accept="image/*" multiple >
                 		</div>
                 	</div>
                 	<div class="store_insert_form">
                 		<div class="store_insert_title">계좌 번호</div>
                 		<div class="store_insert_input">
-                			<input type="text" name="storeRegistNum" value="">
+                			<input type="text" name="storeAccount" value="">
                 		</div>
                 	</div>
                 	<div class="store_insert_form">
                 		<div class="store_insert_title">사업자 번호</div>
                 		<div class="store_insert_input">
-                			<input type="text" name="storeAccount" value="">
+                			<input type="text" name="storeRegistNum" value="">
                 		</div>
                 	</div>
                 	<div class="store_insert_form">

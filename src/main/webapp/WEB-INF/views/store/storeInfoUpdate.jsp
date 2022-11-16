@@ -57,19 +57,19 @@
                 	<div class="store_update_form">
                 		<div class="store_update_title">매장 이미지</div>
                 		<div class="store_update_input">
-                			<input type="text" name="storeImg" value="${s.storeImg }">
+                			<input type="file" name="storeImg" value="${s.storeImg }">
                 		</div>
                 	</div>
                 	<div class="store_update_form">
                 		<div class="store_update_title">계좌 번호</div>
                 		<div class="store_update_input">
-                			<input type="text" name="storeRegistNum" value="${s.storeRegistNum }">
+                			<input type="text" name="storeAccount" value="${s.storeAccount }">
                 		</div>
                 	</div>
                 	<div class="store_update_form">
                 		<div class="store_update_title">사업자 번호</div>
                 		<div class="store_update_input">
-                			<input type="text" name="storeAccount" value="${s.storeAccount }">
+                			<input type="text" name="storeRegistNum" value="${s.storeRegistNum }">
                 		</div>
                 	</div>
                 	<div class="store_update_form">
@@ -103,17 +103,13 @@
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 <script>
-const selectList = $(".selectList li");
-selectList.on("click",function(e){
-	selectList.css("background-color","#f5f2f3").css("color","gray");
-	$(this).css("background-color","lightgray").css("color","black");
-	
-	const index = selectList.index(this);
-	
-	$(".content_container").hide();
-	$(".content_container").eq(index).fadeIn(0.6*1000);
-});
-selectList.eq(0).click();
-
+index=1;
+$(function(){
+	let total = $(".selectList a").length;
+	for(let i=0; i<total; i++){
+		$(".selectList a").eq(i).removeClass("index");
+	}
+	$(".selectList a").eq(index).addClass("index");
+})
 </script>
 </html>

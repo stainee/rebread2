@@ -1,7 +1,7 @@
-const userInfoContent = $(".user_info_content input");
+const userInfoContent = $(".updateAble input");
 
 $(".edit_btn").on("click",function(){
-    userInfoContent.css("border-bottom","1px solid black");
+    userInfoContent.css("border-bottom","1px solid gray");
     userInfoContent.attr("readonly",false);
     $(".edit_btn").css("display","none");
     $(".edit_complete_btn").css("display","inline-block");

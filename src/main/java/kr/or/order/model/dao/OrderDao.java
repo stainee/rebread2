@@ -1,12 +1,16 @@
 package kr.or.order.model.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.or.order.model.vo.Order;
+import kr.or.order.model.vo.OrderProduct;
+import kr.or.product.model.vo.Product;
 
 @Repository
 public class OrderDao {
@@ -72,6 +76,29 @@ public class OrderDao {
 
 	public int insertPayment(Order o) {
 		return sqlSession.insert("payment.insertPayment",o);
+	}
+
+	public int insertOrderProduct(OrderProduct op) {
+		return sqlSession.insert("order.insertOrderProduct",op);
+	}
+
+	public ArrayList<OrderProduct> selectOrderProduct(int orderNo) {
+		List list = sqlSession.selectList("order.selectOrderProduct",orderNo);
+		return (ArrayList<OrderProduct>)list;
+	}
+
+	public Product selectOrderProduct2(int productNo) {
+		return sqlSession.selectOne("product.selectOrderProduct2",productNo);
+	}
+	
+	
+	//토큰 insert
+	public int insertToken(int memberNo) {
+		return sqlSession.update("member.insertToken", memberNo);
+	}
+	//토큰 del
+	public int deleteToken(int memberNo) {
+		return sqlSession.update("member.deleteToken", memberNo);
 	}
 
 	

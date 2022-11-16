@@ -108,5 +108,14 @@ public class ReviewController {
 			return "redirect:/";
 		}
 	}
-	
+	//이벤트 페이지 이동
+	@RequestMapping(value = "/eventFrm.do")
+	public String eventFrm() {
+		return "common/event";
+	}
+	//룰렛 이벤트로 이동
+	@RequestMapping(value = "/rollet.do")
+	public String rollet() {
+		return "common/rollet";
+	}
 }
