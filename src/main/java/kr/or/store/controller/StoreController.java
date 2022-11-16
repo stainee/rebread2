@@ -80,7 +80,6 @@ public class StoreController {
 			}
 		int result = sservice.insertStore(s);
 		System.out.println(s);
-		
 		return "redirect:/ceoStoreInfo.do";
 	}
 	

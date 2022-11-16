@@ -53,11 +53,6 @@ public class DonateController {
 	
 	@RequestMapping(value = "/donateInsert.do")
 	public String donateInsert(Donate d, MultipartFile donateFile, HttpServletRequest request) {
-		d.setDonateOrgan(d.getDonateOrgan());
-		d.setDonateImg(d.getDonateImg());
-		d.setDonateEnd(d.getDonateEnd());
-		d.setDonateContent(d.getDonateContent());
-		
 		// 파일첨부 코드 시작
 		if(donateFile != null) {
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/img/donate/");
@@ -83,7 +78,13 @@ public class DonateController {
 			}
 		
 		int result = service.insertDonate(d);
-		return "admin/donateList";
+		if(result>0) {
+			System.out.println(d);
+			System.out.println(result);
+			return "/admin/donateInsertSuccess";
+		}else {
+			return "redirect:/";
+		}
 	}
 	
 	@ResponseBody
