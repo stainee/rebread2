@@ -241,5 +241,14 @@ public class StoreController {
 			return "0";
 		}
 	}
+	
+	@RequestMapping(value = "/storeSalesStatus.do")
+	public String storeSalesStatus(HttpSession session, Model model) {
+		Member member = (Member)session.getAttribute("m");
+//		System.out.println(member.getMemberNo());
+		ArrayList<Store> list = sservice.selectMemberStore(member);
+		model.addAttribute("list",list);
+		return "store/storeSalesStatus";
+	}
 }
 
