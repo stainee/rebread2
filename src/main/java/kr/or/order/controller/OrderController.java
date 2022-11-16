@@ -215,7 +215,7 @@ public class OrderController {
 			int memberMileage = service.selectMemberMileage(o.getMemberNo());
 			session.setAttribute("memberMileage", memberMileage);
 			
-			//주문취소시 token 삭제
+			// 주문취소시 token 삭제
 			int memberNo = m.getMemberNo();
 			int delToken = service.deleteToken(memberNo);
 			
@@ -228,7 +228,7 @@ public class OrderController {
 	
 	// 무통장입금 api
 	@RequestMapping("/orderAccount.do")
-	public String confirmAccountOrder(@RequestParam String paymentKey, @RequestParam String orderId, @RequestParam int amount, Model model) throws Exception {
+	public String confirmAccountOrder(@RequestParam String paymentKey, @RequestParam String orderId, @RequestParam int amount, Model model, @SessionAttribute Member m) throws Exception {
 		HttpHeaders headers = new HttpHeaders();
 		
 		headers.set("Authorization","Basic "+Base64.getEncoder().encodeToString((SECRET_KEY+":").getBytes()));
@@ -263,6 +263,10 @@ public class OrderController {
 			
 			model.addAttribute("orderNo",o.getOrderNo());
 			
+			//token삽입
+			int memberNo = m.getMemberNo();
+			int inToken = service.insertToken(memberNo);
+			
 			return "order/orderAccountSuccess";
 		}else {
 //			JsonNode failNode = responseEntity.getBody();
@@ -273,44 +277,14 @@ public class OrderController {
 		}
 	}
 	
-	//
+	// order_product 테이블에 정보 저장
 	@ResponseBody
 	@RequestMapping(value="/insertOrderProduct.do", produces = "application/json;charset=utf-8")
 	public void insertOrderProduct(OrderProduct op) {
 		int orderNo = service.searchOrderNo();
 		op.setOrderNo(orderNo);
 		int result = service.insertOrderProduct(op);
-		
-		
-		
-		System.out.println("데이터성공");
 	}
-	
-	
-	// 카카오페이 api
-	@RequestMapping("/kakao.do")
-	public String kakao(Order o) throws Exception{
-		// 
-		URL url = new URL("https://kapi.kakao.com/v1/payment/ready");
-		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-		connection.setRequestMethod("POST");
-		connection.setRequestProperty("Authorization", "KakaoAK 3193216ae4cabdf5c591d742459c5d6d");
-		connection.setRequestProperty("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
-		connection.setDoOutput(true); // 서버에 보낼 데이터가 있을 때 true
-		
-		
-		return null;
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	
