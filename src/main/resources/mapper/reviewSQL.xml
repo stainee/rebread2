@@ -84,4 +84,41 @@
 		review_view = nvl(review_view,0)+1 where review_no =#{reviewNo} 
 	</update>
 	
+	<!-- 매장 리뷰리스트 조회 -->
+	<select id="selectStoreReview" parameterType="_int" resultType="r">
+		select 
+			review_no as reviewNo,
+			review_comment as reviewComment,
+			store_no as storeNo,
+			review_writer as reviewWriter,
+			review_content as reviewContent,
+			review_date as reviewDate,
+			rating,
+			review_img as reviewImg,
+			review_view as reviewView
+		from review
+		where store_no = #{_parameter}
+	</select>
+	
+	<insert id="insertReview" parameterType="r">
+		insert into review
+		values(
+			review_seq.nextval,
+			<choose>
+				<when test="reviewComment == 0">
+					null,
+				</when>
+				<otherwise>
+					#{reviewComment},
+				</otherwise>
+			</choose>
+			#{storeNo},
+			#{reviewWriter},
+			#{reviewContent},
+			to_char(sysdate,'yyyy-mm-dd'),
+			#{rating},
+			#{reviewImg},
+			0		
+		)
+	</insert>
 </mapper>

@@ -1,13 +1,25 @@
 package kr.or.review.controller;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.Gson;
+
+import common.FileRename;
 import kr.or.review.model.service.ReviewService;
 import kr.or.review.model.vo.Review;
 
@@ -15,6 +27,8 @@ import kr.or.review.model.vo.Review;
 public class ReviewController {
 	@Autowired
 	private ReviewService service;
+	@Autowired
+	private FileRename fileRename;
 	
 	//리뷰리스트
 	@RequestMapping(value = "/reviewList.do")
@@ -47,6 +61,51 @@ public class ReviewController {
 			return "redirect:/reviewList.do?reqPage=1";
 		}else {
 			return "redirect:/reviewList.do?reqPage=1";
+		}
+	}
+	
+	//가게 리뷰 불러오기
+	@ResponseBody
+	@RequestMapping(value="/selectReview.do", produces = "application/json;charset=utf-8")
+	public String selectReveiw(int storeNo) {
+		ArrayList<Review> list = service.selectStoreReview(storeNo);
+		return new Gson().toJson(list);
+	}
+	
+	//리뷰 작성
+	@RequestMapping(value="/insertReview.do")
+	public String insertReview(Review r,MultipartFile upFile,HttpServletRequest request) {
+		//System.out.println(r.getReviewWriter());
+		
+		if(upFile != null) {
+				
+			//저장될 파일 경로 지정하기
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/review/");	
+			String filename= upFile.getOriginalFilename();
+			String filepath = fileRename.fileRename(savePath, filename);
+				
+			try {
+				FileOutputStream fos = new FileOutputStream(new File(savePath+filepath));
+				BufferedOutputStream bos = new BufferedOutputStream(fos);
+				
+				byte[] bytes = upFile.getBytes();
+				bos.write(bytes);
+				bos.close();
+					
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			r.setReviewImg(filepath);
+		}
+		int result = service.insertReview(r);
+		if(result>0) {
+			return "redirect:/detailStore.do?storeNo="+r.getStoreNo();
+		}else {
+			return "redirect:/";
 		}
 	}
 	

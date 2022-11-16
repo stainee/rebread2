@@ -22,5 +22,7 @@
 	<typeAlias type="kr.or.review.model.vo.Review" alias="r"></typeAlias>
 	
 	<typeAlias type="kr.or.donate.model.vo.Donate" alias="d"></typeAlias>
+	
+	<typeAlias type="kr.or.store.model.vo.Like" alias="l"></typeAlias>
 </typeAliases>
 </configuration>

@@ -25,7 +25,7 @@ tabs.on("click",function(){
         var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
         center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-        level: 2 // 지도의 확대 레벨
+        level: 3 // 지도의 확대 레벨
     };  
 
     // 지도를 생성합니다    
@@ -50,7 +50,7 @@ tabs.on("click",function(){
 
                 // 인포윈도우로 장소에 대한 설명을 표시합니다
                 var infowindow = new kakao.maps.InfoWindow({
-                    content: '<div style="width:150px;text-align:center;padding:6px 0;">storeName</div>'
+                    content: '<div style="width:150px;text-align:center;padding:6px 0;">'+storeName+'</div>'
                 });
                 infowindow.open(map, marker);
 
@@ -71,6 +71,20 @@ $(".menu-box").on("click",function(){
 });
 
 
+function loadImg(f){
+	    console.log(f.files);
+	    
+	    if(f.files.length !=0 && f.files[0] != 0 ){
+	        const reader = new FileReader(); // 파일 정보를 읽어올 수 있는 객체
+	        reader.readAsDataURL(f.files[0]);//선택한 파일 정보 읽어옴
+	        //파일리더가 파일을 다 읽어오면 동작할 함수 작성
+	        reader.onload = function(e){
+	            $("#img-view").attr("src",e.target.result);
+	        }
+	    }else{
+	        $("#img-view").attr("src","");
+	    }
+	}
 
 
 //플러스 마이너스 버튼 누를 시 수량 변경
@@ -110,8 +124,6 @@ $("[name=minus]").on("click",function(){
     }
 });
 
-
-
 	//콤마 추가 펑션
 	function addComma(value){
 		value = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
@@ -122,3 +134,6 @@ $("[name=minus]").on("click",function(){
 	    value = value.toString().replace(/[^\d]+/g, "");
 	    return value; 
 	};
+
+	
+	

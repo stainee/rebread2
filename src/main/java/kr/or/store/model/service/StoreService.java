@@ -14,6 +14,7 @@ import kr.or.product.model.dao.ProductDao;
 import kr.or.product.model.vo.Product;
 
 import kr.or.store.model.dao.StoreDao;
+import kr.or.store.model.vo.Like;
 import kr.or.store.model.vo.Store;
 import kr.or.store.model.vo.StoreDetail;
 
@@ -45,17 +46,19 @@ public class StoreService {
 	}
 	
 	//별점포함 가져오는 매장 상세페이지 
-	public StoreDetail selectOneStore2(int storeNo) {
+	public StoreDetail selectOneStore2(int storeNo,int memberNo) {
 		Store s = dao.selectOneStore2(storeNo);
+		Like l = dao.selectLike(storeNo,memberNo);
 		ArrayList<Product> lossList = pdao.selectLossList(storeNo);
 		ArrayList<Product> nomalList = pdao.selectNomalList(storeNo);
 		StoreDetail sd = new StoreDetail();
 		sd.setS(s);
+		sd.setL(l);
 		sd.setLossList(lossList);
 		sd.setNomalList(nomalList);
-		System.out.println(s);
-		System.out.println(lossList);
-		System.out.println(nomalList);
+		//System.out.println(s);
+		//System.out.println(lossList);
+		//System.out.println(nomalList);
 		return sd;
 	}
 
@@ -242,6 +245,20 @@ public class StoreService {
 
 	public int countList2(String breadName) {
 		return dao.selectStoreCount(breadName);
+	}
+
+	public int insertLike(int storeNo, int memberNo) {	
+		HashMap<String,Object> map= new HashMap<String,Object>();
+		map.put("storeNo",storeNo);
+		map.put("memberNo", memberNo);
+		return dao.insertLike(map);
+	}
+
+	public int deleteLike(int storeNo, int memberNo) {
+		HashMap<String,Object> map= new HashMap<String,Object>();
+		map.put("storeNo",storeNo);
+		map.put("memberNo", memberNo);
+		return dao.deleteLike(map);
 	}
 
 

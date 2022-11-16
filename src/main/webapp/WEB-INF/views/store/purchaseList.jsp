@@ -74,10 +74,20 @@ href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200&display=sw
 			<ul>
 				<c:forEach items="${ list}" var="s">
 					<li>
-						<a href="/detailStore.do?storeNo=${s.storeNo}">
-							<div class="storePic"><img src="/resources/img/store/${s.storeImg }"></div>
-							<div class="cart"><img src="/resources/img/store/cart.png"></div>
-						</a>
+						<c:choose>
+							<c:when test="${not empty sessionScope.m }">
+								<a href="/detailStore.do?storeNo=${s.storeNo}&memberNo=${sessionScope.m.memberNo}">
+									<div class="storePic"><img src="/resources/img/store/${s.storeImg }"></div>
+									<div class="cart"><img src="/resources/img/store/cart.png"></div>
+								</a>
+							</c:when>
+							<c:otherwise>
+								<a href="/detailStore.do?storeNo=${s.storeNo}&memberNo=0">
+									<div class="storePic"><img src="/resources/img/store/${s.storeImg }"></div>
+									<div class="cart"><img src="/resources/img/store/cart.png"></div>
+								</a>
+							</c:otherwise>
+						</c:choose>
 						<div style="height: 42px; line-height: 42px; margin-top: 13px;">
 							<span class="storeName">${s.storeName}</span>
 							<span class="sale">-${s.maxDiscount }%</span>

@@ -50,4 +50,13 @@ public class ReviewDao {
 		int result = sqlSession.update("review.updateView", reviewNo);
 		return result;
 	}
+
+	public ArrayList<Review> selectStoreReview(int storeNo) {
+		List list = sqlSession.selectList("review.selectStoreReview",storeNo);
+		return (ArrayList<Review>)list;
+	}
+
+	public int insertReview(Review r) {
+		return sqlSession.insert("review.insertReview",r);
+	}
 }
