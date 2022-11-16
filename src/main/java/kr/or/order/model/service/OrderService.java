@@ -88,5 +88,14 @@ public class OrderService {
 		return dao.selectOrderProduct2(productNo);
 	}
 
+	//insert 토큰
+	public int insertToken(int memberNo) {
+		return dao.insertToken(memberNo);
+	}
+	//del 토큰
+	public int deleteToken(int memberNo) {
+		return dao.deleteToken(memberNo);
+	}
+
 	
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.google.gson.Gson;
 
@@ -45,9 +46,12 @@ public class MemberController {
 	}
 	@ResponseBody
 	@RequestMapping(value="/memberDelete.do", produces = "application/json;charset=utf-8")
-	public void memberDelete(int memberNo) {
+	public void memberDelete(int memberNo, HttpSession session) {
 		int result = service.deleteOneMember(memberNo);
-		
+		if(result>0) {
+			session.invalidate();
+		}else {
+		}
 	}
 	
 	@RequestMapping(value="/brandIntro.do")
@@ -358,15 +362,20 @@ public class MemberController {
 	//토큰수정 및 마일리지 추가
 	@ResponseBody
 	@RequestMapping(value = "/rolletEvent.do", produces = "application/json;charset=utf-8")
-	public String updateMile(int token, String memberId) {
-		Member m = new Member();
-		m.setMemberMileage(token);
-		m.setMemberId(memberId);
-		int result = service.updateToken(m);
+	public String updateMile(int token, String memberId, @SessionAttribute Member m) {
+		Member member = new Member();
+		member.setMemberMileage(token);
+		member.setMemberId(memberId);
+		System.out.println(member);
+		int result = service.updateToken(member);
 		if(result>0) {
-			return "token";
+			m.setToken(m.getToken()-1);
+			m.setMemberMileage(m.getMemberMileage()+token);
+			Gson gson = new Gson();
+			String ms = gson.toJson(m);
+			return ms;
 		}else {
-			return null;
+			return "redirect:/";
 		}
 	}
 	

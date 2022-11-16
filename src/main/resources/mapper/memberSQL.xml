@@ -289,6 +289,19 @@
   		token = token - 1
   		where member_id = #{memberId}
   </update>
+  
+  <!-- 토큰 추가와 삭제 -->
+  <update id="insertToken" parameterType="int">
+  		update member set
+  		token = token + 1
+  		where member_No = #{memberNo}
+  </update>
+  
+  <update id="deleteToken" parameterType="int">
+  		update member set
+  		token = token - 1
+  		where member_No = #{memberNo}
+  </update>
 
 </mapper>
 
