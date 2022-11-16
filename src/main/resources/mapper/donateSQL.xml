@@ -12,7 +12,7 @@
     		d.donate_end as donateEnd,
     		m.member_mileage as memberMileage
 		from donate d join member m on d.member_no = m.member_no
-		order by donate_no asc
+		order by donate_no desc
 	</select>
 	<select id="selectOneDonate" resultType="d" parameterType="_int">
 		select 

@@ -66,6 +66,7 @@
     display: inline-block;
 }
 
+
 .user_info{
     font-weight: 700;
     font-size: 15px;
@@ -101,5 +102,5 @@
     font-size: 15px;
     font-weight: 700;
     background-color: white;
-    width: 550px;
+    width: 350px;
 }

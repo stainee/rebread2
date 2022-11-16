@@ -17,6 +17,7 @@
 			<p>기부 등록</p>
 		</div>
 		<div class="content_container">
+		
 			<table class="membertbl">
 				<tr>
 				 	<th>기부 단체</th>
@@ -26,8 +27,7 @@
 				<tr>
 				 	<th>기부 이미지</th>
 				 	<td>
-				 		<input type="text" value="" id="donateImg">
-				 		<button id="donateImg_btn">첨부파일</button>
+				 		<input type="file" value="" id="donateFile" accept="image/*" style="padding: 1px 2px;" multiple>
 				 	</td>
 				</tr>
 				
@@ -44,6 +44,7 @@
 			<div class="btn_wrap">
 				<button class="complete">확인</button>
 			</div>
+			
 		</div>
 	</div>
 </body>
@@ -51,9 +52,10 @@
 	$(".complete").on("click",function(){
 		$("#donateContent").attr("value", $("#donateContent").text());
 		const donateOrgan = $("#donateOrgan").val();
-		const donateImg = $("#donateImg").val();
+		const donateImg = $("#donateFile")[0].files[0];
 		const donateEnd = $("#donateEnd").val();
 		const donateContent = $("#donateContent").val();
+		
 		console.log(donateOrgan);
 		console.log(donateImg);
 		console.log(donateEnd);
@@ -65,14 +67,17 @@
 				donateOrgan:donateOrgan,
 				donateImg:donateImg,
 				donateEnd:donateEnd,
-				donateContent:donateContent
+				donateContent:donateContent,
 			},
 			success:function(){
 				alert("등록되었습니다");
 				opener.location.reload();
-				window.close();
-			}
-		})
+				//window.close();
+			},
+			cache: false,
+	        contentType: false,
+	        processData: false
+		});
 	})
 </script>
 </html>

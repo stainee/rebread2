@@ -280,6 +280,9 @@ public class OrderController {
 		int orderNo = service.searchOrderNo();
 		op.setOrderNo(orderNo);
 		int result = service.insertOrderProduct(op);
+		
+		
+		
 		System.out.println("데이터성공");
 	}
 	

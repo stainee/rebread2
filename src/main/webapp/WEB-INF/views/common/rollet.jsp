@@ -37,14 +37,15 @@
                     </td>
                     <td id="how" width="400" height="582">
                     	<h2>${sessionScope.m.memberName }님의 정보</h2>
-                    	<h2>토큰 개수 : ${sessionScope.m.token }개</h2>
-                    	<h2>마일리지 : ${sessionScope.m.memberMileage } M</h2>
+                    	<h2>토큰 개수 : <span id="token">${sessionScope.m.token }</span>개</h2>
+                    	<h2>마일리지 : <span id="mile">${sessionScope.m.memberMileage }</span> M</h2>
                     	<h2>사용법</h2>
                     	<p>1. Power를 선택해주세요.</p>
                     	<p>2. Start버튼을 눌러주세요. </p>
                     	<p>3. 한번 더 시도하기 위해서는 하단의 again버튼을 눌러주세요</p>
                     	<p> → 1회 회전에 1토큰이 소요됩니다. </p>
                     	<p> → 토큰이 부족하면 룰렛 사용이 제한됩니다.</p>
+                    	<p> → 기프티콘은 관리자에게 문의해 주세요.</p>
                     	
                     </td>
                 </tr>
@@ -74,14 +75,35 @@
 <div aos="fade-up" data-aos-offset="200" data-aos-easing="ease-out-cubic" data-aos-duration="500"></div>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
 <script type="text/javascript" src="/resources/js/common/Winwheel.js"></script>
+<script>
+const token = $("#token").text();
+const mile = $("#mile").text();
+const spin = $("#spin_button");
 
+$(document).ready(function() {
+	if($("#memberId").val()==""){
+		alert("로그인후 이용해주세요 ");
+		location.href="/loginFrm.do";
+	}
+	if(token < 1){
+		spin.removeAttr("onclick");
+	}
+}); 
+spin.on("click",function(){
+	if(token < 1){
+		alert("토큰이 부족하여 게임을 실행할 수 없습니다 더 충전해오세요 ^^7");
+	}
+});
+
+
+</script>
 
 
 
 
 <script>
 	let theWheel = new Winwheel({
-	    'numSegments'  : 8,     // Specify number of segments.
+	    'numSegments'  : 12,     // Specify number of segments.
 	    'outerRadius'  : 212,   // Set outer radius so wheel fits inside the background.
 	    'textFontSize' : 28,    // Set font size as desired.
 	    'segments'     :       // Define segments including colour and text.
@@ -93,7 +115,11 @@
 	       {'fillStyle' : '#e3e0cf', 'text' : '100','textFillStyle' : '#555555'},
 	       {'fillStyle' : '#fff', 'text' : '50', 'textFillStyle' : '#1617ad'},
 	       {'fillStyle' : '#e3e0cf', 'text' : '3000','textFillStyle' : '#555555'},
-	       {'fillStyle' : '#fff', 'text' : '100', 'textFillStyle' : '#1617ad'}
+	       {'fillStyle' : '#fff', 'text' : '100', 'textFillStyle' : '#1617ad'},
+	       {'fillStyle' : '#e3e0cf', 'text' : '10000','textFillStyle' : '#555555'},
+	       {'fillStyle' : '#fff', 'text' : '100', 'textFillStyle' : '#1617ad'},
+	       {'fillStyle' : '#2aa2b0', 'text' : ' 기프티콘','textFillStyle' : '#fff'},
+	       {'fillStyle' : '#fff', 'text' : '100', 'textFillStyle' : '#1617ad'},
 	    ],
 	    'animation' :           // Specify the animation to use.
 	    {
@@ -166,21 +192,30 @@
 	    wheelSpinning = false;          // Reset to false to power buttons and spin can be clicked again.
 	}
 	
+	
 	function alertPrize(indicatedSegment)
 	{
-	    //alert(indicatedSegment.text +"마일리지 적립 성공 !" );
+	if(indicatedSegment.text=="기프티콘"){
+		alert("관리자에게 문의해주세요.");
+	}else{
 	    $.ajax({
 	    	type :"post",
 	    	url : "/rolletEvent.do",
 	    	data : {
 	    		token : indicatedSegment.text,
-	    		memberId : $("#memberId").val(),
+	    		memberId : $("#memberId").val()
 	    	},
 	    	success : function(data){
+	    		$("#token").text(data.token);
+	    		$("#mile").text(data.memberMileage);
 	    		alert(indicatedSegment.text +"마일리지 적립 성공 !" );
 	    	}
 	    })		
 	}
+	}
+	
+	
+
 </script>
 
 </html>

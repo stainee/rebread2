@@ -91,10 +91,6 @@ public class OrderDao {
 	public Product selectOrderProduct2(int productNo) {
 		return sqlSession.selectOne("product.selectOrderProduct2",productNo);
 	}
-
-	public Store selectOrderStore(int storeNo) {
-		return sqlSession.selectOne("order.selectOrderStore",storeNo);
-	}
 	
 	
 	//토큰 insert
@@ -104,6 +100,10 @@ public class OrderDao {
 	//토큰 del
 	public int deleteToken(int memberNo) {
 		return sqlSession.update("member.deleteToken", memberNo);
+	}
+
+	public Store selectOrderStore(int storeNo) {
+		return sqlSession.selectOne("order.selectOrderStore",storeNo);
 	}
 
 	
