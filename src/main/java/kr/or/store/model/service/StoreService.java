@@ -235,7 +235,9 @@ public class StoreService {
 		return dao.deleteLike(map);
 	}
 
-
+	public Store selectOrderStore(int storeNo) {
+		return dao.selectOrderStore(storeNo);
+	}
 
 	
 	

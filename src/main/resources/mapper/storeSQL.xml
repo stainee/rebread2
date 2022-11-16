@@ -292,4 +292,13 @@
    		</if>
    </select>
    
+   <select id="selectOrderStore" parameterType="_int" resultType="s">
+		select
+   			store_name as storeName,
+   			store_addr as storeAddr,
+   			store_phone as storePhone,
+   			store_img as storeImg
+   		from store where store_no=#{_parameter}
+   </select>
+   
 </mapper>

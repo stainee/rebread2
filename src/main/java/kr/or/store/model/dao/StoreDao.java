@@ -135,6 +135,9 @@ public class StoreDao {
 		return sqlSession.delete("like.deleteLike",map);
 	}
 	
+	public Store selectOrderStore(int storeNo) {
+		return sqlSession.selectOne("store.selectOrderStore",storeNo);
+	}
 
 }
 

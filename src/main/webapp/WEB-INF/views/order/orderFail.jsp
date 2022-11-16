@@ -13,8 +13,9 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
     <div class="content-wrap">
         <div class="content">
-            <p>주문이 정상적으로 되지 않았습니다</p>
-            <p>다시 확인해줭</p>
+            <p>무통장 입금</p>
+            <p>주문이 정상적으로 완료되지 않았습니다</p>
+            <p>다시 한번 결제 부탁드립니다</p>
             <button class="order-detail" onclick="goToHome()">홈으로 가기</button>
             <button class="order-mypage" onclick="goToMyPage(${sessionScope.m.memberNo})">마이페이지</button>
         </div>

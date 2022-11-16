@@ -213,6 +213,8 @@ public class StoreController {
 			p.setProductImg(pImg[i]);
 			list.add(p);
 		}
+		Store s = sservice.selectOrderStore(storeNo);
+		model.addAttribute("s",s);
 		model.addAttribute("list",list);
 		model.addAttribute("storeNo",storeNo);
 		model.addAttribute("memberNo",memberNo);

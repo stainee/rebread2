@@ -140,12 +140,12 @@ public class MemberDao {
 	}
 	
 	public int selectOrderProduct2(int orderNo) {
-		System.out.println("dao : "+orderNo);
 		return sqlSession.selectOne("order.selectOrderProduct2",orderNo);
 	}
 
-	public Product selectOrderProduct3(int productNo) {
-		return sqlSession.selectOne("product.selectOrderProduct2",productNo);
+	public ArrayList<Product> selectOrderProduct3(int productNo) {
+		List pList = sqlSession.selectList("product.selectOrderProduct2",productNo);
+		return (ArrayList<Product>)pList;
 	}
 
 }
