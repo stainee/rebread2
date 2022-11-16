@@ -37,7 +37,7 @@
                             <td style="color: #cbcbcb; font-size: 0.9em;">${o.productContent }</td>
                             <td class="product-price" style="color: #cbcbcb; font-size: 0.9em;">${o.productPrice }</td><td style="color: #cbcbcb; font-size: 0.9em;">원</td>
                         </tr>
-                        </c:forEach>
+                      </c:forEach>
                       <!-- for문 종료 -->
                     </table>
                 </div>
@@ -73,30 +73,50 @@
             <div class="line"></div>
         
             <div class="deliver-addr-wrap">
-                <div class="deliver-addr-content" style="width: 40%;">
-                    <p>배송지정보</p>
-                    <button type="button" class="deliver-addr-update">수정</button>
-                    <button type="button" class="deliver-addr-complete" style="display:none;">완료</button>
-                    <div class="deliver-addr">
-                       <div class="addr-box">
-                           <input type="text" id="orderName" value="${sessionScope.m.memberName}" readonly="readonly">
-                        </div>
-                        <div class="addr-box">
-                           <input type="text" id="orderAddr" value="${sessionScope.m.memberAddr}" readonly="readonly">
-                        </div>
-                        <div class="addr-box">
-                           <input type="text" id="orderPhone" value="${sessionScope.m.memberPhone}" readonly="readonly">
-                        </div>
-                    </div>
-                </div>
+				<c:choose>
+					<c:when test="${type eq '배달준비중' }">
+		                <div class="deliver-addr-content" style="width: 40%;">
+		                    <p>배송지정보</p>
+		                    <button type="button" class="deliver-addr-update">수정</button>
+		                    <button type="button" class="deliver-addr-complete" style="display:none;">완료</button>
+		                    <div class="deliver-addr">
+		                       <div class="addr-box">
+		                           <input type="text" id="orderName" value="${sessionScope.m.memberName}" readonly="readonly">
+		                        </div>
+		                        <div class="addr-box">
+		                           <input type="text" id="orderAddr" value="${sessionScope.m.memberAddr}" readonly="readonly">
+		                        </div>
+		                        <div class="addr-box">
+		                           <input type="text" id="orderPhone" value="${sessionScope.m.memberPhone}" readonly="readonly">
+		                        </div>
+		                    </div>
+		                </div>
+					</c:when>            
+					<c:otherwise>
+						<div class="deliver-addr-content" style="width: 40%;">
+		                    <p>매장정보</p>
+		                    <div class="deliver-addr">
+		                       <div class="addr-box">
+		                           <input type="text" id="storeName" value="${s.storeName}" readonly="readonly">
+		                        </div>
+		                        <div class="addr-box">
+		                           <input type="text" id="storeAddr" value="${s.storeAddr}" readonly="readonly">
+		                        </div>
+		                        <div class="addr-box">
+		                           <input type="text" id="storePhone" value="${s.storePhone}" readonly="readonly">
+		                           <input type="hidden" id="orderName" value="${sessionScope.m.memberName}">
+		                           <input type="hidden" id="orderPhone" value="${sessionScope.m.memberPhone}">
+		                           <input type="hidden" id="orderAddr">
+		                        </div>
+		                    </div>
+		                </div>
+					</c:otherwise>
+				</c:choose>
+                
+                
+                
                 <div class="pay-method" style="width: 40%;">
                     <p>결제수단선택</p>
-                    <div id="pay-kakao">
-                       <div class="pay-card-wrap">
-                          <img src="/resources/img/order/kakaoPay.svg">
-                          <div class="pay-card-comment">카카오페이 간편결제</div>
-                       </div>
-                    </div>
                     <div id="pay-card">
                        <div class="pay-card-wrap">
                           <img src="/resources/img/order/card.svg">
@@ -117,11 +137,14 @@
     <input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
     <input type="hidden" name="orderState" value="${type }">
     <input type="hidden" name="storeNo" value="${storeNo }">
+    <input type="hidden" name="storeImg" value="${s.storeImg }">
+    
     
    <script>
    
       const orderState = $("[name=orderState]").val();
       const storeNo = $("[name=storeNo]").val();
+      const storeImg = $("[name=storeImg]").val();
       let productNo = $("[name=productNo]");
 
       const firstProductName = $(".product-name").eq(0).text();
@@ -226,17 +249,6 @@
        const memberNo = $("[name=memberNo]").val();
        const memberId = $("[name=memberId]").val();
 
-       // 카카오페이 간편결제
-       payKakao.on("click",function(){
-          $.ajax({
-               type: "POST",
-               url: "/kakao.do",
-               dataType: 'json', 
-               success: function(){
-                   
-            }
-          }); 
-       });
        
        // 카드결제
        payCard.on("click", function(){
@@ -259,7 +271,9 @@
                        orderName:orderName,
                        orderAddr:orderAddr,
                        orderPhone:orderPhone,
-                       orderMileage:mileage1
+                       orderMileage:mileage1,
+                       orderProductName:productName,
+                       orderProductImg:storeImg
                     },
                  success: function(){
                      tossPayments.requestPayment('카드', { // 결제 수단 파라미터
@@ -323,7 +337,9 @@
 	                        orderName:orderName,
 	                        orderAddr:orderAddr,
 	                        orderPhone:orderPhone,
-	                        orderMileage:mileage1
+	                        orderMileage:mileage1,
+	                        orderProductName:productName,
+	                        orderProductImg:storeImg
 	                     },
 	                  success: function(){
 	                      tossPayments.requestPayment('가상계좌', { // 결제 수단 파라미터

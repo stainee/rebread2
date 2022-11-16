@@ -162,7 +162,7 @@ public class MemberService {
 		if(pageNo<=totalPage) {
 			pageNavi += "<a href='/memberOrderList.do?memberNo="+memberNo+"&reqPage="+pageNo+"'>></a>";
 		}
-		OrderPageData opd = new OrderPageData(list, pageNavi, reqPage, numPerPage, memberNo, null, null);
+		OrderPageData opd = new OrderPageData(list, pageNavi, reqPage, numPerPage, memberNo);
 		return opd;
 	}
 
@@ -280,15 +280,15 @@ public class MemberService {
 		return dao.selectStoreName(storeNo);
 	}
 
-	public int updateToken(Member m) {
-		return dao.updateToken(m);
+	public int updateToken(Member member) {
+		return dao.updateToken(member);
 	}
 	
 	public int selectOrderProduct2(int orderNo) {
 		return dao.selectOrderProduct2(orderNo);
 	}
 
-	public Product selectOrderProduct3(int productNo) {
+	public ArrayList<Product> selectOrderProduct3(int productNo) {
 		return dao.selectOrderProduct3(productNo);
 	}
 

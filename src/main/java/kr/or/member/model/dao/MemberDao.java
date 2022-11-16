@@ -135,17 +135,17 @@ public class MemberDao {
 		return sqlSession.selectOne("review.selectStoreName",storeNo);
 	}
 
-	public int updateToken(Member m) {
-		return sqlSession.update("member.updateToken",m);
+	public int updateToken(Member member) {
+		return sqlSession.update("member.updateToken",member);
 	}
 	
 	public int selectOrderProduct2(int orderNo) {
-		System.out.println("dao : "+orderNo);
 		return sqlSession.selectOne("order.selectOrderProduct2",orderNo);
 	}
 
-	public Product selectOrderProduct3(int productNo) {
-		return sqlSession.selectOne("product.selectOrderProduct2",productNo);
+	public ArrayList<Product> selectOrderProduct3(int productNo) {
+		List pList = sqlSession.selectList("product.selectOrderProduct2",productNo);
+		return (ArrayList<Product>)pList;
 	}
 
 }

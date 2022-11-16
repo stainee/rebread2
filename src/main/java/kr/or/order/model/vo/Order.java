@@ -22,4 +22,6 @@ public class Order {
 	private int orderMileage;
 	private String paymentKey;
 	private String storeName;
+	private String orderProductName;
+	private String orderProductImg;
 }

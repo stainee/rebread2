@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.google.gson.Gson;
 
@@ -45,9 +46,12 @@ public class MemberController {
 	}
 	@ResponseBody
 	@RequestMapping(value="/memberDelete.do", produces = "application/json;charset=utf-8")
-	public void memberDelete(int memberNo) {
+	public void memberDelete(int memberNo, HttpSession session) {
 		int result = service.deleteOneMember(memberNo);
-		
+		if(result>0) {
+			session.invalidate();
+		}else {
+		}
 	}
 	
 	@RequestMapping(value="/brandIntro.do")
@@ -75,18 +79,6 @@ public class MemberController {
 		OrderPageData opd = service.selectOrderList(reqPage, memberNo);
 		// 리스트가 존재할 때에 model에 저장
 		if(!opd.getList().isEmpty()) {
-			for(int i=0;i<opd.getList().size();i++) {
-				System.out.println(opd.getList().get(i).getOrderNo());
-				int productNo = service.selectOrderProduct2(opd.getList().get(i).getOrderNo());
-				System.out.println(productNo);
-				
-				Product p = service.selectOrderProduct3(productNo);
-				opd.setProductImg(p.getProductImg());
-				opd.setProductName(p.getProductName());
-				
-				model.addAttribute("productImg",opd.getProductImg());
-				model.addAttribute("productName",opd.getProductName());
-			}
 			model.addAttribute("list", opd.getList());
 			model.addAttribute("pageNavi",opd.getPageNavi());
 			model.addAttribute("reqPage",opd.getReqPage());
@@ -358,15 +350,20 @@ public class MemberController {
 	//토큰수정 및 마일리지 추가
 	@ResponseBody
 	@RequestMapping(value = "/rolletEvent.do", produces = "application/json;charset=utf-8")
-	public String updateMile(int token, String memberId) {
-		Member m = new Member();
-		m.setMemberMileage(token);
-		m.setMemberId(memberId);
-		int result = service.updateToken(m);
+	public String updateMile(int token, String memberId, @SessionAttribute Member m) {
+		Member member = new Member();
+		member.setMemberMileage(token);
+		member.setMemberId(memberId);
+		System.out.println(member);
+		int result = service.updateToken(member);
 		if(result>0) {
-			return "token";
+			m.setToken(m.getToken()-1);
+			m.setMemberMileage(m.getMemberMileage()+token);
+			Gson gson = new Gson();
+			String ms = gson.toJson(m);
+			return ms;
 		}else {
-			return null;
+			return "redirect:/";
 		}
 	}
 	

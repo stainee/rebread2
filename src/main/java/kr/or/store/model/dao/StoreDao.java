@@ -119,5 +119,9 @@ public class StoreDao {
 		return sqlSession.selectOne("store.totalCount", breadName);
 	}
 
+	public Store selectOrderStore(int storeNo) {
+		return sqlSession.selectOne("store.selectOrderStore",storeNo);
+	}
+
 }
 

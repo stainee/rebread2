@@ -31,16 +31,19 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.client.ResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import kr.or.member.model.vo.Member;
 import kr.or.order.model.service.OrderService;
 import kr.or.order.model.vo.Order;
 import kr.or.order.model.vo.OrderProduct;
 import kr.or.product.model.vo.Product;
+import kr.or.store.model.vo.Store;
 
 @Controller
 public class OrderController {
@@ -109,7 +112,7 @@ public class OrderController {
 	
 	// 주문 api
 	@RequestMapping("/orderCard.do")
-	public String confirmOrder(@RequestParam String paymentKey, @RequestParam String orderId, @RequestParam int amount, Model model) throws Exception {
+	public String confirmOrder(@RequestParam String paymentKey, @RequestParam String orderId, @RequestParam int amount, Model model, @SessionAttribute Member m) throws Exception {
 		
 		// 서버로 요청할 header
 		HttpHeaders headers = new HttpHeaders();
@@ -140,16 +143,19 @@ public class OrderController {
 			o.setOrderPrice(orderPrice);
 			int paymentResult = service.insertPayment(o);
 			
+			//token삽입
+			int memberNo = m.getMemberNo();
+			int inToken = service.insertToken(memberNo);
 			
 			model.addAttribute("orderNo",o.getOrderNo());
 			
-			return "order/orderSuccess";
+			return "order/orderCardSuccess";
 		}else {
 			JsonNode failNode = responseEntity.getBody();
 			model.addAttribute("message",failNode.get("message").asText());
 			model.addAttribute("code",failNode.get("code").asText());
 			
-			return "order/orderFail"; 
+			return "order/orderFail";
 		}
 	}
 	
@@ -162,7 +168,7 @@ public class OrderController {
 	
 	// 주문 취소 api
 	@RequestMapping("/orderCancel.do")
-	public String orderCancel(int orderNo, int reqPage, Model model, HttpSession session) throws Exception {
+	public String orderCancel(int orderNo, int reqPage, Model model, HttpSession session, @SessionAttribute Member m) throws Exception {
 		String paymentKey = service.selectPaymentKey(orderNo);
 		String cancelReason = "고객변심";
 		
@@ -184,18 +190,18 @@ public class OrderController {
 		connection.setRequestMethod("POST");
 		connection.setDoOutput(true);
 		
-		JSONObject obj = new JSONObject();
-		obj.put("cancelReason", cancelReason);
-		
-		OutputStream outputStream = connection.getOutputStream();
-		outputStream.write(obj.toString().getBytes("UTF-8"));
+//		JSONObject obj = new JSONObject();
+//		obj.put("cancelReason", cancelReason);
+//		
+//		OutputStream outputStream = connection.getOutputStream();
+//		outputStream.write(obj.toString().getBytes("UTF-8"));
 		
 		int code = connection.getResponseCode();
 		boolean isSuccess = code == 200 ? true : false;
 		InputStream responseStream = isSuccess? connection.getInputStream(): connection.getErrorStream();
 		Reader reader = new InputStreamReader(responseStream, StandardCharsets.UTF_8);
-		JSONParser parser = new JSONParser();
-		JSONObject jsonObject = (JSONObject) parser.parse(reader);
+//		JSONParser parser = new JSONParser();
+//		JSONObject jsonObject = (JSONObject) parser.parse(reader);
 		responseStream.close();
 		if(isSuccess) {
 			// 주문이 취소되면 주문상태, 회원 마일리지 수정
@@ -208,6 +214,11 @@ public class OrderController {
 			// memberMileage 구하기
 			int memberMileage = service.selectMemberMileage(o.getMemberNo());
 			session.setAttribute("memberMileage", memberMileage);
+			
+			//주문취소시 token 삭제
+			int memberNo = m.getMemberNo();
+			int delToken = service.deleteToken(memberNo);
+			
 			return "redirect:/orderDetail.do?orderNo="+orderNo+"&reqPage="+reqPage;
 		}
 		else {
@@ -237,8 +248,11 @@ public class OrderController {
 			
 			// 가상계좌번호
 			model.addAttribute("accountNumber",successNode.get("virtualAccount").get("accountNumber").asText());
-
-			System.out.println("accountNumber : "+successNode.get("virtualAccount").get("accountNumber").asText());
+			model.addAttribute("bank",successNode.get("virtualAccount").get("bank").asText());
+			model.addAttribute("totalAmount",successNode.get("totalAmount"));
+			System.out.println("bank : "+successNode.get("virtualAccount").get("bank").asText());
+			System.out.println("amount : "+amount);
+			System.out.println("totalAmount : "+successNode.get("totalAmount"));
 			
 			// 결제 후 paymentKey를 DB에 저장
 			int orderNo = service.searchOrderNo();
@@ -249,13 +263,13 @@ public class OrderController {
 			
 			model.addAttribute("orderNo",o.getOrderNo());
 			
-			return "order/orderSuccess";
+			return "order/orderAccountSuccess";
 		}else {
-			JsonNode failNode = responseEntity.getBody();
-			model.addAttribute("message",failNode.get("message").asText());
-			model.addAttribute("code",failNode.get("code").asText());
+//			JsonNode failNode = responseEntity.getBody();
+//			model.addAttribute("message",failNode.get("message").asText());
+//			model.addAttribute("code",failNode.get("code").asText());
 			
-			return "order/orderFail"; 
+			return "order/orderFail";
 		}
 	}
 	
@@ -263,11 +277,10 @@ public class OrderController {
 	@ResponseBody
 	@RequestMapping(value="/insertOrderProduct.do", produces = "application/json;charset=utf-8")
 	public void insertOrderProduct(OrderProduct op) {
-		System.out.println("데이터성공1");
 		int orderNo = service.searchOrderNo();
 		op.setOrderNo(orderNo);
 		int result = service.insertOrderProduct(op);
-		System.out.println("데이터성공2");
+		System.out.println("데이터성공");
 	}
 	
 	

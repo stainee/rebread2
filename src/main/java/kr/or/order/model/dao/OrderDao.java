@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import kr.or.order.model.vo.Order;
 import kr.or.order.model.vo.OrderProduct;
 import kr.or.product.model.vo.Product;
+import kr.or.store.model.vo.Store;
 
 @Repository
 public class OrderDao {
@@ -89,6 +90,20 @@ public class OrderDao {
 
 	public Product selectOrderProduct2(int productNo) {
 		return sqlSession.selectOne("product.selectOrderProduct2",productNo);
+	}
+
+	public Store selectOrderStore(int storeNo) {
+		return sqlSession.selectOne("order.selectOrderStore",storeNo);
+	}
+	
+	
+	//토큰 insert
+	public int insertToken(int memberNo) {
+		return sqlSession.update("member.insertToken", memberNo);
+	}
+	//토큰 del
+	public int deleteToken(int memberNo) {
+		return sqlSession.update("member.deleteToken", memberNo);
 	}
 
 	

@@ -218,6 +218,10 @@ public class StoreService {
 		return dao.selectStoreCount(breadName);
 	}
 
+	public Store selectOrderStore(int storeNo) {
+		return dao.selectOrderStore(storeNo);
+	}
+
 
 
 	
