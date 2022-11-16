@@ -56,8 +56,6 @@
 				                        	<li><a style="cursor: pointer;" id="Nlogout">로그아웃</a></li>
 				                        </c:otherwise>
 			                        </c:choose>
-			                        <li><a href="/memberOrderList.do?memberNo=${sessionScope.m.memberNo }&reqPage=1">주문내역</a></li>
-			                        <li><a href="#">회원해택</a></li>
 			                    </ul>
 			                </div>
 		                </c:if>
@@ -78,7 +76,6 @@
 				                        </c:otherwise>
 			                        </c:choose>
 			                        <li><a href="/memberOrderList.do?memberNo=${sessionScope.m.memberNo }&reqPage=1">주문내역</a></li>
-			                        <li><a href="#">회원해택</a></li>
 			                    </ul>
 			                </div>
 		                </c:if>
@@ -98,8 +95,6 @@
 				                        	<li><a style="cursor: pointer;" id="Nlogout">로그아웃</a></li>
 				                        </c:otherwise>
 			                        </c:choose>
-			                        <li><a href="/memberOrderList.do?memberNo=${sessionScope.m.memberNo }&reqPage=1">주문내역</a></li>
-			                        <li><a href="#">회원해택</a></li>
 			                    </ul>
 			                </div>
 		                </c:if>

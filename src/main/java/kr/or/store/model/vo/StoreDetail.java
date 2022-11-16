@@ -14,5 +14,6 @@ public class StoreDetail {
 	private Store s;
 	private ArrayList<Product> lossList;
 	private ArrayList<Product> nomalList;
+	private Like l;
 }
 	

@@ -2,6 +2,7 @@ package kr.or.order.model.vo;
 
 import java.util.ArrayList;
 
+import kr.or.product.model.vo.Product;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,6 +16,4 @@ public class OrderPageData {
 	private int reqPage;
 	private int numPerPage;
 	private int memberNo;
-	private String productImg;
-	private String productName;
 }

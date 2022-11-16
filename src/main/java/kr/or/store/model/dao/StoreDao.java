@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.or.member.model.vo.Member;
 import kr.or.order.model.vo.Order;
+import kr.or.store.model.vo.Like;
 import kr.or.store.model.vo.Store;
 import kr.or.store.model.vo.StoreDetail;
 import kr.or.store.model.vo.StoreListDetail;
@@ -117,6 +118,25 @@ public class StoreDao {
 	}
 	public int selectStoreCount(String breadName) {
 		return sqlSession.selectOne("store.totalCount", breadName);
+	}
+
+	public int insertLike(HashMap<String, Object> map) {
+		return sqlSession.insert("like.insertLike",map);
+	}
+
+	public Like selectLike(int storeNo, int memberNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("storeNo",storeNo);
+		map.put("memberNo", memberNo);
+		return sqlSession.selectOne("like.selectLike",map);
+	}
+
+	public int deleteLike(HashMap<String, Object> map) {
+		return sqlSession.delete("like.deleteLike",map);
+	}
+	
+	public Store selectOrderStore(int storeNo) {
+		return sqlSession.selectOne("store.selectOrderStore",storeNo);
 	}
 
 }

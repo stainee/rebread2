@@ -103,7 +103,7 @@
         					<c:choose>
 	        					<c:when test="${o.orderState eq '취소완료' }">
 			        				<a class="cancel-confirm">
-		        						<div style="text-decoration: line-through; color: #cbcbcb;">주문 취소</div>
+		        						<div style="text-decoration: none; color: #cbcbcb;">주문 취소</div>
 			        				</a>
 	        					</c:when>
 								<c:otherwise>

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import kr.or.order.model.vo.Order;
 import kr.or.order.model.vo.OrderProduct;
 import kr.or.product.model.vo.Product;
+import kr.or.store.model.vo.Store;
 
 @Repository
 public class OrderDao {
@@ -99,6 +100,10 @@ public class OrderDao {
 	//토큰 del
 	public int deleteToken(int memberNo) {
 		return sqlSession.update("member.deleteToken", memberNo);
+	}
+
+	public Store selectOrderStore(int storeNo) {
+		return sqlSession.selectOne("order.selectOrderStore",storeNo);
 	}
 
 	

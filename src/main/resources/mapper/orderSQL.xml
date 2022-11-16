@@ -4,6 +4,8 @@
    <insert id="insertOrder" parameterType="o">
       insert into orders values
       (
+      <choose>
+      	<when test="orderAddr != null">
          orders_seq.nextval,
          #{memberNo},
          #{storeNo},
@@ -15,7 +17,27 @@
          #{orderAddr},
          #{orderPhone},
          #{orderMileage},
-         null
+         null,
+         #{orderProductName},
+         #{orderProductImg}
+      	</when>
+      	<otherwise>
+         orders_seq.nextval,
+         #{memberNo},
+         #{storeNo},
+         #{orderState},
+         to_char(sysdate, 'yyyy-mm-dd'),
+         #{orderTotalQuan},
+         #{orderPrice},
+         #{orderName},
+         null,
+         #{orderPhone},
+         #{orderMileage},
+         null,
+      	 #{orderProductName},
+         #{orderProductImg}
+      	</otherwise>
+      </choose>
       )
    </insert>
    
@@ -35,8 +57,10 @@
 	       order_state as orderState,
 	       order_date as orderDate,
 	       order_name as orderName,
-	        member_no as memberNo
-	   from (select * from 
+	       member_no as memberNo,
+	       order_product_name as orderProductName,
+	       order_product_img as orderProductImg
+	   from (select * from
 	   (select * from orders where paymentkey is not null)
 	   orders join member using(member_no)) order by 1 desc)o where memberNo=#{memberNo})
     where rnum between #{start} and #{end}
@@ -57,7 +81,9 @@
          order_name as orderName,
          order_addr as orderAddr,
          order_phone as orderPhone,
-         order_mileage as orderMileage
+         order_mileage as orderMileage,
+         order_product_name as orderProductName,
+         order_product_img as orderProductImg
       from orders where order_no = #{_parameter}
    </select>
    
@@ -125,4 +151,5 @@
    	  (select min(order_product_no) from order_product where order_no=#{_parameter})
    </select>
    
+
 </mapper>

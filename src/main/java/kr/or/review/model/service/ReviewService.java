@@ -98,6 +98,17 @@ public class ReviewService {
 	public int updateView(int reviewNo) {
 		return dao.updateView(reviewNo);
 	}
+
+	public ArrayList<Review> selectStoreReview(int storeNo) {
+		return dao.selectStoreReview(storeNo);
+	}
+
+
+
+
+	public int insertReview(Review r) {
+		return dao.insertReview(r);
+	}
 }
 
 

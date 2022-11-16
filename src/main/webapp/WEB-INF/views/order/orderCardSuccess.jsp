@@ -7,17 +7,17 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="/resources/css/font/font.css">
-<link rel="stylesheet" href="/resources/css/order/orderSuccess.css">
+<link rel="stylesheet" href="/resources/css/order/orderCardSuccess.css">
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
     <div class="content-wrap">
         <div class="content">
-            <p>주문 완료 완료 완료 축하축하합니당</p>
-            <p>빠르게 배송 노력합니당</p>
+            <p>카드결제</p>
+            <p>주문이 완료되었습니다</p>
+            <p>빠르게 준비해드릴게요</p>
             <button class="order-detail" onclick="goToHome()">홈으로 가기</button>
             <button class="order-mypage" onclick="goToMyPage(${sessionScope.m.memberNo})">마이페이지</button>
-            <p>${accountNumber }</p>
         </div>
     </div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
@@ -26,7 +26,6 @@
 			location.href="/";
 		}
 		function goToMyPage(memberNo){
-			console.log(memberNo);
 			location.href="/memberMain.do?memberNo="+memberNo;
 		}
 	</script>
