@@ -57,7 +57,7 @@ public class StoreController {
 	@RequestMapping(value = "/storeInsert.do")
 	public String storeInsert(Store s, MultipartFile storeFile, HttpServletRequest request) {
 		if(storeFile != null) {
-			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/store/");
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/img/store/");
 				String filename = storeFile.getOriginalFilename();
 				String filepath = fileRename.fileRename(savePath, filename);
 				
@@ -79,6 +79,7 @@ public class StoreController {
 				s.setStoreImg(filepath);
 			}
 		int result = sservice.insertStore(s);
+		System.out.println(s);
 		
 		return "redirect:/ceoStoreInfo.do";
 	}

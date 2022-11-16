@@ -1,7 +1,13 @@
 package kr.or.donate.controller;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +16,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.multipart.MultipartFile;
 
+import common.FileRename;
 import kr.or.donate.model.service.DonateService;
 import kr.or.donate.model.vo.Donate;
 import kr.or.member.model.vo.Member;
@@ -19,6 +27,8 @@ import kr.or.member.model.vo.Member;
 public class DonateController {
 	@Autowired
 	private DonateService service;
+	@Autowired
+	private FileRename fileRename;
 	
 	@RequestMapping(value="/donateMain.do")
 	public String donateMain(Model model) {
@@ -42,12 +52,36 @@ public class DonateController {
 	}
 	
 	@RequestMapping(value = "/donateInsert.do")
-	public String donateInsert(Donate d) {
+	public String donateInsert(Donate d, MultipartFile donateFile, HttpServletRequest request) {
 		d.setDonateOrgan(d.getDonateOrgan());
 		d.setDonateImg(d.getDonateImg());
 		d.setDonateEnd(d.getDonateEnd());
 		d.setDonateContent(d.getDonateContent());
-		System.out.println(d);
+		
+		// 파일첨부 코드 시작
+		if(donateFile != null) {
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/img/donate/");
+				String filename = donateFile.getOriginalFilename();
+				String filepath = fileRename.fileRename(savePath, filename);
+				
+				FileOutputStream fos;
+				try {
+					fos = new FileOutputStream(new File(savePath+filepath));
+					BufferedOutputStream bos = new BufferedOutputStream(fos);
+					byte[] bytes = donateFile.getBytes();
+					bos.write(bytes);
+					bos.close();
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				// 파일 업로드 끝(파일 1개 업로드)
+				d.setDonateImg(filepath);
+			}
+		
 		int result = service.insertDonate(d);
 		return "admin/donateList";
 	}

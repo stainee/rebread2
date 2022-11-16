@@ -159,7 +159,7 @@ input[name=openTime],input[name=closeTime]{
 .store_insert_form:first-child{
 	margin-top: 50px;
 }
-.store_insert_form input[name=storeImg]{
+.store_insert_form input[name=storeFile]{
 	font-size: 16px;
 }
 .store_insert_form input{

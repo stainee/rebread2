@@ -116,7 +116,7 @@
                 	<div class="store_insert_form">
                 		<div class="store_insert_title">매장 이미지</div>
                 		<div class="store_insert_input">
-                			<input type="file" name="storeImg" multiple>
+                			<input type="file" name="storeFile" accept="image/*" multiple >
                 		</div>
                 	</div>
                 	<div class="store_insert_form">

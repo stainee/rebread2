@@ -57,7 +57,7 @@
                 	<div class="store_update_form">
                 		<div class="store_update_title">매장 이미지</div>
                 		<div class="store_update_input">
-                			<input type="text" name="storeImg" value="${s.storeImg }">
+                			<input type="file" name="storeImg" value="${s.storeImg }">
                 		</div>
                 	</div>
                 	<div class="store_update_form">
