@@ -1,5 +1,10 @@
 package kr.or.store.controller;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -11,9 +16,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 
+import common.FileRename;
 import kr.or.member.model.vo.Member;
 import kr.or.order.model.vo.Order;
 import kr.or.store.model.service.StoreService;
@@ -27,6 +34,8 @@ public class StoreController {
 
 	@Autowired
 	private StoreService sservice;
+	@Autowired
+	private FileRename fileRename;
 	
 	@ResponseBody
 	@RequestMapping(value="/storeUpdate.do", produces = "application/json;charset=utf-8")
@@ -46,56 +55,34 @@ public class StoreController {
 	}
 	
 	@RequestMapping(value = "/storeInsert.do")
-	public String storeInsert(Store s) {
-//		ArrayList<StoreFileVO> storeFileList = new ArrayList<StoreFileVO>();
-//		if(!boardFile[0].isEmpty()) {
-//			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/board/");
-//			for(MultipartFile file : boardFile) {
-//				String filename = file.getOriginalFilename();
-//				String filepath = fileRename.fileRename(savePath, filename);
-//				
-//				FileOutputStream fos;
-//				try {
-//					fos = new FileOutputStream(new File(savePath+filepath));
-//					BufferedOutputStream bos = new BufferedOutputStream(fos);
-//					byte[] bytes = file.getBytes();
-//					bos.write(bytes);
-//					bos.close();
-//				} catch (FileNotFoundException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				} catch (IOException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//				// 파일 업로드 끝(파일 1개 업로드)
-//				FileVO fv = new FileVO();
-//				fv.setFilename(filename);
-//				fv.setFilepath(filepath);
-//				fileList.add(fv);
-//			}
-//		}
-//		b.setFileList(fileList);
-		
+	public String storeInsert(Store s, MultipartFile storeFile, HttpServletRequest request) {
+		if(storeFile != null) {
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/store/");
+				String filename = storeFile.getOriginalFilename();
+				String filepath = fileRename.fileRename(savePath, filename);
+				
+				FileOutputStream fos;
+				try {
+					fos = new FileOutputStream(new File(savePath+filepath));
+					BufferedOutputStream bos = new BufferedOutputStream(fos);
+					byte[] bytes = storeFile.getBytes();
+					bos.write(bytes);
+					bos.close();
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				// 파일 업로드 끝(파일 1개 업로드)
+				s.setStoreImg(filepath);
+			}
 		int result = sservice.insertStore(s);
-		if(result>0) {
-			return "redirect:/";
-		}else {
-			return "store/ceoStoreInfo";
-		}
+		
+		return "redirect:/ceoStoreInfo.do";
 	}
 	
-	// 가게 정보 페이징 처리
-//	@RequestMapping(value = "/storeInfoList.do")
-//	public String storeInfoList(int reqPage, Model model) {
-//		StorePageData spd = sservice.selectStoreList(reqPage);
-//		model.addAttribute("list",spd.getList());
-//		model.addAttribute("pageNavi",spd.getPageNavi());
-//		model.addAttribute("reqPage",spd.getReqPage());
-//		model.addAttribute("numPerPage",spd.getNumPerPage());
-//		return "store/ceoStoreInfo";
-//	}
-		
 	// 가게 정보 수정창으로 이동
 	@RequestMapping(value = "/storeInfoUpdate.do")
 	public String storeInfoUpdate(Store s, Model model) {

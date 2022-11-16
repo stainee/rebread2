@@ -63,13 +63,13 @@
                 	<div class="store_update_form">
                 		<div class="store_update_title">계좌 번호</div>
                 		<div class="store_update_input">
-                			<input type="text" name="storeRegistNum" value="${s.storeRegistNum }">
+                			<input type="text" name="storeAccount" value="${s.storeAccount }">
                 		</div>
                 	</div>
                 	<div class="store_update_form">
                 		<div class="store_update_title">사업자 번호</div>
                 		<div class="store_update_input">
-                			<input type="text" name="storeAccount" value="${s.storeAccount }">
+                			<input type="text" name="storeRegistNum" value="${s.storeRegistNum }">
                 		</div>
                 	</div>
                 	<div class="store_update_form">

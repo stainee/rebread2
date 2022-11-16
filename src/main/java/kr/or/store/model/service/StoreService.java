@@ -16,7 +16,6 @@ import kr.or.product.model.vo.Product;
 import kr.or.store.model.dao.StoreDao;
 import kr.or.store.model.vo.Store;
 import kr.or.store.model.vo.StoreDetail;
-
 import kr.or.store.model.vo.StoreListDetail;
 
 import kr.or.store.model.vo.StorePageData;
@@ -113,32 +112,6 @@ public class StoreService {
 	}
 
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	public ArrayList<Store> searchStore(String storeName) {
 		return dao.searchStore(storeName);
 	}
@@ -147,7 +120,8 @@ public class StoreService {
 	}
 
 	public int insertStore(Store s) {
-		return dao.storeInsert(s);
+		int result = dao.storeInsert(s);
+		return result;
 	}
 
 	public Store selectOneStore1(Store s) {
