@@ -190,11 +190,11 @@ public class OrderController {
 		connection.setRequestMethod("POST");
 		connection.setDoOutput(true);
 		
-//		JSONObject obj = new JSONObject();
-//		obj.put("cancelReason", cancelReason);
-//		
-//		OutputStream outputStream = connection.getOutputStream();
-//		outputStream.write(obj.toString().getBytes("UTF-8"));
+		JSONObject obj = new JSONObject();
+		obj.put("cancelReason", cancelReason);
+		
+		OutputStream outputStream = connection.getOutputStream();
+		outputStream.write(obj.toString().getBytes("UTF-8"));
 		
 		int code = connection.getResponseCode();
 		boolean isSuccess = code == 200 ? true : false;

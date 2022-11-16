@@ -8,8 +8,8 @@ a{
 	text-decoration: none;
 	color: black;
 }
-.content_container a:hover{
-	color: pink;
+.content-box:hover{
+	background-color: rgb(245, 245, 245);
 }
 .member-point{
 	padding-top: 35px;
@@ -42,12 +42,12 @@ a{
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
-	border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+	border-bottom: 2px solid rgb(240, 240, 240);
 	cursor: pointer;
 }
 .content-img img{
 	width: 110px;
-	height: 75px;
+	height: 85px;
 	margin: 25px;
 }
 .content-status-date{
@@ -70,5 +70,6 @@ a{
 	font-size: 1.3em;
 }
 .order-page span{
-	color: pink;
+	font-family: nsr-eb;
+	font-size: 1.4em;
 }
