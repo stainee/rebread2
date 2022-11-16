@@ -280,8 +280,8 @@ public class MemberService {
 		return dao.selectStoreName(storeNo);
 	}
 
-	public int updateToken(Member m) {
-		return dao.updateToken(m);
+	public int updateToken(Member member) {
+		return dao.updateToken(member);
 	}
 	
 	public int selectOrderProduct2(int orderNo) {

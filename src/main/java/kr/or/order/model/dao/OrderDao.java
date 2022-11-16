@@ -90,6 +90,16 @@ public class OrderDao {
 	public Product selectOrderProduct2(int productNo) {
 		return sqlSession.selectOne("product.selectOrderProduct2",productNo);
 	}
+	
+	
+	//토큰 insert
+	public int insertToken(int memberNo) {
+		return sqlSession.update("member.insertToken", memberNo);
+	}
+	//토큰 del
+	public int deleteToken(int memberNo) {
+		return sqlSession.update("member.deleteToken", memberNo);
+	}
 
 	
 

@@ -4,6 +4,7 @@
     list-style-type: none;
     text-decoration: none;
     box-sizing: border-box;
+	font-family: 'nsr-r';
 }
 header {
     background-color: #fefaee;
@@ -28,23 +29,8 @@ header a {
 .header-right ul {
     display: flex;
     justify-content: right;
-  		/* 이거 있는데 굳이 왜 center를 또 박아서 귀찮게 그러냐 
-    	참고로 left, right 사이드 margin 있는거 안하고 센터 컨테이너를 만들어서 보통 margin: 0 auto로 둠
-    	그래야 사용자가 보기 편함
-    	*/
     margin-right: 80px;
 }
-/*
-.header-mid {
-    display: flex;
-    justify-content: center;
-    min-width: 780px;
-    position: absolute;
-    left: 50%;
-    top:40px;
-    transform: translate(-50%, -50%);
-}
-*/
 .header-mid{
 	text-align: center;
 	position: relative;
@@ -87,13 +73,6 @@ header a {
     justify-content: center;
     position: relative;
 }
-
-
-
-
-
-
-
 .header-wrap2 {
     position: sticky;
     z-index: 999;
@@ -294,9 +273,7 @@ header a {
 .Nmodal-content>div:first-child {
 	margin-top: 30px;
 	margin-bottom : 20px;
-	background-color: #fefaeedb;
-	
-	
+	background-color: #785c37;;
 }
 .Nmodal-content>div:last-child {
 	background-color: #4ab46a;

@@ -31,12 +31,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.client.ResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import kr.or.member.model.vo.Member;
 import kr.or.order.model.service.OrderService;
 import kr.or.order.model.vo.Order;
 import kr.or.order.model.vo.OrderProduct;
@@ -109,7 +111,7 @@ public class OrderController {
 	
 	// 주문 api
 	@RequestMapping("/orderCard.do")
-	public String confirmOrder(@RequestParam String paymentKey, @RequestParam String orderId, @RequestParam int amount, Model model) throws Exception {
+	public String confirmOrder(@RequestParam String paymentKey, @RequestParam String orderId, @RequestParam int amount, Model model, @SessionAttribute Member m) throws Exception {
 		
 		// 서버로 요청할 header
 		HttpHeaders headers = new HttpHeaders();
@@ -140,6 +142,9 @@ public class OrderController {
 			o.setOrderPrice(orderPrice);
 			int paymentResult = service.insertPayment(o);
 			
+			//token삽입
+			int memberNo = m.getMemberNo();
+			int inToken = service.insertToken(memberNo);
 			
 			model.addAttribute("orderNo",o.getOrderNo());
 			
@@ -162,7 +167,7 @@ public class OrderController {
 	
 	// 주문 취소 api
 	@RequestMapping("/orderCancel.do")
-	public String orderCancel(int orderNo, int reqPage, Model model, HttpSession session) throws Exception {
+	public String orderCancel(int orderNo, int reqPage, Model model, HttpSession session, @SessionAttribute Member m) throws Exception {
 		String paymentKey = service.selectPaymentKey(orderNo);
 		String cancelReason = "고객변심";
 		
@@ -208,6 +213,11 @@ public class OrderController {
 			// memberMileage 구하기
 			int memberMileage = service.selectMemberMileage(o.getMemberNo());
 			session.setAttribute("memberMileage", memberMileage);
+			
+			//주문취소시 token 삭제
+			int memberNo = m.getMemberNo();
+			int delToken = service.deleteToken(memberNo);
+			
 			return "redirect:/orderDetail.do?orderNo="+orderNo+"&reqPage="+reqPage;
 		}
 		else {
@@ -267,6 +277,9 @@ public class OrderController {
 		int orderNo = service.searchOrderNo();
 		op.setOrderNo(orderNo);
 		int result = service.insertOrderProduct(op);
+		
+		
+		
 		System.out.println("데이터성공2");
 	}
 	
