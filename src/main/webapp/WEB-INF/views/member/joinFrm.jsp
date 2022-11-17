@@ -82,7 +82,7 @@
 							<button id="phoneBtn" type="button">인증하기</button>
 							<span class="successPhoneChk"></span>
 							<div class="phoneIn">
-								<input type="text" id="phoneInput" required="required">
+								<input type="text" id="phoneInput" required="required" style="padding-left: 10px;">
 								<button id="phoneChk" type="button">인증</button>
 								<span id="time" style="font-size: 15px; margin-left: 10px;"></span>
 							</div>
@@ -448,27 +448,52 @@ $("#joinme").on("click",function(){
 //휴대폰 번호 인증
 var code2 = "";
 $("#phoneBtn").click(function(){
-	alert("인증번호 발송이 완료되었습니다.\n휴대폰에서 인증번호 확인을 해주십시오.");
 	var phone = $("#phone").val();
-	$.ajax({
-        type:"GET",
-        url:"/phoneCheck.do?phone=" + phone,
-        cache : false,
-        success:function(data){
-        	if(data == "error"){
-        		alert("휴대폰 번호가 올바르지 않습니다.")
-				$(".successPhoneChk").text("유효한 번호를 입력해주세요.");
-				$(".successPhoneChk").css("color","red");
-				$("#phone").attr("autofocus",true);
-        	}else{	        		
-        		$("#phoneInput").attr("disabled",false);
-        		$(".successPhoneChk").text("인증번호를 입력한 뒤 본인인증을 눌러주십시오.");
-        		$(".successPhoneChk").css("color","green");
-        		$("#phone").attr("readonly",true);
-        		code2 = data;
-        	}
-        }
-    });
+	const phoneval = $("#phone").val();
+	var phoneReg = /[0-9]/;
+	
+	var display = $("#time");
+	var leftSec = 120;
+	var timer = null;
+	var isRunning = false;
+	if(!phoneReg.test(phoneval)){
+		//휴대폰 번호 인증
+		alert("잘못된 휴대폰번호 입니다 '-'를 제외한 번호를 입력해주세요");
+		return false;
+	}else{
+		alert("인증번호 발송이 완료되었습니다.\n휴대폰에서 인증번호 확인을 해주십시오.");
+		//인증번호 전송 controller
+		$.ajax({
+	        type:"GET",
+	        url:"/phoneCheck.do?phone=" + phone,
+	        cache : false,
+	        success:function(data){
+	        	if(data == "error"){
+	        		alert("휴대폰 번호가 올바르지 않습니다.")
+					$(".successPhoneChk").text("유효한 번호를 입력해주세요.");
+					$(".successPhoneChk").css("color","red");
+					$("#phone").attr("autofocus",true);
+	        	}else{	        		
+	        		$("#phoneInput").attr("disabled",false);
+	        		$(".successPhoneChk").text("인증번호를 입력한 뒤 본인인증을 눌러주십시오.");
+	        		$(".successPhoneChk").css("color","green");
+	        		$("#phone").attr("readonly",true);
+	        		code2 = data;
+	        	}
+	        }
+	    });
+		//휴대폰 인증input show
+	    $(".phoneIn").show();
+	    $(this).text("재전송");
+	    //타이머 진행
+		if(isRunning){
+		    clearInterval(timer);
+		    display.html("");
+		    startTimer(leftSec, display);
+		    }else{
+		    startTimer(leftSec, display);
+		    }
+	}
 });
 //휴대폰 인증번호 대조
 let injeong = false;

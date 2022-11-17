@@ -175,9 +175,6 @@ public class StoreController {
 	//빵이름으로 검색시
 	@RequestMapping(value = "/searchBread.do")
 	public String searchBread(int reqPage,Model model,String breadName) {
-		if(breadName == "") {
-			return "redirect:/";
-		}
 		StorePageData spd = sservice.selectBeadList(reqPage,breadName);
 		System.out.println(spd);
 		//스토어 검색안된 count

@@ -23,6 +23,8 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200&display=swap"
 	rel="stylesheet">
+<link rel="icon" href="/resources/img/favicon/favicon.ico"/>
+<link rel="apple-touch-icon" href="/resources/img/favicon/apple-touch-icon.png"/>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -213,7 +215,7 @@
 <script src="/resources/js/common/main.js"></script>
 <script>
 const searchText = $("#searchText").val();
-$(".searchIcon").on("click",function(){
+$("#searchIcon").on("click",function(){
 	if(searchText==""){
 		alert("검색어를 입력해주세요.");
 		return false;

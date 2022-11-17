@@ -84,7 +84,7 @@
                 </div>
                 </form>
                 <div class="footer_box">
-                    <button class="footer_box_btn" onclick="deleteMember(${sessionScope.m.memberNo})">회원 탈퇴</button>
+                    <button class="footer_box_btn">회원 탈퇴</button>
                 </div>
 	            </div>
 	        </div>
@@ -116,22 +116,15 @@
 		userInfoContent.css("border-bottom","1px solid white");
 	});
 	
-	function deleteMember(memberNo){
-		$.ajax({
-			url:"/memberDelete.do?memberNo="+memberNo+"",
-		});
-	};
-		
 	const deleteBtn = $(".footer_box_btn");
 	deleteBtn.on("click",function(){
+		const memberNo = $("#memberNo").val();
 		if(!confirm("정말 탈퇴하시겠습니까?")){
 			// 아니오 클릭 시 이벤트
 		}else{
 			// 예 클릭시 이벤트
-			function deleteMember(memberNo){
-			};
-			location.href = "/";
-			alert("회원 탈퇴가 완료되었습니다.")
+			location.href = "/memberDelete.do?memberNo="+memberNo;
+			alert("회원 탈퇴가 완료되었습니다.");
 		}
 	});
 </script>

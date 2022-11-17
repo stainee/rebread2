@@ -44,13 +44,18 @@ public class MemberController {
 	public void memberUpdate(Member m) {
 		int result = service.updateOneMember(m);
 	}
-	@ResponseBody
-	@RequestMapping(value="/memberDelete.do", produces = "application/json;charset=utf-8")
-	public void memberDelete(int memberNo, HttpSession session) {
+	
+	
+	//회원탈퇴
+	@RequestMapping(value="/memberDelete.do")
+	public String memberDelete(int memberNo, HttpSession session) {
+		System.out.println(memberNo);
 		int result = service.deleteOneMember(memberNo);
 		if(result>0) {
 			session.invalidate();
+			return "redirect:/";
 		}else {
+			return "redirect:/";
 		}
 	}
 	
@@ -353,11 +358,6 @@ public class MemberController {
 			return "redirect:/";
 		}
 	}
-	
-	
-	
-	
-	
 	
 	//토큰수정 및 마일리지 추가
 	@ResponseBody

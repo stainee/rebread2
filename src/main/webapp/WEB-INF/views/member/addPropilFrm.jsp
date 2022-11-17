@@ -28,7 +28,6 @@
 					<!-- 모델에서 받아온 데이터 -->
 					<input type="hidden" name="memberId" id="id" value="${m.memberId }">
 					<input type="hidden" name="memberName" value="${m.memberName }">
-					<input type="hidden" name="memberMail" value="${m.memberMail }">
 					<input type="hidden" name="memberPw" value="${m.memberPw }">
 					<tr>
 						<th>회원유형<img src="/resources/img/member/pilsu.gif"></th>
@@ -60,6 +59,12 @@
 						<th>휴대전화<img src="/resources/img/member/pilsu.gif"></th>
 						<td id="phones">
 							<input type="text" name="memberPhone" id="phone" placeholder="' - '을 제외한 번호를 입력해주세요.">
+						</td>
+					</tr>
+					<tr>	
+						<th>이메일<img src="/resources/img/member/pilsu.gif"></th>
+						<td id="email">
+							<input type="text" name="memberMail" id="memberMail">
 						</td>
 					</tr>
 					

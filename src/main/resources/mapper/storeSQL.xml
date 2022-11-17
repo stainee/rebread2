@@ -162,10 +162,10 @@
 	s.store_phone as storePhone,
 	s.store_img as storeImg,
 	nvl(
-	(select avg(rating) from test_review r where r.store_no = s.store_no),0)as
+	(select avg(rating) from review r where r.store_no = s.store_no),0)as
 	rating,
 	nvl(
-    (select count(review_no) from test_review r where r.store_no = s.store_no),0) as
+    (select count(review_no) from review r where r.store_no = s.store_no),0) as
     reviewCount,
     (select max(product_sale) from product p where p.store_no = s.store_no) as maxDiscount
 	from store s 
@@ -201,10 +201,10 @@
 	s.store_phone as storePhone,
 	s.store_img as storeImg,
 	nvl(
-	(select avg(rating) from test_review r where r.store_no = s.store_no),0)as
+	(select avg(rating) from review r where r.store_no = s.store_no),0)as
 	rating,
 	nvl(
-    (select count(review_no) from test_review r where r.store_no = s.store_no),0) as
+    (select count(review_no) from review r where r.store_no = s.store_no),0) as
     reviewCount,
     (select max(product_sale) from product p where p.store_no = s.store_no) as maxDiscount
 	from store s
@@ -246,7 +246,7 @@
 	s.store_phone as
 	storePhone,
 	s.store_img as storeImg,
-	nvl((select avg(rating) from test_review r where r.store_no = s.store_no),0)as rating
+	nvl((select avg(rating) from review r where r.store_no = s.store_no),0)as rating
 	from store s
 	where store_no = #{_parameter}
    </select>
