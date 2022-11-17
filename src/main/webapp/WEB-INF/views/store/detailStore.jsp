@@ -61,11 +61,9 @@
 				<div id="delivery-type">
 					<!-- 사장님 화면일 때 -->
 					<c:choose>
-						<c:when test="${sessionScope.memberNo eq sd.s.memberNo}">
-						<ul>
+						<c:when test="${sessionScope.m.memberNo eq sd.s.memberNo}">
 							<a href="/insertProductFrm.do?storeNo=${sd.s.storeNo}&storeName=${sd.s.storeName }&storeAddr=${sd.s.storeAddr}" class="btn bc4">빵등록</a>
 							<!-- <a href="/updateProductFrm.do?storeNo=${s.storeNo}&storeName=${s.storeName }&storeAddr=${s.storeAddr}" class="btn bc4">빵수정</a> -->
-						</ul>
 						</c:when>
 						<c:otherwise>
 							<button class="btn bc4"onclick="delivery();">배달</button>
@@ -104,7 +102,7 @@
 										</div>
 										
 										<!-- 사장님에게만 수정,삭제버튼 노출 -->
-										<c:if test="${sessionScope.memberNo eq sd.s.memberNo}">
+										<c:if test="${sessionScope.m.memberNo eq sd.s.memberNo}">
 										<div class="fix">
 											<a href="/updateProductFrm.do?productNo=${sdl.productNo }&storeNo=${sdl.storeNo}&storeName=${sd.s.storeName}&storeAddr=${sd.s.storeAddr}" class="btn bc4">수정</a>
 											<a href="/deleteProduct.do?productNo=${sdl.productNo}&storeNo=${sd.s.storeNo}" class="btn bc4">삭제</a>
