@@ -45,7 +45,7 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value="/insertProduct.do")
-	public String insertProduct(Product p, MultipartFile upFile, HttpServletRequest request) {
+	public String insertProduct(Product p, MultipartFile upFile, int memberNo, HttpServletRequest request) {
 		//System.out.println(p);
 		
 		if(upFile != null) {
@@ -75,8 +75,8 @@ public class ProductController {
 		}
 		int result = service.insertProduct(p);
 		if(result>0) {
-			return "redirect:/detailStore.do?storeNo="+p.getStoreNo();
-			//기존의 상세페이지로 이동시키고 싶은데 안됨..ㅠㅠ 이거는 다시 체크
+			return "redirect:/detailStore.do?storeNo="+p.getStoreNo()+"&memberNo="+memberNo;
+
 		}else {
 			return "redirect:/";
 		}
@@ -101,7 +101,7 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value="/updateProduct.do")
-	public String updateProduct(Product p,MultipartFile upFile, HttpServletRequest request, String status,String oldImg) {
+	public String updateProduct(Product p,int memberNo,MultipartFile upFile, HttpServletRequest request, String status,String oldImg) {
 		
 		System.out.println("업데이트할 상품 번호 : "+p.getProductNo());
 		//저장 경로
@@ -135,7 +135,7 @@ public class ProductController {
 		int result = service.updateProduct(p);
 		
 		if(result>0) {
-			return "redirect:/detailStore.do?storeNo="+p.getStoreNo();
+			return "redirect:/detailStore.do?storeNo="+p.getStoreNo()+"&memberNo="+memberNo;
 		}else {
 			return "redirect:/allStoreList.do?reqPage=1";
 		}

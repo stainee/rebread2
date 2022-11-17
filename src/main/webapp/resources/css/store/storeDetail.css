@@ -628,9 +628,66 @@ width: 100vw;
 #like{
 	color:black;
 }
-/*
-#like:hover{
+.review-box{
+	display: flex;
+    width: 690px;
+    min-height: 120px;
+    border: 1px solid #785c37;
+    margin: 0 auto;
+    align-items: center;
+    border-top: none;q
+}
+.review-info{
+	display: flex;
+	flex-direction: column;
+}
+.review-info .rating{
+	width: 200px;
+}
+.reviewfix{
+	width: 150px;
+}
+.review-mid{
+	display: flex;
+	width : 100%;	
+	height: 25px;
+	align-items: center;
+	justify-content: space-between;
+}
+.review-mid>div span:first-child {
+	border-right: 1px solid #ccc;
+}
+
+.review-content{
+	height: 80px;
+	width: 530px;
+	text-align: left;
+}
+.rating{
+	text-align: left;
+}
+#reviewer{
+	font-size: 18px;
+	font-weight: 800;
+	color: #785c37;
+}
+
+#dBtn:hover{
 	cursor: pointer;
 }
-*/
-
+.inputReview{
+	display: flex;
+	justify-content: center;
+	margin-bottom: 30px;
+	
+}
+.inputReview textarea{
+	
+	width: 500px;
+	resize: none;
+	height: 80px;
+	outline-style: 1px solid #785c37;
+}
+.inputReview textarea:focus {
+	outline-style: 1px solid #785c37;
+}

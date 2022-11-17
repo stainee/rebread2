@@ -11,20 +11,6 @@
 <link rel="stylesheet" href="/resources/css/common/default.css">
 <link rel="stylesheet" href="/resources/css/common/insertproduct.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<style>
-
-	.header-right li {
-    float: left;
-    width: 60px;
-    line-height: 80px;
-    text-align: center;
-    font-size: 12px;
-	}
-	.header-right a{
-	font-size: 12px;
-	font-weight: 1000;
-	}
-</style>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="total_wrapper">
@@ -40,57 +26,59 @@
 			<div class="content_container">
 				<form action="/insertProduct.do" method="post" enctype="multipart/form-data">
 					<div id="product-viewer">
-						<img id="img-view" width="350px">
+						<img id="img-view" width="200px" height="200px">
+						<span>상품 썸네일</span>
 					</div>
-					<table border="1">
+					<div class="product-box">
+					<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo}">
+					<table>
 						<tr>
 							<th>상품명</th>
-							<td><input type="text" name="productName"></td>
+							<td><input type="text" name="productName" required="required" maxlength=16></td>
 						</tr>
 						<tr>
 							<th>판매가격</th>
-							<td><input type="text" name="productPrice"></td>
+							<td><input type="text" name="productPrice" required="required" placeholder="숫자만 입력해주세요" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');"></td>
 						</tr>
 						<tr>
 							<th>수량</th>	
-							<td><input type="text" name="productStock"></td>
+							<td><input type="text" name="productStock" required="required" placeholder="숫자만 입력해주세요" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" maxlength="2"></td>
 						</tr>
 						
 						<tr>
 							<th>유통기한</th>
-							<td><input type="date" name="productDate"></td>	
+							<td><input type="date" name="productDate" min="2022-11-17" max="2022-11-24"required="required"></td>	
 						</tr>
 						
 						<tr>
 							<th>상품이미지</th>
-							<td><input type="file" name="upFile" accept="image/*" onchange="loadImg(this);"></td>
+							<td><input type="file" name="upFile" accept="image/*" onchange="loadImg(this);" required="required"></td>
 						</tr>
 						<tr>
 							<th>할인율</th>
-							<td><input type="text" name="productSale"></td>
+							<td><input type="text" name="productSale" placeholder="숫자만 입력해주세요" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" maxlength=2></td>
 						</tr>
 						<tr>
 							<th>빵종류</th>
-							<td>
-								<select name="productType">
-									<option value="0">로스빵</option>
-									<option value="1">일반빵</option>
-								</select>
+							<td class="select">
+									<input type="radio" id="select" name="productType" value="0" required="required"><label for="select">로스빵</label>
+     								<input type="radio" id="select2" name="productType" value="1" required="required"><label for="select2">일반빵</label>
 								<input type="hidden" name="storeNo" value="${storeNo}">
 							</td>
 						</tr>	
 						<tr>
 							<th>상품정보</th>
-							<td><textarea name="productContent" style="resize: none;"></textarea></td>
+							<td><textarea name="productContent" style="resize: none;" maxlength="100" required="required" placeholder="100자 이내로 상품정보를 입력해주세요."></textarea></td>
 						</tr>
 						<tr>
 							<th colspan="2">
-								<input type="submit" class="btn bc4 bs3" value="빵등록하기">
+								<input type="submit" class="btn bc4" value="빵등록하기">
 								<!-- <a href="/detailStore.do?storeNo=${storeNo}" class="btn bc4 bs3">취소하기</a> -->
 							</th>
 							
 						</tr>
 					</table>
+					</div>
 
 				</form>
 			</div>
@@ -115,6 +103,14 @@
 	        $("#img-view").attr("src","");
 	    }
 	}
+	function check_input1_onblur(){
+		var theForm=document.frm1;
+		if(isNaN(theForm.input1.value)){
+			alert("숫자만 입력해 주세요.");
+			theForm.input1.select();
+		}
+	}
+	
 	</script>
 </body>
 	
