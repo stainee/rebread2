@@ -42,8 +42,6 @@ public class KaKaoController {
     @RequestMapping(value = "/kakao_callback.do", method = RequestMethod.GET)
     public String redirectkakao(@RequestParam String code, HttpSession session, Model model) throws IOException {
             
-            
-            
             //접속토큰 get
             String kakaoToken = kakaoService.getReturnAccessToken(code);
             //접속자 정보 get

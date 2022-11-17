@@ -74,10 +74,8 @@
 								<input type="submit" class="btn bc4 bs3" value="빵등록하기">
 								<!-- <a href="/detailStore.do?storeNo=${storeNo}" class="btn bc4 bs3">취소하기</a> -->
 							</th>
-							
 						</tr>
 					</table>
-
 				</form>
 			</div>
 		</div>

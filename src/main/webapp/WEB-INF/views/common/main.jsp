@@ -214,9 +214,10 @@
 <div aos="fade-up" data-aos-offset="200" data-aos-easing="ease-out-cubic" data-aos-duration="500"></div>
 <script src="/resources/js/common/main.js"></script>
 <script>
-const searchText = $("#searchText").val();
+
 $("#searchIcon").on("click",function(){
-	if(searchText==""){
+	const searchText = $("#searchText").val();
+	if(searchText == ""){
 		alert("검색어를 입력해주세요.");
 		return false;
 	}

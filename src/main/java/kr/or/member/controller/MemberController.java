@@ -49,7 +49,6 @@ public class MemberController {
 	//회원탈퇴
 	@RequestMapping(value="/memberDelete.do")
 	public String memberDelete(int memberNo, HttpSession session) {
-		System.out.println(memberNo);
 		int result = service.deleteOneMember(memberNo);
 		if(result>0) {
 			session.invalidate();
@@ -253,7 +252,6 @@ public class MemberController {
 	@RequestMapping(value = "/changePw.do" , produces = "application/json;charset=utf-8")
 	public String updatePw(Member m ) {
 		int result = service.updatePwMember(m);
-		System.out.println(result);
 		if(result>0) {
 			return "0";
 		}else {
@@ -354,7 +352,6 @@ public class MemberController {
 		Member member = new Member();
 		member.setMemberMileage(token);
 		member.setMemberId(memberId);
-		System.out.println(member);
 		int result = service.updateToken(member);
 		if(result>0) {
 			m.setToken(m.getToken()-1);

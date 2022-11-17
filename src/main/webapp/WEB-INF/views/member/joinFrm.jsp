@@ -36,7 +36,7 @@
 						</td>	
 					</tr>
 					<tr>
-						<th>비빌번호<img src="/resources/img/member/pilsu.gif"></th>
+						<th>비밀번호<img src="/resources/img/member/pilsu.gif"></th>
 						<td><input type="password" name="memberPw" id="pw"> 
 						<span id="eye1" class="eye">SHOW</span> <span id="pwCheck"></span>
 							<div>

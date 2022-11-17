@@ -19,7 +19,7 @@
 	                </div>
             	</c:when>
             	<c:otherwise>
-            		<c:if test="${sessionSope.m.memberGrade eq 0 }">
+            		<c:if test="${sessionScope.m.memberGrade eq 0 }">
             			<div class="header-left">
 		                    <span style="cursor: pointer;"><a onclick="noway()">입점문의</a></span>
 		                </div>

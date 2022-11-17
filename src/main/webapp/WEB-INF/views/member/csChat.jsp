@@ -38,7 +38,7 @@
 	initChat();
 	function initChat(){
 		//웹소켓 연결 시도
-		ws = new WebSocket("ws://192.168.10.37:8888/chat.do");
+		ws = new WebSocket("ws://192.168.10.64/chat.do");
 		//웹소켓 연결 성공시 실행할 함수 지정
 		ws.onopen = startChat;
 		//서버에서 데이터를 받으면 처리할 함수 지정
