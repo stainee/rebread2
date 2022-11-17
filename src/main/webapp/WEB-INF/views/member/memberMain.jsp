@@ -13,7 +13,7 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
-<div class="page-content" style="height: 800px;">
+<div class="member-page-content">
 	<div class="total_wrapper" style="justify-content: center;">
 	        <div class="left_container" style="max-height: 357px;">
 	            <div class="memberInfo">
