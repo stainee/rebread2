@@ -6,11 +6,14 @@
 <head>
 <meta charset="UTF-8">
 <title>마이페이지-가게 정보 수정</title>
+<link rel="icon" href="/resources/img/favicon/favicon.ico"/>
+<link rel="apple-touch-icon" href="/resources/img/favicon/apple-touch-icon.png"/>
 </head>
 <link rel="stylesheet" href="resources/css/font/font.css">
 <link rel="stylesheet" href="/resources/css/common/managetemplate.css">
 <link rel="stylesheet" href="/resources/css/store/storeInfoUpdate.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <div class="total_wrapper">
