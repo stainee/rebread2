@@ -87,8 +87,8 @@ href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200&display=sw
 								</a>
 							</c:otherwise>
 						</c:choose>
-						<div style="height: 42px; line-height: 42px; margin-top: 13px;">
-							<span class="storeName">${s.storeName}</span>
+						<div style="height: 42px; line-height: 42px; margin-top: 13px; overflow: hidden;">
+							<span class="storeName" style="width: 190px;">${s.storeName}</span>
 							<span class="sale">-${s.maxDiscount }%</span>
 						</div>
 						<div class="review">

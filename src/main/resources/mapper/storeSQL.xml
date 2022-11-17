@@ -162,7 +162,7 @@
 	s.store_phone as storePhone,
 	s.store_img as storeImg,
 	nvl(
-	(select avg(rating) from review r where r.store_no = s.store_no),0)as
+	(select round(avg(rating),1) from review r where r.store_no = s.store_no),0)as
 	rating,
 	nvl(
     (select count(review_no) from review r where r.store_no = s.store_no),0) as
@@ -201,7 +201,7 @@
 	s.store_phone as storePhone,
 	s.store_img as storeImg,
 	nvl(
-	(select avg(rating) from review r where r.store_no = s.store_no),0)as
+	(select round(avg(rating),1) from review r where r.store_no = s.store_no),0)as
 	rating,
 	nvl(
     (select count(review_no) from review r where r.store_no = s.store_no),0) as
@@ -246,7 +246,7 @@
 	s.store_phone as
 	storePhone,
 	s.store_img as storeImg,
-	nvl((select avg(rating) from review r where r.store_no = s.store_no),0)as rating
+	nvl((select round(avg(rating),1) from review r where r.store_no = s.store_no),0)as rating
 	from store s
 	where store_no = #{_parameter}
    </select>
@@ -317,7 +317,7 @@
 			s.store_phone as storePhone,
 			s.store_img as storeImg,
 			nvl(
-			(select avg(rating) from review r where r.store_no = s.store_no),0)as
+			(select round(avg(rating),1) from review r where r.store_no = s.store_no),0)as
 			rating,
 			nvl(
     		(select count(review_no) from review r where r.store_no = s.store_no),0) as

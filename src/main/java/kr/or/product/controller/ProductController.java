@@ -144,10 +144,10 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value="/deleteProduct.do")
-	public String deleteProduct(int productNo,int storeNo) {
+	public String deleteProduct(int productNo,int storeNo,int memberNo) {
 		int result = service.deleteProduct(productNo);
 		if(result >0) {
-			return "redirect:/detailStore.do?storeNo="+storeNo;
+			return "redirect:/detailStore.do?storeNo="+storeNo+"&memberNo="+memberNo;
 		}else {
 			return "redirect:/allStoreList.do?reqPage=1";
 		}

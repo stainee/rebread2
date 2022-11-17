@@ -21,7 +21,7 @@ public class Store {
 	private String closeTime;
 	private String storePhone;
 	private String storeImg;
-	private int rating;
+	private double rating;
 	private int reviewCount;
 	private int maxDiscount;
 }

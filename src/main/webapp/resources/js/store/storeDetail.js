@@ -87,22 +87,7 @@ function loadImg(f){
 	}
 
 
-//플러스 마이너스 버튼 누를 시 수량 변경
-$("[name=plus]").on("click",function(){
-    let amount = $("[name=amount]").val();
-    amount++;
-    $("[name=amount]").attr("value",amount);
 
-    //개당 가격 추출
-    let price = $(".detail-price p").text();
-    //가격에서 콤마 제거
-    price2= minusComma(price);
-    
-    let totalPrice = amount * price2;
-    //console.log(totalPrice);
-    let totalPrice2 = addComma(totalPrice);
-    $(".total-price p").text(totalPrice2);
-});
     
 //마이너스 버튼 누를 시
 $("[name=minus]").on("click",function(){

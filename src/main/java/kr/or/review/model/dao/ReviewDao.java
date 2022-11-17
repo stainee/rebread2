@@ -59,4 +59,9 @@ public class ReviewDao {
 	public int insertReview(Review r) {
 		return sqlSession.insert("review.insertReview",r);
 	}
+
+	//상품을 구매한 유저가 리뷰를 등록할 수 있는 카운트
+	public int reviewAbleCount(HashMap<String, Object> map) {
+		return sqlSession.selectOne("review.reviewAbleCount",map);
+	}
 }

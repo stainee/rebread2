@@ -144,7 +144,6 @@ public class StoreController {
 		//System.out.println(s);
 		//model.addAttribute("s",s);
 		StoreDetail sd = sservice.selectOneStore2(storeNo,memberNo);
-		//System.out.println(sd);
 		model.addAttribute("sd",sd);
 		return "store/detailStore";
 	}
