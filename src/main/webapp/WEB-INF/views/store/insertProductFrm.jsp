@@ -39,7 +39,7 @@
 						</tr>
 						<tr>
 							<th>판매가격</th>
-							<td><input type="text" name="productPrice" required="required" placeholder="숫자만 입력해주세요" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');"></td>
+							<td><input type="text" id="price" name="productPrice" required="required" placeholder="숫자만 입력해주세요" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" maxlength="6"></td>
 						</tr>
 						<tr>
 							<th>수량</th>	
