@@ -291,10 +291,3 @@ textarea[name=storeContent]{
 	border: none;
 	outline: none;
 }
-.store_sales_info_wrapper{
-	display: none;
-    justify-content: center;
-    padding-top: 50px;
-    margin-left: 50px;
-    margin-right: 60px;
-}

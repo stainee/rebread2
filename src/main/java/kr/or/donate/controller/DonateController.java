@@ -87,10 +87,45 @@ public class DonateController {
 		}
 	}
 	
-	@ResponseBody
-	@RequestMapping(value = "/donateUpdate.do", produces = "application/json;charset=utf-8")
-	public void donateUpdate(Donate d) {
+	@RequestMapping(value = "/donateUpdate.do")
+	public String donateUpdate(Donate d, MultipartFile upFile, HttpServletRequest request, String status, String oldImg) {
+		//저장 경로
+		String savePath = request.getSession().getServletContext().getRealPath("/resources/img/donate/");
+				
+		if(upFile != null) {
+							
+			String filename = upFile.getOriginalFilename();
+			String filepath = fileRename.fileRename(savePath, filename);
+							
+			try {
+				FileOutputStream fos = new FileOutputStream(new File(savePath+filepath));
+				BufferedOutputStream bos = new BufferedOutputStream(fos);
+								
+				byte[] bytes = upFile.getBytes();
+				bos.write(bytes);
+				bos.close();
+								
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			d.setDonateImg(filepath);
+					
+		}else if(oldImg != null && status.equals("stay")) {
+			d.setDonateImg(oldImg);
+		}		
+		
 		int result = service.updateOneDonate(d);
+		System.out.println(d);
+		System.out.println(result);
+		if(result>0) {
+			return "/admin/donateUpdateSuccess";
+		}else {
+			return "redirect:/";
+		}
 	}
 	
 	

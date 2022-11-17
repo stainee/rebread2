@@ -36,7 +36,7 @@
                 <div class="navi_box">가게 정보 수정</div>
                 <!-- 가게 수정창을 띄우는 div -->
                 <div class="store_update_wrapper">
-	                <form action="/storeInfoUpdateSuccess.do" method="post">
+	                <form action="/storeInfoUpdateSuccess.do" method="post" enctype="multipart/form-data">
                 	<div class="store_update_form">
                 		<div class="store_update_title">매장명</div>
                 		<div class="store_update_input">
@@ -134,6 +134,6 @@
 		$(".delFile").hide();
 		$(this).next().show();
 		$("[name=status]").val("delete");
-});
+	});
 </script>
 </html>

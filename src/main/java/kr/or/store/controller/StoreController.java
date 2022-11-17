@@ -149,6 +149,7 @@ public class StoreController {
 	@RequestMapping(value = "/salesInfoUpdate.do")
 	public String salesInfoUpdate(Order o) {
 		int result = sservice.salesInfoUpdate(o);
+		System.out.println(o);
 		if(result>0) {
 			o.setOrderNo(o.getOrderNo());
 			o.setOrderState(o.getOrderState());
