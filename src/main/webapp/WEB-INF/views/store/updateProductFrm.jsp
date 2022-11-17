@@ -89,7 +89,6 @@
 								<input type="submit" class="btn bc4" value="수정하기">
 								<!-- <a href="/detailStore.do?storeNo=${storeNo}" class="btn bc4 bs3">취소하기</a> -->
 							</th>
-							
 						</tr>
 					</table>
 					</div>
