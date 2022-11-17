@@ -10,6 +10,8 @@
 <link rel="stylesheet" href="/resources/css/font/font.css">
 <link rel="stylesheet" href="/resources/css/common/admin.css">
 <link rel="stylesheet" href="/resources/css/admin/csDetail.css">
+<link rel="icon" href="/resources/img/favicon/favicon.ico"/>
+<link rel="apple-touch-icon" href="/resources/img/favicon/apple-touch-icon.png"/>
 </head>
 <body>
 	<div class="detail_container">

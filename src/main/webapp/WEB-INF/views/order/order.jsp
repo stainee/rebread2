@@ -10,6 +10,8 @@
 <script src="https://js.tosspayments.com/v1"></script>
 <link rel="stylesheet" href="/resources/css/font/font.css">
 <link rel="stylesheet" href="/resources/css/order/order.css">
+<link rel="icon" href="/resources/img/favicon/favicon.ico"/>
+<link rel="apple-touch-icon" href="/resources/img/favicon/apple-touch-icon.png"/>
 </head>
 <body>
    <jsp:include page="/WEB-INF/views/common/header.jsp"/>

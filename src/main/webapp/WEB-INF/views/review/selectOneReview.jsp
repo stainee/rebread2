@@ -15,7 +15,8 @@
 	href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200&display=swap"
 	rel="stylesheet">
 	<link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-round.css" rel="stylesheet">
-</head>
+<link rel="icon" href="/resources/img/favicon/favicon.ico"/>
+<link rel="apple-touch-icon" href="/resources/img/favicon/apple-touch-icon.png"/>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
