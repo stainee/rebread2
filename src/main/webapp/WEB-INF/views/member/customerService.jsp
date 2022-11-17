@@ -92,7 +92,7 @@ $(".qna_wrapper .quest").on("click", function(){
 	console.log($(this));
 })
 
-$("#btn_not").on("click",function(){
+$(".btn_not").on("click",function(){
 	alert("로그인이 필요한 서비스입니다");
 })
 </script>
