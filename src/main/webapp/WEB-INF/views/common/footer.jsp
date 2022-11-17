@@ -30,10 +30,10 @@
             </div>
             <div class="foot-mid">
                 <ul>
-                    <li><a href="#">SHOP</a></li>
-                    <li><a href="#">REVIEW</a></li>
-                    <li><a href="#">COMMUNITY</a></li>
-                    <li><a href="#">ABOUT</a></li>
+                    <li><a href="/purchaseList.do?reqPage=1">SHOP</a></li>
+                    <li><a href="/reviewList.do?reqPage=1">REVIEW</a></li>
+                    <li><a href="/customerService.do">COMMUNITY</a></li>
+                    <li><a href="/brandIntro.do">ABOUT</a></li>
                 </ul>
                 <ul>
                     <li><a href="#" style="font-size: 10px">이용약관</a></li>

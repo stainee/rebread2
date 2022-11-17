@@ -38,7 +38,7 @@ public class KakaoService {
              StringBuilder sb = new StringBuilder();
              sb.append("grant_type=authorization_code");
              sb.append("&client_id=e584f1ee2e73e2ce140d7006c3f82405");  //앱 KEY VALUE
-             sb.append("&redirect_uri=http://localhost:8888/kakao_callback.do"); // 앱 CALLBACK 경로
+             sb.append("&redirect_uri=http://192.168.10.64/kakao_callback.do"); // 앱 CALLBACK 경로
              sb.append("&code=" + code);
              bw.write(sb.toString());
              bw.flush();
@@ -98,11 +98,11 @@ public class KakaoService {
                  JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
                  
                  String memberId = "KAKAO_"+element.getAsJsonObject().get("id").toString();
-                 String memberMail = kakao_account.getAsJsonObject().get("email").getAsString();
+                 //String memberMail = kakao_account.getAsJsonObject().get("email").getAsString();
                  String memberName = properties.getAsJsonObject().get("nickname").getAsString();
                  
                  resultMap.put("memberId", memberId);
-                 resultMap.put("memberMail", memberMail);
+                 //resultMap.put("memberMail", memberMail);
                  resultMap.put("memberName", memberName);
 
              } catch (IOException e) {

@@ -17,67 +17,36 @@
 			<p>기부 등록</p>
 		</div>
 		<div class="content_container">
-		
-			<table class="membertbl">
-				<tr>
-				 	<th>기부 단체</th>
-				 	<td><input type="text" value="" id="donateOrgan"></td>
-				</tr>
-				
-				<tr>
-				 	<th>기부 이미지</th>
-				 	<td>
-				 		<input type="file" value="" id="donateFile" accept="image/*" style="padding: 1px 2px;" multiple>
-				 	</td>
-				</tr>
-				
-				<tr>
-				 	<th>목표 금액</th>
-				 	<td><input type="text" value="" id="donateEnd"></td>
-				</tr>
-				
-				<tr>
-				 	<th>기부 내용</th>
-				 	<td><textarea id="donateContent"></textarea></td>
-				</tr>
-			</table>
+			<form action="/donateInsert.do" method="post" enctype="multipart/form-data">
+				<table class="membertbl">
+					<tr>
+					 	<th>기부 단체</th>
+					 	<td><input type="text" value="" id="donateOrgan" name="donateOrgan"></td>
+					</tr>
+					<tr>
+					 	<th>기부 이미지</th>
+					 	<td>
+					 		<input type="file" value="" id="donateFile" name="donateFile"  accept="image/*" style="padding: 1px 2px;" multiple>
+					 	</td>
+					</tr>
+					<tr>
+					 	<th>목표 금액</th>
+					 	<td><input type="text" value="" id="donateEnd" name="donateEnd"></td>
+					</tr>
+					<tr>
+					 	<th>기부 내용</th>
+					 	<td><textarea id="donateContent" name="donateContent"></textarea></td>
+					</tr>
+				</table>
 			<div class="btn_wrap">
-				<button class="complete">확인</button>
+				<button type="submit" class="complete">확인</button>
 			</div>
-			
+			</form>
 		</div>
 	</div>
 </body>
 <script>
-	$(".complete").on("click",function(){
-		$("#donateContent").attr("value", $("#donateContent").text());
-		const donateOrgan = $("#donateOrgan").val();
-		const donateImg = $("#donateFile")[0].files[0];
-		const donateEnd = $("#donateEnd").val();
-		const donateContent = $("#donateContent").val();
-		
-		console.log(donateOrgan);
-		console.log(donateImg);
-		console.log(donateEnd);
-		console.log(donateContent);
-		
-		$.ajax({
-			url:"/donateInsert.do",
-			data:{
-				donateOrgan:donateOrgan,
-				donateImg:donateImg,
-				donateEnd:donateEnd,
-				donateContent:donateContent,
-			},
-			success:function(){
-				alert("등록되었습니다");
-				opener.location.reload();
-				//window.close();
-			},
-			cache: false,
-	        contentType: false,
-	        processData: false
-		});
-	})
+	
+	
 </script>
 </html>

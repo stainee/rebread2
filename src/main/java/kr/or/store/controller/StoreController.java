@@ -176,9 +176,6 @@ public class StoreController {
 	//빵이름으로 검색시
 	@RequestMapping(value = "/searchBread.do")
 	public String searchBread(int reqPage,Model model,String breadName) {
-		if(breadName == "") {
-			return "redirect:/";
-		}
 		StorePageData spd = sservice.selectBeadList(reqPage,breadName);
 		System.out.println(spd);
 		//스토어 검색안된 count
@@ -258,6 +255,14 @@ public class StoreController {
 		model.addAttribute("count", count);
 		//model.addAttribute("countName", countName);
 		return "store/purchaseList";
+	}
+	@RequestMapping(value = "/storeSalesStatus.do")
+	public String storeSalesStatus(HttpSession session, Model model) {
+		Member member = (Member)session.getAttribute("m");
+//		System.out.println(member.getMemberNo());
+		ArrayList<Store> list = sservice.selectMemberStore(member);
+		model.addAttribute("list",list);
+		return "store/storeSalesStatus";
 	}
 }
 

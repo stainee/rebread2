@@ -42,9 +42,9 @@
   		where member_no = #{memberNo}
   </update>
   
-  <delete id="deleteOneMember" parameterType="Integer">
+  <delete id="deleteOneMember" parameterType="int">
   		delete from member
-  		where member_no = #{_parameter}
+  		where member_no = #{memberNo}
   </delete>
   
   <!-- 로그인 -->

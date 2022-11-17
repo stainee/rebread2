@@ -46,6 +46,8 @@
                             	<input type="text" name="storeName" value="${s.storeName }" readonly>
                             </div>
                         </div>
+                        
+                        
                         <div class="store_info_right">
                             <div class="store_info_form">
                                 <div class="store_info_title">사업자 이름</div>
@@ -76,6 +78,7 @@
                                 <div class="store_info_content">
                                 	<input type="text" name="storeAccount" value="${s.storeAccount }" readonly>
                                 </div>
+                                <input type="hidden" name="storeNo" value="${s.storeNo }">
                                 <button class="store_sale_btn">매출 현황</button>
                             </div>
                             <div class="store_info_form">
@@ -87,6 +90,7 @@
                                 <button class="store_edit_btn">수정</button>
                             </div>
                         </div>
+                        
                     </div>
                 </div>
                 </c:forEach>
@@ -155,6 +159,7 @@
                 	</form>
                 </div>
                 
+                
                 <div class="more_btn_box">
                 	<button class="more_btn">더보기</button>
             	</div>
@@ -186,6 +191,10 @@ $(".navi_btn").on("click",function(){
 
 $(".store_edit_btn").on("click",function(){
 	location.href="/storeInfoUpdate.do?storeNo="+$(this).prev().val();
+});
+
+$(".store_sale_btn").on("click",function(){
+	location.href="/storeSalesStatus.do?storeNo="+$(this).prev().val();
 });
 
 $(function(){
