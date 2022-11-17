@@ -57,7 +57,7 @@ public class StoreController {
 	@RequestMapping(value = "/storeInsert.do")
 	public String storeInsert(Store s, MultipartFile storeFile, HttpServletRequest request) {
 		if(storeFile != null) {
-			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/store/");
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/img/store/");
 				String filename = storeFile.getOriginalFilename();
 				String filepath = fileRename.fileRename(savePath, filename);
 				
@@ -79,7 +79,7 @@ public class StoreController {
 				s.setStoreImg(filepath);
 			}
 		int result = sservice.insertStore(s);
-		
+		System.out.println(s);
 		return "redirect:/ceoStoreInfo.do";
 	}
 	
@@ -138,11 +138,11 @@ public class StoreController {
 	}
 	//매장 상세페이지
 	@RequestMapping(value="/detailStore.do")
-	public String detailStore(int storeNo, Model model) {
+	public String detailStore(int storeNo,int memberNo, Model model) {
 		//Store s = sservice.selectOneStore2(storeNo);
 		//System.out.println(s);
 		//model.addAttribute("s",s);
-		StoreDetail sd = sservice.selectOneStore2(storeNo);
+		StoreDetail sd = sservice.selectOneStore2(storeNo,memberNo);
 		//System.out.println(sd);
 		model.addAttribute("sd",sd);
 		return "store/detailStore";
@@ -209,6 +209,8 @@ public class StoreController {
 			p.setProductImg(pImg[i]);
 			list.add(p);
 		}
+		Store s = sservice.selectOrderStore(storeNo);
+		model.addAttribute("s",s);
 		model.addAttribute("list",list);
 		model.addAttribute("storeNo",storeNo);
 		model.addAttribute("memberNo",memberNo);
@@ -216,5 +218,34 @@ public class StoreController {
 		return "order/order";
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="/insertLike.do", produces = "application/json;charset=utf-8")
+	public String insertLike(int storeNo, int memberNo) {
+		int result = sservice.insertLike(storeNo, memberNo);
+		if(result> 0) {
+			return "1";
+		}else {
+			return "0";
+		}
+	}
+	@ResponseBody
+	@RequestMapping(value="/deleteLike.do", produces = "application/json;charset=utf-8")
+	public String deleteLike(int storeNo, int memberNo) {
+		int result = sservice.deleteLike(storeNo,memberNo);
+		if(result>0) {
+			return "1";
+		}else {
+			return "0";
+		}
+	}
+	
+	@RequestMapping(value = "/storeSalesStatus.do")
+	public String storeSalesStatus(HttpSession session, Model model) {
+		Member member = (Member)session.getAttribute("m");
+//		System.out.println(member.getMemberNo());
+		ArrayList<Store> list = sservice.selectMemberStore(member);
+		model.addAttribute("list",list);
+		return "store/storeSalesStatus";
+	}
 }
 

@@ -30,7 +30,7 @@
 				<tr>
 				 	<th>기부 이미지</th>
 				 	<td>
-				 		<input type="text" value="${d.donateImg }" id="donateImg">
+				 		<input type="file" value="${d.donateImg }" id="donateImg">
 				 		<button id="donateImg_btn">첨부파일</button>
 				 	</td>
 				</tr>

@@ -8,6 +8,111 @@ font-family: 'NanumSquareRoundExtraBold';
 body{
     background-color: #fff;
 }
+
+header {
+    background-color: #fefaee;
+	font-family: 'NanumSquareRound';
+}
+header a {
+    color: #785c37;
+    font-weight: 800;
+}
+.header-wrap1 {
+    border-bottom: solid #785c37 1px;
+    height: 80px;
+}
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    height: 80px;
+}
+.header-wrap1 > div > div {
+    width: 400px;
+}
+.header-right ul {
+    display: flex;
+    justify-content: right;
+  		/* 이거 있는데 굳이 왜 center를 또 박아서 귀찮게 그러냐 
+    	참고로 left, right 사이드 margin 있는거 안하고 센터 컨테이너를 만들어서 보통 margin: 0 auto로 둠
+    	그래야 사용자가 보기 편함
+    	*/
+    margin-right: 80px;
+}
+/*
+.header-mid {
+    display: flex;
+    justify-content: center;
+    min-width: 780px;
+    position: absolute;
+    left: 50%;
+    top:40px;
+    transform: translate(-50%, -50%);
+}
+*/
+.header-mid{
+	text-align: center;
+	position: relative;
+}
+.header-mid img {
+    width: 200px;
+    height: 60px;
+    position: absolute;
+    left: 52px;
+    top: 10px;
+}
+.header-left {
+    display: flex;
+    justify-content: left;
+    line-height: 80px;
+    font-size: 12px;
+    margin-left: 80px; /** margin, padding 구분 할것 */
+    width: 400px;
+}
+.header-left span{
+    width: 60px;
+    height: 80px;
+}
+.header-left img {
+    width: 9px;
+    height: 11px;
+}
+.header-right li {
+    float: left;
+    width: 60px;
+    line-height: 80px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 900;
+}
+/*
+.header-right a{
+	font-size: 13px;
+    font-weight: 900;
+}*/
+.header-bottom {
+    width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+
+
+
+
+
+
+.header-wrap2 {
+    position: sticky;
+    z-index: 999;
+    top: 0;
+    background-color: #fefaeedb;
+    width: 100%;
+}
+
+
+
 .page-content{
     width: 1200px;
     overflow: hidden;
@@ -28,6 +133,10 @@ body{
 }
 .right-content{
     width: 400px;
+}
+.mid-title{
+	display: flex;
+	align-items: baseline;
 }
 .mid-title>h2{
     font-size: 30px;
@@ -429,6 +538,8 @@ body{
 	margin: 0 auto;
 }
 
+
+
 /*로그인알람*/
 
 .alarm-modal{
@@ -485,4 +596,41 @@ width: 100vw;
 	font-size: 18px;
 }
 
+
+.input-comment-box textarea.input-form{
+    width: 70%;
+    min-height: 10px;
+    margin: 0 auto;
+}
+/*
+.input-comment-box li:first-child{
+	width: 75%;
+	margin: 0 auto;
+}
+*/
+.input-comment-box li:last-child{
+	width: 90%;
+	margin : 0 auto;
+}
+
+.mid-title span{
+	width: 50px;
+	text-align: center;
+	font-weight: 1000;		
+}
+.mid-title span:hover{
+	cursor: pointer;
+}
+
+#delLike{
+	color: red;	
+}
+#like{
+	color:black;
+}
+/*
+#like:hover{
+	cursor: pointer;
+}
+*/
 

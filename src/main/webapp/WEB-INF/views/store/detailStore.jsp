@@ -27,10 +27,29 @@
 			<div class="left-content">
 				<div class="mid-title">
 					<h2>${sd.s.storeName }</h2>
+					<c:choose>
+						<c:when test="${not empty sessionScope.m }">
+							<c:choose>
+								<c:when test="${not empty sd.l}">
+									<span id="delLike" class="material-symbols-outlined">favorite</span>
+									<span id="like" class="material-symbols-outlined" style="display: none;">favorite</span>
+								</c:when>
+								<c:otherwise>
+									<span id="like" class="material-symbols-outlined">favorite</span>
+									<span id="delLike" class="material-symbols-outlined" style="display: none;">favorite</span>
+								</c:otherwise>
+							</c:choose>
+						</c:when>
+						<%--비로그인 시 로그인 창 뜨도록 --%>
+						<c:otherwise>
+							<span class="material-symbols-outlined" onclick="alarm();">favorite</span>
+						</c:otherwise>
+					</c:choose>
+					
 				</div>
 				<div class="store-detail-box">
 					<div class="img">
-						<img src="/resources/upload/store/${sd.s.storeImg }">
+						<img src="/resources/img/store/${sd.s.storeImg }">
 					</div>
 					<div class="store-detail">
 						<span id="star">★ ${sd.s.rating }</span>
@@ -40,16 +59,17 @@
 				</div>
 				
 				<div id="delivery-type">
-					
-					<!-- 사장님 화면-->
-					<c:if test="${sessionScope.memberNo eq sd.s.memberNo}"> 
 						<ul>
 							<a href="/insertProductFrm.do?storeNo=${sd.s.storeNo}&storeName=${sd.s.storeName }&storeAddr=${sd.s.storeAddr}" class="btn bc4">빵등록</a>
 							<!-- <a href="/updateProductFrm.do?storeNo=${s.storeNo}&storeName=${s.storeName }&storeAddr=${s.storeAddr}" class="btn bc4">빵수정</a> -->
 						</ul>
-					</c:if>
+					
+					<!-- 사장님 화면
+					<c:if test="${sessionScope.memberNo eq sd.s.memberNo}"> -->
+					<!--</c:if>
 					<button class="btn bc4"onclick="delivery();">배달</button>
                     <button class="btn bc4"onclick="pickup();">픽업</button>
+                    -->
 				</div>
 				
 				<div class="tab-wrap">
@@ -123,12 +143,63 @@
 							</div>
 							</c:if>
 						</div>
-						<div class="tabcontent" id="REVIEW"></div>
+						<div class="tabcontent" id="REVIEW">
+							<div class="review-box-wrap">
+								<div class="input-comment-box">
+									<form action="/insertReview.do" method="post" enctype="multipart/form-data">
+		                      			<div id="product-viewer">
+											<img id="img-view" width="150px">
+										</div>	
+		                      			<ul>
+		                      				<li>
+		                  						<span>별점</span>
+		                  						<select name="rating">
+		                  							<option value="1">★</option>
+		                  							<option value="2">★★</option>
+		                  							<option value="3">★★★</option>
+		                  							<option value="4">★★★★</option>
+		                  							<option value="5">★★★★★</option>
+		                  						</select>
+		                      					<input type="file" name="upFile" accept="image/*" onchange="loadImg(this);">
+		                      				</li>
+		                           			<li>
+		                           				<input type="hidden" name="reviewWriter" value="${sessionScope.m.memberId }">
+				                                <input type="hidden" name="storeNo" value="${sd.s.storeNo}">
+				                                <input type="hidden" name="reviewComment" value="0"><%--대댓글용 댓글번호 --%>
+				                                <textarea class="input-form" name="reviewContent"></textarea>
+				                                <input type="submit" id="commentBtn"class="btn bc5" value="댓글달기">
+		                           			</li>
+		                           			<li>
+		                                		
+		                           			</li>
+		                        		</ul>
+									</form>
+                    			</div>
+                    			<div class="review-list-wrap">
+                    				<ul class="posting-comment">
+										<li>
+					                        <p class="comment-info">
+					                        	<span id="writer"></span>
+					                        	<span id="date"></span>
+					                        </p>
+					                        <p class="comment-content">너무 맛있다~~</p>
+					                        <textarea name="ncContent" class="input-form" style="min-height:96px; display:none;"></textarea>
+											<p class="comment-link">          
+				                    	</li>
+				                    </ul>
+				                  
+                    			</div>
+                    		</div>
+				
+						</div>
+						
+						<!-- 지도  -->
 						<div class="tabcontent" id="LOCATION">
 							<h2>${sd.s.storeAddr }</h2>
 							
 							<div id="map" style="width:600px;height:400px;"></div>
 						</div>
+						<!-- 지도 끝 -->
 					</div>
 				</div>
 			</div>
@@ -235,19 +306,65 @@
 		<!-- 로그인 알림 -->
 		<div class="alarm-modal">
 			<div class="alarm-wrap">
-				<div>주문표에 추가 하시려면 먼저 로그인을 해주세요.</div>
+				<div>리브래드에 먼저 로그인을 해주세요.</div>
 				<div class="btnZone">
 					<a href="/login.do" class="btn bc4">예</a>
 					<button type="button" class="btn bc4">아니요</button>
 				</div>
 			</div>
 		</div>
+		<!-- 로그인 알림 모달 끝 -->
 	</div>
 	
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7eb9ba960e94dd83c11243c2a4da622f&libraries=services"></script>
 	<script src="/resources/js/store/storeDetail.js"></script>
 	<script>
+	
+	//좋아요 버튼 누를 시 delete
+	$("#delLike").on("click",function(e){
+		const storeNo =$("[name=storeNo]").val();
+		const memberNo=$("[name=memberNo]").val();
+		
+		//$("#delLike").css("color","black");
+		
+		$.ajax({
+			url:"/deleteLike.do",
+			data:{storeNo:storeNo, memberNo:memberNo},
+			success:function(data){
+				if(data == 1){
+					//$("#delLike").off('click');
+					$("#like").show();
+					$("#delLike").hide();
+				}
+			}
+			
+		});
+		
+	});
+	
+	//좋아요 버튼 누를 시  insert
+	$("#like").on("click",function(e){
+		const storeNo =$("[name=storeNo]").val();
+		const memberNo=$("[name=memberNo]").val();
+		
+		//$("#like").css("color","red");
+		
+		$.ajax({
+			url:"/insertLike.do",
+			data:{storeNo:storeNo, memberNo:memberNo},
+			success:function(data){
+				//console.log(data);
+				if(data == 1){
+					//$("#like").off('click');
+					$("#delLike").show();
+					$("#like").hide();
+				}
+			}
+		});
+	});
+	
+	
 	function delivery(){
 		//<input type="hidden" name="deliveryType" value="1">
 		$("[name=deliveryType]").attr("value","배달준비중");
@@ -269,7 +386,7 @@
 		let p1 =0;
 		
 		const arr = $(".lastPrice");
-		console.log(arr.length);
+		//console.log(arr.length);
 		for(let i=0;i<arr.length;i++){
 			let price = (arr.eq(i).text());
 			price = parseInt(Math.floor(price));
@@ -365,7 +482,45 @@
 			}
 		});
 		
+	
+		//리뷰탭 클릭 시 리뷰 불러오기
+		$(tabs.eq(1)).on("click",function(){
+			const storeNo =$("[name=storeNo]").val();
+			
+			$.ajax({
+				url:"/selectReview.do",
+				data:{storeNo:storeNo},
+				success:function(data){
+					console.log(data.r);
+					<%--
+					if(data!=null){
+						for(let i=0; i<data.length;i++){
+							let html = '';
+							
+							html += '<ul class="posting-comment">';
+							html += '<li>';
+	                        html += '<p class="comment-info">';
+	                        html += '   <span id="sc-writer">' '</span>';
+	                        html += '   <span id="sc-date">'+ +'</span>';
+	                        html += '</p>';
+	                        html += '<p class="comment-content">' ++ '</p>';          
+	                    	html += '</li>';
+	                    	html += '</ul>';
+	                    	storyComment.append(html);
+	                    	
+						}
+						
+						
+					}
+					--%>
+					
+				}
+			});
+		});
 		
+		
+		
+		//카트에 담긴 장바구니 삭제버튼 클릭시
 		function cancel(obj){
 			let min =$(obj).parent().parent().find(".cart-amount [name=pPrice]").val();
 			console.log("마이너스 할 금액 : "+min);

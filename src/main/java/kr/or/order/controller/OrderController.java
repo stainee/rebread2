@@ -43,6 +43,7 @@ import kr.or.order.model.service.OrderService;
 import kr.or.order.model.vo.Order;
 import kr.or.order.model.vo.OrderProduct;
 import kr.or.product.model.vo.Product;
+import kr.or.store.model.vo.Store;
 
 @Controller
 public class OrderController {
@@ -148,13 +149,13 @@ public class OrderController {
 			
 			model.addAttribute("orderNo",o.getOrderNo());
 			
-			return "order/orderSuccess";
+			return "order/orderCardSuccess";
 		}else {
 			JsonNode failNode = responseEntity.getBody();
 			model.addAttribute("message",failNode.get("message").asText());
 			model.addAttribute("code",failNode.get("code").asText());
 			
-			return "order/orderFail"; 
+			return "order/orderFail";
 		}
 	}
 	
@@ -199,8 +200,8 @@ public class OrderController {
 		boolean isSuccess = code == 200 ? true : false;
 		InputStream responseStream = isSuccess? connection.getInputStream(): connection.getErrorStream();
 		Reader reader = new InputStreamReader(responseStream, StandardCharsets.UTF_8);
-		JSONParser parser = new JSONParser();
-		JSONObject jsonObject = (JSONObject) parser.parse(reader);
+//		JSONParser parser = new JSONParser();
+//		JSONObject jsonObject = (JSONObject) parser.parse(reader);
 		responseStream.close();
 		if(isSuccess) {
 			// 주문이 취소되면 주문상태, 회원 마일리지 수정
@@ -214,7 +215,7 @@ public class OrderController {
 			int memberMileage = service.selectMemberMileage(o.getMemberNo());
 			session.setAttribute("memberMileage", memberMileage);
 			
-			//주문취소시 token 삭제
+			// 주문취소시 token 삭제
 			int memberNo = m.getMemberNo();
 			int delToken = service.deleteToken(memberNo);
 			
@@ -227,7 +228,7 @@ public class OrderController {
 	
 	// 무통장입금 api
 	@RequestMapping("/orderAccount.do")
-	public String confirmAccountOrder(@RequestParam String paymentKey, @RequestParam String orderId, @RequestParam int amount, Model model) throws Exception {
+	public String confirmAccountOrder(@RequestParam String paymentKey, @RequestParam String orderId, @RequestParam int amount, Model model, @SessionAttribute Member m) throws Exception {
 		HttpHeaders headers = new HttpHeaders();
 		
 		headers.set("Authorization","Basic "+Base64.getEncoder().encodeToString((SECRET_KEY+":").getBytes()));
@@ -247,8 +248,11 @@ public class OrderController {
 			
 			// 가상계좌번호
 			model.addAttribute("accountNumber",successNode.get("virtualAccount").get("accountNumber").asText());
-
-			System.out.println("accountNumber : "+successNode.get("virtualAccount").get("accountNumber").asText());
+			model.addAttribute("bank",successNode.get("virtualAccount").get("bank").asText());
+			model.addAttribute("totalAmount",successNode.get("totalAmount"));
+			System.out.println("bank : "+successNode.get("virtualAccount").get("bank").asText());
+			System.out.println("amount : "+amount);
+			System.out.println("totalAmount : "+successNode.get("totalAmount"));
 			
 			// 결제 후 paymentKey를 DB에 저장
 			int orderNo = service.searchOrderNo();
@@ -259,55 +263,28 @@ public class OrderController {
 			
 			model.addAttribute("orderNo",o.getOrderNo());
 			
-			return "order/orderSuccess";
-		}else {
-			JsonNode failNode = responseEntity.getBody();
-			model.addAttribute("message",failNode.get("message").asText());
-			model.addAttribute("code",failNode.get("code").asText());
+			//token삽입
+			int memberNo = m.getMemberNo();
+			int inToken = service.insertToken(memberNo);
 			
-			return "order/orderFail"; 
+			return "order/orderAccountSuccess";
+		}else {
+//			JsonNode failNode = responseEntity.getBody();
+//			model.addAttribute("message",failNode.get("message").asText());
+//			model.addAttribute("code",failNode.get("code").asText());
+			
+			return "order/orderFail";
 		}
 	}
 	
-	//
+	// order_product 테이블에 정보 저장
 	@ResponseBody
 	@RequestMapping(value="/insertOrderProduct.do", produces = "application/json;charset=utf-8")
 	public void insertOrderProduct(OrderProduct op) {
-		System.out.println("데이터성공1");
 		int orderNo = service.searchOrderNo();
 		op.setOrderNo(orderNo);
 		int result = service.insertOrderProduct(op);
-		
-		
-		
-		System.out.println("데이터성공2");
 	}
-	
-	
-	// 카카오페이 api
-	@RequestMapping("/kakao.do")
-	public String kakao(Order o) throws Exception{
-		// 
-		URL url = new URL("https://kapi.kakao.com/v1/payment/ready");
-		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-		connection.setRequestMethod("POST");
-		connection.setRequestProperty("Authorization", "KakaoAK 3193216ae4cabdf5c591d742459c5d6d");
-		connection.setRequestProperty("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
-		connection.setDoOutput(true); // 서버에 보낼 데이터가 있을 때 true
-		
-		
-		return null;
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	

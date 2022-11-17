@@ -11,6 +11,7 @@ import kr.or.order.model.dao.OrderDao;
 import kr.or.order.model.vo.Order;
 import kr.or.order.model.vo.OrderProduct;
 import kr.or.product.model.vo.Product;
+import kr.or.store.model.vo.Store;
 
 @Service
 public class OrderService {
@@ -87,7 +88,6 @@ public class OrderService {
 	public Product selectOrderProduct2(int productNo) {
 		return dao.selectOrderProduct2(productNo);
 	}
-
 	//insert 토큰
 	public int insertToken(int memberNo) {
 		return dao.insertToken(memberNo);
@@ -95,6 +95,9 @@ public class OrderService {
 	//del 토큰
 	public int deleteToken(int memberNo) {
 		return dao.deleteToken(memberNo);
+	}
+	public Store selectOrderStore(int storeNo) {
+		return dao.selectOrderStore(storeNo);
 	}
 
 	
