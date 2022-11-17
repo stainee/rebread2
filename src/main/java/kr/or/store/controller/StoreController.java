@@ -242,5 +242,22 @@ public class StoreController {
 			return "0";
 		}
 	}
+	
+	@RequestMapping(value="/chooseStoreList.do")
+	public String chooseStoreList(int reqPage, int chooseNum,Model model) {
+		StorePageData spd = sservice.chooseStoreList(reqPage,chooseNum);
+		//스토어 검색안된 count
+		int count = sservice.countList();
+		//스토어 검색됐을때 count
+		//int countName = sservice.countList(storeName);
+		model.addAttribute("list",spd.getList());
+		model.addAttribute("pageNavi",spd.getPageNavi());
+		model.addAttribute("reqPage",spd.getReqPage());
+		model.addAttribute("numPerPage", spd.getNumPerPage());
+		//model.addAttribute("storeName",storeName);
+		model.addAttribute("count", count);
+		//model.addAttribute("countName", countName);
+		return "store/purchaseList";
+	}
 }
 
