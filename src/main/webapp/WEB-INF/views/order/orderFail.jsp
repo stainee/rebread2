@@ -15,7 +15,7 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
     <div class="content-wrap">
         <div class="content">
-            <p>무통장 입금</p>
+            <p>결제 실패</p>
             <p>주문이 정상적으로 완료되지 않았습니다</p>
             <p>다시 한번 결제 부탁드립니다</p>
             <button class="order-detail" onclick="goToHome()">홈으로 가기</button>
