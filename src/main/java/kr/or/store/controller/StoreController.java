@@ -94,8 +94,37 @@ public class StoreController {
 	}
 	
 	@RequestMapping(value = "/storeInfoUpdateSuccess.do")
-	public String storeInfoUpdateSuccess(Store s) {
-		Store store = sservice.updateStore(s);
+	public String storeInfoUpdateSuccess(Store s, MultipartFile upFile, HttpServletRequest request, String status, String oldImg) {
+		//저장 경로
+		String savePath = request.getSession().getServletContext().getRealPath("/resources/img/store/");
+		
+		if(upFile != null) {
+					
+			String filename = upFile.getOriginalFilename();
+			String filepath = fileRename.fileRename(savePath, filename);
+					
+			try {
+				FileOutputStream fos = new FileOutputStream(new File(savePath+filepath));
+				BufferedOutputStream bos = new BufferedOutputStream(fos);
+						
+				byte[] bytes = upFile.getBytes();
+				bos.write(bytes);
+				bos.close();
+						
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			s.setStoreImg(filepath);
+			System.out.println(s);
+			
+		}else if(oldImg != null && status.equals("stay")) {
+			s.setStoreImg(oldImg);
+		}
+		int result = sservice.updateStoreInfo(s);
 		return "redirect:/ceoStoreInfo.do";
 	}
 	

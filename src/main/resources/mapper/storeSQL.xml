@@ -358,6 +358,18 @@
 				</when> 
 			</choose>
    </select>
-   
+   <update id="updateStoreInfo" parameterType="s">
+   		update store set
+         store_name = #{storeName},
+         store_addr = #{storeAddr},
+         store_phone = #{storePhone},
+         store_img = #{storeImg},
+         store_account = #{storeAccount},
+         store_regist_num = #{storeRegistNum},
+         open_time = #{openTime},
+         close_time = #{closeTime},
+         store_content = #{storeContent}
+      where store_no = #{storeNo}
+   </update>
    
 </mapper>

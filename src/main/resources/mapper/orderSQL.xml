@@ -119,8 +119,7 @@
          o.order_phone as orderPhone,
          o.order_mileage as orderMileage,
          s.store_name as storeName,
-         paymentkey,
-         o.order_product_img as orderProductImg
+         paymentkey
       from orders o join store s on o.store_no = s.store_no
    </select>
    

@@ -358,4 +358,8 @@ public class StoreService {
 		return dao.selectStoreStatus(map);
 	}
 
+	public int updateStoreInfo(Store s) {
+		return dao.updateStoreInfo(s);
+	}
+
 }

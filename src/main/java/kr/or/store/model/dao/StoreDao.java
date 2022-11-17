@@ -148,6 +148,10 @@ public class StoreDao {
 		List list = sqlSession.selectList("store.chooseStoreList",map);
 		return (ArrayList<Store>)list;
 	}
+
+	public int updateStoreInfo(Store s) {
+		return sqlSession.update("store.updateStoreInfo", s);
+	}
 	
 
 }

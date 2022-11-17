@@ -48,7 +48,7 @@
 .donate_content_title{
     font-weight: 700;
     font-size: 15px;
-    min-height: 34px;
+    min-height: 51px;
 }
 .donate_content_organ{
     margin-top: 10px;
@@ -82,7 +82,7 @@
     float: right;
 }
 
-.donate_content_box>a{
+.donate_content_box a{
     text-decoration: none;
     color: black;
 }
