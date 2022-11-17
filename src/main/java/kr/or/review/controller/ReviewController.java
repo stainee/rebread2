@@ -74,7 +74,7 @@ public class ReviewController {
 	
 	//리뷰 작성
 	@RequestMapping(value="/insertReview.do")
-	public String insertReview(Review r,MultipartFile upFile,HttpServletRequest request) {
+	public String insertReview(Review r,MultipartFile upFile,int memberNo,HttpServletRequest request) {
 		//System.out.println(r.getReviewWriter());
 		
 		if(upFile != null) {
@@ -103,7 +103,7 @@ public class ReviewController {
 		}
 		int result = service.insertReview(r);
 		if(result>0) {
-			return "redirect:/detailStore.do?storeNo="+r.getStoreNo();
+			return "redirect:/detailStore.do?storeNo="+r.getStoreNo()+"&memberNo="+memberNo;
 		}else {
 			return "redirect:/";
 		}

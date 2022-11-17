@@ -135,5 +135,33 @@ $("[name=minus]").on("click",function(){
 	    return value; 
 	};
 
-	
-	
+
+/*
+$(tabs.eq(1)).on("click",function(){
+			const storeNos =$("[name=storeNo]").val();
+			console.log(storeNos);
+			$.ajax({
+				url:"/selectReview.do",
+				data:{
+					storeNo : storeNos
+					},
+				success:function(data){
+					console.log(data);
+					var html = "";
+					html += "<li>";
+					html += "<p class='comment-info'>";
+					html += "<span id='writer'>tntkssk12</span>";
+					html += "<span id='date'>2022-11-16</span>";
+					html += "<span id='updateBtn'>수정</span>";
+					html += "<span id='deleteBtn'>삭제</span>";
+					html += "</p>";
+					html += "<p class='comment-content'>너무 맛있다~~</p>";
+					html += "<textarea name='ncContent' class='input-form' style='min-height:96px; display:none;'></textarea>";
+					html += "<p class='comment-link'>";
+					html += "</li>";
+					$(".posting-comment").html(html);
+				}
+				
+				});
+				});
+	*/

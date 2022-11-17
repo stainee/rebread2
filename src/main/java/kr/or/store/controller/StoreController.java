@@ -80,6 +80,7 @@ public class StoreController {
 			}
 		int result = sservice.insertStore(s);
 		System.out.println(s);
+		
 		return "redirect:/ceoStoreInfo.do";
 	}
 	
@@ -239,6 +240,22 @@ public class StoreController {
 		}
 	}
 	
+	@RequestMapping(value="/chooseStoreList.do")
+	public String chooseStoreList(int reqPage, int chooseNum,Model model) {
+		StorePageData spd = sservice.chooseStoreList(reqPage,chooseNum);
+		//스토어 검색안된 count
+		int count = sservice.countList();
+		//스토어 검색됐을때 count
+		//int countName = sservice.countList(storeName);
+		model.addAttribute("list",spd.getList());
+		model.addAttribute("pageNavi",spd.getPageNavi());
+		model.addAttribute("reqPage",spd.getReqPage());
+		model.addAttribute("numPerPage", spd.getNumPerPage());
+		//model.addAttribute("storeName",storeName);
+		model.addAttribute("count", count);
+		//model.addAttribute("countName", countName);
+		return "store/purchaseList";
+	}
 	@RequestMapping(value = "/storeSalesStatus.do")
 	public String storeSalesStatus(HttpSession session, Model model) {
 		Member member = (Member)session.getAttribute("m");
