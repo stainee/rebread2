@@ -18,10 +18,6 @@
     border-bottom: 1px solid lightgray;
 }
 
-.memberInfo>p{
-	display: inline-block;
-}
-
 .navi_btn{
     width: 90px;
     height: 30px;

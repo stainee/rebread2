@@ -49,7 +49,7 @@
                     <div class="store_info_wrap_box">
                         <div class="store_info_left">
                             <div class="store_img">
-                                <img src="resources/img/member/testImg.jfif">
+                                <img src="resources/img/store/${o.orderProductImg }">
                             </div>
                   			<form action="/salesInfoUpdate.do" method="post">
                             <div class="store_name">주문번호 : ${o.orderNo }</div>

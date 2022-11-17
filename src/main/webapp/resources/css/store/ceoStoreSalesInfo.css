@@ -17,10 +17,6 @@
     border: 2px solid black;
     border-radius: 5px;
 }
-.memberInfo>p{
-	display: inline-block;
-}
-
 /* 각 상품 별 배송 상태 선택칸 */
 .store_sales_info{
     width: 110px;

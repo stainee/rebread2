@@ -11,6 +11,7 @@
 	<typeAlias type="kr.or.store.model.vo.StoreDetail" alias="sd"></typeAlias>
 	<typeAlias type="kr.or.store.model.vo.StorePageData" alias="spd"></typeAlias>
 	<typeAlias type="kr.or.store.model.vo.StoreListDetail" alias="sld"></typeAlias>
+	<typeAlias type="kr.or.store.model.vo.StoreStatus" alias="ss"></typeAlias>
 
 	<typeAlias type="kr.or.cs.model.vo.CS" alias="cs"></typeAlias>
 	<typeAlias type="kr.or.cs.model.vo.CSList" alias="csl"></typeAlias>

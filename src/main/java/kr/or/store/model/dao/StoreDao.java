@@ -14,6 +14,7 @@ import kr.or.store.model.vo.Like;
 import kr.or.store.model.vo.Store;
 import kr.or.store.model.vo.StoreDetail;
 import kr.or.store.model.vo.StoreListDetail;
+import kr.or.store.model.vo.StoreStatus;
 
 @Repository
 public class StoreDao {
@@ -137,6 +138,11 @@ public class StoreDao {
 	
 	public Store selectOrderStore(int storeNo) {
 		return sqlSession.selectOne("store.selectOrderStore",storeNo);
+	}
+
+	public ArrayList<StoreStatus> selectStoreStatus(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("store.selectStoreStatus",map);
+		return (ArrayList<StoreStatus>) list;
 	}
 
 }

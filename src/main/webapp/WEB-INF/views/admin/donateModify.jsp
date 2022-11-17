@@ -30,8 +30,7 @@
 				<tr>
 				 	<th>기부 이미지</th>
 				 	<td>
-				 		<input type="file" value="${d.donateImg }" id="donateImg">
-				 		<button id="donateImg_btn">첨부파일</button>
+				 		<input type="file" value="${d.donateImg }" id="donateImg" style="padding: 2px;">
 				 	</td>
 				</tr>
 				
