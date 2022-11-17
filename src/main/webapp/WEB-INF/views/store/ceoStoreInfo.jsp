@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>마이페이지-가게 정보</title>
+<link rel="icon" href="/resources/img/favicon/favicon.ico"/>
+<link rel="apple-touch-icon" href="/resources/img/favicon/apple-touch-icon.png"/>
 </head>
 <link rel="stylesheet" href="resources/css/font/font.css">
 <link rel="stylesheet" href="/resources/css/common/managetemplate.css">
@@ -101,60 +103,60 @@
                 	<div class="store_insert_form">
                 		<div class="store_insert_title">매장명</div>
                 		<div class="store_insert_input">
-                			<input type="text" name="storeName" value="${storeName }">
+                			<input type="text" name="storeName" value="${storeName }" required>
                 		</div>
 	                <input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
                 	</div>
                 	<div class="store_insert_form">
                 		<div class="store_insert_title">매장 주소</div>
                 		<div class="store_insert_input">
-                			<input type="text" name="storeAddr" value="">
+                			<input type="text" name="storeAddr" value="" required>
                 		</div>
                 	</div>
                 	<div class="store_insert_form">
                 		<div class="store_insert_title">매장 전화번호</div>
                 		<div class="store_insert_input">
-                			<input type="text" name="storePhone" value="">
+                			<input type="text" name="storePhone" value="" placeholder="'-' 없이 입력해주세요" required>
                 		</div>
                 	</div>
                 	<div class="store_insert_form">
                 		<div class="store_insert_title">매장 이미지</div>
                 		<div class="store_insert_input">
-                			<input type="file" name="storeFile" accept="image/*" multiple >
+                			<input type="file" name="storeFile" accept="image/*" multiple required>
                 		</div>
                 	</div>
                 	<div class="store_insert_form">
                 		<div class="store_insert_title">계좌 번호</div>
                 		<div class="store_insert_input">
-                			<input type="text" name="storeAccount" value="">
+                			<input type="text" name="storeAccount" value="" required>
                 		</div>
                 	</div>
                 	<div class="store_insert_form">
                 		<div class="store_insert_title">사업자 번호</div>
                 		<div class="store_insert_input">
-                			<input type="text" name="storeRegistNum" value="">
+                			<input type="text" name="storeRegistNum" value="" placeholder="'0000-00-00' 로 입력해주세요" required>
                 		</div>
                 	</div>
                 	<div class="store_insert_form">
                 		<div class="store_insert_title">오픈 시간</div>
                 		<div class="store_insert_input">
-                			<input type="text" name="openTime" value="">
+                			<input type="text" name="openTime" value="" required>
                 		</div>
                 	</div>
                 	<div class="store_insert_form">
                 		<div class="store_insert_title">마감 시간</div>
                 		<div class="store_insert_input">
-                			<input type="text" name="closeTime" value="">
+                			<input type="text" name="closeTime" value="" required>
                 		</div>
                 	</div>
                 	<div class="store_insert_form">
                 		<div class="store_insert_title">매장 정보</div>
                 		<div class="store_insert_input">
-                			<textarea name="storeContent"></textarea>
+                			<textarea name="storeContent" required></textarea>
                 		</div>
                 	</div>
                 	<div class="store_insert_btn_box">
-                		<button type="submit" class="store_insert_btn" >가게 등록하기</button>
+                		<button type="submit" class="store_insert_btn">가게 등록하기</button>
                 	</div>
                 	</form>
                 </div>
@@ -199,10 +201,10 @@ $(".store_sale_btn").on("click",function(){
 
 $(function(){
     $(".store_info_wrapper").slice(0, 3).show(); // 초기갯수
-    $(".store_info_wrapper:nth-child(-n+3)").css("display","inline-block");
+    $(".store_info_wrapper:nth-child(-n+4)").css("display","flex");
     $(".more_btn").click(function(e){ // 클릭시 more
         e.preventDefault();
-        $(".store_info_wrapper:hidden").slice(0, 3).show().css("display","inline-block"); // 클릭시 more 갯수 지정
+        $(".store_info_wrapper:hidden").slice(0, 3).show().css("display","flex"); // 클릭시 more 갯수 지정
         console.log($(".store_info_wrapper:hidden").length); // 남아있는 컨텐츠 박스 갯수 출력
         
      // 더보여줄 것이 없으면 더보기 버튼을 숨기고 "마지막페이지입니다" text 출력

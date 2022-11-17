@@ -9,6 +9,8 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <meta charset="UTF-8">
 <title>!!Rebread UPdate!!</title>
+<link rel="icon" href="/resources/img/favicon/favicon.ico"/>
+<link rel="apple-touch-icon" href="/resources/img/favicon/apple-touch-icon.png"/>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -89,6 +91,7 @@
 								<input type="submit" class="btn bc4" value="수정하기">
 								<!-- <a href="/detailStore.do?storeNo=${storeNo}" class="btn bc4 bs3">취소하기</a> -->
 							</th>
+							
 						</tr>
 					</table>
 					</div>
@@ -118,7 +121,6 @@
 			$(this).next().show();
 			$("[name=status]").val("delete");
 	});
-		
 	</script>
 </body>
 	

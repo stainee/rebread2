@@ -15,7 +15,8 @@
     margin: 0 auto;
 	}
 </style>
-
+<link rel="icon" href="/resources/img/favicon/favicon.ico"/>
+<link rel="apple-touch-icon" href="/resources/img/favicon/apple-touch-icon.png"/>
 
 </head>
 <body>

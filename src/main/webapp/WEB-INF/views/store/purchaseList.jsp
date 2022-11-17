@@ -14,6 +14,8 @@
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 <link
 href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200&display=swap" rel="stylesheet">
+<link rel="icon" href="/resources/img/favicon/favicon.ico"/>
+<link rel="apple-touch-icon" href="/resources/img/favicon/apple-touch-icon.png"/>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />

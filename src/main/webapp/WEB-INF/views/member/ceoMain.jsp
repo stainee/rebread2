@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>마이페이지-내정보</title>
+<link rel="icon" href="/resources/img/favicon/favicon.ico"/>
+<link rel="apple-touch-icon" href="/resources/img/favicon/apple-touch-icon.png"/>
 </head>
 <link rel="stylesheet" href="/resources/css/font/font.css">
 <link rel="stylesheet" href="/resources/css/member/ceoMain.css">
@@ -30,7 +32,7 @@
         </div>
         <div class="right_container" >
 	        	<!-- 내 정보 -->
-	            <div class="content_container" 	style='height: 600px'>
+	            <div class="content_container" 	style='height: 500px'>
 	            	<div class="navi_box">회원 정보 수정</div>
                 <form action="/updateCeo.do" method="post">
                 <div class="my_info">

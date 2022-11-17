@@ -6,7 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>빵등록</title>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<link rel="icon" href="/resources/img/favicon/favicon.ico"/>
+<link rel="apple-touch-icon" href="/resources/img/favicon/apple-touch-icon.png"/>
 </head>
 <link rel="stylesheet" href="/resources/css/common/default.css">
 <link rel="stylesheet" href="/resources/css/common/insertproduct.css">
@@ -38,7 +39,7 @@
 						</tr>
 						<tr>
 							<th>판매가격</th>
-							<td><input type="text" name="productPrice" required="required" placeholder="숫자만 입력해주세요" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');"></td>
+							<td><input type="text" id="price" name="productPrice" required="required" placeholder="숫자만 입력해주세요" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" maxlength="6"></td>
 						</tr>
 						<tr>
 							<th>수량</th>	

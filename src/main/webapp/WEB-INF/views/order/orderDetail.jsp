@@ -9,6 +9,8 @@
 <link rel="stylesheet" href="/resources/css/common/managetemplate.css">
 <link rel="stylesheet" href="/resources/css/font/font.css">
 <link rel="stylesheet" href="/resources/css/order/orderDetail.css">
+<link rel="icon" href="/resources/img/favicon/favicon.ico"/>
+<link rel="apple-touch-icon" href="/resources/img/favicon/apple-touch-icon.png"/>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -136,7 +138,7 @@
 				if(orderState == "결제완료" , orderState == "입금대기"){
 					location.href="/orderCancel.do?orderNo="+orderNo+"&reqPage="+reqPage;
 				}else{
-					alert("취소할 수 없습니다.");
+					alert("현재 단계에서는 취소할 수 없습니다.\n고객센터로 문의주세요.");
 				}
 			}
 		}

@@ -27,6 +27,7 @@ import kr.or.store.model.service.StoreService;
 import kr.or.store.model.vo.Store;
 import kr.or.store.model.vo.StoreDetail;
 import kr.or.store.model.vo.StorePageData;
+import kr.or.store.model.vo.StoreStatus;
 import kr.or.product.model.vo.Product;
 
 @Controller
@@ -93,8 +94,37 @@ public class StoreController {
 	}
 	
 	@RequestMapping(value = "/storeInfoUpdateSuccess.do")
-	public String storeInfoUpdateSuccess(Store s) {
-		Store store = sservice.updateStore(s);
+	public String storeInfoUpdateSuccess(Store s, MultipartFile upFile, HttpServletRequest request, String status, String oldImg) {
+		//저장 경로
+		String savePath = request.getSession().getServletContext().getRealPath("/resources/img/store/");
+		
+		if(upFile != null) {
+					
+			String filename = upFile.getOriginalFilename();
+			String filepath = fileRename.fileRename(savePath, filename);
+					
+			try {
+				FileOutputStream fos = new FileOutputStream(new File(savePath+filepath));
+				BufferedOutputStream bos = new BufferedOutputStream(fos);
+						
+				byte[] bytes = upFile.getBytes();
+				bos.write(bytes);
+				bos.close();
+						
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			s.setStoreImg(filepath);
+			System.out.println(s);
+			
+		}else if(oldImg != null && status.equals("stay")) {
+			s.setStoreImg(oldImg);
+		}
+		int result = sservice.updateStoreInfo(s);
 		return "redirect:/ceoStoreInfo.do";
 	}
 	
@@ -119,6 +149,7 @@ public class StoreController {
 	@RequestMapping(value = "/salesInfoUpdate.do")
 	public String salesInfoUpdate(Order o) {
 		int result = sservice.salesInfoUpdate(o);
+		System.out.println(o);
 		if(result>0) {
 			o.setOrderNo(o.getOrderNo());
 			o.setOrderState(o.getOrderState());
@@ -256,10 +287,10 @@ public class StoreController {
 		return "store/purchaseList";
 	}
 	@RequestMapping(value = "/storeSalesStatus.do")
-	public String storeSalesStatus(HttpSession session, Model model) {
+	public String storeSalesStatus(HttpSession session,int storeNo, Model model) {
 		Member member = (Member)session.getAttribute("m");
 //		System.out.println(member.getMemberNo());
-		ArrayList<Store> list = sservice.selectMemberStore(member);
+		ArrayList<StoreStatus> list = sservice.selectStoreStatus(member,storeNo);
 		model.addAttribute("list",list);
 		return "store/storeSalesStatus";
 	}

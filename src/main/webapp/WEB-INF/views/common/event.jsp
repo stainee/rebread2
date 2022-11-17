@@ -16,6 +16,8 @@
 href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200&display=swap" rel="stylesheet">
 	<link rel="icon" href="/resources/img/favicon/favicon.ico"/>
 	<link rel="apple-touch-icon" href="/resources/img/favicon/apple-touch-icon.png"/>
+	<link rel="icon" href="/resources/img/favicon/favicon.ico"/>
+<link rel="apple-touch-icon" href="/resources/img/favicon/apple-touch-icon.png"/>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />

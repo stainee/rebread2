@@ -138,6 +138,23 @@
    		from store
    		where member_no = #{memberNo}
    </select>
+   
+   <select id="selectStoreStatus" resultType="ss" parameterType="map">
+   		select * from
+   		(
+   		select
+			p.store_no as storeNo,
+			s.store_name as storeName,
+			s.store_img as storeImg,
+			(select sum(price) from payment where store_no=#{storeNo} and payment_date=to_char(sysdate, 'yyyy-mm-dd')) as today,
+			(select sum(price) from payment where store_no=#{storeNo} and payment_date between trunc(sysdate,'mm') and last_day(sysdate)) as month, 
+			(select sum(price) from payment where store_no=#{storeNo} and payment_date between trunc(sysdate,'yyyy') and last_day('2022-12-01')) as years
+		from payment p join store s on p.store_no = s.store_no
+		where p.store_no=#{storeNo}
+		)
+		where rownum=1
+   </select>
+   
 	<insert id="insertStore" parameterType="s">
 		insert into store values
 		(
@@ -280,7 +297,8 @@
 			o.order_phone as orderPhone,
 			o.order_mileage as orderMileage,
 			s.store_name as storeName,
-			paymentkey
+			paymentkey,
+			o.order_product_img as orderProductImg
 		from orders o join store s on o.store_no = s.store_no
 		where order_state = #{orderState}
    </select>
@@ -341,6 +359,18 @@
 				</when> 
 			</choose>
    </select>
-   
+   <update id="updateStoreInfo" parameterType="s">
+   		update store set
+         store_name = #{storeName},
+         store_addr = #{storeAddr},
+         store_phone = #{storePhone},
+         store_img = #{storeImg},
+         store_account = #{storeAccount},
+         store_regist_num = #{storeRegistNum},
+         open_time = #{openTime},
+         close_time = #{closeTime},
+         store_content = #{storeContent}
+      where store_no = #{storeNo}
+   </update>
    
 </mapper>

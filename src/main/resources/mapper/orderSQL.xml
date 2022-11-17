@@ -67,7 +67,9 @@
    </select>
    
    <select id="totalCount" parameterType="_int" resultType="_int">
-      select count(*) from orders where member_no=#{memberNo}
+      select count(*) from 
+      	(select * from orders where paymentkey is not null)
+      	orders where member_no=#{memberNo}
    </select>
    
    <select id="selectOneOrder" parameterType="_int" resultType="o">
@@ -117,12 +119,17 @@
          o.order_phone as orderPhone,
          o.order_mileage as orderMileage,
          s.store_name as storeName,
-         paymentkey
+         paymentkey,
+         o.order_product_name as orderProductName,
+         o.order_product_img as orderProductImg
       from orders o join store s on o.store_no = s.store_no
    </select>
    
-   <select id="selectOrderPrice" parameterType="_int" resultType="_int">
-      select order_price from orders where order_no = #{orderNo}
+   <select id="selectOrderPrice" parameterType="_int" resultType="o">
+      select
+      	order_price as orderPrice,
+      	store_no as storeNo
+      from orders where order_no = #{orderNo}
    </select>
    
    <insert id="insertOrderProduct" parameterType="op">

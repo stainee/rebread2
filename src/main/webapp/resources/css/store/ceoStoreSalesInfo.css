@@ -17,10 +17,6 @@
     border: 2px solid black;
     border-radius: 5px;
 }
-.memberInfo>p{
-	display: inline-block;
-}
-
 /* 각 상품 별 배송 상태 선택칸 */
 .store_sales_info{
     width: 110px;
@@ -39,11 +35,6 @@
 .store_info_wrap_box{
     display: none;
     align-items: center;
-}
-.store_sales_info_wrapper{
-    padding-top: 10px;
-    padding-left: 50px;
-    padding-right: 50px;
 }
 .product_info_form{
     display: flex;
@@ -83,4 +74,12 @@
 	font-size: 24px;
 	font-family: nsr-b;
 	margin: 40px 0px;
+}
+.store_sales_info_wrapper{
+	display:none;
+	justify-content: center;
+    padding-top: 50px;
+    margin-left: 50px;
+    margin-right: 60px;
+    border-bottom: 2px solid gray;
 }

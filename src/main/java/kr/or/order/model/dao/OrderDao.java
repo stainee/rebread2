@@ -71,7 +71,7 @@ public class OrderDao {
 		return sqlSession.selectOne("member.selectMemberMileage",memberNo);
 	}
 
-	public int selectOrderPrice(int orderNo) {
+	public Order selectOrderPrice(int orderNo) {
 		return sqlSession.selectOne("order.selectOrderPrice",orderNo);
 	}
 

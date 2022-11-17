@@ -9,6 +9,8 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="/resources/css/admin/storeDetail.css">
 <link rel="stylesheet" href="/resources/css/font/font.css">
+<link rel="icon" href="/resources/img/favicon/favicon.ico"/>
+<link rel="apple-touch-icon" href="/resources/img/favicon/apple-touch-icon.png"/>
 </head>
 <body>
 	<div class="detail_container">

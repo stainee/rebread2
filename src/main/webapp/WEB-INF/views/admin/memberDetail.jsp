@@ -9,6 +9,8 @@
 <title>Insert title here</title>
 <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-round.css" rel="stylesheet">
 <link rel="stylesheet" href="/resources/css/admin/memberDetail.css">
+<link rel="icon" href="/resources/img/favicon/favicon.ico"/>
+<link rel="apple-touch-icon" href="/resources/img/favicon/apple-touch-icon.png"/>
 </head>
 <body>
 	<div class="detail_container">
