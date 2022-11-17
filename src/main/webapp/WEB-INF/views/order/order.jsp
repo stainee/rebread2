@@ -10,6 +10,8 @@
 <script src="https://js.tosspayments.com/v1"></script>
 <link rel="stylesheet" href="/resources/css/font/font.css">
 <link rel="stylesheet" href="/resources/css/order/order.css">
+<link rel="icon" href="/resources/img/favicon/favicon.ico"/>
+<link rel="apple-touch-icon" href="/resources/img/favicon/apple-touch-icon.png"/>
 </head>
 <body>
    <jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -282,8 +284,8 @@
                           orderId: memberId+'-'+todayString,
                           orderName: productName,
                           customerName: orderName,
-                          successUrl: 'http://localhost:8888/orderCard.do',
-                          failUrl: 'http://localhost:8888/fail.do'
+                          successUrl: 'http://192.168.10.64/orderCard.do',
+                          failUrl: 'http://192.168.10.64/fail.do'
                      });
 		             for(var i=0;i<productQuan.length;i++){
 		            	 let pQuan = productQuan.eq(i).text();
@@ -348,8 +350,8 @@
 	                           orderId: memberId+'-'+todayString,
 	                           orderName: productName,
 	                           customerName: orderName,
-	                           successUrl: 'http://localhost:8888/orderAccount.do',
-	                           failUrl: 'http://localhost:8888/fail.do'
+	                           successUrl: 'http://192.168.10.64/orderAccount.do',
+	                           failUrl: 'http://192.168.10.64/fail.do'
 	                      });
 			             for(var i=0;i<productQuan.length;i++){
 			            	 let pQuan = productQuan.eq(i).text();

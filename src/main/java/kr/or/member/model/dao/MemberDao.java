@@ -55,6 +55,7 @@ public class MemberDao {
 	}
 
 	public int insertMember(Member m) {
+		System.out.println(m);
 		return sqlSession.insert("member.insertMember", m);
 	}
 

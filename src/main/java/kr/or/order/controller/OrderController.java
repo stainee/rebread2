@@ -139,8 +139,11 @@ public class OrderController {
 			int result = service.updatePaymentKey(o);
 			
 			// 결제 후 payment 테이블에 데이터 insert
-			int orderPrice = service.selectOrderPrice(orderNo);
-			o.setOrderPrice(orderPrice);
+			Order order = service.selectOrderPrice(orderNo);
+			
+			o.setOrderPrice(order.getOrderPrice());
+			o.setStoreNo(order.getStoreNo());
+			System.out.println("o : "+o);
 			int paymentResult = service.insertPayment(o);
 			
 			//token삽입

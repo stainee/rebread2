@@ -4,9 +4,10 @@
 <link rel="stylesheet" href="/resources/css/common/header.css">
 <link rel="stylesheet" href="/resources/css/font/font.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<link rel="Icon" href="/resources/img/favicon/favicon-16x16.png">
-
-
+<head>
+	<link rel="icon" href="/resources/img/favicon/favicon.ico"/>
+	<link rel="apple-touch-icon" href="/resources/img/favicon/apple-touch-icon.png"/>
+</head>
 <div class="wrap">
     <header>
         <div class="header-wrap1">
@@ -18,10 +19,23 @@
 	                </div>
             	</c:when>
             	<c:otherwise>
-            		<div class="header-left">
-	                    <span><a href="/ceoMain.do">입점문의</a></span>
-	                </div>
+            		<c:if test="${sessionScope.m.memberGrade eq 0 }">
+            			<div class="header-left">
+		                    <span style="cursor: pointer;"><a onclick="noway()">입점문의</a></span>
+		                </div>
+            		</c:if>
+            		<c:if test="${sessionScope.m.memberGrade eq 1 }">
+            			<div class="header-left">
+		                    <span style="cursor: pointer;"><a onclick="noway()">입점문의</a></span>
+		                </div>
+            		</c:if>
+            		<c:if test="${sessionScope.m.memberGrade eq 2 }">
+	            		<div class="header-left">
+		                    <span><a href="/ceoMain.do">입점문의</a></span>
+		                </div>
+            		</c:if>
             	</c:otherwise>
+            		
             </c:choose>
                 <div class="header-mid">
                     <a href="/">
@@ -175,8 +189,9 @@ $("#log2").on("click",function(){
 $("#1logout").on("click",function(){
 	alert("'리브레드'에서 로그아웃되었습니다.")
 });
-
-
+function noway(){
+	alert("판매자로 등록된 경우에만 입점이 가능합니다.");
+}
 
 $("#Nlogout").on("click",function(){
 	$(".Nlogmodal").fadeIn(300);

@@ -218,10 +218,10 @@
 	s.store_phone as storePhone,
 	s.store_img as storeImg,
 	nvl(
-	(select avg(rating) from test_review r where r.store_no = s.store_no),0)as
+	(select avg(rating) from review r where r.store_no = s.store_no),0)as
 	rating,
 	nvl(
-    (select count(review_no) from test_review r where r.store_no = s.store_no),0) as
+    (select count(review_no) from review r where r.store_no = s.store_no),0) as
     reviewCount,
     (select max(product_sale) from product p where p.store_no = s.store_no) as maxDiscount
 	from store s
@@ -317,5 +317,47 @@
    			store_img as storeImg
    		from store where store_no=#{_parameter}
    </select>
+   
+   <select id="chooseStoreList" parameterType="map" resultType="s">
+   	select * from
+		(select rownum as rnum, s.*from
+		(select
+			s.store_no as storeNo,
+			s.member_no as memberNo,
+			s.store_name as storeName,
+			s.store_content as storeContent,
+			s.store_addr as storeAddr,
+			s.store_regist_num as storeRegistNum,
+			s.store_account as storeAccount,
+			s.open_time as openTime,
+			s.close_time as closeTime,
+			s.store_phone as storePhone,
+			s.store_img as storeImg,
+			nvl(
+			(select avg(rating) from review r where r.store_no = s.store_no),0)as
+			rating,
+			nvl(
+    		(select count(review_no) from review r where r.store_no = s.store_no),0) as
+    		reviewCount,
+    		nvl(
+    		(select max(product_sale) from product p where p.store_no = s.store_no),0) as maxDiscount
+	from store s 
+
+			<choose>
+				<when test="chooseNum == 1">
+					order by rating desc)s)
+					where rnum between #{start} and #{end}
+				</when>
+				<when test="chooseNum ==2">
+					order by reviewcount desc)s)
+					where rnum between #{start} and #{end}
+				</when>
+				<when test="chooseNum ==3">
+					order by maxdiscount desc)s)
+					where rnum between #{start} and #{end}
+				</when> 
+			</choose>
+   </select>
+   
    
 </mapper>

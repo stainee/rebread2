@@ -11,6 +11,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="icon" href="/resources/img/favicon/favicon.ico"/>
+<link rel="apple-touch-icon" href="/resources/img/favicon/apple-touch-icon.png"/>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -92,7 +94,7 @@ $(".qna_wrapper .quest").on("click", function(){
 	console.log($(this));
 })
 
-$("#btn_not").on("click",function(){
+$(".btn_not").on("click",function(){
 	alert("로그인이 필요한 서비스입니다");
 })
 </script>

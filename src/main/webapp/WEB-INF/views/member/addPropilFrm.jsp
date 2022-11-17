@@ -15,6 +15,8 @@
     <!--aos라이브러리-->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="icon" href="/resources/img/favicon/favicon.ico"/>
+<link rel="apple-touch-icon" href="/resources/img/favicon/apple-touch-icon.png"/>
 <title>회원정보 추가기입</title>
 </head>
 <body>
@@ -28,7 +30,6 @@
 					<!-- 모델에서 받아온 데이터 -->
 					<input type="hidden" name="memberId" id="id" value="${m.memberId }">
 					<input type="hidden" name="memberName" value="${m.memberName }">
-					<input type="hidden" name="memberMail" value="${m.memberMail }">
 					<input type="hidden" name="memberPw" value="${m.memberPw }">
 					<tr>
 						<th>회원유형<img src="/resources/img/member/pilsu.gif"></th>
@@ -60,6 +61,12 @@
 						<th>휴대전화<img src="/resources/img/member/pilsu.gif"></th>
 						<td id="phones">
 							<input type="text" name="memberPhone" id="phone" placeholder="' - '을 제외한 번호를 입력해주세요.">
+						</td>
+					</tr>
+					<tr>	
+						<th>이메일<img src="/resources/img/member/pilsu.gif"></th>
+						<td id="email">
+							<input type="text" name="memberMail" id="memberMail">
 						</td>
 					</tr>
 					

@@ -135,7 +135,7 @@ public class StoreDao {
 	public int deleteLike(HashMap<String, Object> map) {
 		return sqlSession.delete("like.deleteLike",map);
 	}
-	
+
 	public Store selectOrderStore(int storeNo) {
 		return sqlSession.selectOne("store.selectOrderStore",storeNo);
 	}
@@ -144,6 +144,11 @@ public class StoreDao {
 		List list = sqlSession.selectList("store.selectStoreStatus",map);
 		return (ArrayList<StoreStatus>) list;
 	}
+	public ArrayList<Store> chooseStoreList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("store.chooseStoreList",map);
+		return (ArrayList<Store>)list;
+	}
+	
 
 }
 

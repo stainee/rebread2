@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>마이페이지-내정보</title>
+<link rel="icon" href="/resources/img/favicon/favicon.ico"/>
+<link rel="apple-touch-icon" href="/resources/img/favicon/apple-touch-icon.png"/>
 </head>
 <link rel="stylesheet" href="/resources/css/font/font.css">
 <link rel="stylesheet" href="/resources/css/member/ceoMain.css">
@@ -83,7 +85,7 @@
                 </div>
                 </form>
                 <div class="footer_box">
-                    <button class="footer_box_btn" onclick="deleteMember(${sessionScope.m.memberNo})">회원 탈퇴</button>
+                    <button class="footer_box_btn">회원 탈퇴</button>
                 </div>
 	            </div>
 	        </div>
@@ -98,7 +100,21 @@ $(function(){
 		$(".selectList a").eq(i).removeClass("index");
 	}
 	$(".selectList a").eq(index).addClass("index");
-})
+});
+
+
+	const deleteBtn = $(".footer_box_btn");
+		deleteBtn.on("click",function(){
+			const memberNo = $("#memberNo").val();
+			if(!confirm("정말 탈퇴하시겠습니까?")){
+				// 아니오 클릭 시 이벤트
+			}else{
+				// 예 클릭시 이벤트
+				location.href = "/memberDelete.do?memberNo="+memberNo;
+				alert("회원 탈퇴가 완료되었습니다.");
+			}
+		});
+	
 	
 </script>
 <script src="resources/js/member/ceoMain.js"></script>

@@ -15,7 +15,8 @@
     margin: 0 auto;
 	}
 </style>
-
+<link rel="icon" href="/resources/img/favicon/favicon.ico"/>
+<link rel="apple-touch-icon" href="/resources/img/favicon/apple-touch-icon.png"/>
 
 </head>
 <body>
@@ -59,17 +60,18 @@
 				</div>
 				
 				<div id="delivery-type">
-						<ul>
+					<!-- 사장님 화면일 때 -->
+					<c:choose>
+						<c:when test="${sessionScope.m.memberNo eq sd.s.memberNo}">
 							<a href="/insertProductFrm.do?storeNo=${sd.s.storeNo}&storeName=${sd.s.storeName }&storeAddr=${sd.s.storeAddr}" class="btn bc4">빵등록</a>
 							<!-- <a href="/updateProductFrm.do?storeNo=${s.storeNo}&storeName=${s.storeName }&storeAddr=${s.storeAddr}" class="btn bc4">빵수정</a> -->
-						</ul>
-					
-					<!-- 사장님 화면
-					<c:if test="${sessionScope.memberNo eq sd.s.memberNo}"> -->
-					<!--</c:if>
-					<button class="btn bc4"onclick="delivery();">배달</button>
-                    <button class="btn bc4"onclick="pickup();">픽업</button>
-                    -->
+						</c:when>
+						<c:otherwise>
+							<button class="btn bc4"onclick="delivery();">배달</button>
+                    		<button class="btn bc4"onclick="pickup();">픽업</button>
+						</c:otherwise>
+					</c:choose>
+				
 				</div>
 				
 				<div class="tab-wrap">
@@ -101,7 +103,7 @@
 										</div>
 										
 										<!-- 사장님에게만 수정,삭제버튼 노출 -->
-										<c:if test="${sessionScope.memberNo eq sd.s.memberNo}">
+										<c:if test="${sessionScope.m.memberNo eq sd.s.memberNo}">
 										<div class="fix">
 											<a href="/updateProductFrm.do?productNo=${sdl.productNo }&storeNo=${sdl.storeNo}&storeName=${sd.s.storeName}&storeAddr=${sd.s.storeAddr}" class="btn bc4">수정</a>
 											<a href="/deleteProduct.do?productNo=${sdl.productNo}&storeNo=${sd.s.storeNo}" class="btn bc4">삭제</a>
@@ -144,14 +146,15 @@
 							</c:if>
 						</div>
 						<div class="tabcontent" id="REVIEW">
-							<div class="review-box-wrap">
+							<div class="review-box-wrap">	
+								<c:if test="${not empty sessionScope.m }">
 								<div class="input-comment-box">
 									<form action="/insertReview.do" method="post" enctype="multipart/form-data">
 		                      			<div id="product-viewer">
 											<img id="img-view" width="150px">
 										</div>	
-		                      			<ul>
-		                      				<li>
+		                      			<div>
+		                      				<div>
 		                  						<span>별점</span>
 		                  						<select name="rating">
 		                  							<option value="1">★</option>
@@ -160,34 +163,27 @@
 		                  							<option value="4">★★★★</option>
 		                  							<option value="5">★★★★★</option>
 		                  						</select>
-		                      					<input type="file" name="upFile" accept="image/*" onchange="loadImg(this);">
-		                      				</li>
-		                           			<li>
+		                      					<input type="file" name="upFile" accept="image/*" onchange="loadImg(this);" required="required">
+		                      				</div>
+		                      				
+		                           			<div class="inputReview">
+		                           				<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
 		                           				<input type="hidden" name="reviewWriter" value="${sessionScope.m.memberId }">
 				                                <input type="hidden" name="storeNo" value="${sd.s.storeNo}">
 				                                <input type="hidden" name="reviewComment" value="0"><%--대댓글용 댓글번호 --%>
-				                                <textarea class="input-form" name="reviewContent"></textarea>
+				                                <textarea name="reviewContent" required="required" maxlength="200"></textarea>
 				                                <input type="submit" id="commentBtn"class="btn bc5" value="댓글달기">
-		                           			</li>
-		                           			<li>
-		                                		
-		                           			</li>
-		                        		</ul>
+		                           			</div>
+		   
+		                        		</div>
 									</form>
                     			</div>
+                    			</c:if>
+                    			<div class="category">
+									<h2>REBREAD 리뷰</h2>
+								</div>
                     			<div class="review-list-wrap">
-                    				<ul class="posting-comment">
-										<li>
-					                        <p class="comment-info">
-					                        	<span id="writer"></span>
-					                        	<span id="date"></span>
-					                        </p>
-					                        <p class="comment-content">너무 맛있다~~</p>
-					                        <textarea name="ncContent" class="input-form" style="min-height:96px; display:none;"></textarea>
-											<p class="comment-link">          
-				                    	</li>
-				                    </ul>
-				                  
+                    			//여기여기
                     			</div>
                     		</div>
 				
@@ -491,28 +487,34 @@
 				url:"/selectReview.do",
 				data:{storeNo:storeNo},
 				success:function(data){
-					console.log(data.r);
-					<%--
-					if(data!=null){
-						for(let i=0; i<data.length;i++){
-							let html = '';
-							
-							html += '<ul class="posting-comment">';
-							html += '<li>';
-	                        html += '<p class="comment-info">';
-	                        html += '   <span id="sc-writer">' '</span>';
-	                        html += '   <span id="sc-date">'+ +'</span>';
-	                        html += '</p>';
-	                        html += '<p class="comment-content">' ++ '</p>';          
-	                    	html += '</li>';
-	                    	html += '</ul>';
-	                    	storyComment.append(html);
-	                    	
-						}
-						
+					//console.log(data);
+					
+					var html = '';
+					for(let i=0; i<data.length; i++){
+						console.log(data[i]);
+						html += '<div class="review-box">';
+						html += '	<div id="bread-img">';
+						html +=	'		<img id="Img" src="/resources/upload/review/'+data[i].reviewImg+'">';
+						html +=	'	</div>';
+						html +=	'	<div class="review-info">';
+						html +=	'		<div class="review-mid">';
+						html += '			<div class="rating">';	
+						html += '				<span id="reviewer">'+data[i].reviewWriter+'</span>';
+						html += '				<span>★  '+data[i].Rating +'</span>';
+						html += '			</div>';	
+						html += '			<div class="reviewfix">';
+						html += '				<span>'+data[i].reviewDate+'</span>';
+						html += '				<span id="dBtn" idx="'+data[i].reviewNo+'">삭제</span>';
+						html += '			</div>';
+						html += '		</div>';	
+						html += '		<div class="review-content">';
+						html += '			<p>'+data[i].reviewContent+'</p>';
+						html += '		</div>';
+						html += '	</div>';
+						html += '</div>';
 						
 					}
-					--%>
+					$(".review-list-wrap").html(html);
 					
 				}
 			});

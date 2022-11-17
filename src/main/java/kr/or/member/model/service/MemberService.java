@@ -38,7 +38,6 @@ public class MemberService {
 		return dao.updateOneMember(m);
 	}
 
-	@Transactional
 	public int deleteOneMember(int memberNo) {
 		return dao.deleteOneMember(memberNo);
 	}

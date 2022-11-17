@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>마이페이지-가게 정보</title>
+<link rel="icon" href="/resources/img/favicon/favicon.ico"/>
+<link rel="apple-touch-icon" href="/resources/img/favicon/apple-touch-icon.png"/>
 </head>
 <link rel="stylesheet" href="/resources/css/font/font.css">
 <link rel="stylesheet" href="/resources/css/common/managetemplate.css">

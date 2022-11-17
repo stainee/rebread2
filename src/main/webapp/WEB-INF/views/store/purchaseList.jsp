@@ -14,6 +14,8 @@
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 <link
 href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200&display=swap" rel="stylesheet">
+<link rel="icon" href="/resources/img/favicon/favicon.ico"/>
+<link rel="apple-touch-icon" href="/resources/img/favicon/apple-touch-icon.png"/>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -45,11 +47,11 @@ href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200&display=sw
 				</c:otherwise>
 			</c:choose>
 			<span class="search" style="cursor: pointer;">(매장검색)</span>
+			
 			<select class="chooseNum">
-				<option value="1">추천순</option>
-				<option value="2">별점순</option>
-				<option value="3">리뷰순</option>
-				<option value="4">할인순</option> 
+				<option value="1">별점순</option>
+				<option value="2">리뷰순</option>
+				<option value="3">할인순</option> 
 			</select>
 			<div class="searchBar">
 				<form action="/purchaseList.do">
@@ -67,7 +69,6 @@ href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200&display=sw
 				</form>
 			</div>
 		</div>
-		
 		
 		<!-- 여기서부터는 가게리스트 -->
 		<div class="item-basket-box">
@@ -134,6 +135,12 @@ const search = $(".search");
 const searchBar = $(".searchBar");
 	search.on("click",function(){
 		searchBar.toggle(400);
+	});
+	
+	$(".chooseNum").on("change",function(){
+		const chooseNum = $(this).val();
+		//const stoerName = $("[name=storeName]").val();
+		location.href = "/chooseStoreList.do?reqPage=1&chooseNum="+chooseNum;
 	});
 </script>
 </html>

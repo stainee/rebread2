@@ -8,14 +8,16 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="/resources/css/font/font.css">
 <link rel="stylesheet" href="/resources/css/order/orderAccountSuccess.css">
+<link rel="icon" href="/resources/img/favicon/favicon.ico"/>
+<link rel="apple-touch-icon" href="/resources/img/favicon/apple-touch-icon.png"/>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
     <div class="content-wrap">
         <div class="content">
             <p>무통장 입금</p>
-            <p>주문이 완료되었습니다</p>
-            <p>아래 입금 정보를 확인하여주세요</p>
+            <p>주문 신청이 완료되었습니다</p>
+            <p>아래 입금 정보를 확인하여 입금해주세요</p>
             <div class="content-account-wrap">
 	            <div class="content-account">
 		            <div class="account-wrap">
