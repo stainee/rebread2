@@ -354,7 +354,12 @@
 	<script>
 	
 	
-	
+	//배달 픽업 클릭 시 색깔 바꾸기
+	const button = $("#delivery-type button");
+	button.on("click",function(){
+		button.css("background-color","#eeeeee").css("color","#785c37");
+		$(this).css("background-color","#785c37").css("color","#eeeeee");
+	});
 	
 	//플러스 마이너스 버튼 누를 시 수량 변경
 	$("[name=plus]").on("click",function(){
