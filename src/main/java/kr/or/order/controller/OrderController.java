@@ -85,7 +85,6 @@ public class OrderController {
 		model.addAttribute("reqPage",reqPage);
 		Store s = service.selectOrderStore(o.getStoreNo());
 		model.addAttribute("s",s);
-		System.out.println("s : "+s);
 
 		// 주문 목록 불러오기
 		ArrayList<OrderProduct> list = new ArrayList<OrderProduct>();
@@ -146,7 +145,6 @@ public class OrderController {
 			
 			o.setOrderPrice(order.getOrderPrice());
 			o.setStoreNo(order.getStoreNo());
-			System.out.println("o : "+o);
 			int paymentResult = service.insertPayment(o);
 			
 			//token삽입
@@ -256,9 +254,6 @@ public class OrderController {
 			model.addAttribute("accountNumber",successNode.get("virtualAccount").get("accountNumber").asText());
 			model.addAttribute("bank",successNode.get("virtualAccount").get("bank").asText());
 			model.addAttribute("totalAmount",successNode.get("totalAmount"));
-			System.out.println("bank : "+successNode.get("virtualAccount").get("bank").asText());
-			System.out.println("amount : "+amount);
-			System.out.println("totalAmount : "+successNode.get("totalAmount"));
 			
 			// 결제 후 paymentKey를 DB에 저장
 			int orderNo = service.searchOrderNo();

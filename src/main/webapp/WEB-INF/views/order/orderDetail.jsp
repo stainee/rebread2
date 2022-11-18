@@ -98,7 +98,7 @@
 	        			<div class="content-price">
 							<div class="content-info">
 		        				<div>상품 가격</div>
-		        				<div>1</div>
+		        				<div></div>
 		        			</div>
 							<div class="content-info">
 		        				<div>적립마일리지</div>
@@ -106,7 +106,7 @@
 		        			</div>
 							<div class="content-info">
 		        				<c:choose>
-		        					<c:when test="${o.orderState eq '픽업준비중' }">
+		        					<c:when test="${o.orderState eq '픽업준비중' || o.orderState eq '픽업완료' }">
 										<div style="color: #cbcbcb;">배송비</div>
 		        						<div style="color: #cbcbcb;">0</div>
 		        					</c:when>
@@ -168,10 +168,10 @@
 		// 상품 가격 계산
 		const orderPrice = $("[name=orderPrice]").val();
 		let price = $(".content-info").eq(3).children().next();
-		if(orderState == "결제완료" , orderState == "배송준비중", orderState == "배송중", orderState == "배송완료"){
-			price.text(addComma(Number(orderPrice-3000))+"원");
-		}else{
+		if(orderState == "픽업준비중", orderState == "픽업완료"){
 			price.text(addComma(Number(orderPrice))+"원");
+		}else{
+			price.text(addComma(Number(orderPrice-3000))+"원");
 		}
 		
 		function addComma(value){
