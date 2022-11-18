@@ -48,7 +48,7 @@
 						
 						<tr>
 							<th>유통기한</th>
-							<td><input type="date" name="productDate" min="2022-11-17" max="2022-11-24"required="required"></td>	
+							<td><input type="date" name="productDate" min="2022-11-18" max="2022-11-25"required="required"></td>	
 						</tr>
 						
 						<tr>
