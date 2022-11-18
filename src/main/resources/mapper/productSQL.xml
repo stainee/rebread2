@@ -120,4 +120,22 @@
 	<delete id="expirationDate">
 		delete from product where product_date <![CDATA[<]]> sysdate and product_type = 0;
 	</delete>
+	
+	<delete id="deleteProduct" parameterType="_int">
+		delete product
+		where product_no= #{parameter}
+	</delete>
+	<update id="updateProduct" parameterType="p">
+		update product
+		set 
+			product_name = #{productName},
+			product_content = #{productContent},
+			product_price = #{productPrice},
+			product_stock = #{productStock},
+			product_date = #{productDate},
+			product_img = #{productImg},
+			product_sale = #{productSale},
+			product_type = #{productType}
+		where product_no = #{productNo}
+	</update>
 </mapper>

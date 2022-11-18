@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>기부 페이지</title>
     <link rel="stylesheet" href="resources/css/font/font.css">
-    <link rel="stylesheet" href="resources/css/donate/donateMain.css">
+    <link rel="stylesheet" href="/resources/css/donate/donateMain.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
@@ -26,13 +26,13 @@
         
         	<c:forEach items="${list }" var="d">
             <div class="donate_content_box">
-			<a href="#ex1" rel="modal:open" onclick="openModal(this);">
+			<a href="#ex1" rel="modal:open" onclick="openModal(this);" class="donate_a">
                 <img src="resources/img/donate/${d.donateImg }" class="donate_img">
                 <div class="donate_content">
                     <div class="donate_content_title">${d.donateContent }</div>
                     <div class="donate_content_organ">${d.donateOrgan }</div>
                     <div class="donate_content_bar">
-                    	<progress value="${d.donateSum/10000}" max="100"></progress>
+                    	<progress value="${(d.donateSum/d.donateEnd)*100}" max="100"></progress>
                     </div>
                     <div class="donate_content_footer">
                         <strong class="donate_percent_num"></strong>
@@ -60,7 +60,7 @@
 			                <div class="donate_content_title" id="modal_title"></div>
 			                <div class="donate_content_organ" id="modal_organ"></div>
 			                <div class="donate_content_bar" id="modal_bar">
-			                	<progress value="" max="100"></progress>
+			                	<progress value="" max="100" ></progress>
 			                </div>
 			                <div class="donate_content_footer">
 			                    <strong class="donate_percent_num" id="modal_percent_num"></strong>
@@ -156,6 +156,17 @@
 		    let donateSum = $("input[name=donateSum]").eq(i).val();
 		    let donateEnd = $("input[name=donateEnd]").eq(i).val();
 		    let donateCountSum = $(".donate_percent_num").eq(i).text(Number((donateSum/donateEnd)*100).toFixed());
+	
+			// 만약 100% 넘어가면 기부종료
+		    if(((donateSum/donateEnd)*100)>=100){
+		    	console.log("100% 넘었다!!");
+		    	// 100% 넘어가면 클릭 안되도록 a태그 #으로 변경
+                $(".donate_a").eq(i).attr("href","#");
+		    	$(".donate_content_bar>progress")
+                $(".donate_a").eq(i).attr("href","#").on("click",function(){
+                	alert("모금이 종료된 항목입니다");
+                });
+		    }
 	    }
 	    
 		let memberMileage = addComma($("input[name=memberMileage]").val());

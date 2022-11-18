@@ -32,7 +32,7 @@
         </div>
         <div class="right_container" >
 	        	<!-- 내 정보 -->
-	            <div class="content_container" 	style='height: 600px'>
+	            <div class="content_container" 	style='height: 500px'>
 	            	<div class="navi_box">회원 정보 수정</div>
                 <form action="/updateCeo.do" method="post">
                 <div class="my_info">

@@ -121,4 +121,14 @@
 			0		
 		)
 	</insert>
+	
+	<select id="reviewAbleCount" parameterType="map" resultType="_int">
+		select
+    		(select count(order_no) from orders where store_no=#{storeNo} and member_no =#{memberNo} and order_state='결제완료')
+		    -
+		    (select count(review_no) from review where review_writer = (select member_id from member where member_no= #{memberNo}) and store_no = #{storeNo})
+		    as cnt
+		from dual
+	
+	</select>
 </mapper>

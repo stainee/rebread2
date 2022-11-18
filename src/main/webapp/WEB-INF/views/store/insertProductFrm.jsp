@@ -18,7 +18,7 @@
 		<div class="left_container">
 			<div class="memberInfo">
 				<p>[${storeName }]</p>
-				<p><a href="/detailStore.do?storeNo=${storeNo}">${storeAddr}</a></p>
+				<p><a href="/detailStore.do?storeNo=${storeNo}&memberNo=${sessionScope.m.memberNo}">${storeAddr}</a></p>
 			</div>
 		</div>
 

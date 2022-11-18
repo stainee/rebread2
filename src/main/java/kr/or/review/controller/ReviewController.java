@@ -64,12 +64,16 @@ public class ReviewController {
 		}
 	}
 	
-	//가게 리뷰 불러오기
+	//가게 리뷰 불러오기& 리뷰를 등록할 수 있는 카운트 불러오기
 	@ResponseBody
 	@RequestMapping(value="/selectReview.do", produces = "application/json;charset=utf-8")
-	public String selectReveiw(int storeNo) {
+	public String selectReveiw(int storeNo, int memberNo) {
 		ArrayList<Review> list = service.selectStoreReview(storeNo);
-		return new Gson().toJson(list);
+		int count = service.selectCountReview(storeNo,memberNo);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("list",list);
+		map.put("count",count);
+		return new Gson().toJson(map);
 	}
 	
 	//리뷰 작성
@@ -117,5 +121,17 @@ public class ReviewController {
 	@RequestMapping(value = "/rollet.do")
 	public String rollet() {
 		return "common/rollet";
+	}
+	
+	//근데 ajax로 할걸 
+	//매장 리뷰 삭제 후 기존의 가게 상세페이지로 이동
+	@RequestMapping(value="deleteStoreReview.do")
+	public String deleteStoreReview(int reviewNo, int memberNo, int storeNo) {
+		int result = service.deleteReview(reviewNo);
+		if(result>0) {
+			return "redirect:/detailStore.do?storeNo="+storeNo+"&memberNo="+memberNo;
+		}else {
+			return "redirect:/detailStore.do?storeNo="+storeNo+"&memberNo="+memberNo;
+		}
 	}
 }

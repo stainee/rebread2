@@ -34,37 +34,37 @@
             <div class="content_container">
                 <div class="navi_box">가게 정보</div>
                 
-                <!-- 가게 리스트를 띄우는 div -->
+                <!-- 매출 현황 -->
                 <c:forEach items="${list}" var="s">
-                <div class="store_info_wrapper">
-                    <div class="store_info_wrap_box">
+                <div class="store_sales_info_wrapper">
+                    <div class="store_sales_info_wrap_box">
                         <div class="store_info_left">
                             <div class="store_img">
                                 <img src="resources/img/store/${s.storeImg }">
                             </div>
                             <div class="store_name">
-                            	<input type="text" name="storeName" value="${s.storeName }" readonly>
+                            	<input type="text" name="storeName" value="${s.storeName }">
                             </div>
                         </div>
                         
                         
                         <div class="store_info_right">
                             <div class="store_info_form">
-                                <div class="store_info_title">일 매출</div>
-                                <div class="store_info_content">
-                                	<input type="text" name="memberName" value="${sessionScope.m.memberName }" readonly>
+                                <div class="store_status_title">일 매출</div>
+                                <div class="store_sales_info_content">
+                                	<input type="text" name="today" class="today" value="${s.today }" dir="rtl">원
                                 </div>
                             </div>
                             <div class="store_info_form">
-                                <div class="store_info_title">월 매출</div>
-                                <div class="store_info_content">
-                                	<input type="text" name="storeRegistNum" value="${s.storeRegistNum }" readonly>
+                                <div class="store_status_title">월 매출</div>
+                                <div class="store_sales_info_content">
+                                	<input type="text" name="month" class="month" value="${s.month }" dir="rtl">원
                                 </div>
                             </div>
                             <div class="store_info_form">
-                                <div class="store_info_title">연 매출</div>
-                                <div class="store_info_content">
-                                	<input type="text" name="storeAddr" value="${s.storeAddr }" readonly>
+                                <div class="store_status_title">연 매출</div>
+                                <div class="store_sales_info_content">
+                                	<input type="text" name="years" class="years" value="${s.years }" dir="rtl">원
                                 </div>
                                 <button class="store_sale_btn">돌아가기</button>
                             </div>
@@ -73,17 +73,26 @@
                 </div>
                 </c:forEach>
                 
-                <div class="more_btn_box">
-                	<button class="more_btn">더보기</button>
-            	</div>
-            	<div class="more_end_box">마지막 페이지입니다</div>
-              
             </div>
         </div>
     </div>
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 <script>
+function addComma(value){
+		value = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		return value;
+};
+
+const todayVal = addComma($(".today").val());
+const monthVal = addComma($(".month").val());
+const yearsVal = addComma($(".years").val());
+$(".today").val(todayVal); 
+$(".month").val(monthVal);
+$(".years").val(yearsVal);
+
+
+
 index=1;
 $(function(){
 	let total = $(".selectList a").length;
@@ -111,18 +120,12 @@ $(".store_sale_btn").on("click",function(){
 });
 
 $(function(){
-    $(".store_info_wrapper").slice(0, 3).show(); // 초기갯수
-    $(".store_info_wrapper:nth-child(-n+3)").css("display","inline-block");
+    $(".store_sales_info_wrapper").slice(0, 3).show(); // 초기갯수
+    $(".store_sales_info_wrapper:nth-child(-n+4)").css("display","flex");
     $(".more_btn").click(function(e){ // 클릭시 more
         e.preventDefault();
-        $(".store_info_wrapper:hidden").slice(0, 3).show().css("display","inline-block"); // 클릭시 more 갯수 지정
-        console.log($(".store_info_wrapper:hidden").length); // 남아있는 컨텐츠 박스 갯수 출력
-        
-     // 더보여줄 것이 없으면 더보기 버튼을 숨기고 "마지막페이지입니다" text 출력
-        if($(".store_info_wrapper:hidden").length == 0){ 
-        	$(".more_btn_box").css("display","none");
-        	$(".more_end_box").css("display","block");
-        }
+        $(".store_sales_info_wrapper:hidden").slice(0, 3).show().css("display","flex"); // 클릭시 more 갯수 지정
+        console.log($(".store_sales_info_wrapper:hidden").length); // 남아있는 컨텐츠 박스 갯수 출력
     });
 });
 </script>

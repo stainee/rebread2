@@ -53,7 +53,7 @@
 						<img src="/resources/img/store/${sd.s.storeImg }">
 					</div>
 					<div class="store-detail">
-						<span id="star">★ ${sd.s.rating }</span>
+						<span id="star">★  ${sd.s.rating }</span>
 						<input type="hidden" name="addr" value="${sd.s.storeAddr }">
 						<p>${sd.s.storeContent }</p>
 					</div>
@@ -92,9 +92,10 @@
 										<div id="bread-img">
 											<img id="Img" src="/resources/upload/product/${sdl.productImg }">
 										</div>
-										<div class="bread-info">
-											<span id="bread-name">${sdl.productName }</span><br> <span
-												id="bread-detail">${sdl.productContent }</span>
+										<div class="bread-info">								
+											<span id="bread-name">${sdl.productName }</span><br> 
+											<span id="bread-detail">${sdl.productContent }</span>
+											<input type="hidden" id="stock" value="${sdl.productStock}">
 										</div>
 										<div class="bread-price">
 											<span id="discount">${sdl.productSale }%</span><br> 
@@ -106,7 +107,7 @@
 										<c:if test="${sessionScope.m.memberNo eq sd.s.memberNo}">
 										<div class="fix">
 											<a href="/updateProductFrm.do?productNo=${sdl.productNo }&storeNo=${sdl.storeNo}&storeName=${sd.s.storeName}&storeAddr=${sd.s.storeAddr}" class="btn bc4">수정</a>
-											<a href="/deleteProduct.do?productNo=${sdl.productNo}&storeNo=${sd.s.storeNo}" class="btn bc4">삭제</a>
+											<a href="/deleteProduct.do?productNo=${sdl.productNo}&storeNo=${sd.s.storeNo}&memberNo=${sessionScope.m.memberNo}" class="btn bc4">삭제</a>
 										</div>
 										</c:if>
 									</div>
@@ -127,13 +128,14 @@
 									<div class="bread-info">
 										<span id="bread-name">${sdn.productName }</span><br> 
 										<span id="bread-detail">${sdn.productContent }</span>
+										<input type="hidden" id="stock" value="${sdn.productStock}">
 									</div>
 									<div class="bread-price">
 										<span id="discount">${sdn.productSale }%</span><br> 
 										<span id="price" style="text-decoration: line-through; color: #999999;">${sdn.productPrice }</span>
 										<span>→ <strong class="lastPrice">${sdn.productPrice-(sdn.productPrice*sdn.productSale /100)}</strong></span>
 									</div>
-									<c:if test="${sessionScope.memberNo eq sd.s.memberNo}">
+									<c:if test="${sessionScope.m.memberNo eq sd.s.memberNo}">
 									<div class="fix">
 										<a href="/updateProductFrm.do?productNo=${sdn.productNo }&storeNo=${sdn.storeNo}&storeName=${sd.s.storeName}&storeAddr=${sd.s.storeAddr}" class="btn bc4">수정</a>
 										<a href="/deleteProduct.do?productNo=${sdn.productNo}&storeNo=${sd.s.storeNo}" class="btn bc4">삭제</a>
@@ -146,9 +148,10 @@
 							</c:if>
 						</div>
 						<div class="tabcontent" id="REVIEW">
-							<div class="review-box-wrap">	
-								<c:if test="${not empty sessionScope.m }">
+							<div class="review-box-wrap">
+							
 								<div class="input-comment-box">
+								<!-- 
 									<form action="/insertReview.do" method="post" enctype="multipart/form-data">
 		                      			<div id="product-viewer">
 											<img id="img-view" width="150px">
@@ -177,13 +180,14 @@
 		   
 		                        		</div>
 									</form>
+									-->	
                     			</div>
-                    			</c:if>
+                    			 
                     			<div class="category">
 									<h2>REBREAD 리뷰</h2>
 								</div>
                     			<div class="review-list-wrap">
-                    			//여기여기
+                    			
                     			</div>
                     		</div>
 				
@@ -205,9 +209,16 @@
                     <div class="mid-title"><h2>CART</h2></div>
                     <form action="/orderFrm.do" method="post">
                         <div class="cart-wrap">
-                            <input type="hidden" name="memberNo" value="${sessionScope.m.memberNo}">
+                        	<c:choose>
+                        		<c:when test="${not empty sessionScope.m}">
+                        			<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo}">
+                        		</c:when>
+                        		<c:otherwise>
+                        			<input type="hidden" name="memberNo" value="0">
+                        		</c:otherwise>
+                        	</c:choose>
                             <input type="hidden" name="storeNo"value="${sd.s.storeNo}">
-                            <input type="hidden" name="deliveryType" value="배달준비중">
+                            <input type="hidden" name="deliveryType" value="결제완료">
                             <div class="cart-box-wrap">
                            	<!-- 물품 내역 담길 곳 -->
                            	
@@ -262,6 +273,7 @@
 					</div>
 				</div>
 				<div class="detail-price">
+					<input type="hidden" id="stock2">
 					<strong>가격</strong>
 					<div>
 						<p></p>원
@@ -310,12 +322,52 @@
 			</div>
 		</div>
 		<!-- 로그인 알림 모달 끝 -->
+		
+		<!-- 댓글 삭제 모달 -->
+		<div class="delete-modal">
+			<div class="alarm-wrap">
+				<div>정말 삭제하시겠습니까?</div>
+				<div class="btnZone">
+					<a href="#" class="btn bc4">예</a>
+					<button type="button" id="closeD" class="btn bc4" onclick="clBtn();">아니요</button>
+				</div>
+			</div>
+		</div>
+		<!-- 댓글 삭제모달 끝 -->
 	</div>
 	
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7eb9ba960e94dd83c11243c2a4da622f&libraries=services"></script>
 	<script src="/resources/js/store/storeDetail.js"></script>
 	<script>
+	
+	
+	
+	
+	//플러스 마이너스 버튼 누를 시 수량 변경
+	$("[name=plus]").on("click",function(){
+	    let amount = Number($("[name=amount]").val());
+	    const limit = Number($("#stock2").val());
+	    if(amount < limit){
+	    	amount++;
+	    }else{
+	    	alert("최대수량입니다!!!");
+	    }
+	    
+	    $("[name=amount]").attr("value",amount);
+
+	    //개당 가격 추출
+	    let price = $(".detail-price p").text();
+	    //가격에서 콤마 제거
+	    price2= minusComma(price);
+	    
+	    let totalPrice = amount * price2;
+	    //console.log(totalPrice);
+	    let totalPrice2 = addComma(totalPrice);
+	    $(".total-price p").text(totalPrice2);
+	});
+	
+	
 	
 	//좋아요 버튼 누를 시 delete
 	$("#delLike").on("click",function(e){
@@ -360,10 +412,29 @@
 		});
 	});
 	
+	//리뷰 삭제
+	function delReview(obj){
+		const reviewNo = $(obj).attr("idx");
+		const memberNo = $("[name=memberNo]").val();
+		const storeNo = $("[name=storeNo]").val();
+		
+		//로그인 안되었을 시
+		if(memberNo== 0){
+			$(".alarm-modal").css("display","flex");
+		}else{
+			//로그인 되었을 때
+			$(".delete-modal a").attr("href","/deleteStoreReview.do?storeNo="+storeNo+"&memberNo="+memberNo+"&reviewNo="+reviewNo);
+			$(".delete-modal").css("display","flex");
+		}
+	}
+	function clBtn(){
+		$(".delete-modal").hide();
+	}
+	
 	
 	function delivery(){
 		//<input type="hidden" name="deliveryType" value="1">
-		$("[name=deliveryType]").attr("value","배달준비중");
+		$("[name=deliveryType]").attr("value","결제완료");
 	};
 	function pickup(){
 		$("[name=deliveryType]").attr("value","픽업준비중");
@@ -394,8 +465,9 @@
 			//console.log("idx : "+productNo);
 			const productName = $(this).find("#bread-name").text();
 			const src= $(this).find("#Img").attr("src");
-			console.log(src);
-
+			//console.log(src);
+			const stock = $(this).find("#stock").val();
+			console.log("수량 :"+stock);
 			const detail = $(this).find("#bread-detail").text();
 			//console.log("설명 : "+detail);
 			
@@ -407,6 +479,7 @@
 			$(".detail-price p").text(showPrice);
 			$(".total-price p").text(showPrice);
 			$(".detail-btn button").attr("idx",productNo);
+			$("#stock2").attr("value",stock);
 			
 		});
 		
@@ -428,7 +501,7 @@
 			const amount = $(this).parents().find("[name=amount]").val();
 			//console.log(amount);
 			
-			//버튼 누른 후 모달창 닫기, 수량 1로 바꿔주기
+			//버튼 누른 후 모달창 닫기, 수량 1로 바꿔주기	
 			$(".detail-modal").hide();
 			$("[name=amount]").attr("value",1);
 			
@@ -482,33 +555,75 @@
 		//리뷰탭 클릭 시 리뷰 불러오기
 		$(tabs.eq(1)).on("click",function(){
 			const storeNo =$("[name=storeNo]").val();
+			const memberNo = $("[name=memberNo]").val();
+			
+			$(".input-comment-box").empty();
 			
 			$.ajax({
 				url:"/selectReview.do",
-				data:{storeNo:storeNo},
+				data:{storeNo:storeNo,memberNo:memberNo},
 				success:function(data){
 					//console.log(data);
 					
+					//가져온 리뷰 카운트가 0보다 클 때 textarea 보이도록
+					if(data.count > 0){
+						let html2 = '';
+						
+						html2 += '<form action="/insertReview.do" method="post" enctype="multipart/form-data">';
+						html2 += '<div id="product-viewer">';
+						html2 += '	<img id="img-view" width="150px">';
+						html2 += '</div>';
+						html2 += '<div>';
+						html2 += '	<div>';
+						html2 += '		<span>별점</span>';
+						html2 += '		<select name="rating">';
+						html2 += '			<option value="1">★</option>';
+						html2 += '			<option value="1">★★</option>';
+						html2 += '			<option value="1">★★★</option>';
+						html2 += '			<option value="1">★★★★</option>';
+						html2 += '			<option value="1">★★★★★</option>';
+						html2 += '		</select>';
+						html2 += '		<input type="file" name="upFile" accept="image/*" onchange="loadImg(this);" required="required">';
+						html2 += '	</div>';
+						html2 += '	<div class="inputReview">';
+						html2 += '		<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">';
+						html2 += '		<input type="hidden" name="reviewWriter" value="${sessionScope.m.memberId }">';
+						html2 += '		<input type="hidden" name="storeNo" value="${sd.s.storeNo}">';
+						html2 += '		<input type="hidden" name="reviewComment" value="0">';
+						html2 += '		<textarea name="reviewContent" required="required" maxlength="200"></textarea>';
+						html2 += '		<input type="submit" id="commentBtn"class="btn bc5" value="댓글달기">';
+						html2 += '	</div>';
+						html2 += '</div>';
+						html2 += '</form>';
+						
+						$(".input-comment-box").append(html2);
+					}else{
+						const div = $(".input-comment-box");
+						const p = $("<p>");
+							p.text("상품을 구매하시고 결제완료가 되신분은 리뷰를 등록하실 수 있습니다.");
+						div.append(p);
+					}
+					
 					var html = '';
-					for(let i=0; i<data.length; i++){
-						console.log(data[i]);
+					for(let i=0; i<data.list.length; i++){
+						console.log(data.list[i]);
 						html += '<div class="review-box">';
 						html += '	<div id="bread-img">';
-						html +=	'		<img id="Img" src="/resources/upload/review/'+data[i].reviewImg+'">';
+						html +=	'		<img id="Img" src="/resources/upload/review/'+data.list[i].reviewImg+'">';
 						html +=	'	</div>';
 						html +=	'	<div class="review-info">';
 						html +=	'		<div class="review-mid">';
 						html += '			<div class="rating">';	
-						html += '				<span id="reviewer">'+data[i].reviewWriter+'</span>';
-						html += '				<span>★  '+data[i].Rating +'</span>';
+						html += '				<span id="reviewer">'+data.list[i].reviewWriter+'</span>';
+						html += '				<span>★  '+data.list[i].Rating +'</span>';
 						html += '			</div>';	
 						html += '			<div class="reviewfix">';
-						html += '				<span>'+data[i].reviewDate+'</span>';
-						html += '				<span id="dBtn" idx="'+data[i].reviewNo+'">삭제</span>';
+						html += '				<span>'+data.list[i].reviewDate+'</span>';
+						html += '				<span id="dBtn" idx="'+data.list[i].reviewNo+'" onclick="delReview(this);">삭제</span>';
 						html += '			</div>';
 						html += '		</div>';	
 						html += '		<div class="review-content">';
-						html += '			<p>'+data[i].reviewContent+'</p>';
+						html += '			<p>'+data.list[i].reviewContent+'</p>';
 						html += '		</div>';
 						html += '	</div>';
 						html += '</div>';
@@ -518,6 +633,7 @@
 					
 				}
 			});
+		
 		});
 		
 		
@@ -555,6 +671,43 @@
 		    value = value.toString().replace(/[^\d]+/g, "");
 		    return value; 
 		};
+		
+		
+
+		
+		
+		
+		
+		
+		<%--
+		//플러스 마이너스 버튼 누를 시 수량 변경
+		$("[name=plus]").on("click",function(){
+		    let amount = $("[name=amount]").val();
+		    const limit = $("#stock2").val();
+		    console.log(limit);
+		    if(amount <= limit){
+		    	amount++;
+		    	if(amount == limit){
+		    		alert("최대 수량입니다!");
+		    	}
+		    }
+		    
+		    $("[name=amount]").attr("value",amount);
+
+		    //개당 가격 추출
+		    let price = $(".detail-price p").text();
+		    //가격에서 콤마 제거
+		    price2= minusComma(price);
+		    
+		    let totalPrice = amount * price2;
+		    //console.log(totalPrice);
+		    let totalPrice2 = addComma(totalPrice);
+		    $(".total-price p").text(totalPrice2);
+		});
+		--%>
+		
+
+
 	</script>
 </body>
 </html>

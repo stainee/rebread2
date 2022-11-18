@@ -42,7 +42,7 @@
    </insert>
    
    <select id="searchOrderNo" resultType="_int">
-      select max(order_no) from orders where paymentKey is not null
+      select max(order_no) from orders
    </select>
    
    <update id="updatePaymentKey" parameterType="o">
@@ -119,7 +119,9 @@
          o.order_phone as orderPhone,
          o.order_mileage as orderMileage,
          s.store_name as storeName,
-         paymentkey
+         paymentkey,
+         o.order_product_name as orderProductName,
+         o.order_product_img as orderProductImg
       from orders o join store s on o.store_no = s.store_no
    </select>
    

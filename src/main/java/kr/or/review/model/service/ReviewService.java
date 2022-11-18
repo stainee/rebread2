@@ -109,6 +109,17 @@ public class ReviewService {
 	public int insertReview(Review r) {
 		return dao.insertReview(r);
 	}
+
+
+
+	//상품을 구매한 유저가 리뷰를 등록할 수 있는 카운트
+	public int selectCountReview(int storeNo, int memberNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("storeNo", storeNo);
+		map.put("memberNo",memberNo);
+		int count = dao.reviewAbleCount(map);
+		return count;
+	}
 }
 
 

@@ -23,21 +23,21 @@
 				<table class="membertbl">
 					<tr>
 					 	<th>기부 단체</th>
-					 	<td><input type="text" value="" id="donateOrgan" name="donateOrgan"></td>
+					 	<td><input type="text" value="" id="donateOrgan" name="donateOrgan" required></td>
 					</tr>
 					<tr>
 					 	<th>기부 이미지</th>
 					 	<td>
-					 		<input type="file" value="" id="donateFile" name="donateFile"  accept="image/*" style="padding: 1px 2px;" multiple>
+					 		<input type="file" value="" id="donateFile" name="donateFile"  accept="image/*" style="padding: 1px 2px;" multiple required>
 					 	</td>
 					</tr>
 					<tr>
 					 	<th>목표 금액</th>
-					 	<td><input type="text" value="" id="donateEnd" name="donateEnd"></td>
+					 	<td><input type="text" value="" id="donateEnd" name="donateEnd" required></td>
 					</tr>
 					<tr>
 					 	<th>기부 내용</th>
-					 	<td><textarea id="donateContent" name="donateContent"></textarea></td>
+					 	<td><textarea id="donateContent" name="donateContent" required></textarea></td>
 					</tr>
 				</table>
 			<div class="btn_wrap">
