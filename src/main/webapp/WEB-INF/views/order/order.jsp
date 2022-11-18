@@ -19,7 +19,7 @@
         <div class="content-wrap">
             <div class="deliver-wrap" style="width: 40%;">
                <c:choose>
-                  <c:when test="${type eq '배달준비중' }">
+                  <c:when test="${type eq '결제완료' }">
                       <p>배달내역</p>
                    </c:when>
                    <c:otherwise>
@@ -52,7 +52,7 @@
                     <div class="two">
                         <span>배송비</span>
                         <c:choose>
-                           <c:when test="${type eq '배달준비중' }">
+                           <c:when test="${type eq '결제완료' }">
                               <span class="product-delivery-price">3000</span>
                            </c:when>
 	                     <c:otherwise>
@@ -76,7 +76,7 @@
         
             <div class="deliver-addr-wrap">
 				<c:choose>
-					<c:when test="${type eq '배달준비중' }">
+					<c:when test="${type eq '결제완료' }">
 		                <div class="deliver-addr-content" style="width: 40%;">
 		                    <p>배송지정보</p>
 		                    <button type="button" class="deliver-addr-update">수정</button>
@@ -145,6 +145,7 @@
    <script>
    
       const orderState = $("[name=orderState]").val();
+      console.log(orderState);
       const storeNo = $("[name=storeNo]").val();
       const storeImg = $("[name=storeImg]").val();
       let productNo = $("[name=productNo]");
@@ -284,8 +285,8 @@
                           orderId: memberId+'-'+todayString,
                           orderName: productName,
                           customerName: orderName,
-                          successUrl: 'http://192.168.10.64/orderCard.do',
-                          failUrl: 'http://192.168.10.64/fail.do'
+                          successUrl: 'http://localhost:8888/orderCard.do',
+                          failUrl: 'http://localhost:8888/fail.do'
                      });
 		             for(var i=0;i<productQuan.length;i++){
 		            	 let pQuan = productQuan.eq(i).text();
@@ -350,8 +351,8 @@
 	                           orderId: memberId+'-'+todayString,
 	                           orderName: productName,
 	                           customerName: orderName,
-	                           successUrl: 'http://192.168.10.64/orderAccount.do',
-	                           failUrl: 'http://192.168.10.64/fail.do'
+	                           successUrl: 'http://localhost:8888/orderAccount.do',
+	                           failUrl: 'http://localhost:8888/fail.do'
 	                      });
 			             for(var i=0;i<productQuan.length;i++){
 			            	 let pQuan = productQuan.eq(i).text();

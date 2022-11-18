@@ -43,21 +43,43 @@
 	        			</div>
 	        			<div class="content-title-date">${o.orderDate }</div>
 	        		</div>
-	        		<div class="content-box2">
-	        			<div class="content-addr">배송지 정보</div>
-	        			<div class="content-info">
-	        				<div>이름</div>
-	        				<div>${o.orderName }</div>
-	        			</div>
-	        			<div class="content-info">
-	        				<div>연락처</div>
-	        				<div>${o.orderPhone }</div>
-	        			</div>
-	        			<div class="content-info">
-	        				<div>주소</div>
-	        				<div>${o.orderAddr }</div>
-	        			</div>
-	        		</div>
+
+	        		<c:choose>
+	        			<c:when test="${o.orderState eq '픽업준비중' || o.orderState eq '픽업완료' }">
+			        		<div class="content-box2">
+			        			<div class="content-addr">픽업 매장 정보</div>
+			        			<div class="content-info">
+			        				<div>가게이름</div>
+			        				<div>${s.storeName }</div>
+			        			</div>
+			        			<div class="content-info">
+			        				<div>연락처</div>
+			        				<div>${s.storePhone }</div>
+			        			</div>
+			        			<div class="content-info">
+			        				<div>주소</div>
+			        				<div>${s.storeAddr }</div>
+			        			</div>
+			        		</div>
+		        		</c:when>
+		        		<c:otherwise>
+		        			<div class="content-box2">
+			        			<div class="content-addr">배송지 정보</div>
+			        			<div class="content-info">
+			        				<div>이름</div>
+			        				<div>${o.orderName }</div>
+			        			</div>
+			        			<div class="content-info">
+			        				<div>연락처</div>
+			        				<div>${o.orderPhone }</div>
+			        			</div>
+			        			<div class="content-info">
+			        				<div>주소</div>
+			        				<div>${o.orderAddr }</div>
+			        			</div>
+			        		</div>
+		        		</c:otherwise>
+	        		</c:choose>
 	        		<div class="content-box3">
 	        			<c:forEach items="${list }" var="op" varStatus="i">
 		        			<div class="content-product">
@@ -79,7 +101,7 @@
 		        				<div>1</div>
 		        			</div>
 							<div class="content-info">
-		        				<div>적립예정마일리지</div>
+		        				<div>적립마일리지</div>
 		        				<div>${o.orderMileage }</div>
 		        			</div>
 							<div class="content-info">
@@ -146,8 +168,11 @@
 		// 상품 가격 계산
 		const orderPrice = $("[name=orderPrice]").val();
 		let price = $(".content-info").eq(3).children().next();
-		price.text(addComma(Number(orderPrice-3000))+"원");
-
+		if(orderState == "결제완료" , orderState == "배송준비중", orderState == "배송중", orderState == "배송완료"){
+			price.text(addComma(Number(orderPrice-3000))+"원");
+		}else{
+			price.text(addComma(Number(orderPrice))+"원");
+		}
 		
 		function addComma(value){
 	         value = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
