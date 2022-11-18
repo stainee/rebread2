@@ -54,6 +54,7 @@
 					</div>
 					<div class="store-detail">
 						<span id="star">★  ${sd.s.rating }</span>
+						<input type="hidden" id="Id" value="${sessionScope.m.memberId}">
 						<input type="hidden" name="addr" value="${sd.s.storeAddr }">
 						<p>${sd.s.storeContent }</p>
 					</div>
@@ -334,6 +335,17 @@
 			</div>
 		</div>
 		<!-- 댓글 삭제모달 끝 -->
+		
+		<!-- 삭제불가 모달 -->
+		<div class="deleteN-modal">
+			<div class="alarm-wrap">
+				<div>리뷰 작성자가 아니므로 삭제하실 수 없습니다.</div>
+				<div class="btnZone">
+					<button type="button" id="closeD" class="btn bc4" onclick="closeM();">예</button>
+				</div>
+			</div>
+		</div>
+		<!-- 댓글 삭제모달 끝 -->
 	</div>
 	
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
@@ -342,7 +354,12 @@
 	<script>
 	
 	
-	
+	//배달 픽업 클릭 시 색깔 바꾸기
+	const button = $("#delivery-type button");
+	button.on("click",function(){
+		button.css("background-color","#eeeeee").css("color","#785c37");
+		$(this).css("background-color","#785c37").css("color","#eeeeee");
+	});
 	
 	//플러스 마이너스 버튼 누를 시 수량 변경
 	$("[name=plus]").on("click",function(){
@@ -417,27 +434,40 @@
 		const reviewNo = $(obj).attr("idx");
 		const memberNo = $("[name=memberNo]").val();
 		const storeNo = $("[name=storeNo]").val();
+		const reviewer = $(obj).parent().parent().find("#reviewer").text();
+		const memberId = $("#Id").val();
+		//console.log("로그인된 아이디"+ memberId);
+		
 		
 		//로그인 안되었을 시
 		if(memberNo== 0){
 			$(".alarm-modal").css("display","flex");
 		}else{
 			//로그인 되었을 때
-			$(".delete-modal a").attr("href","/deleteStoreReview.do?storeNo="+storeNo+"&memberNo="+memberNo+"&reviewNo="+reviewNo);
-			$(".delete-modal").css("display","flex");
+			if(memberId == reviewer){
+				//세션아이디랑 리뷰작성자가 같을 때
+				$(".delete-modal a").attr("href","/deleteStoreReview.do?storeNo="+storeNo+"&memberNo="+memberNo+"&reviewNo="+reviewNo);
+				$(".delete-modal").css("display","flex");
+			}else{
+				$(".deleteN-modal").css("display","flex");
+			}
+			
 		}
 	}
+	function closeM(){
+		$(".deleteN-modal").hide();
+	}
+	
 	function clBtn(){
 		$(".delete-modal").hide();
 	}
-	
-	
 	function delivery(){
 		//<input type="hidden" name="deliveryType" value="1">
 		$("[name=deliveryType]").attr("value","결제완료");
 	};
 	function pickup(){
 		$("[name=deliveryType]").attr("value","픽업준비중");
+		$(this).css("background-color","#785c37");
 	};
 	
 	function alarm(){
