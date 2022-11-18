@@ -39,15 +39,15 @@
                     	<option value="" disabled selected hidden>선택해주세요</option>
                         <option value="전체보기">전체보기</option>
                         <option value="결제완료">결제완료</option>
-                        <option value="배송준비">배송준비</option>
+                        <option value="배송준비중">배송준비중</option>
 				        <option value="배송중">배송중</option>
 				        <option value="배송완료">배송완료</option>
-				        <option value="픽업준비">픽업준비</option>
+				        <option value="픽업준비중">픽업준비중</option>
 				        <option value="픽업완료">픽업완료</option>
                     </select>
                 </div>
-                    <c:forEach items="${list}" var="o">
              		<form action="/salesInfoUpdate.do" method="post">
+                    <c:forEach items="${list}" var="o">
                     <div class="store_sales_info_wrapper">
                         <div class="store_info_left">
                             <div class="store_img">
@@ -61,10 +61,10 @@
                                     <select class="store_sales_info" name="orderState">
                                         <option value="" selected hidden>${o.orderState }</option>
 				                        <option value="결제완료">결제완료</option>
-                                        <option value="배송준비">배송준비</option>
+                                        <option value="배송준비중">배송준비중</option>
 				                        <option value="배송중">배송중</option>
 				                        <option value="배송완료">배송완료</option>
-				                        <option value="픽업준비">픽업준비</option>
+				                        <option value="픽업준비중">픽업준비중</option>
 				                        <option value="픽업완료">픽업완료</option>
                                     </select>
                                 </div>
@@ -72,7 +72,6 @@
 		                            <input type="hidden" name="orderNo" value="${o.orderNo }">
                                     <button type="submit" class="store_info_status_btn">변경</button>
                                 </div>
-                 				</form>
                                 <div class="store_info_date">구매 일자 : ${o.orderDate }</div>
                             </div>
                             <div class="product_info_form">
@@ -90,6 +89,7 @@
                         </div>
                         </div>
                         </c:forEach>
+                 				</form>
                 </div>
                 
                 <div class="more_btn_box">

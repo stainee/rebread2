@@ -46,6 +46,7 @@
     padding-left: 50px;
 }
 .product_info_content{
+	width: 500px;
     font-weight: 600;
     font-size: 17px;
 }
