@@ -98,9 +98,10 @@ public class StoreController {
 		//저장 경로
 		String savePath = request.getSession().getServletContext().getRealPath("/resources/img/store/");
 		
-		if(upFile != null) {
+		if(!upFile.isEmpty()) {
 					
 			String filename = upFile.getOriginalFilename();
+			
 			String filepath = fileRename.fileRename(savePath, filename);
 					
 			try {
