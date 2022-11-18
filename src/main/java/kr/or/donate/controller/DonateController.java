@@ -54,7 +54,7 @@ public class DonateController {
 	@RequestMapping(value = "/donateInsert.do")
 	public String donateInsert(Donate d, MultipartFile donateFile, HttpServletRequest request) {
 		// 파일첨부 코드 시작
-		if(donateFile != null) {
+		if(!donateFile.isEmpty()) {
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/img/donate/");
 				String filename = donateFile.getOriginalFilename();
 				String filepath = fileRename.fileRename(savePath, filename);
@@ -92,7 +92,7 @@ public class DonateController {
 		//저장 경로
 		String savePath = request.getSession().getServletContext().getRealPath("/resources/img/donate/");
 				
-		if(upFile != null) {
+		if(!upFile.isEmpty()) {
 							
 			String filename = upFile.getOriginalFilename();
 			String filepath = fileRename.fileRename(savePath, filename);
