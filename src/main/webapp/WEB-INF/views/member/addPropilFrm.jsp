@@ -60,13 +60,13 @@
 					<tr>
 						<th>휴대전화<img src="/resources/img/member/pilsu.gif"></th>
 						<td id="phones">
-							<input type="text" name="memberPhone" id="phone" placeholder="' - '을 제외한 번호를 입력해주세요.">
+							<input type="text" name="memberPhone" id="phone" placeholder="' - '을 제외한 번호를 입력해주세요." maxlength="11">
 						</td>
 					</tr>
 					<tr>	
 						<th>이메일<img src="/resources/img/member/pilsu.gif"></th>
 						<td id="email">
-							<input type="text" name="memberMail" id="memberMail">
+							<input type="text" name="memberMail" id="memberMail" maxlength="20">
 						</td>
 					</tr>
 					

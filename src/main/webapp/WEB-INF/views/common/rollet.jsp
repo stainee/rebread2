@@ -40,6 +40,7 @@
                     </td>
                     <td id="how" width="400" height="582">
                     	<h2>${sessionScope.m.memberName }님의 정보</h2>
+                    	<h2>토큰은 구매시 적립됩니다.</h2>
                     	<h2>토큰 개수 : <span id="token">${sessionScope.m.token }</span>개</h2>
                     	<h2>마일리지 : <span id="mile">${sessionScope.m.memberMileage }</span> M</h2>
                     	<h2>사용법</h2>
@@ -101,16 +102,20 @@ $(document).ready(function() {
 });
 	if(token < 1){
 		again.css("display","none");
+		
+		againbtn.on("click",function(){
+			alert("토큰이 부족하여 게임을 실행할 수 없습니다 더 충전해오세요 ^^7");
+			againbtn.removeAttr("onclick");
+			return false;
+		});
+		
+		spin.on("click",function(){
+			againbtn.removeAttr("onclick");
+			return false;
+		});
 	}
-	againbtn.on("click",function(){
-		alert("토큰이 부족하여 게임을 실행할 수 없습니다 더 충전해오세요 ^^7");
-		againbtn.removeAttr("onclick");
-		return false;
-	});
-	spin.on("click",function(){
-		againbtn.removeAttr("onclick");
-		return false;
-	});
+	
+	
 
 
 </script>

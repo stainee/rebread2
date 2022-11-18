@@ -61,7 +61,7 @@
 					<tr>
 						<th>휴대전화<img src="/resources/img/member/pilsu.gif"></th>
 						<td id="phones">
-							<input type="text" name="memberPhone" id="phone" placeholder="' - '을 제외한 번호를 입력해주세요.">
+							<input type="text" name="memberPhone" id="phone" placeholder="' - '을 제외한 번호를 입력해주세요." maxlength="11">
 						</td>
 					</tr>
 					
