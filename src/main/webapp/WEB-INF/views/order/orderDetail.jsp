@@ -157,7 +157,7 @@
 
 		function orderCancel(orderNo,reqPage){
 			if(confirm("주문을 취소하시겠습니까?")){
-				if(orderState == "결제완료" , orderState == "입금대기"){
+				if(orderState == "결제완료" || orderState == "입금대기"){
 					location.href="/orderCancel.do?orderNo="+orderNo+"&reqPage="+reqPage;
 				}else{
 					alert("현재 단계에서는 취소할 수 없습니다.\n고객센터로 문의주세요.");
@@ -168,7 +168,7 @@
 		// 상품 가격 계산
 		const orderPrice = $("[name=orderPrice]").val();
 		let price = $(".content-info").eq(3).children().next();
-		if(orderState == "픽업준비중", orderState == "픽업완료"){
+		if(orderState == "픽업준비중" || orderState == "픽업완료"){
 			price.text(addComma(Number(orderPrice))+"원");
 		}else{
 			price.text(addComma(Number(orderPrice-3000))+"원");
