@@ -103,7 +103,7 @@ public class OrderDao {
 	}
 
 	public Store selectOrderStore(int storeNo) {
-		return sqlSession.selectOne("order.selectOrderStore",storeNo);
+		return sqlSession.selectOne("store.selectOrderStore",storeNo);
 	}
 
 	

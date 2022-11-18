@@ -83,6 +83,9 @@ public class OrderController {
 		Order o = service.selectOneOrder(orderNo);
 		model.addAttribute("o",o);
 		model.addAttribute("reqPage",reqPage);
+		Store s = service.selectOrderStore(o.getStoreNo());
+		model.addAttribute("s",s);
+		System.out.println("s : "+s);
 
 		// 주문 목록 불러오기
 		ArrayList<OrderProduct> list = new ArrayList<OrderProduct>();

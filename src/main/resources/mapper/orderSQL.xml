@@ -76,6 +76,7 @@
       select
          order_no as orderNo,
          member_no as memberNo,
+         store_no as storeNo,
          order_state as orderState,
          order_date as orderDate,
          order_total_quan as orderTotalQuan,
