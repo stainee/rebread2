@@ -208,7 +208,7 @@
 			<!-- 오른쪽 장바구니 -->
                 <div class="right-content">
                     <div class="mid-title"><h2>CART</h2></div>
-                    <form action="/orderFrm.do" method="post">
+                    <form action="/orderFrm.do" method="post" id="orderFrm">
                         <div class="cart-wrap">
                         	<c:choose>
                         		<c:when test="${not empty sessionScope.m}">
@@ -239,9 +239,9 @@
                                 </div>
                             </div>
                             <c:choose>
-    							<c:when test="${not empty sessionScope.m.memberNo}">
+    							<c:when test="${not empty sessionScope.m.memberNo and sessionScope.m.memberNo ne 0}">
 		                            <div class="subBtn">
-		                                <input type="submit" value="결제하기" class="btn bc5 bs4">
+		                                <input type="button" value="결제하기" class="btn bc5 bs4" id="orBtn">
 		                            </div>
 	                            </c:when>
 	                            <c:otherwise>
@@ -360,6 +360,7 @@
 		button.css("background-color","#eeeeee").css("color","#785c37");
 		$(this).css("background-color","#785c37").css("color","#eeeeee");
 	});
+	
 	
 	//플러스 마이너스 버튼 누를 시 수량 변경
 	$("[name=plus]").on("click",function(){
@@ -581,7 +582,19 @@
 			}
 		});
 		
+		$("#orBtn").on("click",function(){
+			const cartBox = $(".cart-box");
+			console.log(cartBox);
 	
+			if(cartBox.length == 0){
+				$(".alarm-modal").css("display","flex");
+			}else{
+				$("#orderFrm").submit();
+			}
+			
+		});
+		
+		
 		//리뷰탭 클릭 시 리뷰 불러오기
 		$(tabs.eq(1)).on("click",function(){
 			const storeNo =$("[name=storeNo]").val();
