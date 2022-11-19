@@ -346,6 +346,17 @@
 			</div>
 		</div>
 		<!-- 댓글 삭제모달 끝 -->
+		
+		<!-- 삭제불가 모달 -->
+		<div class="cartAlarm-modal">
+			<div class="alarm-wrap">
+				<div>장바구니를 먼저 담아주세요.</div>
+				<div class="btnZone">
+					<button type="button" id="closeD" class="btn bc4" onclick="closeA();">예</button>
+				</div>
+			</div>
+		</div>
+		<!-- 댓글 삭제모달 끝 -->
 	</div>
 	
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
@@ -457,6 +468,11 @@
 	}
 	function closeM(){
 		$(".deleteN-modal").hide();
+	}
+	
+	
+	function closeA() {
+		$(".cartAlarm-modal").hide();
 	}
 	
 	function clBtn(){
@@ -587,13 +603,13 @@
 			console.log(cartBox);
 	
 			if(cartBox.length == 0){
-				$(".alarm-modal").css("display","flex");
+				$(".cartAlarm-modal").css("display","flex");
 			}else{
 				$("#orderFrm").submit();
 			}
 			
 		});
-		
+	
 		
 		//리뷰탭 클릭 시 리뷰 불러오기
 		$(tabs.eq(1)).on("click",function(){
@@ -703,7 +719,6 @@
 			}
 			
 		};
-				
 		//콤마 추가 펑션
 		function addComma(value){
 			value = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
@@ -714,43 +729,6 @@
 		    value = value.toString().replace(/[^\d]+/g, "");
 		    return value; 
 		};
-		
-		
-
-		
-		
-		
-		
-		
-		<%--
-		//플러스 마이너스 버튼 누를 시 수량 변경
-		$("[name=plus]").on("click",function(){
-		    let amount = $("[name=amount]").val();
-		    const limit = $("#stock2").val();
-		    console.log(limit);
-		    if(amount <= limit){
-		    	amount++;
-		    	if(amount == limit){
-		    		alert("최대 수량입니다!");
-		    	}
-		    }
-		    
-		    $("[name=amount]").attr("value",amount);
-
-		    //개당 가격 추출
-		    let price = $(".detail-price p").text();
-		    //가격에서 콤마 제거
-		    price2= minusComma(price);
-		    
-		    let totalPrice = amount * price2;
-		    //console.log(totalPrice);
-		    let totalPrice2 = addComma(totalPrice);
-		    $(".total-price p").text(totalPrice2);
-		});
-		--%>
-		
-
-
 	</script>
 </body>
 </html>
