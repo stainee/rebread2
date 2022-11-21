@@ -33,7 +33,7 @@ public class KaKaoController {
         loginUrl.append("https://kauth.kakao.com/oauth/authorize?client_id=");
         loginUrl.append("e584f1ee2e73e2ce140d7006c3f82405"); 
         loginUrl.append("&redirect_uri=");
-        loginUrl.append("http://192.168.10.64/kakao_callback.do"); 
+        loginUrl.append("http://localhost/kakao_callback.do"); 
         loginUrl.append("&response_type=code");
         return "redirect:"+loginUrl.toString();
     }
