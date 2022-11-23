@@ -1,169 +1,182 @@
-*{
+* {
 	font-family: nsr-r;
 }
-.left_container{
-    width:200px;
-    height: 360px;
-    box-shadow: 2px 2px 2px 2px lightgray;
-    border-radius: 5px;
-    margin-right:20px;
-}
-.navi_box{
-    width: 920px;
-    padding-left: 20px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid lightgray;
+
+.left_container {
+	width: 200px;
+	height: 360px;
+	box-shadow: 2px 2px 2px 2px lightgray;
+	border-radius: 5px;
+	margin-right: 20px;
 }
 
-.navi_btn{
-    width: 90px;
-    height: 30px;
-    margin-right: 20px;
-    border: none;
-    border-radius: 5px;
-    background-color: rgb(90, 90, 90);
-    color: white;
-    cursor: pointer;
-    font-weight: 700;
+.navi_box {
+	width: 920px;
+	padding-left: 20px;
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	border-bottom: 1px solid lightgray;
 }
 
-.store_info_wrapper{
-	display:none;
+.navi_btn {
+	width: 90px;
+	height: 30px;
+	margin-right: 20px;
+	border: none;
+	border-radius: 5px;
+	background-color: rgb(90, 90, 90);
+	color: white;
+	cursor: pointer;
+	font-weight: 700;
+}
+
+.store_info_wrapper {
+	display: none;
 	border-bottom: 2px solid gray;
-    justify-content: center;
-    padding-top: 50px;
-    margin-left: 50px;
-    margin-right: 60px;
+	justify-content: center;
+	padding-top: 50px;
+	margin-left: 50px;
+	margin-right: 60px;
 }
 
-.store_info_left{
-    display: inline-block;
-    padding-left: 50px;
+.store_info_left {
+	display: inline-block;
+	padding-left: 50px;
 }
 
-.store_info_right{
-    display: inline-block;
-    padding-left: 30px;
+.store_info_right {
+	display: inline-block;
+	padding-left: 30px;
 }
 
-.store_img>img{
-    width: 200px;
-    height: 180px;
+.store_img>img {
+	width: 200px;
+	height: 180px;
 }
 
-.store_name{
-    display: flex;
-    justify-content: center;
-    padding: 20px 0px;
+.store_name {
+	display: flex;
+	justify-content: center;
+	padding: 20px 0px;
 }
-.store_name input{
+
+.store_name input {
 	text-align: center;
 	font-size: 16px;
 	border: none;
 	outline: none;
 }
 
-.store_info_form{
-    width: 500px;
-    padding-left: 50px;
-    
+.store_info_form {
+	width: 500px;
+	padding-left: 50px;
 }
-.store_info_title{
-    padding-bottom: 25px;
-    width: 170px;
-    display: inline-block;
-    color: gray;
+
+.store_info_title {
+	padding-bottom: 25px;
+	width: 170px;
+	display: inline-block;
+	color: gray;
 }
-.store_info_content{
-    display: inline-block;
+
+.store_info_content {
+	display: inline-block;
 }
-.store_info_content input{
+
+.store_info_content input {
 	font-size: 16px;
 	border: none;
 	outline: none;
 }
-input[name=openTime],input[name=closeTime]{
+
+input[name=openTime], input[name=closeTime] {
 	width: 45px;
 }
-.store_sales_info_wrap_box{
+
+.store_sales_info_wrap_box {
 	display: flex;
 	align-items: center;
-    padding-top: 40px;
-    padding-bottom: 20px;
+	padding-top: 40px;
+	padding-bottom: 20px;
 }
-
 
 /* 페이징 디자인*/
-.pagination{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-top: 30px;
-    padding-bottom: 30px;
-}
-.page-item{
-    width: 50px;
-    height: 50px;
-    font-size: 24px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid lightgray;
-    border-right: none;
-}
-.page-item:first-child{
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-}
-.page-item:last-child{
-    border-right: 1px solid lightgray;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
+.pagination {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding-top: 30px;
+	padding-bottom: 30px;
 }
 
-.page-link{
-    text-decoration: none;
-    color: rgb(69, 69, 251);
+.page-item {
+	width: 50px;
+	height: 50px;
+	font-size: 24px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 1px solid lightgray;
+	border-right: none;
 }
 
-.store_sale_btn,.store_edit_btn{
-    float: right;
-    width: 85px;
-    height: 30px;
+.page-item:first-child {
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
 }
 
+.page-item:last-child {
+	border-right: 1px solid lightgray;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
 
+.page-link {
+	text-decoration: none;
+	color: rgb(69, 69, 251);
+}
+
+.store_sale_btn, .store_edit_btn {
+	float: right;
+	width: 85px;
+	height: 30px;
+}
 
 /* 가게 등록창 CSS */
-.store_insert_wrapper{
+.store_insert_wrapper {
 	display: none;
 }
-.store_insert_form{
+
+.store_insert_form {
 	display: flex;
 	justify-content: center;
 }
-.store_insert_form div{
+
+.store_insert_form div {
 	display: inline-block;
 }
-.store_insert_title{
+
+.store_insert_title {
 	width: 200px;
 	height: 30x;
-	font-size:24px;
+	font-size: 24px;
 	padding-right: 35px;
-	margin-bottom : 40px;
+	margin-bottom: 40px;
 	text-align: left;
 }
-.store_insert_form:first-child{
+
+.store_insert_form:first-child {
 	margin-top: 50px;
 }
-.store_insert_form input[name=storeFile]{
+
+.store_insert_form input[name=storeFile] {
 	font-size: 16px;
 }
-.store_insert_form input{
-	width : 300px;
+
+.store_insert_form input {
+	width: 300px;
 	height: 30px;
 	border: none;
 	outline: none;
@@ -172,59 +185,67 @@ input[name=openTime],input[name=closeTime]{
 	color: gray;
 }
 
-textarea[name=storeContent]{
+textarea[name=storeContent] {
 	width: 300px;
 	height: 100px;
 	outline: none;
 	border: 1.5px solid lightgray;
-	resize:none;
+	resize: none;
 	font-size: 20px;
 	color: gray;
 }
-.store_insert_btn_box{
+
+.store_insert_btn_box {
 	display: flex;
 	justify-content: center;
 }
-.store_insert_btn{
+
+.store_insert_btn {
 	width: 200px;
-    height: 50px;
-    margin-top: 30px;
-    margin-bottom: 100px;
-    border: none;
-    border-radius: 5px;
-    background-color: rgb(90, 90, 90);
-    color: white;
-    cursor: pointer;
-    font-weight: 700;
+	height: 50px;
+	margin-top: 30px;
+	margin-bottom: 100px;
+	border: none;
+	border-radius: 5px;
+	background-color: rgb(90, 90, 90);
+	color: white;
+	cursor: pointer;
+	font-weight: 700;
 }
 
 /* 가게 정보 수정창 CSS */
-.store_update_wrapper{
+.store_update_wrapper {
 	display: none;
 }
-.store_update_form{
+
+.store_update_form {
 	display: flex;
 	justify-content: center;
 }
-.store_update_form div{
+
+.store_update_form div {
 	display: inline-block;
 }
-.store_update_title{
+
+.store_update_title {
 	width: 200px;
 	height: 30x;
-	font-size:24px;
+	font-size: 24px;
 	padding-right: 35px;
-	margin-bottom : 40px;
+	margin-bottom: 40px;
 	text-align: left;
 }
-.store_update_form:first-child{
+
+.store_update_form:first-child {
 	margin-top: 50px;
 }
-.store_update_form input[name=storeImg]{
+
+.store_update_form input[name=storeImg] {
 	font-size: 16px;
 }
-.store_update_form input{
-	width : 300px;
+
+.store_update_form input {
+	width: 300px;
 	height: 30px;
 	border: none;
 	outline: none;
@@ -233,41 +254,46 @@ textarea[name=storeContent]{
 	color: gray;
 }
 
-textarea[name=storeContent]{
+textarea[name=storeContent] {
 	width: 300px;
 	height: 100px;
 	outline: none;
 	border: 1.5px solid lightgray;
-	resize:none;
+	resize: none;
 	font-size: 20px;
 	color: gray;
 }
-.store_update_btn_box{
+
+.store_update_btn_box {
 	display: flex;
 	justify-content: center;
 }
-.store_update_btn{
+
+.store_update_btn {
 	width: 200px;
-    height: 50px;
-    margin-top: 30px;
-    margin-bottom: 100px;
-    border: none;
-    border-radius: 5px;
-    background-color: rgb(90, 90, 90);
-    color: white;
-    cursor: pointer;
-    font-weight: 700;
+	height: 50px;
+	margin-top: 30px;
+	margin-bottom: 100px;
+	border: none;
+	border-radius: 5px;
+	background-color: rgb(90, 90, 90);
+	color: white;
+	cursor: pointer;
+	font-weight: 700;
 }
-.more_btn{
+
+.more_btn {
 	width: 850px;
 	height: 40px;
 	margin: 40px 0px;
 }
-.more_btn_box{
+
+.more_btn_box {
 	display: flex;
 	justify-content: center;
 }
-.more_end_box{
+
+.more_end_box {
 	text-align: center;
 	display: none;
 	font-size: 24px;
@@ -275,18 +301,20 @@ textarea[name=storeContent]{
 	margin: 40px 0px;
 }
 
-.store_status_title{
+.store_status_title {
 	font-size: 20px;
 	padding-bottom: 25px;
-    width: 60px;
-    display: inline-block;
-    color: gray;
+	width: 60px;
+	display: inline-block;
+	color: gray;
 }
-.store_sales_info_content{
+
+.store_sales_info_content {
 	display: inline-block;
 	font-size: 20px;
 }
-.store_sales_info_content input{
+
+.store_sales_info_content input {
 	font-size: 20px;
 	border: none;
 	outline: none;

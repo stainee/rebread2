@@ -28,7 +28,6 @@ public class DonateDao {
 		return sqlSession.update("donate.donateMileage", d);
 	}
 
-
 	public void donateMileage2(HashMap<String, Object> map) {
 		sqlSession.update("donate.donateMileage2", map);
 	}

@@ -1,35 +1,36 @@
 @charset "UTF-8";
 
-.sellertbl th{
-	background-color:lightgrey;
-	width:200px;
+.sellertbl th {
+	background-color: lightgrey;
+	width: 200px;
 }
 
-.sellertbl th:nth-child(1){
-	width:120px;
+.sellertbl th:nth-child(1) {
+	width: 120px;
 }
 
-.sellertbl tr td{
-	text-align:center;
+.sellertbl tr td {
+	text-align: center;
 }
-.sellertbl tr button{
-	border:none;
-	padding:5px 10px 5px 10px;
+
+.sellertbl tr button {
+	border: none;
+	padding: 5px 10px 5px 10px;
 	color: white;
-	font-weight:800;
-	border-radius:5px;
-	cursor:pointer;
+	font-weight: 800;
+	border-radius: 5px;
+	cursor: pointer;
 }
 
-.sellertbl tr td:nth-child(5){
-	margin : 0 auto;
-	text-align:center;
+.sellertbl tr td:nth-child(5) {
+	margin: 0 auto;
+	text-align: center;
 }
 
-.sellertbl .info{
-	background-color:orange;
+.sellertbl .info {
+	background-color: orange;
 }
 
-.sellertbl .account{
-	background-color:skyblue;
+.sellertbl .account {
+	background-color: skyblue;
 }

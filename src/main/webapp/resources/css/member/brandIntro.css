@@ -1,93 +1,94 @@
 @charset "UTF-8";
 
-*{
-	margin:0;
+* {
+	margin: 0;
 	font-family: 'nsr-r';
 }
 
-.content-wrap{
-	margin-top:50px;
-	margin-bottom:100px;
-}
-.content1{
-	width:900px;
-	margin:0 auto;
+.content-wrap {
+	margin-top: 50px;
+	margin-bottom: 100px;
 }
 
-.content .text{
-	font-size:24px;
-	margin-bottom:40px;
-}
-
-
-.content p{
-	font-weight:600;
-}
-.content #title4{
-	font-size:24px;
-	margin-bottom:40px;
-}
-
-.content title2{
-	font-weight:600;
-}
-
-.title1 p{
-	font-size:48px;
-	font-weight:600;
-	margin-bottom:30px;
-}
-
-.title3{
+.content1 {
+	width: 900px;
 	margin: 0 auto;
-	text-align:center;
-	padding-top:80px;
-	padding-bottom:80px;
-	background-color:#785c37;
-	color:#f8f8f8;
-	font-size:36px;
-	margin-top:80px;
-	margin-bottom:80px;
 }
 
-.title3 p{
-	font-family:'nsr-eb';
+.content .text {
+	font-size: 24px;
+	margin-bottom: 40px;
 }
-.title2 p{
-	margin-bottom:10px;
+
+.content p {
+	font-weight: 600;
+}
+
+.content #title4 {
+	font-size: 24px;
+	margin-bottom: 40px;
+}
+
+.content title2 {
+	font-weight: 600;
+}
+
+.title1 p {
+	font-size: 48px;
+	font-weight: 600;
+	margin-bottom: 30px;
+}
+
+.title3 {
+	margin: 0 auto;
+	text-align: center;
+	padding-top: 80px;
+	padding-bottom: 80px;
+	background-color: #785c37;
+	color: #f8f8f8;
+	font-size: 36px;
+	margin-top: 80px;
+	margin-bottom: 80px;
+}
+
+.title3 p {
+	font-family: 'nsr-eb';
+}
+
+.title2 p {
+	margin-bottom: 10px;
 }
 
 /* 두번째 단락 */
-
 .content2 {
-	margin:0 auto;
-}
-.content2 p{
-	font-size:32px;
+	margin: 0 auto;
 }
 
-.content2 .icon_wrap{
-	width:256px;
-	height:256px;
+.content2 p {
+	font-size: 32px;
 }
 
-.icon_container{
-	display:flex;
-	justify-content:center;
+.content2 .icon_wrap {
+	width: 256px;
+	height: 256px;
 }
 
-.icon_container:nth-child(2) .icon_wrap{
-	justify-content:flex-end;
+.icon_container {
+	display: flex;
+	justify-content: center;
 }
 
-.text_wrap{
-	margin-top:16px;
-	height:240px;
-	width:600px;
-	margin-left:48px;
+.icon_container:nth-child(2) .icon_wrap {
+	justify-content: flex-end;
 }
 
-.text_wrap p{
-	margin-bottom:20px;
+.text_wrap {
+	margin-top: 16px;
+	height: 240px;
+	width: 600px;
+	margin-left: 48px;
 }
 
+.text_wrap p {
+	margin-bottom: 20px;
+}

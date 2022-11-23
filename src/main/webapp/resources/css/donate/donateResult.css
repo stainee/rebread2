@@ -1,60 +1,69 @@
-*{
+* {
 	font-family: nsr-r;
 }
-.donate_result_wrap_frm{
+
+.donate_result_wrap_frm {
 	width: 1200px;
 	border: 1px solid lightgray;
 	margin: 80px auto;
 	padding: 0px 100px;
 }
-.donate_result_title>h1{
+
+.donate_result_title>h1 {
 	font-size: 44px;
 	text-align: center;
 	padding: 50px 0px;
 }
-.donate_result_comment_top_wrap{
-	width:990px;
+
+.donate_result_comment_top_wrap {
+	width: 990px;
 	margin: auto;
 	font-size: 0;
-    letter-spacing: 0;
-    word-spacing: 0;
+	letter-spacing: 0;
+	word-spacing: 0;
 }
-.donate_result_comment_top{
-	width:247.5px;
+
+.donate_result_comment_top {
+	width: 247.5px;
 	height: 60px;
 	background-color: #cfb696;
 	border-top-right-radius: 45px;
 	border-top-left-radius: 45px;
 	display: inline-block;
 	border: 3px solid #b1823c;
-	border-bottom: none; 
+	border-bottom: none;
 }
-.donate_result_comment_box{
-	width:990px;
-	height:200px;
+
+.donate_result_comment_box {
+	width: 990px;
+	height: 200px;
 	margin: auto;
 	background-color: #cfb696;
 	border-bottom-right-radius: 10px;
 	border-bottom-left-radius: 10px;
 	margin-bottom: 80px;
-	border: 3px solid #b1823c; 
+	border: 3px solid #b1823c;
 }
-.donate_result_comment{
-	padding: 50px 50px;	
+
+.donate_result_comment {
+	padding: 50px 50px;
 	text-align: center;
 }
-.donate_result_comment>h2{
+
+.donate_result_comment>h2 {
 	font-size: 30px;
 	color: white;
 	margin-bottom: 15px;
 }
-.donate_result_comment>h3{
-	font-weight:300;
+
+.donate_result_comment>h3 {
+	font-weight: 300;
 	display: block;
 	color: white;
 	margin-bottom: 15px;
 }
-.donate_result_comment_btn{
+
+.donate_result_comment_btn {
 	border: 1px solid white;
 	border-radius: 10px;
 	background-color: #cfb696;
@@ -63,45 +72,55 @@
 	width: 120px;
 	cursor: pointer;
 }
-.donate_info_title{
+
+.donate_info_title {
 	margin-bottom: 20px;
 }
-.donate_info_frm{
+
+.donate_info_frm {
 	border: 1px solid lightgray;
 }
-.donate_info_comment{
+
+.donate_info_comment {
 	font-size: 24px;
 	padding: 30px;
 	border-bottom: 1px solid lightgray;
 }
-.donate_info_comment>strong{
+
+.donate_info_comment>strong {
 	color: #b1823c;
 	font-size: 30px;
 }
-.donate_info_comment>span{
+
+.donate_info_comment>span {
 	color: gray;
 }
-.donate_info_name_box{
+
+.donate_info_name_box {
 	padding: 30px;
 }
-.donate_info_title_name,.donate_info_organ_name{
+
+.donate_info_title_name, .donate_info_organ_name {
 	width: 120px;
 	display: inline-block;
 	color: gray;
 }
-.donate_info_title_content,.donate_info_organ_content{
+
+.donate_info_title_content, .donate_info_organ_content {
 	display: inline-block;
-	
 }
-.donate_info_title_name_box{
+
+.donate_info_title_name_box {
 	margin-bottom: 20px;
 }
-.donate_return_btn_box{
+
+.donate_return_btn_box {
 	display: flex;
 	justify-content: center;
 	margin: 80px 0px;
 }
-.donate_return_btn{
+
+.donate_return_btn {
 	width: 180px;
 	height: 50px;
 	font-size: 18px;

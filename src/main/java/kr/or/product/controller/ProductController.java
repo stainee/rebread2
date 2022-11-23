@@ -46,10 +46,7 @@ public class ProductController {
 	
 	@RequestMapping(value="/insertProduct.do")
 	public String insertProduct(Product p, MultipartFile upFile, int memberNo, HttpServletRequest request) {
-		//System.out.println(p);
-		
 		if(upFile != null) {
-			
 			//저장될 파일 경로 지정하기
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/product/");
 			
@@ -65,10 +62,8 @@ public class ProductController {
 				bos.close();
 				
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			p.setProductImg(filepath);
@@ -85,14 +80,8 @@ public class ProductController {
 	}
 	@RequestMapping(value="/updateProductFrm.do")
 	public String updateProductFrm(Model model,String storeName,String storeAddr,int storeNo,int productNo ) {
-		//Product p = service.selectOneProduct(Product);
-//		System.out.println("스토어이름?"+storeName);
-//		System.out.println("스토어주소?"+storeAddr);
-//		System.out.println("스토어번호?"+storeNo);
-//		System.out.println("제품번호?"+productNo);
 		Product p = service.selectOneProduct(productNo);
 		
-		System.out.println(p);
 		model.addAttribute("storeNo",storeNo);
 		model.addAttribute("storeName",storeName);
 		model.addAttribute("storeAddr",storeAddr);
@@ -121,10 +110,8 @@ public class ProductController {
 				bos.close();
 						
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			p.setProductImg(filepath);

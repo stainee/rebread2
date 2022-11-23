@@ -1,141 +1,158 @@
 @charset "UTF-8";
 
-*{
-    list-style: none;
-    margin : 0;
+* {
+	list-style: none;
+	margin: 0;
 }
-body{
+
+body {
 	align-items: center;
 }
-.top{
+
+.top {
 	display: flex;
-	width:100%;
+	width: 100%;
 	min-width: 1200px;
-    justify-content: space-around;
-    align-items: center;
-}
-.total_wrapper{
-	margin-top : 60px;
-    display:flex;
-    justify-content: center;
+	justify-content: space-around;
+	align-items: center;
 }
 
-.left_container{
-    width:250px;
-    box-shadow: 2px 2px 2px 2px lightgray;
-    border-radius: 5px;
-    margin-right:20px;
-    height:160px;
+.total_wrapper {
+	margin-top: 60px;
+	display: flex;
+	justify-content: center;
 }
 
-.memberInfo{
-    width:250px;
-    height:160px;
-    padding-top:14px;
-    padding-left:20px;
+.left_container {
+	width: 250px;
+	box-shadow: 2px 2px 2px 2px lightgray;
+	border-radius: 5px;
+	margin-right: 20px;
+	height: 160px;
 }
 
-.memberInfo p{
-    font-size:23px;
-    margin-bottom: 10px;
-    font-weight:1000;
-    
+.memberInfo {
+	width: 250px;
+	height: 160px;
+	padding-top: 14px;
+	padding-left: 20px;
 }
-.memberInfo a{
+
+.memberInfo p {
+	font-size: 23px;
+	margin-bottom: 10px;
+	font-weight: 1000;
+}
+
+.memberInfo a {
 	font-size: 15px;
 	font-weight: 600;
 }
 
-.right_container{
-    width:960px;
-    min-width :750px;
-    box-shadow: 2px 2px 2px 2px lightgray;
-    border-radius:5px;
+.right_container {
+	width: 960px;
+	min-width: 750px;
+	box-shadow: 2px 2px 2px 2px lightgray;
+	border-radius: 5px;
 }
 
-.right_container .content_container{
-    margin-top:10px;
-    margin-left:10px;
+.right_container .content_container {
+	margin-top: 10px;
+	margin-left: 10px;
 }
+
 .content-top {
 	width: 90%;
-	margin : 0 auto;
+	margin: 0 auto;
 	border-bottom: 2px solid #ccc;
 	padding: 20px;
-
 }
 
-.content-top h2{
-	font-size:30px;
+.content-top h2 {
+	font-size: 30px;
 	font-weight: 1000;
 }
-#product-viewer{
-    border : 1px solid #EBEBEC;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px 0;
+
+#product-viewer {
+	border: 1px solid #EBEBEC;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+	padding: 20px 0;
 }
-#product-viewer span{
+
+#product-viewer span {
 	font-size: 13px;
 	color: #785c37;
 }
+
 .memberInfo {
 	box-sizing: border-box;
 }
-.product-box{
+
+.product-box {
 	display: flex;
 	align-items: center;
-    justify-content: space-around;
-    padding: 20px 0;
-    padding-bottom: 35px;
+	justify-content: space-around;
+	padding: 20px 0;
+	padding-bottom: 35px;
 }
-.product-box table{
+
+.product-box table {
 	margin: 0 auto;
 	text-align: center;
-	
 }
-.product-box table input{
+
+.product-box table input {
 	border: none;
 	border-bottom: 1px solid #ccc;
 	width: 90%;
 	margin-top: 10px;
 }
-.product-box table th{
+
+.product-box table th {
 	color: #6b3e04;
 }
-.product-box table tr{
+
+.product-box table tr {
 	height: 30px;
 }
 
 .select {
-    padding: 15px 10px;
+	padding: 15px 10px;
 }
-.select input[type=radio]{
-    display: none;
-}
-.select input[type=radio]+label{
-    display: inline-block;
-    cursor: pointer;
-    height: 24px;
-    width: 120px;
-    border: 1px solid #6b3e04;
-    line-height: 24px;
-    text-align: center;
-    font-weight:bold;
-    font-size:13px;
-}
-.select input[type=radio]+label{
-    background-color: #fff;
-    color: #6b3e04;
-}
-.select input[type=radio]:checked+label{
-    background-color: #6b3e04;
-    color: #fff;
-}
-input:focus {outline: none;} 
 
-textarea{
+.select input[type=radio] {
+	display: none;
+}
+
+.select input[type=radio]+label {
+	display: inline-block;
+	cursor: pointer;
+	height: 24px;
+	width: 120px;
+	border: 1px solid #6b3e04;
+	line-height: 24px;
+	text-align: center;
+	font-weight: bold;
+	font-size: 13px;
+}
+
+.select input[type=radio]+label {
+	background-color: #fff;
+	color: #6b3e04;
+}
+
+.select input[type=radio]:checked+label {
+	background-color: #6b3e04;
+	color: #fff;
+}
+
+input:focus {
+	outline: none;
+}
+
+textarea {
 	width: 90%;
 }

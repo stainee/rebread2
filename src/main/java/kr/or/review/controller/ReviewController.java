@@ -82,7 +82,6 @@ public class ReviewController {
 		//System.out.println(r.getReviewWriter());
 		
 		if(upFile != null) {
-				
 			//저장될 파일 경로 지정하기
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/review/");	
 			String filename= upFile.getOriginalFilename();
@@ -97,10 +96,8 @@ public class ReviewController {
 				bos.close();
 					
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			r.setReviewImg(filepath);

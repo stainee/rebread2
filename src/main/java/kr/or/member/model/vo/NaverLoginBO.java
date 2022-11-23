@@ -24,7 +24,6 @@ import lombok.NoArgsConstructor;
 
 
 public class NaverLoginBO {
-	/* 인증 요청문을 구성하는 파라미터 */
 	//client_id: 애플리케이션 등록 후 발급받은 클라이언트 아이디
 	//response_type: 인증 과정에 대한 구분값. code로 값이 고정돼 있습니다.
 	//redirect_uri: 네이버 로그인 인증의 결과를 전달받을 콜백 URL(URL 인코딩). 애플리케이션을 등록할 때 Callback URL에 설정한 정보입니다.
@@ -54,9 +53,6 @@ public class NaverLoginBO {
 
         return oauthService.getAuthorizationUrl();
     }
-
-    
-    
     
     /* 네이버아이디로 Callback 처리 및  AccessToken 획득 Method */
     public OAuth2AccessToken getAccessToken(HttpSession session, String code, String state) throws IOException{
@@ -78,9 +74,6 @@ public class NaverLoginBO {
         return null;
     }
 
-    
-    
-    
     /* 세션 유효성 검증을 위한 난수 생성기 */
     private String generateRandomString() {
         return UUID.randomUUID().toString();

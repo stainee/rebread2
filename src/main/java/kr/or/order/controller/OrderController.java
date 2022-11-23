@@ -176,12 +176,6 @@ public class OrderController {
 		String paymentKey = service.selectPaymentKey(orderNo);
 		String cancelReason = "고객변심";
 		
-		// base64로 인코딩
-//		Encoder encoder = Base64.getEncoder();
-//		byte[] encodedBytes = encoder.encode(SECRET_KEY.getBytes("UTF-8"));
-//		byte[] encodedBytes = Base64.getEncoder().encode(SECRET_KEY.getBytes("UTF-8"));
-//		String authorizations = "Basic " + new String(encodedBytes, 0, encodedBytes.length);
-		
 		String authorizations = "Basic " + Base64.getEncoder().encodeToString((SECRET_KEY+":").getBytes());
 		
 		URL url = new URL("https://api.tosspayments.com/v1/payments/" + paymentKey + "/cancel");
@@ -204,8 +198,6 @@ public class OrderController {
 		boolean isSuccess = code == 200 ? true : false;
 		InputStream responseStream = isSuccess? connection.getInputStream(): connection.getErrorStream();
 		Reader reader = new InputStreamReader(responseStream, StandardCharsets.UTF_8);
-//		JSONParser parser = new JSONParser();
-//		JSONObject jsonObject = (JSONObject) parser.parse(reader);
 		responseStream.close();
 		if(isSuccess) {
 			// 주문이 취소되면 주문상태, 회원 마일리지 수정
@@ -270,9 +262,6 @@ public class OrderController {
 			
 			return "order/orderAccountSuccess";
 		}else {
-//			JsonNode failNode = responseEntity.getBody();
-//			model.addAttribute("message",failNode.get("message").asText());
-//			model.addAttribute("code",failNode.get("code").asText());
 			
 			return "order/orderFail";
 		}
@@ -286,8 +275,4 @@ public class OrderController {
 		op.setOrderNo(orderNo);
 		int result = service.insertOrderProduct(op);
 	}
-	
-	
-	
-	
 }

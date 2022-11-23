@@ -49,7 +49,6 @@ public class StoreController {
 	@RequestMapping(value="/ceoStoreInfo.do")
 	public String ceoStoreInfo(Model model, HttpSession session){	
 		Member member = (Member)session.getAttribute("m");
-//		System.out.println(member.getMemberNo());
 		ArrayList<Store> list = sservice.selectMemberStore(member);
 		model.addAttribute("list",list);
 		return "store/ceoStoreInfo";
@@ -70,17 +69,14 @@ public class StoreController {
 					bos.write(bytes);
 					bos.close();
 				} catch (FileNotFoundException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				// 파일 업로드 끝(파일 1개 업로드)
 				s.setStoreImg(filepath);
 			}
 		int result = sservice.insertStore(s);
-		System.out.println(s);
 		
 		return "redirect:/ceoStoreInfo.do";
 	}
@@ -113,14 +109,11 @@ public class StoreController {
 				bos.close();
 						
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			s.setStoreImg(filepath);
-			System.out.println(s);
 			
 		}else if(oldImg != null && status.equals("stay")) {
 			s.setStoreImg(oldImg);
@@ -161,7 +154,6 @@ public class StoreController {
 	@RequestMapping(value="/allStoreList.do")
 	public String allStoreList(int reqPage,Model model,String storeName) {
 		StorePageData spd = sservice.selectStoreList(reqPage,storeName);
-		//System.out.println(spd);
 		model.addAttribute("list",spd.getList());
 		model.addAttribute("pageNavi",spd.getPageNavi());
 		model.addAttribute("reqPage",spd.getReqPage());
@@ -172,9 +164,6 @@ public class StoreController {
 	//매장 상세페이지
 	@RequestMapping(value="/detailStore.do")
 	public String detailStore(int storeNo,int memberNo, Model model) {
-		//Store s = sservice.selectOneStore2(storeNo);
-		//System.out.println(s);
-		//model.addAttribute("s",s);
 		StoreDetail sd = sservice.selectOneStore2(storeNo,memberNo);
 		model.addAttribute("sd",sd);
 		return "store/detailStore";
@@ -208,7 +197,6 @@ public class StoreController {
 	@RequestMapping(value = "/searchBread.do")
 	public String searchBread(int reqPage,Model model,String breadName) {
 		StorePageData spd = sservice.selectBeadList(reqPage,breadName);
-		System.out.println(spd);
 		//스토어 검색안된 count
 		int count = sservice.countList2(breadName);
 		//스토어 검색됐을때 count
@@ -229,7 +217,6 @@ public class StoreController {
 	public String orderFrm(int storeNo,int memberNo, String deliveryType,int[] pNo, String[] pName,String[] pContent,
 			int[] pStock, int[] pPrice, String[] pImg, Model model) {
 		
-		//System.out.println(pNo[0]);	
 		ArrayList<Product> list = new ArrayList<Product>();
 		for(int i=0;i<pName.length;i++) {
 			Product p = new Product();
@@ -290,7 +277,6 @@ public class StoreController {
 	@RequestMapping(value = "/storeSalesStatus.do")
 	public String storeSalesStatus(HttpSession session,int storeNo, Model model) {
 		Member member = (Member)session.getAttribute("m");
-//		System.out.println(member.getMemberNo());
 		ArrayList<StoreStatus> list = sservice.selectStoreStatus(member,storeNo);
 		model.addAttribute("list",list);
 		return "store/storeSalesStatus";

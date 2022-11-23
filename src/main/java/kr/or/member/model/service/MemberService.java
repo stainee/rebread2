@@ -76,13 +76,10 @@ public class MemberService {
 	//문자인증
 	public void certifiedPhoneNumber(String userPhoneNumber, int randomNumber) {
 		String api_key = "NCSYOLUKOEOQOVTE";	
-		//구동시에만 아래의 api-key삭제 후 주석 풀어주시기 바랍니다. (20원씩 날라가요 ㅠㅠ)
 		
-		//String api_key = "";
 	    String api_secret = "XS3HZOGLMQWOUMH1DIPLFUDIREUPD0VR";
 	    Message coolsms = new Message(api_key, api_secret);
 
-	    // 4 params(to, from, type, text) are mandatory. must be filled
 	    HashMap<String, String> params = new HashMap<String, String>();
 	    params.put("to", userPhoneNumber);    // 수신전화번호
 	    params.put("from", "01041390974");  // 발신전화번호. 테스트시에는 발신,수신 둘다 본인 번호로 하면 됨
@@ -92,10 +89,7 @@ public class MemberService {
 	    
 	    try {
 	        JSONObject obj = (JSONObject) coolsms.send(params);
-	        System.out.println(obj.toString());
 	      } catch (CoolsmsException e) {
-	        System.out.println(e.getMessage());
-	        System.out.println(e.getCode());
 	      }
 	}
 	

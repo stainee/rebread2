@@ -1,136 +1,135 @@
 @charset "UTF-8";
-@charset "UTF-8";
 
-.page-content{
+.page-content {
 	width: 1200px;
 	margin: 90px auto;
+}
 
-}
-.page-title{
+.page-title {
 	min-height: 30px;
-    padding: 0 0 10px;
-    padding: 5px 0 70px;
-    text-align: center;
-    height: 100%;
+	padding: 0 0 10px;
+	padding: 5px 0 70px;
+	text-align: center;
+	height: 100%;
 }
-.page-title>h2{
+
+.page-title>h2 {
 	font-size: 26px;
-    letter-spacing: 0.08em;
-   	color: #785c37;
+	letter-spacing: 0.08em;
+	color: #785c37;
 }
-.page-content p{
+
+.page-content p {
 	margin-top: 10px;
-	color : "darkgray";
+	color: "darkgray";
 }
-.item-basket-box{
-    text-align: center;
-    vertical-align: top;
-    font-size: 12px;
+
+.item-basket-box {
+	text-align: center;
+	vertical-align: top;
+	font-size: 12px;
 	margin-top: 30px;
 	position: relative;
 }
-.item-basket-box{
+
+.item-basket-box {
 	height: 680px;
 }
-.item-basket-box>ul>li{
+
+.item-basket-box>ul>li {
 	width: 274px;
 	height: 381px;
 	margin-right: 22px;
 	margin-bottom: 60px;
 	display: inline-block;
 }
-.item-basket-box img{
+
+.item-basket-box img {
 	width: 274px;
 	height: 274px;
 }
-.item-basket-box img:hover{
-	box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
-s}
-.eventTitle{
+
+.item-basket-box img:hover {
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+		rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+	s
+}
+
+.eventTitle {
 	margin-top: 10px;
 }
+
 .power {
-    border-spacing:0;
-    border: none;
-    background-color: #fff;
+	border-spacing: 0;
+	border: none;
+	background-color: #fff;
 }
 
 .power td, table th {
-    font-size: 15px;
-    border-radius: 30px;
-    width: 60px;
-    height: 60px;
+	font-size: 15px;
+	border-radius: 30px;
+	width: 60px;
+	height: 60px;
 }
 
-.power_controls{
-	margin: 0 auto;	
+.power_controls {
+	margin: 0 auto;
 	width: 1200px;
 }
-#spin_button{
+
+#spin_button {
 	width: 80px;
 	height: 80px;
-	line-height : 80px;
-	border-radius : 40px;
+	line-height: 80px;
+	border-radius: 40px;
 	border: 1px solid darkgrey;
 	color: #1617ad;
-	font-size : 20px;
-	font-weight : 600;
+	font-size: 20px;
+	font-weight: 600;
 	background-color: #fff;
 	top: 36.7%;
 	left: 30%;
-	position: absolute; 
+	position: absolute;
 	cursor: pointer;
 }
-#spin_button:hover{
-	box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;
+
+#spin_button:hover {
+	box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px
+		5px 10px;
 	font-size: 21px;
-	transition : 0.4s;
+	transition: 0.4s;
 }
-#again{
+
+#again {
 	font-size: 20px;
 	margin-top: 20px;
 	cursor: pointer;
 }
-#again>a{
-		color: #555555;
+
+#again>a {
+	color: #555555;
 	font-weight: 600px;
 }
-#again:hover{
+
+#again:hover {
+	
 }
-#how{
+
+#how {
 	text-align: left;
 	padding-left: 60px;
 }
-#how h2{
+
+#how h2 {
 	margin-top: 25px;
 }
-#how p{
+
+#how p {
 	font-size: 15px;
 }
-*{
+
+* {
 	margin: 0;
 	padding: 0;
 	font-family: nsr-r;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

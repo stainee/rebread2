@@ -98,7 +98,6 @@ public class KakaoService {
                  JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
                  
                  String memberId = "KAKAO_"+element.getAsJsonObject().get("id").toString();
-                 //String memberMail = kakao_account.getAsJsonObject().get("email").getAsString();
                  String memberName = properties.getAsJsonObject().get("nickname").getAsString();
                  
                  resultMap.put("memberId", memberId);
@@ -130,7 +129,6 @@ public class KakaoService {
 	        while ((line = br.readLine()) != null) {
 	            result += line;
 	        }
-	        System.out.println(result);
 	    } catch (IOException e) {
 	        e.printStackTrace();
 	    }

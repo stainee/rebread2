@@ -1,38 +1,45 @@
 @charset "UTF-8";
 
-*{
-   font-family: 'nsr-r';
+* {
+	font-family: 'nsr-r';
 }
-.contetn-wrap{
-    margin: 0 auto;
 
+.contetn-wrap {
+	margin: 0 auto;
 }
-.content{
-    text-align: center;
-    margin: 100px 0px;
+
+.content {
+	text-align: center;
+	margin: 100px 0px;
 }
-.content>p{
-    font-size: 2.3em;
-    font-weight: 700;
+
+.content>p {
+	font-size: 2.3em;
+	font-weight: 700;
 }
-.content-account-wrap{
+
+.content-account-wrap {
 	display: flex;
 	justify-content: center;
 }
-.account-wrap>div{
-	padding-bottom: 20px;	
+
+.account-wrap>div {
+	padding-bottom: 20px;
 }
-.account-info>div{
+
+.account-info>div {
 	padding: 20px;
 	color: #cbcbcb;
 }
-.content>p:last-of-type{
+
+.content>p:last-of-type {
 	margin-top: 50px;
 	color: #cbcbcb;
-    font-size: 1.5em;
-    padding-bottom: 50px;
+	font-size: 1.5em;
+	padding-bottom: 50px;
 }
-.content-account{
+
+.content-account {
 	display: flex;
 	flex-direction: column;
 	width: 500px;
@@ -41,39 +48,42 @@
 	margin: 50px 0px;
 	font-size: 1.2em;
 }
-.content-account .account-wrap{
+
+.content-account .account-wrap {
 	font-size: 1.3em;
 	text-align: left;
 }
-.account-info{
+
+.account-info {
 	display: flex;
 	justify-content: space-between;
 }
 
+.order-detail, .order-mypage {
+	border: 1px solid black;
+	border-radius: 5px;
+	width: 150px;
+	height: 45px;
+	cursor: pointer;
+}
 
-.order-detail, .order-mypage{
-    border: 1px solid black;
-    border-radius: 5px;
-    width: 150px;
-    height: 45px;
-    cursor: pointer;
+.order-detail {
+	background-color: #fff;
 }
-.order-detail{
-    background-color: #fff;
+
+.order-mypage {
+	color: #fff;
+	background-color: #1c1c1c;
 }
-.order-mypage{
-    color: #fff;
-    background-color: #1c1c1c;
+
+.order-detail:hover {
+	color: #fff;
+	background-color: #1c1c1c;
+	transition-duration: 0.5s;
 }
-.order-detail:hover{
-    color: #fff;
-    background-color: #1c1c1c;
-    transition-duration: 0.5s;
-    
-}
-.order-mypage:hover{
-    color: #1c1c1c;
-    background-color: #fff;
-    transition-duration: 0.5s;
-    
+
+.order-mypage:hover {
+	color: #1c1c1c;
+	background-color: #fff;
+	transition-duration: 0.5s;
 }

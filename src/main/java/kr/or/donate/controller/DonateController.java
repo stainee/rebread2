@@ -79,8 +79,6 @@ public class DonateController {
 		
 		int result = service.insertDonate(d);
 		if(result>0) {
-			System.out.println(d);
-			System.out.println(result);
 			return "/admin/donateInsertSuccess";
 		}else {
 			return "redirect:/";
@@ -119,8 +117,6 @@ public class DonateController {
 		}		
 		
 		int result = service.updateOneDonate(d);
-		System.out.println(d);
-		System.out.println(result);
 		if(result>0) {
 			return "/admin/donateUpdateSuccess";
 		}else {

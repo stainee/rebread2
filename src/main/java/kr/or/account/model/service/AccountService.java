@@ -59,12 +59,6 @@ public class AccountService {
 			a.setProfit(sales);
 			a.setAccountPayment(accountPayment);
 			a.setStoreAccount(account);
-			/*  depositToSeller --> 실 테스트시 필요한 매개변수
-			  	계좌번호 req_client_account_num
-				은행번호 req_client_bank_code
-				금액 tran_amt
-				이름 req_client_name
-			*/
 			   	
 			String tranDataTotranDtm = depositToSeller();
 			String api_tran_id = tranDataTotranDtm.split(" ")[0];

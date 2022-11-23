@@ -1,140 +1,153 @@
-/*
-font-family: 'NanumSquareRoundLight';
-font-family: 'NanumSquareRound';
-font-family: 'NanumSquareRoundBold';
-font-family: 'NanumSquareRoundExtraBold';
-*/
-*{
-    margin: 0px;
-    padding: 0px;
+* {
+	margin: 0px;
+	padding: 0px;
 }
-body{
-    background-color: #fff;
+
+body {
+	background-color: #fff;
 }
-.page-content{
-    overflow: hidden;
+
+.page-content {
+	overflow: hidden;
 }
-.mid-title{
-    width: 1200px;
-    min-width: 500px;
-    margin: 0 auto;
-    text-align: center;
-    display: flex;
-    border-bottom: 1px solid #515151;
-    height: 50px;
-    line-height: 50px;
-    margin-top: 50px;
+
+.mid-title {
+	width: 1200px;
+	min-width: 500px;
+	margin: 0 auto;
+	text-align: center;
+	display: flex;
+	border-bottom: 1px solid #515151;
+	height: 50px;
+	line-height: 50px;
+	margin-top: 50px;
 }
+
 .mid-title>h3 {
-    margin: 0 auto;
-    padding: 0;
-    text-align: center;
-    width: 500px;
-    font-size: 30px;
-    font-family:'NanumSquareRoundExtraBold';
+	margin: 0 auto;
+	padding: 0;
+	text-align: center;
+	width: 500px;
+	font-size: 30px;
+	font-family: 'NanumSquareRoundExtraBold';
 }
-.mid-wrap{
-    width: 1200px;
-    margin: 0 auto;
+
+.mid-wrap {
+	width: 1200px;
+	margin: 0 auto;
 }
+
 .search {
-    display: flex;
-    justify-content: space-between;
-    height: 50px;
-    align-items: center;
-}
-.search form{
-    width : 400px;
-    text-align: center;
-}
-.search form input{
-    width: 250px;
+	display: flex;
+	justify-content: space-between;
+	height: 50px;
+	align-items: center;
 }
 
-.store-img img{
-    width: 120px;
-    height: 120px;
+.search form {
+	width: 400px;
+	text-align: center;
 }
+
+.search form input {
+	width: 250px;
+}
+
+.store-img img {
+	width: 120px;
+	height: 120px;
+}
+
 .search .btn {
-    text-align: center;
-    width: 80px;
-    height: 30px;
-    line-height: 25px;
-    padding: 0px;
-}
-.storeWrap{
-    width: 1200px;
-    margin: 0 auto;
-    text-align: center;
-}
-.wrap2{
-    width: 600px;
-    margin: 0 auto;
-    text-align: center;
-    float: left;
-    text-align: center;
-    margin: 0 auto;
-    padding-bottom: 20px;
+	text-align: center;
+	width: 80px;
+	height: 30px;
+	line-height: 25px;
+	padding: 0px;
 }
 
+.storeWrap {
+	width: 1200px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.wrap2 {
+	width: 600px;
+	margin: 0 auto;
+	text-align: center;
+	float: left;
+	text-align: center;
+	margin: 0 auto;
+	padding-bottom: 20px;
+}
 
 .storeBox {
-    width: 500px;
-    height: 150px;
-    border: 2px solid #b1823c;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    margin-right: 30px;
-    text-align: center;
-    margin: 0 auto;
-}
-.storeBox:hover{
-	cursor: pointer;
-}
-.store-img{
-    width: 150px;
-    border-radius: 15px;
-}
-.store-info{
-    width: 250px;
-    flex-direction: row;
-}
-.storeWrap{
-    width: 1200px;
-    padding-top: 30px;
-    overflow: hidden;
-    margin: 0 auto; 
-    text-align: center;
-}
-.store-info div{
-    height: 40px;
-    line-height: 40px;
-}
-.store-info .store-name{
-    font-size: 20px;
-    font-family: 'NanumSquareRoundExtraBold';
-    font-weight: bold;
-}
-.store-discount{
-    font-size: 40px;
-    font-style: italic;
-    font-weight: bold;
-    color: crimson;
-}
-#star{
-    color: gold;
+	width: 500px;
+	height: 150px;
+	border: 2px solid #b1823c;
+	border-radius: 5px;
+	display: flex;
+	align-items: center;
+	margin-right: 30px;
+	text-align: center;
+	margin: 0 auto;
 }
 
-.input-comment-box textarea.input-form{
-    width: 80%;
-    min-height: 10px;
+.storeBox:hover {
+	cursor: pointer;
 }
-.input-comment-box li:first-child{
+
+.store-img {
+	width: 150px;
+	border-radius: 15px;
+}
+
+.store-info {
+	width: 250px;
+	flex-direction: row;
+}
+
+.storeWrap {
+	width: 1200px;
+	padding-top: 30px;
+	overflow: hidden;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.store-info div {
+	height: 40px;
+	line-height: 40px;
+}
+
+.store-info .store-name {
+	font-size: 20px;
+	font-family: 'NanumSquareRoundExtraBold';
+	font-weight: bold;
+}
+
+.store-discount {
+	font-size: 40px;
+	font-style: italic;
+	font-weight: bold;
+	color: crimson;
+}
+
+#star {
+	color: gold;
+}
+
+.input-comment-box textarea.input-form {
+	width: 80%;
+	min-height: 10px;
+}
+
+.input-comment-box li:first-child {
 	width: 75%;
 	margin: 0 auto;
 }
-.input-comment-box li:last-child{
+
+.input-comment-box li:last-child {
 	width: 25%;
 }
-
