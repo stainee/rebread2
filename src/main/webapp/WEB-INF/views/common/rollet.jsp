@@ -79,46 +79,7 @@
 <div aos="fade-up" data-aos-offset="200" data-aos-easing="ease-out-cubic" data-aos-duration="500"></div>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
 <script type="text/javascript" src="/resources/js/common/Winwheel.js"></script>
-<script>
-const token = $("#token").text();
-const mile = $("#mile").text();
-const spin = $("#spin_button");
-const againbtn = $("#againbtn");
 
-$(document).ready(function() {
-	if($("#memberId").val()==""){
-		alert("로그인후 이용해주세요 ");
-		location.href="/loginFrm.do";
-	}
-	if($("#memberGrade").val()=="0" || $("#memberGrade").val()=="2"){
-		alert("회원만 이용할 수 있는 이벤트입니다");
-		location.href="/";
-	}
-	if(token < 1){
-		const again = $("#again");
-		spin.removeAttr("onclick");
-		again.css("display","none");
-	}
-});
-	if(token < 1){
-		again.css("display","none");
-		
-		againbtn.on("click",function(){
-			alert("토큰이 부족하여 게임을 실행할 수 없습니다 더 충전해오세요 ^^7");
-			againbtn.removeAttr("onclick");
-			return false;
-		});
-		
-		spin.on("click",function(){
-			againbtn.removeAttr("onclick");
-			return false;
-		});
-	}
-	
-	
-
-
-</script>
 
 
 
@@ -234,9 +195,51 @@ $(document).ready(function() {
 	    	}
 	    })		
 	}
+}
+
+</script>
+<script>
+const token = $("#token").text();
+const mile = $("#mile").text();
+const spin = $("#spin_button");
+const againbtn = $("#againbtn");
+const again = $("#again");
+$(document).ready(function() {
+	if($("#memberId").val()==""){
+		alert("로그인후 이용해주세요 ");
+		location.href="/loginFrm.do";
 	}
-	
-	
+	if($("#memberGrade").val()=="0" || $("#memberGrade").val()=="2"){
+		alert("회원만 이용할 수 있는 이벤트입니다");
+		location.href="/";
+	}
+	if(token < 1){
+		alert("토큰이 부족하여 게임을 실행할 수 없습니다 더 충전해오세요 ^^7");
+		spin.removeAttr("onclick");
+		again.css("display","none");
+	}
+});
+
+	if(token < 1){
+		spin.removeAttr("onclick");
+		againbtn.css("display","none");
+	}
+	againbtn.on("click",function(){
+		if(token<1){
+			alert("토큰이 부족하여 게임을 실행할 수 없습니다 더 충전해오세요 ^^7");
+			againbtn.removeAttr("onclick");
+			again.css("display","none");
+			return;
+		}
+	});
+	spin.on("click",function(){
+		if(token<1){
+			againbtn.removeAttr("onclick");
+			again.css("display","none");
+			return;
+		}
+	});
+
 
 </script>
 

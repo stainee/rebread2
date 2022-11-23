@@ -285,8 +285,8 @@
                           orderId: memberId+'-'+todayString,
                           orderName: productName,
                           customerName: orderName,
-                          successUrl: 'http://localhost:8888/orderCard.do',
-                          failUrl: 'http://localhost:8888/fail.do'
+                          successUrl: 'http://localhost/orderCard.do',
+                          failUrl: 'http://localhost/fail.do'
                      });
 		             for(var i=0;i<productQuan.length;i++){
 		            	 let pQuan = productQuan.eq(i).text();
@@ -351,8 +351,8 @@
 	                           orderId: memberId+'-'+todayString,
 	                           orderName: productName,
 	                           customerName: orderName,
-	                           successUrl: 'http://localhost:8888/orderAccount.do',
-	                           failUrl: 'http://localhost:8888/fail.do'
+	                           successUrl: 'http://localhost/orderAccount.do',
+	                           failUrl: 'http://localhost/fail.do'
 	                      });
 			             for(var i=0;i<productQuan.length;i++){
 			            	 let pQuan = productQuan.eq(i).text();

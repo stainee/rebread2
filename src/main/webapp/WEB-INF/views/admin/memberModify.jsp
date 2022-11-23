@@ -76,7 +76,8 @@
 				
 				<tr>
 					<th>마일리지</th>
-					<td><input type="text" value="${m.memberMileage}" id="memberMileage"></td>
+					<td><input type="text" value="${m.memberMileage}" id="memberMileage" readonly="readonly"></td>
+					<!-- 오류수정 -->
 				</tr>
 			</table>
 			<div class="btn_wrap">
